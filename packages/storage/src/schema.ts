@@ -94,7 +94,7 @@ export const messages = pgTable('messages', {
   }),
   
   /**
-   * Role of the message sender: 'user', 'assistant', or 'system'
+   * Role of the message sender: 'user', 'assistant', 'system', or 'tool'
    */
   role: text('role', { enum: ['user', 'assistant', 'system', 'tool'] }).notNull(),
   
