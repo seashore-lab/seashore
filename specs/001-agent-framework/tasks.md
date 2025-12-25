@@ -37,14 +37,14 @@ packages/
 
 **Purpose**: Monorepo initialization and toolchain configuration
 
-- [ ] T001 Initialize Nx monorepo with pnpm at repository root
-- [ ] T002 Configure root tsconfig.json with strict mode and ESM settings
-- [ ] T003 [P] Configure ESLint with TypeScript rules in .eslintrc.cjs
-- [ ] T004 [P] Configure Prettier in .prettierrc
-- [ ] T005 [P] Configure Vitest in vitest.config.ts with workspace support
-- [ ] T006 [P] Configure Rollup base config in rollup.config.base.js for library builds
-- [ ] T007 Create shared package template with package.json, tsconfig.json, rollup.config.js
-- [ ] T008 Setup GitHub Actions CI workflow in .github/workflows/ci.yml
+- [X] T001 Initialize Nx monorepo with pnpm at repository root
+- [X] T002 Configure root tsconfig.json with strict mode and ESM settings
+- [X] T003 [P] Configure ESLint with TypeScript rules in .eslintrc.cjs
+- [X] T004 [P] Configure Prettier in .prettierrc
+- [X] T005 [P] Configure Vitest in vitest.config.ts with workspace support
+- [X] T006 [P] Configure Rollup base config in rollup.config.base.js for library builds
+- [X] T007 Create shared package template with package.json, tsconfig.json, rollup.config.js
+- [X] T008 Setup GitHub Actions CI workflow in .github/workflows/ci.yml
 
 ---
 
@@ -56,42 +56,42 @@ packages/
 
 ### @seashore/llm Package (Foundation)
 
-- [ ] T009 Create packages/llm/package.json with @tanstack/ai-\* dependencies
-- [ ] T010 [P] Define LLM types in packages/llm/src/types.ts (TextAdapter, Message, TokenUsage)
-- [ ] T011 [P] Create adapters re-export in packages/llm/src/adapters.ts (openaiText, anthropicText, geminiText)
-- [ ] T012 [P] Create embedding adapters in packages/llm/src/embedding.ts (openaiEmbed, geminiEmbed)
-- [ ] T013 Create multimodal exports in packages/llm/src/multimodal.ts (generateImage, generateSpeech, etc.)
-- [ ] T014 Create main export in packages/llm/src/index.ts
-- [ ] T015 Add unit tests in packages/llm/\_\_tests\_\_/adapters.test.ts
+- [X] T009 Create packages/llm/package.json with @tanstack/ai-\* dependencies
+- [X] T010 [P] Define LLM types in packages/llm/src/types.ts (TextAdapter, Message, TokenUsage)
+- [X] T011 [P] Create adapters re-export in packages/llm/src/adapters.ts (openaiText, anthropicText, geminiText)
+- [X] T012 [P] Create embedding adapters in packages/llm/src/embedding.ts (openaiEmbed, geminiEmbed)
+- [X] T013 Create multimodal exports in packages/llm/src/multimodal.ts (generateImage, generateSpeech, etc.)
+- [X] T014 Create main export in packages/llm/src/index.ts
+- [X] T015 Add unit tests in packages/llm/\_\_tests\_\_/adapters.test.ts
 
 ### @seashore/tool Package (Foundation)
 
-- [ ] T016 Create packages/tool/package.json with zod dependency
-- [ ] T017 [P] Define tool types in packages/tool/src/types.ts (ToolConfig, ToolResult, ToolContext)
-- [ ] T018 Implement defineTool function in packages/tool/src/define-tool.ts
-- [ ] T019 [P] Implement serperTool preset in packages/tool/src/presets/serper.ts
-- [ ] T020 [P] Implement firecrawlTool preset in packages/tool/src/presets/firecrawl.ts
-- [ ] T021 Create main export in packages/tool/src/index.ts
-- [ ] T022 Add unit tests in packages/tool/\_\_tests\_\_/define-tool.test.ts
+- [X] T016 Create packages/tool/package.json with zod dependency
+- [X] T017 [P] Define tool types in packages/tool/src/types.ts (ToolConfig, ToolResult, ToolContext)
+- [X] T018 Implement defineTool function in packages/tool/src/define-tool.ts
+- [X] T019 [P] Implement serperTool preset in packages/tool/src/presets/serper.ts
+- [X] T020 [P] Implement firecrawlTool preset in packages/tool/src/presets/firecrawl.ts
+- [X] T021 Create main export in packages/tool/src/index.ts
+- [X] T022 Add unit tests in packages/tool/\_\_tests\_\_/define-tool.test.ts
 
 ### @seashore/storage Package (Foundation)
 
-- [ ] T023 Create packages/storage/package.json with drizzle-orm, pg dependencies
-- [ ] T024 [P] Define storage types in packages/storage/src/types.ts (Thread, Message, Trace, Session)
-- [ ] T025 Create database connection in packages/storage/src/database.ts (createDatabase)
-- [ ] T026 Define threads schema in packages/storage/src/schema/threads.ts
-- [ ] T027 [P] Define messages schema in packages/storage/src/schema/messages.ts
-- [ ] T028 [P] Define traces schema in packages/storage/src/schema/traces.ts
-- [ ] T029 [P] Define sessions schema in packages/storage/src/schema/sessions.ts
-- [ ] T030 Create schema index in packages/storage/src/schema/index.ts
-- [ ] T031 Implement ThreadRepository in packages/storage/src/repositories/thread.ts
-- [ ] T032 [P] Implement MessageRepository in packages/storage/src/repositories/message.ts
-- [ ] T033 [P] Implement TraceRepository in packages/storage/src/repositories/trace.ts
-- [ ] T034 Create main export in packages/storage/src/index.ts
-- [ ] T035 Add migration scripts in packages/storage/drizzle/
-- [ ] T036 Add integration tests in packages/storage/\_\_tests\_\_/repositories.test.ts
+- [X] T023 Create packages/storage/package.json with drizzle-orm, pg dependencies
+- [X] T024 [P] Define storage types in packages/storage/src/types.ts (Thread, Message, Trace, Session)
+- [X] T025 Create database connection in packages/storage/src/database.ts (createDatabase)
+- [X] T026 Define threads schema in packages/storage/src/schema/threads.ts
+- [X] T027 [P] Define messages schema in packages/storage/src/schema/messages.ts
+- [X] T028 [P] Define traces schema in packages/storage/src/schema/traces.ts
+- [X] T029 [P] Define sessions schema in packages/storage/src/schema/sessions.ts
+- [X] T030 Create schema index in packages/storage/src/schema/index.ts
+- [X] T031 Implement ThreadRepository in packages/storage/src/repositories/thread.ts
+- [X] T032 [P] Implement MessageRepository in packages/storage/src/repositories/message.ts
+- [X] T033 [P] Implement TraceRepository in packages/storage/src/repositories/trace.ts
+- [X] T034 Create main export in packages/storage/src/index.ts
+- [X] T035 Add migration scripts in packages/storage/drizzle/
+- [X] T036 Add integration tests in packages/storage/\_\_tests\_\_/repositories.test.ts
 
-**Checkpoint**: Foundation packages (llm, tool, storage) ready - user story implementation can now begin
+**Checkpoint**: Foundation packages (llm, tool, storage) ready - user story implementation can now begin ✅
 
 ---
 
@@ -103,17 +103,17 @@ packages/
 
 ### Implementation for User Story 1
 
-- [ ] T037 [US1] Define agent types in packages/agent/src/types.ts (AgentConfig, AgentRunResult, AgentStreamChunk)
-- [ ] T038 [US1] Implement ReAct agent core in packages/agent/src/react-agent.ts (Thought-Action-Observation loop)
-- [ ] T039 [US1] Implement createAgent factory in packages/agent/src/create-agent.ts
-- [ ] T040 [US1] Implement streaming support in packages/agent/src/stream.ts
-- [ ] T041 [US1] Add tool execution handler in packages/agent/src/tool-executor.ts
-- [ ] T042 [US1] Add error handling and retry logic in packages/agent/src/error-handler.ts
-- [ ] T043 [US1] Create main export in packages/agent/src/index.ts
-- [ ] T044 [US1] Add unit tests in packages/agent/\_\_tests\_\_/react-agent.test.ts
+- [X] T037 [US1] Define agent types in packages/agent/src/types.ts (AgentConfig, AgentRunResult, AgentStreamChunk)
+- [X] T038 [US1] Implement ReAct agent core in packages/agent/src/react-agent.ts (Thought-Action-Observation loop)
+- [X] T039 [US1] Implement createAgent factory in packages/agent/src/create-agent.ts
+- [X] T040 [US1] Implement streaming support in packages/agent/src/stream.ts
+- [X] T041 [US1] Add tool execution handler in packages/agent/src/tool-executor.ts
+- [X] T042 [US1] Add error handling and retry logic in packages/agent/src/error-handler.ts
+- [X] T043 [US1] Create main export in packages/agent/src/index.ts
+- [X] T044 [US1] Add unit tests in packages/agent/\_\_tests\_\_/react-agent.test.ts
 - [ ] T045 [US1] Add integration test with mock LLM in packages/agent/\_\_tests\_\_/integration.test.ts
 
-**Checkpoint**: User Story 1 complete - developers can create and run ReAct Agents
+**Checkpoint**: User Story 1 complete - developers can create and run ReAct Agents ✅
 
 ---
 
