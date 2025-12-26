@@ -114,7 +114,7 @@ async function generateOpenAIEmbedding(
   const data = (await response.json()) as OpenAIEmbeddingResponse;
 
   return {
-    embedding: data.data[0].embedding,
+    embedding: data.data[0]!.embedding,
     model: data.model,
     usage: {
       promptTokens: data.usage.prompt_tokens,

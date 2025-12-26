@@ -415,7 +415,7 @@ async function generateGeminiSpeech(options: SpeechOptions): Promise<SpeechResul
   }
 
   const data = (await response.json()) as GeminiSpeechResponse;
-  const audioData = data.candidates[0].content.parts[0].inlineData;
+  const audioData = data.candidates[0]!.content.parts[0]!.inlineData;
 
   return {
     audio: audioData.data,

@@ -336,7 +336,7 @@ export function topicBlockRule(config: TopicBlockRuleConfig): SecurityRule {
 
       // Keyword matching
       for (let i = 0; i < blockedTopics.length; i++) {
-        if (topicPatterns[i].test(content)) {
+        if (topicPatterns[i]!.test(content)) {
           violations.push({
             rule: 'topic_block',
             severity: 'high',

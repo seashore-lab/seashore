@@ -90,7 +90,7 @@ class TokenCounterImpl implements TokenCounter {
 
     if (!pricing) {
       // Use GPT-4o pricing as default
-      const defaultPricing = MODEL_PRICING['gpt-4o'];
+      const defaultPricing = MODEL_PRICING['gpt-4o']!;
       return (
         (usage.promptTokens / 1000) * defaultPricing.input +
         (usage.completionTokens / 1000) * defaultPricing.output
