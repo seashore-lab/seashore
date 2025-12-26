@@ -6,7 +6,7 @@
 
 import { readFile, stat } from 'fs/promises';
 import { basename, resolve } from 'path';
-import type { DocumentLoader, LoadedDocument, PDFLoaderOptions } from '../types.js';
+import type { DocumentLoader, LoadedDocument, PDFLoaderOptions } from '../types';
 
 /**
  * PDF parse result type

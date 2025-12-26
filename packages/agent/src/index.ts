@@ -14,13 +14,13 @@ export type {
   RunOptions,
   ToolCallRecord,
   AgentToolContext,
-} from './types.js';
+} from './types';
 
 // Agent creation
-export { createAgent } from './create-agent.js';
+export { createAgent } from './create-agent';
 
 // ReAct agent (direct export for advanced use)
-export { createAgent as createReActAgent } from './react-agent.js';
+export { createAgent as createReActAgent } from './react-agent';
 
 // Tool execution
 export {
@@ -28,7 +28,7 @@ export {
   executeTools,
   formatToolResult,
   type ToolCallRequest,
-} from './tool-executor.js';
+} from './tool-executor';
 
 // Error handling
 export {
@@ -40,10 +40,10 @@ export {
   DEFAULT_RETRY_CONFIG,
   checkAborted,
   wrapError,
-} from './error-handler.js';
+} from './error-handler';
 
 // Streaming utilities
-export { collectStream, StreamChunks, streamToReadable, parseSSEStream } from './stream.js';
+export { collectStream, StreamChunks, streamToReadable, parseSSEStream } from './stream';
 
 // Workflow agent integration
 export {
@@ -53,7 +53,7 @@ export {
   type WorkflowAgentConfig,
   type WorkflowAgentInput,
   type WorkflowAgentOutput,
-} from './workflow-agent.js';
+} from './workflow-agent';
 
 // Storage integration
 export {
@@ -61,7 +61,7 @@ export {
   type WithStorageConfig,
   type StorageRunOptions,
   type AgentWithStorage,
-} from './with-storage.js';
+} from './with-storage';
 
 // Thread continuation
 export {
@@ -71,4 +71,4 @@ export {
   type ThreadManager,
   type ThreadContext,
   type ThreadContinuationOptions,
-} from './thread.js';
+} from './thread';

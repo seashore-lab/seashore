@@ -4,8 +4,8 @@
  */
 
 import React, { useEffect, useRef } from 'react';
-import type { ChatMessagesProps, ChatMessage as ChatMessageType } from '../types.js';
-import { ChatMessage } from './ChatMessage.js';
+import type { ChatMessagesProps, ChatMessage as ChatMessageType } from '../types';
+import { ChatMessage } from './ChatMessage';
 
 /**
  * ChatMessages component - displays a list of chat messages

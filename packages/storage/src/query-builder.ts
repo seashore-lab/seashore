@@ -5,11 +5,11 @@
  */
 
 import { eq, and, or, desc, asc, gt, gte, lt, lte, isNull, isNotNull, sql } from 'drizzle-orm';
-import type { DrizzleDB } from '../database.js';
-import type { ListOptions, PaginationOptions } from '../types.js';
-import { threads } from '../schema/threads.js';
-import { messages } from '../schema/messages.js';
-import { traces } from '../schema/traces.js';
+import type { DrizzleDB } from './database';
+import type { ListOptions, PaginationOptions } from './types';
+import { threads } from './schema/threads';
+import { messages } from './schema/messages';
+import { traces } from './schema/traces';
 
 /**
  * Date range filter

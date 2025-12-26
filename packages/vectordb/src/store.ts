@@ -6,7 +6,7 @@
 
 import { eq, sql, and, inArray } from 'drizzle-orm';
 import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
-import { collections, documents, generateSearchVector } from './schema/index.js';
+import { collections, documents, generateSearchVector } from './schema/index';
 import type {
   Collection,
   CollectionConfig,
@@ -22,10 +22,10 @@ import type {
   VectorSearchOptions,
   VectorStore,
   VectorStoreOptions,
-} from './types.js';
-import { vectorSearch } from './search/vector-search.js';
-import { textSearch } from './search/text-search.js';
-import { hybridSearch } from './search/hybrid-search.js';
+} from './types';
+import { vectorSearch } from './search/vector-search';
+import { textSearch } from './search/text-search';
+import { hybridSearch } from './search/hybrid-search';
 
 /**
  * Vector store error

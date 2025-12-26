@@ -6,7 +6,7 @@
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { z } from 'zod';
-import { createAgent } from '../src/react-agent.js';
+import { createAgent } from '../src/react-agent';
 import { defineTool } from '@seashore/tool';
 import type { TextAdapter, Message, TokenUsage, StreamChunk } from '@seashore/llm';
 

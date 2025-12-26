@@ -8,7 +8,7 @@ import type {
   EvaluationReport,
   BatchEvaluationResult,
   EvaluationResult,
-} from './types.js';
+} from './types';
 
 /**
  * Calculate standard deviation

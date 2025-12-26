@@ -5,8 +5,8 @@
  */
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { serperTool } from '../src/presets/serper.js';
-import { firecrawlTool } from '../src/presets/firecrawl.js';
+import { serperTool } from '../src/presets/serper';
+import { firecrawlTool } from '../src/presets/firecrawl';
 
 // Mock fetch globally
 const mockFetch = vi.fn();

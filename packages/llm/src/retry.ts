@@ -4,8 +4,8 @@
  * Rate limit handling and retry logic for LLM API calls
  */
 
-import type { TextAdapter, Message, StreamChunk } from './types.js';
-import { chat } from './adapters.js';
+import type { TextAdapter, Message, StreamChunk } from './types';
+import { chat } from './adapters';
 
 /**
  * Retry configuration

@@ -9,7 +9,7 @@ import type {
   LoadedDocument,
   DocumentChunk,
   TokenSplitterOptions,
-} from '../types.js';
+} from '../types';
 
 /**
  * Simple token approximation when tiktoken is not available

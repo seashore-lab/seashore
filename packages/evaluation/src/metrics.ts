@@ -3,7 +3,7 @@
  * @module @seashore/evaluation
  */
 
-import type { Metric, MetricConfig, MetricResult, TextAdapter } from './types.js';
+import type { Metric, MetricConfig, MetricResult, TextAdapter } from './types';
 
 /**
  * Parse LLM response for score and reason

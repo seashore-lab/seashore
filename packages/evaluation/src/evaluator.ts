@@ -11,7 +11,7 @@ import type {
   BatchEvaluationResult,
   Metric,
   TextAdapter,
-} from './types.js';
+} from './types';
 
 /**
  * Retry helper

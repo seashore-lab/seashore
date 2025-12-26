@@ -3,7 +3,7 @@
  * @module @seashore/observability
  */
 
-import type { Span, SpanExporter, ExporterConfig } from '../types.js';
+import type { Span, SpanExporter, ExporterConfig } from '../types';
 
 /**
  * Console exporter configuration

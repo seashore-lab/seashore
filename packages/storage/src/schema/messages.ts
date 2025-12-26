@@ -5,7 +5,7 @@
  */
 
 import { pgTable, uuid, text, timestamp, jsonb, index } from 'drizzle-orm/pg-core';
-import { threads } from './threads.js';
+import { threads } from './threads';
 
 /**
  * Tool call structure stored in messages

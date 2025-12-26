@@ -4,7 +4,7 @@
  * Workflow context utilities and management
  */
 
-import type { WorkflowContext, MutableWorkflowContext } from './types.js';
+import type { WorkflowContext, MutableWorkflowContext } from './types';
 
 /**
  * Create a new immutable workflow context

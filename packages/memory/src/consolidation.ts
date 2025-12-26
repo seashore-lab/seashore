@@ -4,7 +4,7 @@
  * Utilities for consolidating and summarizing memories
  */
 
-import type { MemoryEntry, ConsolidationResult } from './types.js';
+import type { MemoryEntry, ConsolidationResult } from './types';
 
 /**
  * Summarization function type

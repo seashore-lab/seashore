@@ -6,7 +6,7 @@
 
 import type { VectorStore, VectorStoreOptions, EmbeddingFunction } from '@seashore/vectordb';
 import { createVectorStore } from '@seashore/vectordb';
-import type { Retriever, RetrieverOptions, RetrievedDocument, DocumentChunk } from '../types.js';
+import type { Retriever, RetrieverOptions, RetrievedDocument, DocumentChunk } from '../types';
 
 /**
  * Options for creating a vector retriever

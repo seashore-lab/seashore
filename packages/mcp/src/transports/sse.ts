@@ -4,8 +4,8 @@
  * @module @seashore/mcp
  */
 
-import type { MCPClientConfig } from '../types.js';
-import { MCPConnectionError, MCPTimeoutError, MCPError } from './stdio.js';
+import type { MCPClientConfig } from '../types';
+import { MCPConnectionError, MCPTimeoutError, MCPError } from './stdio';
 
 /**
  * JSON-RPC types

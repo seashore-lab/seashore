@@ -12,8 +12,8 @@ import {
   useChat,
   useChatStream,
   renderToolCall,
-} from '../src/index.js';
-import type { ChatMessageType, ToolCallUI } from '../src/types.js';
+} from '../src/index';
+import type { ChatMessageType, ToolCallUI } from '../src/types';
 
 describe('@seashore/genui', () => {
   describe('createGenUIRegistry', () => {

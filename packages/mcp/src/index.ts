@@ -31,10 +31,10 @@
  */
 
 // MCP Client
-export { createMCPClient, type MCPClient, type MCPClientConfig } from './client.js';
+export { createMCPClient, type MCPClient, type MCPClientConfig } from './client';
 
 // Tool Bridge
-export { createMCPToolBridge, type ToolBridge, type ToolBridgeConfig } from './bridge.js';
+export { createMCPToolBridge, type ToolBridge, type ToolBridgeConfig } from './bridge';
 
 // Server Discovery
 export {
@@ -42,7 +42,7 @@ export {
   autoDiscoverMCPServers,
   type ServerInfo,
   type MCPServerConfig,
-} from './discovery.js';
+} from './discovery';
 
 // Transports
 export {
@@ -55,7 +55,7 @@ export {
   MCPError,
   MCPConnectionError,
   MCPTimeoutError,
-} from './transports/index.js';
+} from './transports/index';
 
 // Types
 export type {
@@ -75,4 +75,4 @@ export type {
   MCPResourceCallback,
   MCPResourceChangeEvent,
   JSONSchema,
-} from './types.js';
+} from './types';

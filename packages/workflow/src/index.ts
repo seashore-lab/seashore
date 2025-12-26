@@ -25,10 +25,10 @@ export type {
   ConditionNodeConfig,
   ParallelNodeConfig,
   CustomNodeConfig,
-} from './types.js';
+} from './types';
 
 // Workflow factory
-export { createWorkflow, WorkflowConfigError } from './workflow.js';
+export { createWorkflow, WorkflowConfigError } from './workflow';
 
 // Execution
 export {
@@ -38,7 +38,7 @@ export {
   WorkflowExecutionError,
   WorkflowAbortError,
   WorkflowTimeoutError,
-} from './execution.js';
+} from './execution';
 
 // Context management
 export {
@@ -52,27 +52,27 @@ export {
   getExecutedNodes,
   createWorkflowAbortController,
   createContextAccessor,
-} from './context.js';
+} from './context';
 
 // LLM Node
-export { createLLMNode } from './nodes/llm-node.js';
-export type { LLMNodeOutput } from './nodes/llm-node.js';
+export { createLLMNode } from './nodes/llm-node';
+export type { LLMNodeOutput } from './nodes/llm-node';
 
 // Tool Node
-export { createToolNode } from './nodes/tool-node.js';
-export type { ToolNodeOutput } from './nodes/tool-node.js';
+export { createToolNode } from './nodes/tool-node';
+export type { ToolNodeOutput } from './nodes/tool-node';
 
 // Condition Node
-export { createConditionNode, createSwitchNode } from './nodes/condition-node.js';
+export { createConditionNode, createSwitchNode } from './nodes/condition-node';
 export type {
   ConditionNodeOutput,
   SwitchNodeConfig,
   SwitchNodeOutput,
-} from './nodes/condition-node.js';
+} from './nodes/condition-node';
 
 // Parallel Node
-export { createParallelNode, createMapReduceNode } from './nodes/parallel-node.js';
-export type { ParallelNodeOutput } from './nodes/parallel-node.js';
+export { createParallelNode, createMapReduceNode } from './nodes/parallel-node';
+export type { ParallelNodeOutput } from './nodes/parallel-node';
 
 // Custom Node
 export {
@@ -82,7 +82,7 @@ export {
   createDelayNode,
   createLogNode,
   createValidationNode,
-} from './nodes/custom-node.js';
+} from './nodes/custom-node';
 
 // Loop Control
 export {
@@ -93,9 +93,9 @@ export {
   continueLoop,
   LoopBreakSignal,
   LoopContinueSignal,
-} from './loops.js';
+} from './loops';
 
-export type { LoopState } from './loops.js';
+export type { LoopState } from './loops';
 
 // Error Handling
 export {
@@ -108,6 +108,6 @@ export {
   withTimeout,
   createCircuitBreaker,
   catchError,
-} from './error-handler.js';
+} from './error-handler';
 
-export type { RetryOptions } from './error-handler.js';
+export type { RetryOptions } from './error-handler';

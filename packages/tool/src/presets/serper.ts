@@ -5,7 +5,7 @@
  */
 
 import { z } from 'zod';
-import { defineTool } from '../define-tool.js';
+import { defineTool } from '../define-tool';
 
 /**
  * Serper tool configuration

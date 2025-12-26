@@ -14,7 +14,7 @@ import {
   createDataset,
   generateReport,
   type TextAdapter,
-} from '../src/index.js';
+} from '../src/index';
 
 // Mock LLM adapter
 function mockAdapter(response: string): TextAdapter {

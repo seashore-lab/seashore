@@ -14,7 +14,7 @@ export { geminiText } from '@tanstack/ai-gemini';
 export { chat, toStreamResponse } from '@tanstack/ai';
 
 // Type-safe adapter factory functions for internal use
-import type { TextAdapter } from './types.js';
+import type { TextAdapter } from './types';
 
 /**
  * Create an OpenAI text adapter

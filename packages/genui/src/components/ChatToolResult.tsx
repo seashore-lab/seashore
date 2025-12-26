@@ -4,8 +4,8 @@
  */
 
 import React from 'react';
-import type { ChatToolResultProps } from '../types.js';
-import { renderToolCall } from '../renderer.js';
+import type { ChatToolResultProps } from '../types';
+import { renderToolCall } from '../renderer';
 
 /**
  * ChatToolResult component - renders a tool call result

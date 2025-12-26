@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useRef, useCallback, KeyboardEvent, ChangeEvent } from 'react';
-import type { ChatInputProps } from '../types.js';
+import type { ChatInputProps } from '../types';
 
 /**
  * ChatInput component - input field for chat messages

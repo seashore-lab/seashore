@@ -5,9 +5,9 @@
  */
 
 import { eq, desc, asc } from 'drizzle-orm';
-import type { DrizzleDB } from '../database.js';
-import { threads } from '../schema/threads.js';
-import type { Thread, NewThread, UpdateThread, ListOptions } from '../types.js';
+import type { DrizzleDB } from '../database';
+import { threads } from '../schema/threads';
+import type { Thread, NewThread, UpdateThread, ListOptions } from '../types';
 
 /**
  * Thread repository interface

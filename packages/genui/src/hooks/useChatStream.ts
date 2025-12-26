@@ -4,7 +4,7 @@
  */
 
 import { useState, useCallback, useRef, useEffect } from 'react';
-import type { StreamChunk, ToolCallUI } from '../types.js';
+import type { StreamChunk, ToolCallUI } from '../types';
 
 /**
  * Options for useChatStream hook

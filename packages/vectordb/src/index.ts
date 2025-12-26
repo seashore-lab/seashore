@@ -23,11 +23,11 @@ export type {
   EmbeddingFunction,
   VectorStoreOptions,
   DistanceMetric,
-} from './types.js';
+} from './types';
 
 // Schema (for migrations/setup)
-export * as schema from './schema/index.js';
-export { collections, collectionsRelations } from './schema/collections.js';
+export * as schema from './schema/index';
+export { collections, collectionsRelations } from './schema/collections';
 export {
   documents,
   documentsRelations,
@@ -36,7 +36,7 @@ export {
   generateSearchVector,
   generateSearchQuery,
   generateWebSearchQuery,
-} from './schema/documents.js';
+} from './schema/documents';
 
 // Store
 export {
@@ -47,7 +47,7 @@ export {
   listCollections,
   VectorStoreError,
   CollectionNotFoundError,
-} from './store.js';
+} from './store';
 
 // Search functions (for advanced usage)
 export {
@@ -58,4 +58,4 @@ export {
   getSearchSuggestions,
   hybridSearch,
   hybridSearchLinear,
-} from './search/index.js';
+} from './search/index';

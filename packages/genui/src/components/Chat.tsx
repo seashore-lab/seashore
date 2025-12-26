@@ -4,10 +4,10 @@
  */
 
 import React, { useEffect } from 'react';
-import type { ChatProps, ChatMessage as ChatMessageType } from '../types.js';
-import { useChat } from '../hooks/useChat.js';
-import { ChatMessages } from './ChatMessages.js';
-import { ChatInput } from './ChatInput.js';
+import type { ChatProps, ChatMessage as ChatMessageType } from '../types';
+import { useChat } from '../hooks/useChat';
+import { ChatMessages } from './ChatMessages';
+import { ChatInput } from './ChatInput';
 
 /**
  * Chat component - complete chat interface

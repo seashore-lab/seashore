@@ -4,7 +4,7 @@
  * Wrapper to add memory capabilities to agents
  */
 
-import type { MemoryManager, WithMemoryOptions } from './types.js';
+import type { MemoryManager, WithMemoryOptions } from './types';
 
 /**
  * Memory-enhanced message type

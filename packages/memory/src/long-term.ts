@@ -7,13 +7,13 @@
 import { eq, and, gte, desc, sql } from 'drizzle-orm';
 import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import type { VectorStore, EmbeddingFunction } from '@seashore/vectordb';
-import { memories } from './schema.js';
+import { memories } from './schema';
 import type {
   MemoryEntry,
   NewMemoryEntry,
   LongTermMemoryConfig,
   SemanticSearchOptions,
-} from './types.js';
+} from './types';
 
 /**
  * Default long-term memory configuration

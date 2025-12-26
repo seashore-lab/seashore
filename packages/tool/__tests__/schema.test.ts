@@ -6,8 +6,8 @@
 
 import { describe, it, expect } from 'vitest';
 import { z } from 'zod';
-import { zodToJsonSchema } from '../src/zod-to-json-schema.js';
-import { defineTool } from '../src/define-tool.js';
+import { zodToJsonSchema } from '../src/zod-to-json-schema';
+import { defineTool } from '../src/define-tool';
 
 describe('Zod to JSON Schema Conversion', () => {
   describe('Primitive Types', () => {

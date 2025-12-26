@@ -3,7 +3,7 @@
  * @module @seashore/evaluation
  */
 
-import type { Evaluator, TestCase, EvaluationResult, BatchEvaluationResult } from './types.js';
+import type { Evaluator, TestCase, EvaluationResult, BatchEvaluationResult } from './types';
 
 /**
  * Evaluate options

@@ -10,7 +10,7 @@ import {
   observabilityMiddleware,
   createAgentObserver,
   createConsoleExporter,
-} from '../src/index.js';
+} from '../src/index';
 
 describe('@seashore/observability', () => {
   describe('createTracer', () => {

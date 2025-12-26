@@ -4,7 +4,7 @@
  */
 
 import type { ToolConfig } from '@seashore/tool';
-import type { MCPClient, MCPTool, ToolBridgeConfig, JSONSchema } from './types.js';
+import type { MCPClient, MCPTool, ToolBridgeConfig, JSONSchema } from './types';
 import { z } from 'zod';
 
 /**

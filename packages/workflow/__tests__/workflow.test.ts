@@ -28,7 +28,7 @@ import {
   WorkflowExecutionError,
   WorkflowTimeoutError,
   breakLoop,
-} from '../src/index.js';
+} from '../src/index';
 
 // Mock LLM adapter
 function createMockLLMAdapter(response: string) {

@@ -6,8 +6,8 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import type { Context, MiddlewareHandler } from 'hono';
-import type { Server, ServerConfig, ThreadResponse } from './types.js';
-import { createChatHandler, createAgentHandler } from './handlers.js';
+import type { Server, ServerConfig, ThreadResponse } from './types';
+import { createChatHandler, createAgentHandler } from './handlers';
 
 /**
  * Parse rate limit window to milliseconds

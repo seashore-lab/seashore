@@ -25,7 +25,7 @@ export type {
   ConsolidationResult,
   ImportanceEvaluator,
   WithMemoryOptions,
-} from './types.js';
+} from './types';
 
 // Schema
 export {
@@ -41,19 +41,19 @@ export {
   type NewMemorySummary,
   type MemoryFact,
   type NewMemoryFact,
-} from './schema.js';
+} from './schema';
 
 // Short-term memory
-export { ShortTermMemory, createShortTermMemory } from './short-term.js';
+export { ShortTermMemory, createShortTermMemory } from './short-term';
 
 // Mid-term memory
-export { MidTermMemory, createMidTermMemory } from './mid-term.js';
+export { MidTermMemory, createMidTermMemory } from './mid-term';
 
 // Long-term memory
-export { LongTermMemory, createLongTermMemory } from './long-term.js';
+export { LongTermMemory, createLongTermMemory } from './long-term';
 
 // Memory manager
-export { createMemoryManager, createStandaloneMemoryManager } from './manager.js';
+export { createMemoryManager, createStandaloneMemoryManager } from './manager';
 
 // Consolidation utilities
 export {
@@ -68,7 +68,7 @@ export {
   type SummarizeFn,
   type ConsolidationStrategy,
   type ConsolidationOptions,
-} from './consolidation.js';
+} from './consolidation';
 
 // Importance evaluation
 export {
@@ -80,7 +80,7 @@ export {
   parseImportanceResponse,
   IMPORTANCE_PROMPT_TEMPLATE,
   type ImportanceSignals,
-} from './importance.js';
+} from './importance';
 
 // Agent integration
 export {
@@ -91,4 +91,4 @@ export {
   type MemoryEnhancedMessage,
   type AgentWithMemory,
   type MemoryMiddleware,
-} from './agent-integration.js';
+} from './agent-integration';

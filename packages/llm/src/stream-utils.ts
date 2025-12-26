@@ -4,7 +4,7 @@
  * Utilities for working with LLM streaming responses
  */
 
-import type { StreamChunk, TokenUsage } from './types.js';
+import type { StreamChunk, TokenUsage } from './types';
 
 /**
  * Convert a stream of chunks to a Web ReadableStream

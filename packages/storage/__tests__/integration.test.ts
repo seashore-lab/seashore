@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import type { Thread, Message, ThreadRepository, MessageRepository } from '../src/types.js';
+import type { Thread, Message, ThreadRepository, MessageRepository } from '../src/types';
 
 describe('@seashore/storage Integration', () => {
   describe('Persistence Middleware', () => {

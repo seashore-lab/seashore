@@ -40,7 +40,7 @@
  */
 
 // React Components
-export { Chat, ChatMessages, ChatInput, ChatMessage, ChatToolResult } from './components/index.js';
+export { Chat, ChatMessages, ChatInput, ChatMessage, ChatToolResult } from './components/index';
 
 // Hooks
 export {
@@ -50,13 +50,13 @@ export {
   type UseChatReturn,
   type UseChatStreamOptions,
   type UseChatStreamReturn,
-} from './hooks/index.js';
+} from './hooks/index';
 
 // Registry
-export { createGenUIRegistry, isGenUIData } from './registry.js';
+export { createGenUIRegistry, isGenUIData } from './registry';
 
 // Renderer
-export { renderToolCall, createToolCallRenderer } from './renderer.js';
+export { renderToolCall, createToolCallRenderer } from './renderer';
 
 // Types
 export type {
@@ -78,4 +78,4 @@ export type {
   ChatInputProps,
   ChatMessageProps,
   ChatToolResultProps,
-} from './types.js';
+} from './types';

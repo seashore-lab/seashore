@@ -5,8 +5,8 @@
  */
 
 import type { z, ZodSchema } from 'zod';
-import { zodToJsonSchema } from './zod-to-json-schema.js';
-import type { Tool, ToolConfig, ToolContext, ToolResult, JsonSchema } from './types.js';
+import { zodToJsonSchema } from './zod-to-json-schema';
+import type { Tool, ToolConfig, ToolContext, ToolResult, JsonSchema } from './types';
 
 /**
  * Client-side tool configuration

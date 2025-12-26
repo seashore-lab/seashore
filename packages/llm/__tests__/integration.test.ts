@@ -26,8 +26,8 @@ vi.mock('@tanstack/ai-gemini', () => ({
   geminiText: vi.fn((model: string) => ({ provider: 'gemini', model })),
 }));
 
-import { openaiText, anthropicText, geminiText } from '../src/adapters.js';
-import type { TextAdapter, StreamChunk, TokenUsage } from '../src/types.js';
+import { openaiText, anthropicText, geminiText } from '../src/adapters';
+import type { TextAdapter, StreamChunk, TokenUsage } from '../src/types';
 import {
   toReadableStream,
   toSSEStream,
@@ -36,21 +36,21 @@ import {
   collectContent,
   transformStream,
   filterStream,
-} from '../src/stream-utils.js';
+} from '../src/stream-utils';
 import {
   withRetry,
   isRetryableError,
   calculateDelay,
   parseRetryAfter,
   RateLimiter,
-} from '../src/retry.js';
+} from '../src/retry';
 import {
   normalizeOptions,
   getDefaultOptions,
   mergeWithDefaults,
   validateOptions,
   getModelCapabilities,
-} from '../src/options.js';
+} from '../src/options';
 
 describe('LLM Adapters', () => {
   it('should create OpenAI adapter', () => {

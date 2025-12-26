@@ -5,8 +5,8 @@
  */
 
 import type { z, ZodSchema, ZodError } from 'zod';
-import type { Message, TextAdapter, TokenUsage, StreamChunk } from './types.js';
-import { chat } from './adapters.js';
+import type { Message, TextAdapter, TokenUsage, StreamChunk } from './types';
+import { chat } from './adapters';
 
 /**
  * Structured output options

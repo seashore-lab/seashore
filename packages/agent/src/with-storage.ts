@@ -6,7 +6,7 @@
 
 import type { Message as LLMMessage } from '@seashore/llm';
 import type { Message, Thread, ThreadRepository, MessageRepository } from '@seashore/storage';
-import type { Agent, AgentConfig, AgentRunResult, AgentStreamChunk, RunOptions } from './types.js';
+import type { Agent, AgentConfig, AgentRunResult, AgentStreamChunk, RunOptions } from './types';
 
 /**
  * Storage-aware run options
@@ -113,7 +113,7 @@ function toMessage(message: Message): LLMMessage {
     return {
       role: 'tool',
       content: message.content ?? '',
-      tool_call_id: message.toolCallId ?? undefined,
+      toolCallId: message.toolCallId ?? undefined,
     };
   }
 

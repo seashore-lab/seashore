@@ -4,12 +4,12 @@
  * Re-exports all document splitters
  */
 
-export { createRecursiveSplitter, createCharacterSplitter } from './recursive-splitter.js';
+export { createRecursiveSplitter, createCharacterSplitter } from './recursive-splitter';
 
 export {
   createTokenSplitter,
   createCustomTokenSplitter,
   estimateTokens,
-} from './token-splitter.js';
+} from './token-splitter';
 
-export { createMarkdownSplitter, createHeaderSplitter } from './markdown-splitter.js';
+export { createMarkdownSplitter, createHeaderSplitter } from './markdown-splitter';

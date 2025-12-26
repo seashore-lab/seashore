@@ -4,8 +4,8 @@
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { z } from 'zod';
-import { defineTool } from '../src/define-tool.js';
-import { zodToJsonSchema } from '../src/zod-to-json-schema.js';
+import { defineTool } from '../src/define-tool';
+import { zodToJsonSchema } from '../src/zod-to-json-schema';
 
 describe('@seashore/tool', () => {
   describe('defineTool', () => {

@@ -4,7 +4,7 @@
  * Provider-specific options handling for different LLM providers
  */
 
-import type { TextAdapter, Message } from './types.js';
+import type { TextAdapter, Message } from './types';
 
 /**
  * Base chat options shared across all providers

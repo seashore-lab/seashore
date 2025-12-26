@@ -6,8 +6,8 @@
 
 import { eq, and, gte, lte, desc, sql } from 'drizzle-orm';
 import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
-import { memories } from './schema.js';
-import type { MemoryEntry, NewMemoryEntry, MidTermMemoryConfig } from './types.js';
+import { memories } from './schema';
+import type { MemoryEntry, NewMemoryEntry, MidTermMemoryConfig } from './types';
 
 /**
  * Default mid-term memory configuration

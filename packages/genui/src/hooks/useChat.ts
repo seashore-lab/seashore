@@ -4,7 +4,7 @@
  */
 
 import { useState, useCallback, useRef } from 'react';
-import type { ChatMessage, ChatResponse, TokenUsage, GenUIRegistry } from '../types.js';
+import type { ChatMessage, ChatResponse, TokenUsage, GenUIRegistry } from '../types';
 
 /**
  * Options for useChat hook

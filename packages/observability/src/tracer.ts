@@ -15,7 +15,7 @@ import type {
   StartSpanOptions,
   TraceEvent,
   TokenUsage,
-} from './types.js';
+} from './types';
 
 // Generate unique IDs
 function generateId(length: number = 16): string {

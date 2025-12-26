@@ -4,8 +4,8 @@
  * Node type for parallel execution
  */
 
-import type { WorkflowNode, ParallelNodeConfig, WorkflowContext } from '../types.js';
-import { createMutableWorkflowContext } from '../context.js';
+import type { WorkflowNode, ParallelNodeConfig, WorkflowContext } from '../types';
+import { createMutableWorkflowContext } from '../context';
 
 /**
  * Parallel node output

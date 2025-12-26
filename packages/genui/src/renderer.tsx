@@ -5,8 +5,8 @@
 
 import React, { createElement } from 'react'
 import type { ReactNode } from 'react'
-import type { GenUIRegistry, ToolCallUI, ToolCallRenderResult, ComponentRendererProps } from './types.js'
-import { isGenUIData } from './registry.js'
+import type { GenUIRegistry, ToolCallUI, ToolCallRenderResult, ComponentRendererProps } from './types'
+import { isGenUIData } from './registry'
 
 /**
  * Default renderer for non-GenUI tool results

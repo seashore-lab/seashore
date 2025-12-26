@@ -10,7 +10,7 @@ import type {
   SecurityCheckResult,
   Violation,
   TextAdapter,
-} from './types.js';
+} from './types';
 
 /**
  * Merge security check results

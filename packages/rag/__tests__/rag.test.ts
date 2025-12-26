@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import type { LoadedDocument, DocumentChunk, RetrievedDocument, RAGContext } from '../src/types.js';
+import type { LoadedDocument, DocumentChunk, RetrievedDocument, RAGContext } from '../src/types';
 
 describe('@seashore/rag', () => {
   describe('Document Loaders', () => {

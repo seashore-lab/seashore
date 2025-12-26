@@ -6,8 +6,8 @@
 
 import { sql, eq, and } from 'drizzle-orm';
 import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
-import { documents } from '../schema/index.js';
-import type { Collection, SearchResult, ScoredDocument, TextSearchOptions } from '../types.js';
+import { documents } from '../schema/index';
+import type { Collection, SearchResult, ScoredDocument, TextSearchOptions } from '../types';
 
 /**
  * Perform full-text search using PostgreSQL tsvector

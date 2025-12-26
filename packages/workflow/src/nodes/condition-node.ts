@@ -4,7 +4,7 @@
  * Node type for conditional routing
  */
 
-import type { WorkflowNode, ConditionNodeConfig, WorkflowContext } from '../types.js';
+import type { WorkflowNode, ConditionNodeConfig, WorkflowContext } from '../types';
 
 /**
  * Condition node output

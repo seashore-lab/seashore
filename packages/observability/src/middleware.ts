@@ -3,7 +3,7 @@
  * @module @seashore/observability
  */
 
-import type { Tracer, TokenCounter, Logger, SpanType } from './types.js';
+import type { Tracer, TokenCounter, Logger, SpanType } from './types';
 
 /**
  * Observability context

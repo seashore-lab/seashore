@@ -12,7 +12,7 @@ import type {
   DocumentLoader,
   DocumentSplitter,
   RetrievedDocument,
-} from './types.js';
+} from './types';
 
 /**
  * Default system prompt template

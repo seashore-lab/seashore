@@ -3,7 +3,7 @@
  * @module @seashore/security
  */
 
-import type { Guardrails, SecurityCheckResult, Violation } from './types.js';
+import type { Guardrails, SecurityCheckResult, Violation } from './types';
 
 /**
  * Input violation handler result

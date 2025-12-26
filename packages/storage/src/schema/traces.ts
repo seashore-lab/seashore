@@ -5,7 +5,7 @@
  */
 
 import { pgTable, uuid, text, timestamp, jsonb, integer, index } from 'drizzle-orm/pg-core';
-import { threads } from './threads.js';
+import { threads } from './threads';
 
 /**
  * Token usage structure

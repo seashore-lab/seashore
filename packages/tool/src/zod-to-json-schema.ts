@@ -5,7 +5,7 @@
  */
 
 import type { ZodSchema } from 'zod';
-import type { JsonSchema, JsonSchemaProperty } from './types.js';
+import type { JsonSchema, JsonSchemaProperty } from './types';
 
 // Internal type for Zod type definitions
 interface ZodTypeDef {

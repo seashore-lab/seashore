@@ -3,7 +3,7 @@
  * @module @seashore/evaluation
  */
 
-import type { Dataset, DatasetConfig, TestCase } from './types.js';
+import type { Dataset, DatasetConfig, TestCase } from './types';
 
 /**
  * Dataset implementation

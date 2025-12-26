@@ -5,9 +5,9 @@
  */
 
 import { eq, desc, asc, and, isNull } from 'drizzle-orm';
-import type { DrizzleDB } from '../database.js';
-import { traces } from '../schema/traces.js';
-import type { Trace, NewTrace, UpdateTrace, ListOptions, TraceType, TokenUsage } from '../types.js';
+import type { DrizzleDB } from '../database';
+import { traces } from '../schema/traces';
+import type { Trace, NewTrace, UpdateTrace, ListOptions, TraceType, TokenUsage } from '../types';
 
 /**
  * Trace repository interface

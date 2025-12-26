@@ -7,7 +7,7 @@
 import { readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
-import type { MCPServerConfig, ServerInfo } from './types.js';
+import type { MCPServerConfig, ServerInfo } from './types';
 
 /**
  * MCP configuration file format (mcp.json)

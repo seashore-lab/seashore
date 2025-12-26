@@ -4,8 +4,8 @@
  */
 
 import React from 'react';
-import type { ChatMessageProps, ToolCallUI } from '../types.js';
-import { ChatToolResult } from './ChatToolResult.js';
+import type { ChatMessageProps, ToolCallUI } from '../types';
+import { ChatToolResult } from './ChatToolResult';
 
 /**
  * Format timestamp to readable string

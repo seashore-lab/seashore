@@ -16,7 +16,7 @@ import type {
   TTSAdapter,
   SpeechOptions,
   SpeechResult,
-} from './types.js';
+} from './types';
 
 // ============================================================================
 // Image Adapters

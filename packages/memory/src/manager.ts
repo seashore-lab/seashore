@@ -6,10 +6,10 @@
 
 import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import type { VectorStore, EmbeddingFunction } from '@seashore/vectordb';
-import { ShortTermMemory, createShortTermMemory } from './short-term.js';
-import { MidTermMemory, createMidTermMemory } from './mid-term.js';
-import { LongTermMemory, createLongTermMemory } from './long-term.js';
-import { createImportanceEvaluator, defaultImportanceEvaluator } from './importance.js';
+import { ShortTermMemory, createShortTermMemory } from './short-term';
+import { MidTermMemory, createMidTermMemory } from './mid-term';
+import { LongTermMemory, createLongTermMemory } from './long-term';
+import { createImportanceEvaluator, defaultImportanceEvaluator } from './importance';
 import type {
   MemoryManager,
   MemoryManagerConfig,
@@ -20,7 +20,7 @@ import type {
   ContextOptions,
   ConsolidationResult,
   ImportanceEvaluator,
-} from './types.js';
+} from './types';
 
 /**
  * Default memory manager configuration

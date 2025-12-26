@@ -6,7 +6,7 @@
 
 import { readFile, stat } from 'fs/promises';
 import { basename, resolve } from 'path';
-import type { DocumentLoader, LoadedDocument, MarkdownLoaderOptions } from '../types.js';
+import type { DocumentLoader, LoadedDocument, MarkdownLoaderOptions } from '../types';
 
 /**
  * Parse YAML-like frontmatter (simplified)

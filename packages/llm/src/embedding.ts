@@ -9,7 +9,7 @@ import type {
   EmbeddingOptions,
   EmbeddingResult,
   BatchEmbeddingResult,
-} from './types.js';
+} from './types';
 
 /**
  * Create an OpenAI embedding adapter

@@ -3,7 +3,7 @@
  * @module @seashore/observability
  */
 
-import type { TokenCounter, TokenCounterConfig, TokenUsage } from './types.js';
+import type { TokenCounter, TokenCounterConfig, TokenUsage } from './types';
 
 /**
  * Token pricing per 1K tokens (in USD)

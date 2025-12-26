@@ -13,13 +13,13 @@ import type {
   MCPResourceResult,
   MCPPromptResult,
   MCPResourceCallback,
-} from './types.js';
+} from './types';
 import {
   StdioTransport,
   SSETransport,
   WebSocketTransport,
   MCPConnectionError,
-} from './transports/index.js';
+} from './transports/index';
 
 /**
  * Transport interface for internal use

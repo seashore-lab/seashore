@@ -13,7 +13,7 @@ import type {
   TextAdapter,
   RuleBasedSecurityRuleConfig,
   LLMSecurityRuleConfig,
-} from './types.js';
+} from './types';
 
 /**
  * Prompt injection rule configuration

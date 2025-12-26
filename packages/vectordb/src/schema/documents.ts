@@ -6,7 +6,7 @@
 
 import { pgTable, uuid, text, timestamp, jsonb, index, customType } from 'drizzle-orm/pg-core';
 import { sql } from 'drizzle-orm';
-import { collections } from './collections.js';
+import { collections } from './collections';
 
 /**
  * Custom vector type for pgvector

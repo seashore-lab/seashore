@@ -6,8 +6,8 @@
 
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
-import type { Database, DatabaseConfig } from './types.js';
-import * as schema from './schema/index.js';
+import type { Database, DatabaseConfig } from './types';
+import * as schema from './schema/index';
 
 /**
  * Drizzle database instance type

@@ -24,14 +24,14 @@ export type {
   DatabaseConfig,
   ListOptions,
   PaginationOptions,
-} from './types.js';
+} from './types';
 
 // Database
-export { createDatabase, type DrizzleDB } from './database.js';
-export { sql, eq, and, or, desc, asc, gt, gte, lt, lte, isNull, isNotNull } from './database.js';
+export { createDatabase, type DrizzleDB } from './database';
+export { sql, eq, and, or, desc, asc, gt, gte, lt, lte, isNull, isNotNull } from './database';
 
 // Schema
-export { threads, messages, traces, sessions } from './schema/index.js';
+export { threads, messages, traces, sessions } from './schema/index';
 
 // Repositories
 export {
@@ -41,7 +41,7 @@ export {
   type ThreadRepository,
   type MessageRepository,
   type TraceRepository,
-} from './repositories/index.js';
+} from './repositories/index';
 
 // Middleware
 export {
@@ -52,7 +52,7 @@ export {
   type MessageEvent,
   type MessageEventType,
   type TraceEvent,
-} from './middleware.js';
+} from './middleware';
 
 // Query Builder
 export {
@@ -67,4 +67,4 @@ export {
   type MessageQueryOptions,
   type TraceQueryOptions,
   type DateRangeFilter,
-} from './query-builder.js';
+} from './query-builder';

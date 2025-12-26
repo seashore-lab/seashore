@@ -6,8 +6,8 @@
 
 import type { TextAdapter, Message } from '@seashore/llm';
 import type { Tool } from '@seashore/tool';
-import type { Agent, AgentRunResult, RunOptions, AgentConfig } from './types.js';
-import { createAgent } from './create-agent.js';
+import type { Agent, AgentRunResult, RunOptions, AgentConfig } from './types';
+import { createAgent } from './create-agent';
 import type {
   Workflow,
   WorkflowConfig,
@@ -263,7 +263,7 @@ export function composeAgents(config: {
     createNode<WorkflowAgentInput, AgentRunResult>({
       name: nodeName,
       execute: async (input, ctx) => {
-        const prevNodeName = index > 0 ? agents[index - 1].name : null;
+        const prevNodeName = index > 0 ? agents[index - 1]?.name : null;
         const prevResult = prevNodeName ? (ctx.nodeOutputs[prevNodeName] as AgentRunResult) : null;
 
         const message = extract(prevResult, input, ctx);
@@ -274,15 +274,15 @@ export function composeAgents(config: {
 
   // Create edges to chain agents sequentially
   const edges = agents.slice(1).map((_, index) => ({
-    from: agents[index].name,
-    to: agents[index + 1].name,
+    from: agents[index]!.name,
+    to: agents[index + 1]!.name,
   }));
 
   // Add final output transformation node
   const outputNode = createNode<unknown, WorkflowAgentOutput>({
     name: '_output',
     execute: async (_, ctx) => {
-      const lastAgentName = agents[agents.length - 1].name;
+      const lastAgentName = agents[agents.length - 1]!.name;
       const lastResult = ctx.nodeOutputs[lastAgentName] as AgentRunResult;
 
       return {
@@ -298,7 +298,7 @@ export function composeAgents(config: {
   // Add edge from last agent to output
   if (agents.length > 0) {
     edges.push({
-      from: agents[agents.length - 1].name,
+      from: agents[agents.length - 1]!.name,
       to: '_output',
     });
   }

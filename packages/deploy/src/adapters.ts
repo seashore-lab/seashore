@@ -3,7 +3,7 @@
  * @module @seashore/deploy
  */
 
-import type { Server, RuntimeAdapter, RuntimeAdapterOptions } from './types.js';
+import type { Server, RuntimeAdapter, RuntimeAdapterOptions } from './types';
 
 /**
  * Cloudflare Workers adapter

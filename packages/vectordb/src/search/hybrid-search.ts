@@ -6,14 +6,14 @@
 
 import { sql, eq, and } from 'drizzle-orm';
 import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
-import { documents } from '../schema/index.js';
+import { documents } from '../schema/index';
 import type {
   Collection,
   EmbeddingVector,
   HybridSearchOptions,
   SearchResult,
   ScoredDocument,
-} from '../types.js';
+} from '../types';
 
 /**
  * Reciprocal Rank Fusion (RRF) scoring

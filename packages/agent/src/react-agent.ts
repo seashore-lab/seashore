@@ -15,10 +15,10 @@ import type {
   RunOptions,
   ToolCallRecord,
   InternalMessage,
-} from './types.js';
-import { executeTools, formatToolResult, type ToolCallRequest } from './tool-executor.js';
-import { AgentError, checkAborted, wrapError } from './error-handler.js';
-import { StreamChunks, collectStream } from './stream.js';
+} from './types';
+import { executeTools, formatToolResult, type ToolCallRequest } from './tool-executor';
+import { AgentError, checkAborted, wrapError } from './error-handler';
+import { StreamChunks, collectStream } from './stream';
 
 /**
  * Default configuration values
@@ -139,20 +139,20 @@ export function createAgent<
                   break;
 
                 case 'tool-call-start':
-                  if (chunk.toolCall !== undefined) {
+                  if (chunk.toolCall?.id !== undefined) {
                     pendingToolCalls.set(chunk.toolCall.id, {
-                      name: chunk.toolCall.function?.name ?? '',
+                      name: (chunk.toolCall as any).function?.name ?? '',
                       arguments: '',
                     });
                     yield StreamChunks.toolCallStart(
                       chunk.toolCall.id,
-                      chunk.toolCall.function?.name ?? ''
+                      (chunk.toolCall as any).function?.name ?? ''
                     );
                   }
                   break;
 
                 case 'tool-call-delta':
-                  if (chunk.toolCall !== undefined && chunk.delta !== undefined) {
+                  if (chunk.toolCall?.id !== undefined && chunk.delta !== undefined) {
                     const call = pendingToolCalls.get(chunk.toolCall.id);
                     if (call !== undefined) {
                       call.arguments += chunk.delta;
@@ -162,7 +162,7 @@ export function createAgent<
                   break;
 
                 case 'tool-call-end':
-                  if (chunk.toolCall !== undefined) {
+                  if (chunk.toolCall?.id !== undefined) {
                     const call = pendingToolCalls.get(chunk.toolCall.id);
                     if (call !== undefined) {
                       yield StreamChunks.toolCallEnd(chunk.toolCall.id, call.name, call.arguments);

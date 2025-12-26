@@ -4,7 +4,7 @@
  * Utilities for streaming agent responses
  */
 
-import type { AgentStreamChunk, AgentRunResult, ToolCallRecord } from './types.js';
+import type { AgentStreamChunk, AgentRunResult, ToolCallRecord } from './types';
 import type { TokenUsage } from '@seashore/llm';
 
 /**
