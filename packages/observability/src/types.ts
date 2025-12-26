@@ -150,6 +150,16 @@ export type ExporterConfig =
   | { type: 'otlp'; endpoint: string; headers?: Record<string, string> };
 
 /**
+ * Span exporter interface
+ */
+export interface SpanExporter {
+  /** Export spans */
+  export(spans: Span[]): Promise<void>;
+  /** Shutdown exporter */
+  shutdown(): Promise<void>;
+}
+
+/**
  * Tracer interface
  */
 export interface Tracer {

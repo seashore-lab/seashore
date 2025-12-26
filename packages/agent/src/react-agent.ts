@@ -123,13 +123,14 @@ export function createAgent<
           const pendingToolCalls: Map<string, { name: string; arguments: string }> = new Map();
 
           try {
-            for await (const chunk of chat({
+            for await (const rawChunk of chat({
               adapter: model,
               messages: conversationMessages as Message[],
               tools: llmTools.length > 0 ? llmTools : undefined,
               temperature: effectiveTemperature,
               signal: options?.signal,
             })) {
+              const chunk = rawChunk as any;
               switch (chunk.type) {
                 case 'content':
                   if (chunk.delta !== undefined) {
@@ -140,32 +141,35 @@ export function createAgent<
 
                 case 'tool-call-start':
                   if (chunk.toolCall?.id !== undefined) {
-                    pendingToolCalls.set(chunk.toolCall.id, {
-                      name: (chunk.toolCall as any).function?.name ?? '',
+                    const toolCall = chunk.toolCall;
+                    pendingToolCalls.set(toolCall.id, {
+                      name: toolCall.function?.name ?? '',
                       arguments: '',
                     });
                     yield StreamChunks.toolCallStart(
-                      chunk.toolCall.id,
-                      (chunk.toolCall as any).function?.name ?? ''
+                      toolCall.id,
+                      toolCall.function?.name ?? ''
                     );
                   }
                   break;
 
                 case 'tool-call-delta':
                   if (chunk.toolCall?.id !== undefined && chunk.delta !== undefined) {
-                    const call = pendingToolCalls.get(chunk.toolCall.id);
+                    const toolCall = chunk.toolCall;
+                    const call = pendingToolCalls.get(toolCall.id);
                     if (call !== undefined) {
                       call.arguments += chunk.delta;
-                      yield StreamChunks.toolCallArgs(chunk.toolCall.id, call.name, chunk.delta);
+                      yield StreamChunks.toolCallArgs(toolCall.id, call.name, chunk.delta);
                     }
                   }
                   break;
 
                 case 'tool-call-end':
                   if (chunk.toolCall?.id !== undefined) {
-                    const call = pendingToolCalls.get(chunk.toolCall.id);
+                    const toolCall = chunk.toolCall;
+                    const call = pendingToolCalls.get(toolCall.id);
                     if (call !== undefined) {
-                      yield StreamChunks.toolCallEnd(chunk.toolCall.id, call.name, call.arguments);
+                      yield StreamChunks.toolCallEnd(toolCall.id, call.name, call.arguments);
                     }
                   }
                   break;

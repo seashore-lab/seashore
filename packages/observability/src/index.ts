@@ -15,8 +15,6 @@ export type {
   ExporterConfig,
   TokenCounter,
   TokenCounterConfig,
-  TokenEstimate,
-  TokenCost,
   Logger,
   LoggerConfig,
   LogLevel,

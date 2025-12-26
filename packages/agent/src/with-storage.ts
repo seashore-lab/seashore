@@ -168,7 +168,12 @@ export function withStorage<TTools extends readonly unknown[] = readonly unknown
   // Create enhanced agent
   const enhancedAgent = Object.create(agent) as AgentWithStorage<TTools>;
 
-  enhancedAgent.storage = config;
+  Object.defineProperty(enhancedAgent, 'storage', {
+    value: config,
+    writable: false,
+    enumerable: true,
+    configurable: false,
+  });
 
   enhancedAgent.getOrCreateThread = async (options) => {
     const { threadId, userId, title } = options;

@@ -121,8 +121,7 @@ export class ThreadQueryBuilder {
    * Set pagination
    */
   paginate(limit: number, offset: number = 0): this {
-    this.options.limit = limit;
-    this.options.offset = offset;
+    this.options = { ...this.options, limit, offset };
     return this;
   }
 
@@ -130,8 +129,7 @@ export class ThreadQueryBuilder {
    * Set ordering
    */
   orderBy(column: 'createdAt' | 'updatedAt' | 'title', order: 'asc' | 'desc' = 'desc'): this {
-    this.options.orderBy = column;
-    this.options.order = order;
+    this.options = { ...this.options, orderBy: column, order };
     return this;
   }
 
@@ -238,8 +236,7 @@ export class MessageQueryBuilder {
    * Set pagination
    */
   paginate(limit: number, offset: number = 0): this {
-    this.options.limit = limit;
-    this.options.offset = offset;
+    this.options = { ...this.options, limit, offset };
     return this;
   }
 
@@ -247,7 +244,7 @@ export class MessageQueryBuilder {
    * Set ordering
    */
   orderBy(order: 'asc' | 'desc' = 'asc'): this {
-    this.options.order = order;
+    this.options = { ...this.options, order };
     return this;
   }
 
@@ -368,8 +365,7 @@ export class TraceQueryBuilder {
    * Set pagination
    */
   paginate(limit: number, offset: number = 0): this {
-    this.options.limit = limit;
-    this.options.offset = offset;
+    this.options = { ...this.options, limit, offset };
     return this;
   }
 
@@ -377,7 +373,7 @@ export class TraceQueryBuilder {
    * Set ordering
    */
   orderBy(order: 'asc' | 'desc' = 'desc'): this {
-    this.options.order = order;
+    this.options = { ...this.options, order };
     return this;
   }
 

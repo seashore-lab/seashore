@@ -12,14 +12,12 @@ export type {
   CollectionConfig,
   Document,
   NewDocument,
-  DocumentUpdate,
   ScoredDocument,
   VectorSearchOptions,
   TextSearchOptions,
   HybridSearchOptions,
   SearchResult,
   VectorStore,
-  VectorStoreStats,
   EmbeddingFunction,
   VectorStoreOptions,
   DistanceMetric,
@@ -27,10 +25,9 @@ export type {
 
 // Schema (for migrations/setup)
 export * as schema from './schema/index';
-export { collections, collectionsRelations } from './schema/collections';
+export { collections } from './schema/collections';
 export {
   documents,
-  documentsRelations,
   vector,
   tsvector,
   generateSearchVector,
