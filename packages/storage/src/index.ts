@@ -42,3 +42,29 @@ export {
   type MessageRepository,
   type TraceRepository,
 } from './repositories/index.js';
+
+// Middleware
+export {
+  createPersistenceMiddleware,
+  createAutoPersistedMessageHandler,
+  type PersistenceMiddleware,
+  type PersistenceMiddlewareConfig,
+  type MessageEvent,
+  type MessageEventType,
+  type TraceEvent,
+} from './middleware.js';
+
+// Query Builder
+export {
+  ThreadQueryBuilder,
+  MessageQueryBuilder,
+  TraceQueryBuilder,
+  createQueryBuilders,
+  queryThreads,
+  queryMessages,
+  queryTraces,
+  type ThreadQueryOptions,
+  type MessageQueryOptions,
+  type TraceQueryOptions,
+  type DateRangeFilter,
+} from './query-builder.js';

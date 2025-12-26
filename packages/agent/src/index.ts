@@ -54,3 +54,21 @@ export {
   type WorkflowAgentInput,
   type WorkflowAgentOutput,
 } from './workflow-agent.js';
+
+// Storage integration
+export {
+  withStorage,
+  type WithStorageConfig,
+  type StorageRunOptions,
+  type AgentWithStorage,
+} from './with-storage.js';
+
+// Thread continuation
+export {
+  createThreadManager,
+  continueThread,
+  streamContinueThread,
+  type ThreadManager,
+  type ThreadContext,
+  type ThreadContinuationOptions,
+} from './thread.js';

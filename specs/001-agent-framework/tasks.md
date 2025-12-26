@@ -193,35 +193,35 @@ packages/
 
 ### @seashore/vectordb Package
 
-- [ ] T071 [US5] Create packages/vectordb/package.json with pgvector dependency
-- [ ] T072 [US5] Define vectordb types in packages/vectordb/src/types.ts (Document, Collection, SearchResult)
-- [ ] T073 [US5] Define collections schema in packages/vectordb/src/schema/collections.ts
-- [ ] T074 [US5] Define documents schema with vector and tsvector in packages/vectordb/src/schema/documents.ts
-- [ ] T075 [US5] Implement createVectorStore in packages/vectordb/src/store.ts
-- [ ] T076 [US5] Implement HNSW vector search in packages/vectordb/src/search/vector-search.ts
-- [ ] T077 [P] [US5] Implement tsvector text search in packages/vectordb/src/search/text-search.ts
-- [ ] T078 [US5] Implement hybrid search with RRF fusion in packages/vectordb/src/search/hybrid-search.ts
-- [ ] T079 [US5] Create main export in packages/vectordb/src/index.ts
-- [ ] T080 [US5] Add integration tests in packages/vectordb/\_\_tests\_\_/search.test.ts
+- [X] T071 [US5] Create packages/vectordb/package.json with pgvector dependency
+- [X] T072 [US5] Define vectordb types in packages/vectordb/src/types.ts (Document, Collection, SearchResult)
+- [X] T073 [US5] Define collections schema in packages/vectordb/src/schema/collections.ts
+- [X] T074 [US5] Define documents schema with vector and tsvector in packages/vectordb/src/schema/documents.ts
+- [X] T075 [US5] Implement createVectorStore in packages/vectordb/src/store.ts
+- [X] T076 [US5] Implement HNSW vector search in packages/vectordb/src/search/vector-search.ts
+- [X] T077 [P] [US5] Implement tsvector text search in packages/vectordb/src/search/text-search.ts
+- [X] T078 [US5] Implement hybrid search with RRF fusion in packages/vectordb/src/search/hybrid-search.ts
+- [X] T079 [US5] Create main export in packages/vectordb/src/index.ts
+- [X] T080 [US5] Add integration tests in packages/vectordb/\_\_tests\_\_/search.test.ts
 
 ### @seashore/rag Package
 
-- [ ] T081 [US5] Create packages/rag/package.json
-- [ ] T082 [US5] Define RAG types in packages/rag/src/types.ts (LoadedDocument, DocumentChunk, Retriever)
-- [ ] T083 [US5] Implement createTextLoader in packages/rag/src/loaders/text-loader.ts
-- [ ] T084 [P] [US5] Implement createMarkdownLoader in packages/rag/src/loaders/markdown-loader.ts
-- [ ] T085 [P] [US5] Implement createPDFLoader in packages/rag/src/loaders/pdf-loader.ts
-- [ ] T086 [P] [US5] Implement createWebLoader in packages/rag/src/loaders/web-loader.ts
-- [ ] T087 [US5] Implement createRecursiveSplitter in packages/rag/src/splitters/recursive-splitter.ts
-- [ ] T088 [P] [US5] Implement createTokenSplitter in packages/rag/src/splitters/token-splitter.ts
-- [ ] T089 [P] [US5] Implement createMarkdownSplitter in packages/rag/src/splitters/markdown-splitter.ts
-- [ ] T090 [US5] Implement createVectorRetriever in packages/rag/src/retrievers/vector-retriever.ts
-- [ ] T091 [US5] Implement createHybridRetriever in packages/rag/src/retrievers/hybrid-retriever.ts
-- [ ] T092 [US5] Implement createRAG pipeline in packages/rag/src/rag.ts
-- [ ] T093 [US5] Create main export in packages/rag/src/index.ts
-- [ ] T094 [US5] Add unit tests in packages/rag/\_\_tests\_\_/rag.test.ts
+- [X] T081 [US5] Create packages/rag/package.json
+- [X] T082 [US5] Define RAG types in packages/rag/src/types.ts (LoadedDocument, DocumentChunk, Retriever)
+- [X] T083 [US5] Implement createTextLoader in packages/rag/src/loaders/text-loader.ts
+- [X] T084 [P] [US5] Implement createMarkdownLoader in packages/rag/src/loaders/markdown-loader.ts
+- [X] T085 [P] [US5] Implement createPDFLoader in packages/rag/src/loaders/pdf-loader.ts
+- [X] T086 [P] [US5] Implement createWebLoader in packages/rag/src/loaders/web-loader.ts
+- [X] T087 [US5] Implement createRecursiveSplitter in packages/rag/src/splitters/recursive-splitter.ts
+- [X] T088 [P] [US5] Implement createTokenSplitter in packages/rag/src/splitters/token-splitter.ts
+- [X] T089 [P] [US5] Implement createMarkdownSplitter in packages/rag/src/splitters/markdown-splitter.ts
+- [X] T090 [US5] Implement createVectorRetriever in packages/rag/src/retrievers/vector-retriever.ts
+- [X] T091 [US5] Implement createHybridRetriever in packages/rag/src/retrievers/hybrid-retriever.ts
+- [X] T092 [US5] Implement createRAG pipeline in packages/rag/src/rag.ts
+- [X] T093 [US5] Create main export in packages/rag/src/index.ts
+- [X] T094 [US5] Add unit tests in packages/rag/\_\_tests\_\_/rag.test.ts
 
-**Checkpoint**: User Story 5 complete - developers can implement RAG with hybrid search
+**Checkpoint**: User Story 5 complete - developers can implement RAG with hybrid search ✅
 
 ---
 
@@ -233,20 +233,20 @@ packages/
 
 ### Implementation for User Story 6
 
-- [ ] T095 [US6] Create packages/memory/package.json
-- [ ] T096 [US6] Define memory types in packages/memory/src/types.ts (MemoryEntry, MemoryType, MemoryConfig)
-- [ ] T097 [US6] Define memories schema in packages/memory/src/schema.ts
-- [ ] T098 [US6] Implement short-term memory in packages/memory/src/short-term.ts
-- [ ] T099 [US6] Implement mid-term memory in packages/memory/src/mid-term.ts
-- [ ] T100 [US6] Implement long-term memory with vector search in packages/memory/src/long-term.ts
-- [ ] T101 [US6] Implement createMemoryManager in packages/memory/src/manager.ts
-- [ ] T102 [US6] Implement memory consolidation in packages/memory/src/consolidation.ts
-- [ ] T103 [US6] Implement importance evaluator in packages/memory/src/importance.ts
-- [ ] T104 [US6] Add withMemory agent wrapper in packages/memory/src/agent-integration.ts
-- [ ] T105 [US6] Create main export in packages/memory/src/index.ts
-- [ ] T106 [US6] Add unit tests in packages/memory/\_\_tests\_\_/memory.test.ts
+- [X] T095 [US6] Create packages/memory/package.json
+- [X] T096 [US6] Define memory types in packages/memory/src/types.ts (MemoryEntry, MemoryType, MemoryConfig)
+- [X] T097 [US6] Define memories schema in packages/memory/src/schema.ts
+- [X] T098 [US6] Implement short-term memory in packages/memory/src/short-term.ts
+- [X] T099 [US6] Implement mid-term memory in packages/memory/src/mid-term.ts
+- [X] T100 [US6] Implement long-term memory with vector search in packages/memory/src/long-term.ts
+- [X] T101 [US6] Implement createMemoryManager in packages/memory/src/manager.ts
+- [X] T102 [US6] Implement memory consolidation in packages/memory/src/consolidation.ts
+- [X] T103 [US6] Implement importance evaluator in packages/memory/src/importance.ts
+- [X] T104 [US6] Add withMemory agent wrapper in packages/memory/src/agent-integration.ts
+- [X] T105 [US6] Create main export in packages/memory/src/index.ts
+- [X] T106 [US6] Add unit tests in packages/memory/\_\_tests\_\_/memory.test.ts
 
-**Checkpoint**: User Story 6 complete - Agents can maintain short/mid/long term memory
+**Checkpoint**: User Story 6 complete - Agents can maintain short/mid/long term memory ✅
 
 ---
 
@@ -260,13 +260,13 @@ packages/
 
 > Note: Core storage infrastructure was created in Phase 2 (T023-T036). This phase adds integration.
 
-- [ ] T107 [US7] Add automatic persistence middleware in packages/storage/src/middleware.ts
-- [ ] T108 [US7] Add query builder utilities in packages/storage/src/query-builder.ts
-- [ ] T109 [US7] Add storage integration with agent in packages/agent/src/with-storage.ts
-- [ ] T110 [US7] Add thread continuation support in packages/agent/src/thread.ts
-- [ ] T111 [US7] Add storage integration tests in packages/storage/\_\_tests\_\_/integration.test.ts
+- [X] T107 [US7] Add automatic persistence middleware in packages/storage/src/middleware.ts
+- [X] T108 [US7] Add query builder utilities in packages/storage/src/query-builder.ts
+- [X] T109 [US7] Add storage integration with agent in packages/agent/src/with-storage.ts
+- [X] T110 [US7] Add thread continuation support in packages/agent/src/thread.ts
+- [X] T111 [US7] Add storage integration tests in packages/storage/\_\_tests\_\_/integration.test.ts
 
-**Checkpoint**: User Story 7 complete - Agent data is automatically persisted
+**Checkpoint**: User Story 7 complete - Agent data is automatically persisted ✅
 
 ---
 
