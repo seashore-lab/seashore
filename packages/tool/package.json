@@ -1,0 +1,43 @@
+{
+  "name": "@seashore/tool",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Type-safe tool definitions for Seashore Agent Framework",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./presets": {
+      "import": "./dist/presets/index.js",
+      "types": "./dist/presets/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "tool",
+    "agent",
+    "ai",
+    "seashore",
+    "zod"
+  ],
+  "license": "MIT",
+  "dependencies": {},
+  "peerDependencies": {
+    "zod": "^4.0.5"
+  },
+  "devDependencies": {
+    "zod": "^4.0.5"
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false
+}

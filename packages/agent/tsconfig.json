@@ -1,0 +1,26 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "exactOptionalPropertyTypes": false,
+    "paths": {
+      "@seashore/llm": [
+        "../llm/src"
+      ],
+      "@seashore/tool": [
+        "../tool/src"
+      ],
+      "@seashore/workflow": [
+        "../workflow/src"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "__tests__/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
