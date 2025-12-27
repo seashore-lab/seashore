@@ -20,10 +20,10 @@ export type {
   ReportConfig,
   EvaluationReport,
   TextAdapter,
-} from './types.js';
+} from './types';
 
 // Evaluator
-export { createEvaluator } from './evaluator.js';
+export { createEvaluator } from './evaluator';
 
 // Evaluate functions
 export {
@@ -31,7 +31,7 @@ export {
   evaluateBatch,
   type EvaluateOptions,
   type EvaluateBatchOptions,
-} from './evaluate.js';
+} from './evaluate';
 
 // Metrics
 export {
@@ -46,10 +46,10 @@ export {
   type HarmfulnessMetricConfig,
   type CustomLLMMetricConfig,
   type CustomRuleMetricConfig,
-} from './metrics.js';
+} from './metrics';
 
 // Dataset
-export { createDataset, loadDataset } from './dataset.js';
+export { createDataset, loadDataset } from './dataset';
 
 // Report
-export { generateReport } from './report.js';
+export { generateReport } from './report';

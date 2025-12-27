@@ -26,8 +26,8 @@ vi.mock('@tanstack/ai-gemini', () => ({
   geminiText: vi.fn((model: string) => ({ provider: 'gemini', model })),
 }));
 
-import { openaiText, anthropicText, geminiText } from '../src/adapters.js';
-import type { TextAdapter, StreamChunk, TokenUsage } from '../src/types.js';
+import { openaiText, anthropicText, geminiText } from '../src/adapters';
+import type { TextAdapter, StreamChunk, TokenUsage } from '../src/types';
 import {
   toReadableStream,
   toSSEStream,
@@ -36,21 +36,21 @@ import {
   collectContent,
   transformStream,
   filterStream,
-} from '../src/stream-utils.js';
+} from '../src/stream-utils';
 import {
   withRetry,
   isRetryableError,
   calculateDelay,
   parseRetryAfter,
   RateLimiter,
-} from '../src/retry.js';
+} from '../src/retry';
 import {
   normalizeOptions,
   getDefaultOptions,
   mergeWithDefaults,
   validateOptions,
   getModelCapabilities,
-} from '../src/options.js';
+} from '../src/options';
 
 describe('LLM Adapters', () => {
   it('should create OpenAI adapter', () => {
@@ -78,7 +78,7 @@ describe('Stream Utilities', () => {
     { type: 'content', delta: ' world' },
     { type: 'content', delta: '!' },
     {
-      type: 'finish',
+      type: 'done',
       finishReason: 'stop',
       usage: { promptTokens: 10, completionTokens: 5, totalTokens: 15 },
     },
@@ -255,34 +255,37 @@ describe('Retry Logic', () => {
     });
 
     it('should retry on transient errors', async () => {
+      // Use real timers to avoid timing issues with fake timers
+      vi.useRealTimers();
+
       const fn = vi
         .fn()
         .mockRejectedValueOnce(new Error('Rate limit'))
         .mockRejectedValueOnce(new Error('Rate limit'))
         .mockResolvedValue('success');
 
-      const resultPromise = withRetry(fn, { maxRetries: 3, initialDelay: 100 });
-
-      // Fast-forward through delays
-      await vi.advanceTimersByTimeAsync(100);
-      await vi.advanceTimersByTimeAsync(200);
-
-      const result = await resultPromise;
+      const result = await withRetry(fn, { maxRetries: 3, initialDelay: 10, jitter: 0 });
 
       expect(result).toBe('success');
       expect(fn).toHaveBeenCalledTimes(3);
+
+      // Restore fake timers
+      vi.useFakeTimers();
     });
 
     it('should throw after max retries', async () => {
+      // Use real timers for this test to avoid timing issues with fake timers
+      vi.useRealTimers();
+
       const fn = vi.fn().mockRejectedValue(new Error('Rate limit'));
 
-      const resultPromise = withRetry(fn, { maxRetries: 2, initialDelay: 100 });
-
-      await vi.advanceTimersByTimeAsync(100);
-      await vi.advanceTimersByTimeAsync(200);
-
-      await expect(resultPromise).rejects.toThrow('Rate limit');
+      await expect(withRetry(fn, { maxRetries: 2, initialDelay: 10, jitter: 0 })).rejects.toThrow(
+        'Rate limit'
+      );
       expect(fn).toHaveBeenCalledTimes(3); // Initial + 2 retries
+
+      // Restore fake timers
+      vi.useFakeTimers();
     });
 
     it('should not retry non-retryable errors', async () => {
@@ -293,23 +296,28 @@ describe('Retry Logic', () => {
     });
 
     it('should call onRetry callback', async () => {
+      // Use real timers for this test as fake timers can cause race conditions
+      vi.useRealTimers();
+
       const onRetry = vi.fn();
       const fn = vi
         .fn()
         .mockRejectedValueOnce(new Error('Rate limit'))
         .mockResolvedValue('success');
 
-      const resultPromise = withRetry(fn, {
+      const result = await withRetry(fn, {
         maxRetries: 3,
-        initialDelay: 100,
+        initialDelay: 10, // Very short delay for fast tests
+        jitter: 0, // No jitter for predictability
         onRetry,
       });
 
-      await vi.advanceTimersByTimeAsync(100);
-      await resultPromise;
-
+      expect(result).toBe('success');
       expect(onRetry).toHaveBeenCalledTimes(1);
       expect(onRetry).toHaveBeenCalledWith(expect.any(Error), 1, expect.any(Number));
+
+      // Restore fake timers for other tests
+      vi.useFakeTimers();
     });
   });
 

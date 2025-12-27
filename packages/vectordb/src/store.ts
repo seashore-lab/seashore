@@ -4,9 +4,9 @@
  * Main vector store implementation
  */
 
-import { eq, sql, and, inArray } from 'drizzle-orm';
+import { eq, sql, and } from 'drizzle-orm';
 import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
-import { collections, documents, generateSearchVector } from './schema/index.js';
+import { collections, documents, generateSearchVector } from './schema/index';
 import type {
   Collection,
   CollectionConfig,
@@ -17,15 +17,14 @@ import type {
   HybridSearchOptions,
   NewDocument,
   SearchResult,
-  ScoredDocument,
   TextSearchOptions,
   VectorSearchOptions,
   VectorStore,
   VectorStoreOptions,
-} from './types.js';
-import { vectorSearch } from './search/vector-search.js';
-import { textSearch } from './search/text-search.js';
-import { hybridSearch } from './search/hybrid-search.js';
+} from './types';
+import { vectorSearch } from './search/vector-search';
+import { textSearch } from './search/text-search';
+import { hybridSearch } from './search/hybrid-search';
 
 /**
  * Vector store error
@@ -236,7 +235,7 @@ function createVectorStoreForCollection(
       const values = processedDocs.map((doc) => ({
         collectionId: collection.id,
         content: doc.content,
-        embedding: doc.embedding,
+        embedding: doc.embedding ? [...doc.embedding] : null,
         searchVector: sql`to_tsvector('english', ${doc.content})`,
         metadata: doc.metadata ?? {},
       }));

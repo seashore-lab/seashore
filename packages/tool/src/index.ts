@@ -15,11 +15,11 @@ export type {
   JsonSchemaProperty,
   ToolCallRequest,
   ToolCallResponse,
-} from './types.js';
+} from './types';
 
 // Core
-export { defineTool } from './define-tool.js';
-export { zodToJsonSchema } from './zod-to-json-schema.js';
+export { defineTool } from './define-tool';
+export { zodToJsonSchema } from './zod-to-json-schema';
 
 // Validation
 export {
@@ -31,7 +31,7 @@ export {
   sanitizeObject,
   type ValidationIssue,
   type ValidationMiddlewareOptions,
-} from './validation.js';
+} from './validation';
 
 // Client-side tools
 export {
@@ -40,7 +40,7 @@ export {
   type ClientTool,
   type ClientToolConfig,
   type ClientToolPending,
-} from './client-tool.js';
+} from './client-tool';
 
 // Approval handling
 export {
@@ -52,8 +52,8 @@ export {
   type ApprovalResponse,
   type ApprovalHandler,
   type ApprovalConfig,
-} from './approval.js';
+} from './approval';
 
 // Presets
-export { serperTool, type SerperConfig, type SerperResult } from './presets/serper.js';
-export { firecrawlTool, type FirecrawlConfig, type FirecrawlResult } from './presets/firecrawl.js';
+export { serperTool, type SerperConfig, type SerperResult } from './presets/serper';
+export { firecrawlTool, type FirecrawlConfig, type FirecrawlResult } from './presets/firecrawl';

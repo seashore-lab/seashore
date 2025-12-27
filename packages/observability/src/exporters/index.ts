@@ -3,5 +3,5 @@
  * @module @seashore/observability
  */
 
-export { createOTLPExporter, type OTLPExporterConfig } from './otlp.js';
-export { createConsoleExporter, type ConsoleExporterConfig } from './console.js';
+export { createOTLPExporter, type OTLPExporterConfig } from './otlp';
+export { createConsoleExporter, type ConsoleExporterConfig } from './console';

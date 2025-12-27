@@ -4,7 +4,7 @@
  * Error handling, retry logic, and fallback mechanisms for workflows
  */
 
-import type { WorkflowNode, WorkflowContext } from './types.js';
+import type { WorkflowNode, WorkflowContext } from './types';
 
 /**
  * Base workflow error class

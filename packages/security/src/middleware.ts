@@ -3,7 +3,7 @@
  * @module @seashore/security
  */
 
-import type { Guardrails, SecurityCheckResult, Violation } from './types.js';
+import type { Guardrails, Violation } from './types';
 
 /**
  * Input violation handler result
@@ -132,7 +132,10 @@ export function securityMiddleware(config: SecurityMiddlewareConfig): SecurityMi
         if (handler.action === 'reject') {
           return {
             continue: false,
-            error: handler.message || 'Input blocked by security rules',
+            error:
+              'message' in handler && handler.message
+                ? handler.message
+                : 'Input blocked by security rules',
             violations: result.violations,
           };
         }

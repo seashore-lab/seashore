@@ -4,7 +4,7 @@
  * Wrapper to add memory capabilities to agents
  */
 
-import type { MemoryManager, WithMemoryOptions } from './types.js';
+import type { MemoryManager, WithMemoryOptions } from './types';
 
 /**
  * Memory-enhanced message type
@@ -59,7 +59,7 @@ export function withMemory<T extends { invoke: (input: unknown) => Promise<unkno
 ): T & AgentWithMemory {
   const {
     memory,
-    includeInSystemPrompt = true,
+    includeInSystemPrompt: _includeInSystemPrompt = true,
     maxMemoriesInContext = 5,
     autoRemember = true,
     autoRememberResponses = false,
@@ -241,8 +241,8 @@ export function createMemoryMiddleware(
       });
     }
 
-    // Get memory context
-    const memories = await memory.recall(message, {
+    // Get memory context (recall memories but integrate with agent's context mechanism)
+    await memory.recall(message, {
       threadId,
       limit: maxMemoriesInContext,
     });

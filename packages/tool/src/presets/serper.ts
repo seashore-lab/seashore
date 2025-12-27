@@ -5,7 +5,7 @@
  */
 
 import { z } from 'zod';
-import { defineTool } from '../define-tool.js';
+import { defineTool } from '../define-tool';
 
 /**
  * Serper tool configuration
@@ -57,10 +57,7 @@ export interface KnowledgeGraph {
  */
 const serperInputSchema = z.object({
   query: z.string().describe('Search query'),
-  type: z
-    .enum(['search', 'news', 'images'])
-    .optional()
-    .describe('Search type (default: search)'),
+  type: z.enum(['search', 'news', 'images']).optional().describe('Search type (default: search)'),
 });
 
 /**

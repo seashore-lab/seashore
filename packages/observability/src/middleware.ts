@@ -3,7 +3,7 @@
  * @module @seashore/observability
  */
 
-import type { Tracer, TokenCounter, Logger, SpanType } from './types.js';
+import type { Tracer, TokenCounter, Logger, SpanType } from './types';
 
 /**
  * Observability context
@@ -36,7 +36,7 @@ export interface ObservabilityContext {
  * ```
  */
 export function observabilityMiddleware(context: ObservabilityContext) {
-  const { tracer, tokenCounter, logger } = context;
+  const { tracer, tokenCounter: _tokenCounter, logger } = context;
 
   return function observe<T extends unknown[], R>(
     fn: (...args: T) => Promise<R>,

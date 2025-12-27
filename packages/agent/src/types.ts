@@ -4,8 +4,8 @@
  * Type definitions for agents
  */
 
-import type { ZodSchema, z } from 'zod';
-import type { TextAdapter, Message, TokenUsage } from '@seashore/llm';
+import type { ZodSchema } from 'zod';
+import type { AnyTextAdapter, Message, TokenUsage } from '@seashore/llm';
 import type { Tool, ToolResult } from '@seashore/tool';
 
 /**
@@ -44,7 +44,7 @@ export interface AgentConfig<
   readonly systemPrompt: string;
 
   /** LLM model adapter */
-  readonly model: TextAdapter;
+  readonly model: AnyTextAdapter;
 
   /** Available tools */
   readonly tools?: TTools;

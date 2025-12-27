@@ -5,9 +5,9 @@
  */
 
 import { eq, desc, asc } from 'drizzle-orm';
-import type { DrizzleDB } from '../database.js';
-import { messages } from '../schema/messages.js';
-import type { Message, NewMessage, ListOptions } from '../types.js';
+import type { DrizzleDB } from '../database';
+import { messages } from '../schema/messages';
+import type { Message, NewMessage, ListOptions } from '../types';
 
 /**
  * Message repository interface
@@ -64,6 +64,10 @@ export function createMessageRepository(db: DrizzleDB): MessageRepository {
           metadata: data.metadata ?? null,
         })
         .returning();
+
+      if (message === undefined) {
+        throw new Error('Failed to create message');
+      }
 
       return mapMessage(message);
     },

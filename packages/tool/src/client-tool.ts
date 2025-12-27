@@ -5,13 +5,13 @@
  */
 
 import type { z, ZodSchema } from 'zod';
-import { zodToJsonSchema } from './zod-to-json-schema.js';
-import type { Tool, ToolConfig, ToolContext, ToolResult, JsonSchema } from './types.js';
+import { zodToJsonSchema } from './zod-to-json-schema';
+import type { Tool, ToolContext, ToolResult, JsonSchema } from './types';
 
 /**
  * Client-side tool configuration
  */
-export interface ClientToolConfig<TInput extends ZodSchema, TOutput> {
+export interface ClientToolConfig<TInput extends ZodSchema, _TOutput> {
   /** Tool name (unique identifier) */
   readonly name: string;
 
@@ -154,7 +154,7 @@ export function defineClientTool<TInput extends ZodSchema, TOutput = boolean>(
 
     async execute(
       input: z.infer<TInput>,
-      context?: Partial<ToolContext>
+      _context?: Partial<ToolContext>
     ): Promise<ToolResult<TOutput>> {
       // Client tools cannot be executed server-side directly
       // They return a "pending" result that must be resolved by the client

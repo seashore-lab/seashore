@@ -4,8 +4,8 @@
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { z } from 'zod';
-import { defineTool } from '../src/define-tool.js';
-import { zodToJsonSchema } from '../src/zod-to-json-schema.js';
+import { defineTool } from '../src/define-tool';
+import { zodToJsonSchema } from '../src/zod-to-json-schema';
 
 describe('@seashore/tool', () => {
   describe('defineTool', () => {
@@ -178,10 +178,13 @@ describe('@seashore/tool', () => {
         },
       });
 
-      await tool.execute({}, {
-        threadId: 'thread-123',
-        userId: 'user-456',
-      });
+      await tool.execute(
+        {},
+        {
+          threadId: 'thread-123',
+          userId: 'user-456',
+        }
+      );
 
       expect(capturedContext.threadId).toBe('thread-123');
       expect(capturedContext.userId).toBe('user-456');
@@ -263,10 +266,14 @@ describe('@seashore/tool', () => {
       expect(jsonSchema.properties['user'].properties?.['name'].type).toBe('string');
     });
 
-    it('should throw for non-object root schema', () => {
+    it('should handle non-object root schema', () => {
+      // Zod 4's toJSONSchema supports all types, not just objects
       const schema = z.string();
+      const jsonSchema = zodToJsonSchema(schema);
 
-      expect(() => zodToJsonSchema(schema)).toThrow('Root schema must be a ZodObject');
+      expect(jsonSchema).toMatchObject({
+        type: 'string',
+      });
     });
   });
 });

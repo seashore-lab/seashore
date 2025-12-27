@@ -3,7 +3,7 @@
  * @module @seashore/evaluation
  */
 
-import type { Dataset, DatasetConfig, TestCase } from './types.js';
+import type { Dataset, DatasetConfig, TestCase } from './types';
 
 /**
  * Dataset implementation
@@ -33,7 +33,11 @@ class DatasetImpl implements Dataset {
     // Fisher-Yates shuffle
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      const itemI = shuffled[i];
+      const itemJ = shuffled[j];
+      if (itemI !== undefined && itemJ !== undefined) {
+        [shuffled[i], shuffled[j]] = [itemJ, itemI];
+      }
     }
 
     return new DatasetImpl({
@@ -50,7 +54,11 @@ class DatasetImpl implements Dataset {
     // Shuffle before splitting
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      const itemI = shuffled[i];
+      const itemJ = shuffled[j];
+      if (itemI !== undefined && itemJ !== undefined) {
+        [shuffled[i], shuffled[j]] = [itemJ, itemI];
+      }
     }
 
     const train = new DatasetImpl({
@@ -80,18 +88,10 @@ class DatasetImpl implements Dataset {
     await fs.writeFile(path, JSON.stringify(data, null, 2), 'utf-8');
   }
 
-  [Symbol.iterator](): Iterator<TestCase> {
-    let index = 0;
-    const cases = this.testCases;
-
-    return {
-      next(): IteratorResult<TestCase> {
-        if (index < cases.length) {
-          return { value: cases[index++], done: false };
-        }
-        return { value: undefined as unknown as TestCase, done: true };
-      },
-    };
+  *[Symbol.iterator](): Generator<TestCase> {
+    for (const testCase of this.testCases) {
+      yield testCase;
+    }
   }
 }
 

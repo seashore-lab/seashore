@@ -4,8 +4,8 @@
  * @module @seashore/mcp
  */
 
-import type { MCPClientConfig } from '../types.js';
-import { MCPConnectionError, MCPTimeoutError, MCPError } from './stdio.js';
+import type { MCPClientConfig } from '../types';
+import { MCPConnectionError, MCPTimeoutError, MCPError } from './stdio';
 
 /**
  * JSON-RPC types
@@ -101,7 +101,7 @@ export class WebSocketTransport {
           });
       };
 
-      this.ws.onerror = (event) => {
+      this.ws.onerror = (_event) => {
         clearTimeout(connectionTimeout);
         if (!this.connected) {
           reject(new MCPConnectionError('WebSocket connection failed'));

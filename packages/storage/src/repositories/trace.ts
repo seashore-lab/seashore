@@ -4,10 +4,10 @@
  * Repository for trace CRUD operations (observability)
  */
 
-import { eq, desc, asc, and, isNull } from 'drizzle-orm';
-import type { DrizzleDB } from '../database.js';
-import { traces } from '../schema/traces.js';
-import type { Trace, NewTrace, UpdateTrace, ListOptions, TraceType, TokenUsage } from '../types.js';
+import { eq, desc, asc, isNull } from 'drizzle-orm';
+import type { DrizzleDB } from '../database';
+import { traces } from '../schema/traces';
+import type { Trace, NewTrace, UpdateTrace, ListOptions, TraceType, TokenUsage } from '../types';
 
 /**
  * Trace repository interface
@@ -74,6 +74,10 @@ export function createTraceRepository(db: DrizzleDB): TraceRepository {
           startedAt: data.startedAt ?? new Date(),
         })
         .returning();
+
+      if (trace === undefined) {
+        throw new Error('Failed to create trace');
+      }
 
       return mapTrace(trace);
     },

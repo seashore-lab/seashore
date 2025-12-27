@@ -9,14 +9,14 @@ export {
   createStringLoader,
   createMultiTextLoader,
   createGlobLoader,
-} from './text-loader.js';
+} from './text-loader';
 
 export {
   createMarkdownLoader,
   createMultiMarkdownLoader,
   createMarkdownStringLoader,
-} from './markdown-loader.js';
+} from './markdown-loader';
 
-export { createPDFLoader, createMultiPDFLoader, createPDFBufferLoader } from './pdf-loader.js';
+export { createPDFLoader, createMultiPDFLoader, createPDFBufferLoader } from './pdf-loader';
 
-export { createWebLoader, createMultiWebLoader, createSitemapLoader } from './web-loader.js';
+export { createWebLoader, createMultiWebLoader, createSitemapLoader } from './web-loader';

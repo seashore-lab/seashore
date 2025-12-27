@@ -9,7 +9,7 @@ import type {
   LoadedDocument,
   DocumentChunk,
   TokenSplitterOptions,
-} from '../types.js';
+} from '../types';
 
 /**
  * Simple token approximation when tiktoken is not available
@@ -46,13 +46,12 @@ export function createTokenSplitter(options: TokenSplitterOptions = {}): Documen
   const {
     chunkSize = 500, // tokens
     chunkOverlap = 50, // tokens
-    model = 'gpt-4',
+    model: _model = 'gpt-4',
     stripWhitespace = true,
   } = options;
 
   // Token functions - using approximation
   // In production, replace with tiktoken
-  const countTokens = approximateTokenCount;
   const tokenize = approximateTokenize;
   const decode = approximateDecode;
 
@@ -208,7 +207,7 @@ export function createCustomTokenSplitter(
 /**
  * Estimate token count for text
  */
-export function estimateTokens(text: string, model = 'gpt-4'): number {
+export function estimateTokens(text: string, _model = 'gpt-4'): number {
   // Using approximation
   // For accurate counting, use tiktoken
   return approximateTokenCount(text);

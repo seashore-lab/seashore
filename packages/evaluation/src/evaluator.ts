@@ -11,7 +11,7 @@ import type {
   BatchEvaluationResult,
   Metric,
   TextAdapter,
-} from './types.js';
+} from './types';
 
 /**
  * Retry helper
@@ -62,6 +62,7 @@ async function parallelLimit<T, R>(
     while (currentIndex < items.length) {
       const index = currentIndex++;
       const item = items[index];
+      if (item === undefined) continue;
 
       results[index] = await fn(item, index);
       completed++;
@@ -185,7 +186,7 @@ export function createEvaluator(config: EvaluatorConfig): Evaluator {
       }
 
       for (const metric of Object.keys(metricSums)) {
-        averageScores[metric] = metricSums[metric] / metricCounts[metric];
+        averageScores[metric] = (metricSums[metric] ?? 0) / (metricCounts[metric] ?? 1);
       }
 
       const overallAverage = results.reduce((sum, r) => sum + r.overallScore, 0) / results.length;

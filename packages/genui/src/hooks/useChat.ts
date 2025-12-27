@@ -4,7 +4,7 @@
  */
 
 import { useState, useCallback, useRef } from 'react';
-import type { ChatMessage, ChatResponse, TokenUsage, GenUIRegistry } from '../types.js';
+import type { ChatMessage, ChatResponse, TokenUsage, GenUIRegistry } from '../types';
 
 /**
  * Options for useChat hook
@@ -314,6 +314,7 @@ export function useChat(options: UseChatOptions): UseChatReturn {
     if (lastUserMessageIndex === -1) return;
 
     const lastUserMessage = messages[lastUserMessageIndex];
+    if (!lastUserMessage) return;
 
     // Remove messages after the last user message
     setMessages(messages.slice(0, lastUserMessageIndex));

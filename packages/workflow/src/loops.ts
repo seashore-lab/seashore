@@ -4,8 +4,8 @@
  * Loop and iteration management for workflows
  */
 
-import type { WorkflowNode, WorkflowContext } from './types.js';
-import { createMutableWorkflowContext } from './context.js';
+import type { WorkflowNode, WorkflowContext } from './types';
+import { createMutableWorkflowContext } from './context';
 
 /**
  * Loop state for tracking iterations

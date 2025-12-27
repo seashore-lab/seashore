@@ -9,8 +9,8 @@ import {
   createMCPToolBridge,
   discoverMCPServers,
   MCPConnectionError,
-} from '../src/index.js';
-import type { MCPClient, MCPTool } from '../src/types.js';
+} from '../src/index';
+import type { MCPClient, MCPTool } from '../src/types';
 
 // Mock implementations
 const mockTools: MCPTool[] = [

@@ -5,7 +5,8 @@
  */
 
 import { chat } from '@seashore/llm';
-import type { Message, TokenUsage, TextAdapter } from '@seashore/llm';
+import type { Message, TokenUsage } from '@seashore/llm';
+import { filterChatMessages } from '@seashore/llm';
 import type { Tool } from '@seashore/tool';
 import type {
   Agent,
@@ -14,11 +15,10 @@ import type {
   AgentStreamChunk,
   RunOptions,
   ToolCallRecord,
-  InternalMessage,
-} from './types.js';
-import { executeTools, formatToolResult, type ToolCallRequest } from './tool-executor.js';
-import { AgentError, checkAborted, wrapError } from './error-handler.js';
-import { StreamChunks, collectStream } from './stream.js';
+} from './types';
+import { executeTools, formatToolResult, type ToolCallRequest } from './tool-executor';
+import { AgentError, checkAborted, wrapError } from './error-handler';
+import { StreamChunks, collectStream } from './stream';
 
 /**
  * Default configuration values
@@ -101,11 +101,8 @@ export function createAgent<
       const effectiveMaxIterations = options?.maxIterations ?? maxIterations;
       const effectiveTemperature = options?.temperature ?? temperature;
 
-      // Build conversation history with system prompt
-      const conversationMessages: InternalMessage[] = [
-        { role: 'system', content: systemPrompt },
-        ...messages,
-      ];
+      // Build conversation history (system prompt passed separately to chat)
+      const conversationMessages: Message[] = [...messages];
 
       const allToolCalls: ToolCallRecord[] = [];
       let totalUsage: TokenUsage = { promptTokens: 0, completionTokens: 0, totalTokens: 0 };
@@ -125,10 +122,10 @@ export function createAgent<
           try {
             for await (const chunk of chat({
               adapter: model,
-              messages: conversationMessages as Message[],
+              messages: filterChatMessages(conversationMessages),
+              systemPrompts: [systemPrompt],
               tools: llmTools.length > 0 ? llmTools : undefined,
               temperature: effectiveTemperature,
-              signal: options?.signal,
             })) {
               switch (chunk.type) {
                 case 'content':
@@ -138,39 +135,22 @@ export function createAgent<
                   }
                   break;
 
-                case 'tool-call-start':
+                case 'tool_call':
+                  // @tanstack/ai sends complete tool calls in a single chunk
                   if (chunk.toolCall !== undefined) {
-                    pendingToolCalls.set(chunk.toolCall.id, {
-                      name: chunk.toolCall.function?.name ?? '',
-                      arguments: '',
+                    const { id, function: fn } = chunk.toolCall;
+                    pendingToolCalls.set(id, {
+                      name: fn.name,
+                      arguments: fn.arguments,
                     });
-                    yield StreamChunks.toolCallStart(
-                      chunk.toolCall.id,
-                      chunk.toolCall.function?.name ?? ''
-                    );
+                    // Emit start, args, and end for compatibility
+                    yield StreamChunks.toolCallStart(id, fn.name);
+                    yield StreamChunks.toolCallArgs(id, fn.name, fn.arguments);
+                    yield StreamChunks.toolCallEnd(id, fn.name, fn.arguments);
                   }
                   break;
 
-                case 'tool-call-delta':
-                  if (chunk.toolCall !== undefined && chunk.delta !== undefined) {
-                    const call = pendingToolCalls.get(chunk.toolCall.id);
-                    if (call !== undefined) {
-                      call.arguments += chunk.delta;
-                      yield StreamChunks.toolCallArgs(chunk.toolCall.id, call.name, chunk.delta);
-                    }
-                  }
-                  break;
-
-                case 'tool-call-end':
-                  if (chunk.toolCall !== undefined) {
-                    const call = pendingToolCalls.get(chunk.toolCall.id);
-                    if (call !== undefined) {
-                      yield StreamChunks.toolCallEnd(chunk.toolCall.id, call.name, call.arguments);
-                    }
-                  }
-                  break;
-
-                case 'finish':
+                case 'done':
                   if (chunk.usage !== undefined) {
                     totalUsage = addUsage(totalUsage, chunk.usage);
                   }

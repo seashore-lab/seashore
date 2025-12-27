@@ -4,6 +4,6 @@
  * Re-exports search functions
  */
 
-export { vectorSearch, batchVectorSearch } from './vector-search.js';
-export { textSearch, prefixTextSearch, getSearchSuggestions } from './text-search.js';
-export { hybridSearch, hybridSearchLinear } from './hybrid-search.js';
+export { vectorSearch, batchVectorSearch } from './vector-search';
+export { textSearch, prefixTextSearch, getSearchSuggestions } from './text-search';
+export { hybridSearch, hybridSearchLinear } from './hybrid-search';

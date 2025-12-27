@@ -8,11 +8,11 @@ export {
   createVectorRetriever,
   createInMemoryRetriever,
   type VectorRetrieverOptions,
-} from './vector-retriever.js';
+} from './vector-retriever';
 
 export {
   createHybridRetriever,
   createRerankingRetriever,
   createMultiRetriever,
   type HybridRetrieverOptions,
-} from './hybrid-retriever.js';
+} from './hybrid-retriever';

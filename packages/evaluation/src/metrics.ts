@@ -3,7 +3,7 @@
  * @module @seashore/evaluation
  */
 
-import type { Metric, MetricConfig, MetricResult, TextAdapter } from './types.js';
+import type { Metric, MetricConfig, MetricResult } from './types';
 
 /**
  * Parse LLM response for score and reason
@@ -27,8 +27,9 @@ function parseScoreResponse(response: string): { score: number; reason?: string 
 
   // Try to extract numeric score
   const scoreMatch = response.match(/(?:score|分数)[:\s]*([0-9]*\.?[0-9]+)/i);
-  if (scoreMatch) {
-    const score = parseFloat(scoreMatch[1]);
+  const scoreStr = scoreMatch?.[1];
+  if (scoreStr !== undefined) {
+    const score = parseFloat(scoreStr);
     return {
       score: score > 1 ? score / 10 : Math.max(0, Math.min(1, score)),
       reason: response,

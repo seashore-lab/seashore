@@ -4,7 +4,7 @@
  */
 
 import type { ToolConfig } from '@seashore/tool';
-import type { MCPClient, MCPTool, ToolBridgeConfig, JSONSchema } from './types.js';
+import type { MCPClient, MCPTool, ToolBridgeConfig, JSONSchema } from './types';
 import { z } from 'zod';
 
 /**
@@ -73,7 +73,7 @@ function jsonSchemaToZod(schema: JSONSchema): z.ZodTypeAny {
         }
         return objectSchema;
       }
-      return z.record(z.any());
+      return z.record(z.string(), z.any());
 
     case 'null':
       return z.null();

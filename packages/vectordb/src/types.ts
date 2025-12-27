@@ -89,6 +89,15 @@ export interface NewDocument {
 }
 
 /**
+ * Document update input
+ */
+export interface DocumentUpdate {
+  readonly content?: string;
+  readonly embedding?: EmbeddingVector;
+  readonly metadata?: Record<string, unknown>;
+}
+
+/**
  * Document with score from search
  */
 export interface ScoredDocument {
@@ -217,6 +226,11 @@ export interface CollectionStats {
   readonly avgEmbeddingSize: number;
   readonly storageBytes: number;
 }
+
+/**
+ * Alias for CollectionStats (for backwards compatibility)
+ */
+export type VectorStoreStats = CollectionStats;
 
 /**
  * Embedding function type

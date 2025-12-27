@@ -143,11 +143,57 @@ export interface TracerConfig {
 }
 
 /**
+ * Base exporter configuration
+ */
+export interface BaseExporterConfig {
+  /** Exporter type */
+  type: string;
+}
+
+/**
  * Exporter configuration
  */
 export type ExporterConfig =
   | { type: 'console' }
-  | { type: 'otlp'; endpoint: string; headers?: Record<string, string> };
+  | { type: 'otlp'; endpoint: string; headers?: Record<string, string>; serviceName?: string };
+
+/**
+ * Span exporter interface
+ */
+export interface SpanExporter {
+  /** Export spans */
+  export(spans: readonly Span[]): Promise<void>;
+  /** Shutdown exporter */
+  shutdown(): Promise<void>;
+}
+
+/**
+ * Token estimate for a text
+ */
+export interface TokenEstimate {
+  /** Text that was estimated */
+  text: string;
+  /** Estimated token count */
+  tokens: number;
+  /** Model used for estimation */
+  model?: string;
+}
+
+/**
+ * Token cost calculation result
+ */
+export interface TokenCost {
+  /** Input tokens */
+  inputTokens: number;
+  /** Output tokens */
+  outputTokens: number;
+  /** Total tokens */
+  totalTokens: number;
+  /** Cost in USD */
+  costUsd: number;
+  /** Model used */
+  model: string;
+}
 
 /**
  * Tracer interface

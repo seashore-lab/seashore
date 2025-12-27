@@ -4,7 +4,7 @@
  * Provider-specific options handling for different LLM providers
  */
 
-import type { TextAdapter, Message } from './types.js';
+import type { TextAdapterConfig, Message } from './types';
 
 /**
  * Base chat options shared across all providers
@@ -122,7 +122,7 @@ export type ProviderChatOptions =
  * Normalize provider options to a common format
  */
 export function normalizeOptions(
-  adapter: TextAdapter,
+  adapter: TextAdapterConfig,
   options: Partial<BaseChatOptions>
 ): ProviderChatOptions {
   const base = {
@@ -171,9 +171,14 @@ export function normalizeOptions(
 }
 
 /**
+ * Provider type for configuration
+ */
+export type Provider = 'openai' | 'anthropic' | 'gemini';
+
+/**
  * Get default options for a provider
  */
-export function getDefaultOptions(provider: TextAdapter['provider']): Partial<BaseChatOptions> {
+export function getDefaultOptions(provider: Provider): Partial<BaseChatOptions> {
   switch (provider) {
     case 'openai':
       return {
@@ -199,7 +204,7 @@ export function getDefaultOptions(provider: TextAdapter['provider']): Partial<Ba
  * Merge options with defaults
  */
 export function mergeWithDefaults(
-  adapter: TextAdapter,
+  adapter: TextAdapterConfig,
   options: Partial<BaseChatOptions>
 ): BaseChatOptions {
   const defaults = getDefaultOptions(adapter.provider);
@@ -288,7 +293,7 @@ export interface ModelCapabilities {
 /**
  * Get capabilities for a model
  */
-export function getModelCapabilities(adapter: TextAdapter): ModelCapabilities {
+export function getModelCapabilities(adapter: TextAdapterConfig): ModelCapabilities {
   // Default capabilities
   const defaults: ModelCapabilities = {
     supportsVision: false,

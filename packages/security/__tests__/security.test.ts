@@ -14,7 +14,7 @@ import {
   lengthLimitRule,
   createSecurityRule,
   securityMiddleware,
-} from '../src/index.js';
+} from '../src/index';
 
 describe('@seashore/security', () => {
   describe('promptInjectionRule', () => {

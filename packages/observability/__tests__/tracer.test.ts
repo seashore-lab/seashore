@@ -10,7 +10,7 @@ import {
   observabilityMiddleware,
   createAgentObserver,
   createConsoleExporter,
-} from '../src/index.js';
+} from '../src/index';
 
 describe('@seashore/observability', () => {
   describe('createTracer', () => {
@@ -20,7 +20,7 @@ describe('@seashore/observability', () => {
       expect(tracer).toBeDefined();
       expect(tracer.startSpan).toBeInstanceOf(Function);
       expect(tracer.withSpan).toBeInstanceOf(Function);
-      expect(tracer.getActiveSpan).toBeInstanceOf(Function);
+      expect(tracer.getActiveContext).toBeInstanceOf(Function);
     });
 
     it('should create and end spans', async () => {
@@ -63,24 +63,22 @@ describe('@seashore/observability', () => {
     });
 
     it('should export spans when exporter is configured', async () => {
-      const exportFn = vi.fn().mockResolvedValue(undefined);
-      const exporter = {
-        export: exportFn,
-        shutdown: vi.fn().mockResolvedValue(undefined),
-      };
+      const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
 
       const tracer = createTracer({
         serviceName: 'test-service',
-        exporter,
+        exporters: [{ type: 'console' }],
       });
 
       await tracer.withSpan('exported-span', async (span) => {
         span.setAttributes({ test: true });
       });
 
-      expect(exportFn).toHaveBeenCalled();
-      const exportedSpans = exportFn.mock.calls[0][0];
-      expect(exportedSpans[0].name).toBe('exported-span');
+      expect(consoleSpy).toHaveBeenCalled();
+      const logOutput = consoleSpy.mock.calls[0][0];
+      expect(logOutput).toContain('exported-span');
+
+      consoleSpy.mockRestore();
     });
   });
 
@@ -108,17 +106,20 @@ describe('@seashore/observability', () => {
         { role: 'assistant' as const, content: 'Hi there!' },
       ];
 
-      const estimate = counter.estimate(messages);
-      expect(estimate.promptTokens).toBeGreaterThan(0);
+      const tokenCount = counter.countMessages(messages);
+      expect(tokenCount).toBeGreaterThan(0);
     });
 
     it('should calculate cost estimates', () => {
-      const counter = createTokenCounter({ model: 'gpt-4' });
+      const counter = createTokenCounter();
 
-      const cost = counter.estimateCost(1000, 500);
-      expect(cost.totalCost).toBeGreaterThan(0);
-      expect(cost.inputCost).toBeGreaterThan(0);
-      expect(cost.outputCost).toBeGreaterThan(0);
+      const cost = counter.estimateCost({
+        promptTokens: 1000,
+        completionTokens: 500,
+        totalTokens: 1500,
+        model: 'gpt-4',
+      });
+      expect(cost).toBeGreaterThan(0);
     });
   });
 
@@ -188,12 +189,12 @@ describe('@seashore/observability', () => {
         format: 'json',
       });
 
-      const childLogger = logger.child({ component: 'child' });
+      const childLogger = logger.child('child');
       childLogger.info('Child message');
 
       expect(consoleOutput.length).toBe(1);
       const entry = JSON.parse(consoleOutput[0]);
-      expect(entry.component).toBe('child');
+      expect(entry.name).toBe('parent.child');
     });
   });
 
@@ -278,17 +279,17 @@ describe('@seashore/observability', () => {
       });
 
       const span = {
-        id: 'span-1',
-        traceId: 'trace-1',
         name: 'test-span',
-        startTime: new Date(),
-        endTime: new Date(),
+        type: 'custom' as const,
+        context: { traceId: 'trace-1', spanId: 'span-1' },
         attributes: { key: 'value' },
         events: [],
-        status: 'ok' as const,
+        status: { code: 'ok' as const },
+        startTime: new Date(),
+        endTime: new Date(),
       };
 
-      await exporter.export([span]);
+      await exporter.export([span as any]);
 
       expect(output.length).toBe(1);
       const exported = JSON.parse(output[0]);
@@ -303,17 +304,17 @@ describe('@seashore/observability', () => {
       });
 
       const span = {
-        id: 'span-1',
-        traceId: 'trace-1',
         name: 'test-span',
-        startTime: new Date(),
-        endTime: new Date(),
+        type: 'custom' as const,
+        context: { traceId: 'trace-1', spanId: 'span-1' },
         attributes: {},
         events: [],
-        status: 'ok' as const,
+        status: { code: 'ok' as const },
+        startTime: new Date(),
+        endTime: new Date(),
       };
 
-      await exporter.export([span]);
+      await exporter.export([span as any]);
 
       expect(output.length).toBe(1);
       expect(output[0]).toContain('test-span');

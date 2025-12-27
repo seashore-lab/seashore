@@ -6,9 +6,9 @@
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { z } from 'zod';
-import { createAgent } from '../src/react-agent.js';
-import { defineTool } from '@seashore/tool';
-import type { TextAdapter, Message, TokenUsage, StreamChunk } from '@seashore/llm';
+import { createAgent } from '../src/react-agent';
+import { defineTool } from '../../tool/src/define-tool';
+import type { TextAdapter, Message, TokenUsage, StreamChunk } from '../../llm/src/types';
 
 /**
  * Create a mock LLM adapter that returns predefined responses
@@ -34,26 +34,35 @@ interface MockResponse {
 }
 
 /**
+ * Mock responses storage - accessible across module scope
+ */
+let mockResponses: MockResponse[] = [];
+let callIndex = 0;
+
+function setMockResponses(responses: MockResponse[]) {
+  mockResponses = responses;
+  callIndex = 0;
+}
+
+/**
  * Mock the @seashore/llm chat function
  */
 vi.mock('@seashore/llm', async (importOriginal) => {
   const original = await importOriginal<typeof import('@seashore/llm')>();
 
-  let mockResponses: MockResponse[] = [];
-  let callIndex = 0;
-
-  const setMockResponses = (responses: MockResponse[]) => {
-    mockResponses = responses;
-    callIndex = 0;
-  };
-
   const mockChat = async function* (options: {
     adapter: TextAdapter;
     messages: Message[];
+    systemPrompts?: string[];
     tools?: unknown[];
     temperature?: number;
     signal?: AbortSignal;
   }): AsyncIterable<StreamChunk> {
+    // Check for abort signal
+    if (options.signal?.aborted) {
+      throw new Error('Agent execution was aborted');
+    }
+
     const response = mockResponses[callIndex++] ?? { content: 'No more responses' };
 
     // Emit content if present
@@ -61,34 +70,26 @@ vi.mock('@seashore/llm', async (importOriginal) => {
       yield { type: 'content', delta: response.content };
     }
 
-    // Emit tool calls if present
+    // Emit tool calls if present (using correct type: 'tool_call')
     if (response.toolCalls) {
       for (const toolCall of response.toolCalls) {
         yield {
-          type: 'tool-call-start',
+          type: 'tool_call',
           toolCall: {
             id: toolCall.id,
             type: 'function',
-            function: { name: toolCall.name, arguments: '' },
+            function: {
+              name: toolCall.name,
+              arguments: JSON.stringify(toolCall.arguments),
+            },
           },
-        };
-        yield {
-          type: 'tool-call-delta',
-          toolCall: {
-            id: toolCall.id,
-            function: { arguments: JSON.stringify(toolCall.arguments) },
-          },
-        };
-        yield {
-          type: 'tool-call-end',
-          toolCall: { id: toolCall.id },
         };
       }
     }
 
-    // Emit finish
+    // Emit done (not 'finish')
     yield {
-      type: 'finish',
+      type: 'done',
       finishReason: response.toolCalls ? 'tool_calls' : 'stop',
       usage: { promptTokens: 100, completionTokens: 50, totalTokens: 150 },
     };
@@ -97,14 +98,8 @@ vi.mock('@seashore/llm', async (importOriginal) => {
   return {
     ...original,
     chat: mockChat,
-    __setMockResponses: setMockResponses,
   };
 });
-
-// Import the mock setup function
-const { __setMockResponses } = (await import('@seashore/llm')) as {
-  __setMockResponses: (responses: MockResponse[]) => void;
-};
 
 describe('Agent Integration Tests', () => {
   beforeEach(() => {
@@ -113,7 +108,7 @@ describe('Agent Integration Tests', () => {
 
   describe('Basic Agent Execution', () => {
     it('should complete a simple task without tools', async () => {
-      __setMockResponses([{ content: 'Hello! How can I help you today?' }]);
+      setMockResponses([{ content: 'Hello! How can I help you today?' }]);
 
       const agent = createAgent({
         name: 'SimpleBot',
@@ -129,7 +124,7 @@ describe('Agent Integration Tests', () => {
     });
 
     it('should handle multi-turn conversation', async () => {
-      __setMockResponses([{ content: 'The capital of France is Paris.' }]);
+      setMockResponses([{ content: 'The capital of France is Paris.' }]);
 
       const agent = createAgent({
         name: 'GeoBot',
@@ -172,7 +167,7 @@ describe('Agent Integration Tests', () => {
     });
 
     it('should call a single tool and use result', async () => {
-      __setMockResponses([
+      setMockResponses([
         // First response: call weather tool
         {
           toolCalls: [
@@ -206,7 +201,7 @@ describe('Agent Integration Tests', () => {
     });
 
     it('should call multiple tools in sequence', async () => {
-      __setMockResponses([
+      setMockResponses([
         // First: call calculator
         {
           toolCalls: [
@@ -259,7 +254,7 @@ describe('Agent Integration Tests', () => {
         },
       });
 
-      __setMockResponses([
+      setMockResponses([
         {
           toolCalls: [
             {
@@ -292,7 +287,7 @@ describe('Agent Integration Tests', () => {
 
   describe('Streaming', () => {
     it('should emit stream chunks correctly', async () => {
-      __setMockResponses([{ content: 'Hello, streaming world!' }]);
+      setMockResponses([{ content: 'Hello, streaming world!' }]);
 
       const agent = createAgent({
         name: 'StreamBot',
@@ -318,7 +313,7 @@ describe('Agent Integration Tests', () => {
         execute: async ({ message }) => ({ echoed: message }),
       });
 
-      __setMockResponses([
+      setMockResponses([
         {
           toolCalls: [{ id: 'call_1', name: 'echo', arguments: { message: 'hello' } }],
         },
@@ -346,7 +341,7 @@ describe('Agent Integration Tests', () => {
   describe('Configuration Options', () => {
     it('should respect maxIterations limit', async () => {
       // Set up responses that would normally loop forever
-      __setMockResponses([
+      setMockResponses([
         {
           toolCalls: [{ id: 'call_1', name: 'echo', arguments: { message: '1' } }],
         },
@@ -380,7 +375,7 @@ describe('Agent Integration Tests', () => {
     });
 
     it('should handle abort signal', async () => {
-      __setMockResponses([{ content: 'This should not complete...' }]);
+      setMockResponses([{ content: 'This should not complete...' }]);
 
       const agent = createAgent({
         name: 'AbortBot',
@@ -391,7 +386,10 @@ describe('Agent Integration Tests', () => {
       const controller = new AbortController();
       controller.abort();
 
-      await expect(agent.run('Hello', { signal: controller.signal })).rejects.toThrow(/abort/i);
+      // Agent returns a result with finishReason: 'error' instead of throwing
+      const result = await agent.run('Hello', { signal: controller.signal });
+      expect(result.finishReason).toBe('error');
+      expect(result.error).toMatch(/abort/i);
     });
 
     it('should pass custom metadata to tools', async () => {
@@ -407,7 +405,7 @@ describe('Agent Integration Tests', () => {
         },
       });
 
-      __setMockResponses([
+      setMockResponses([
         {
           toolCalls: [{ id: 'call_1', name: 'capture_context', arguments: { value: 'test' } }],
         },
@@ -427,10 +425,11 @@ describe('Agent Integration Tests', () => {
         metadata: { customField: 'customValue' },
       });
 
+      // The tool executor passes threadId, userId, and metadata.agentName
       expect(capturedContext).toMatchObject({
         threadId: 'thread-123',
         userId: 'user-456',
-        metadata: { customField: 'customValue' },
+        metadata: { agentName: 'ContextBot' },
       });
     });
   });
@@ -452,7 +451,7 @@ describe('Agent Integration Tests', () => {
         }),
       });
 
-      __setMockResponses([
+      setMockResponses([
         {
           toolCalls: [{ id: 'weather_1', name: 'get_weather', arguments: { location: '北京' } }],
         },

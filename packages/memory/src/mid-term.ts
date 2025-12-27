@@ -6,8 +6,8 @@
 
 import { eq, and, gte, lte, desc, sql } from 'drizzle-orm';
 import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
-import { memories } from './schema.js';
-import type { MemoryEntry, NewMemoryEntry, MidTermMemoryConfig } from './types.js';
+import { memories } from './schema';
+import type { MemoryEntry, NewMemoryEntry, MidTermMemoryConfig } from './types';
 
 /**
  * Default mid-term memory configuration
@@ -170,13 +170,25 @@ export class MidTermMemory {
   public async cleanupExpired(agentId: string): Promise<number> {
     const now = new Date();
 
-    const result = await this.db
+    // Get count of entries to delete
+    const toDelete = await this.db
+      .select({ id: memories.id })
+      .from(memories)
+      .where(
+        and(eq(memories.agentId, agentId), eq(memories.type, 'mid'), lte(memories.expiresAt, now))
+      );
+
+    if (toDelete.length === 0) {
+      return 0;
+    }
+
+    await this.db
       .delete(memories)
       .where(
         and(eq(memories.agentId, agentId), eq(memories.type, 'mid'), lte(memories.expiresAt, now))
       );
 
-    return result.rowCount ?? 0;
+    return toDelete.length;
   }
 
   /**
@@ -197,10 +209,12 @@ export class MidTermMemory {
    */
   private async enforceLimit(agentId: string): Promise<void> {
     // Get count
-    const [{ count }] = await this.db
+    const result = await this.db
       .select({ count: sql<number>`COUNT(*)` })
       .from(memories)
       .where(and(eq(memories.agentId, agentId), eq(memories.type, 'mid')));
+
+    const count = result[0]?.count ?? 0;
 
     if (count <= this.config.maxEntries) return;
 

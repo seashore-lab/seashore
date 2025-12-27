@@ -6,7 +6,8 @@
 
 import type { Message as LLMMessage } from '@seashore/llm';
 import type { Message, Thread, ThreadRepository, MessageRepository } from '@seashore/storage';
-import type { Agent, AgentRunResult, AgentStreamChunk, RunOptions } from './types.js';
+import type { Tool } from '@seashore/tool';
+import type { Agent, AgentRunResult, AgentStreamChunk, RunOptions } from './types';
 
 /**
  * Thread continuation options
@@ -119,7 +120,7 @@ function toLLMMessage(message: Message): LLMMessage {
     return {
       role: 'tool',
       content: message.content ?? '',
-      tool_call_id: message.toolCallId ?? undefined,
+      toolCallId: message.toolCallId ?? undefined,
     };
   }
 
@@ -217,7 +218,7 @@ export function createThreadManager(
 
       // Apply filters
       if (!includeToolMessages) {
-        threadMessages = threadMessages.filter((m) => m.role !== 'tool');
+        threadMessages = threadMessages.filter((m: Message) => m.role !== 'tool');
       }
 
       if (messageFilter) {
@@ -295,7 +296,7 @@ export function createThreadManager(
  *
  * Helper function that wraps agent execution with thread context
  */
-export async function continueThread<TTools extends readonly unknown[]>(
+export async function continueThread<TTools extends readonly Tool<unknown, unknown>[]>(
   agent: Agent<TTools>,
   threadManager: ThreadManager,
   input: string,
@@ -309,10 +310,8 @@ export async function continueThread<TTools extends readonly unknown[]>(
   const { threadId, loadHistory = true, messageLimit = 50, persistMessages = true } = options;
 
   // Load context if requested
-  let history: readonly LLMMessage[] = [];
   if (loadHistory) {
-    const context = await threadManager.loadContext(threadId, { messageLimit });
-    history = context.toLLMMessages();
+    await threadManager.loadContext(threadId, { messageLimit });
   }
 
   // Save user message
@@ -340,7 +339,7 @@ export async function continueThread<TTools extends readonly unknown[]>(
 /**
  * Stream continue an agent conversation in a thread
  */
-export async function* streamContinueThread<TTools extends readonly unknown[]>(
+export async function* streamContinueThread<TTools extends readonly Tool<unknown, unknown>[]>(
   agent: Agent<TTools>,
   threadManager: ThreadManager,
   input: string,

@@ -4,7 +4,7 @@
  * Node type for tool execution
  */
 
-import type { WorkflowNode, ToolNodeConfig, WorkflowContext } from '../types.js';
+import type { WorkflowNode, ToolNodeConfig, WorkflowContext } from '../types';
 
 /**
  * Tool node output

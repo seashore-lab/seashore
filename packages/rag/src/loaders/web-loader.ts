@@ -4,7 +4,7 @@
  * Load content from web pages
  */
 
-import type { DocumentLoader, LoadedDocument, WebLoaderOptions } from '../types.js';
+import type { DocumentLoader, LoadedDocument, WebLoaderOptions } from '../types';
 
 /**
  * Create a web page loader

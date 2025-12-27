@@ -13,8 +13,8 @@ import type {
   WorkflowEvent,
   WorkflowExecutionOptions,
   WorkflowExecutionResult,
-} from './types.js';
-import { createMutableWorkflowContext } from './context.js';
+} from './types';
+import { createMutableWorkflowContext } from './context';
 
 /**
  * Workflow execution error

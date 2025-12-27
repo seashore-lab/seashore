@@ -11,8 +11,8 @@ import type {
   ChatResponse,
   AgentRequest,
   StreamChunk,
-} from './types.js';
-import { createSSEStream, createSSEHeaders, createNDJSONStream } from './sse.js';
+} from './types';
+import { createSSEStream, createSSEHeaders, createNDJSONStream } from './sse';
 
 /**
  * Generate thread ID

@@ -3,12 +3,13 @@
  * @module @seashore/observability
  */
 
-import type { Span, SpanExporter, ExporterConfig } from '../types.js';
+import type { Span, SpanExporter, BaseExporterConfig } from '../types';
 
 /**
  * OTLP exporter configuration
  */
-export interface OTLPExporterConfig extends ExporterConfig {
+export interface OTLPExporterConfig extends BaseExporterConfig {
+  type: 'otlp';
   /** OTLP endpoint URL */
   endpoint: string;
   /** Request headers for authentication */
@@ -19,16 +20,19 @@ export interface OTLPExporterConfig extends ExporterConfig {
   batchSize?: number;
   /** Maximum batch delay in milliseconds */
   maxBatchDelay?: number;
+  /** Service name for OTLP resource */
+  serviceName?: string;
 }
 
 /**
  * Convert internal span to OTLP format
  */
 function spanToOTLP(span: Span): OTLPSpan {
+  const statusCode = span.status.code;
   return {
-    traceId: span.traceId,
-    spanId: span.id,
-    parentSpanId: span.parentId,
+    traceId: span.context.traceId,
+    spanId: span.context.spanId,
+    parentSpanId: span.parentContext?.spanId,
     name: span.name,
     kind: mapSpanKind(span.type),
     startTimeUnixNano: BigInt(span.startTime.getTime() * 1_000_000),
@@ -39,12 +43,10 @@ function spanToOTLP(span: Span): OTLPSpan {
       key,
       value: toAnyValue(value),
     })),
-    status: span.status
-      ? {
-          code: span.status === 'ok' ? 1 : span.status === 'error' ? 2 : 0,
-          message: span.error?.message,
-        }
-      : { code: 0 },
+    status: {
+      code: statusCode === 'ok' ? 1 : statusCode === 'error' ? 2 : 0,
+      message: span.status.message,
+    },
     events: span.events.map((event) => ({
       timeUnixNano: BigInt(event.timestamp.getTime() * 1_000_000),
       name: event.name,

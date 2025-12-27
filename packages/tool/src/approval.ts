@@ -4,7 +4,7 @@
  * Approval flow for dangerous or sensitive tool operations
  */
 
-import type { Tool, ToolContext, ToolResult } from './types.js';
+import type { Tool, ToolContext, ToolResult } from './types';
 
 /**
  * Approval request sent to the client

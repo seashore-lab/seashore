@@ -4,14 +4,14 @@
  * Middleware for automatic message persistence
  */
 
-import type { DrizzleDB } from '../database.js';
-import type { MessageRepository } from '../repositories/message.js';
-import type { ThreadRepository } from '../repositories/thread.js';
-import type { TraceRepository } from '../repositories/trace.js';
-import type { Message, NewMessage, Trace, NewTrace, UpdateTrace } from '../types.js';
-import { createMessageRepository } from '../repositories/message.js';
-import { createThreadRepository } from '../repositories/thread.js';
-import { createTraceRepository } from '../repositories/trace.js';
+import type { DrizzleDB } from './database';
+import type { MessageRepository } from './repositories/message';
+import type { ThreadRepository } from './repositories/thread';
+import type { TraceRepository } from './repositories/trace';
+import type { Message, NewMessage, Trace, NewTrace, UpdateTrace } from './types';
+import { createMessageRepository } from './repositories/message';
+import { createThreadRepository } from './repositories/thread';
+import { createTraceRepository } from './repositories/trace';
 
 /**
  * Message event types

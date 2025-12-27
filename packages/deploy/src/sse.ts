@@ -3,7 +3,7 @@
  * @module @seashore/deploy
  */
 
-import type { SSEStreamConfig, StreamChunk } from './types.js';
+import type { SSEStreamConfig, StreamChunk } from './types';
 
 /**
  * SSE message formatter

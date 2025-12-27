@@ -4,25 +4,16 @@
  * Integration between Agent and Workflow packages
  */
 
-import type { TextAdapter, Message } from '@seashore/llm';
-import type { Tool } from '@seashore/tool';
-import type { Agent, AgentRunResult, RunOptions, AgentConfig } from './types.js';
-import { createAgent } from './create-agent.js';
+import type { Message } from '@seashore/llm';
+import type { Agent, AgentRunResult, AgentStreamChunk, RunOptions } from './types';
 import type {
   Workflow,
-  WorkflowConfig,
   WorkflowNode,
   WorkflowContext,
   WorkflowExecutionResult,
   WorkflowExecutionOptions,
 } from '@seashore/workflow';
-import {
-  createWorkflow,
-  createNode,
-  createLLMNode,
-  executeWorkflow,
-  createWorkflowContext,
-} from '@seashore/workflow';
+import { createWorkflow, createNode, executeWorkflow } from '@seashore/workflow';
 
 /**
  * Workflow agent configuration
@@ -122,8 +113,11 @@ export function createWorkflowAgent(config: WorkflowAgentConfig): Agent & {
 } {
   const { name, workflow, defaultOptions = {} } = config;
 
-  // Create a run function that executes the workflow
-  async function run(input: WorkflowAgentInput, options: RunOptions = {}): Promise<AgentRunResult> {
+  // Internal function that executes the workflow with WorkflowAgentInput
+  async function executeWithInput(
+    input: WorkflowAgentInput,
+    options: RunOptions = {}
+  ): Promise<AgentRunResult> {
     const startTime = Date.now();
 
     const workflowOptions: WorkflowExecutionOptions = {
@@ -140,22 +134,31 @@ export function createWorkflowAgent(config: WorkflowAgentConfig): Agent & {
       toolCalls: [],
       usage: { promptTokens: 0, completionTokens: 0, totalTokens: 0 },
       durationMs: Date.now() - startTime,
-      iterations: 1,
+      finishReason: 'stop',
     };
   }
 
+  // Create a run function that accepts string input (Agent interface)
+  async function run(input: string, options: RunOptions = {}): Promise<AgentRunResult> {
+    return executeWithInput({ message: input }, options);
+  }
+
   // Create a streaming run (not fully implemented for workflows)
-  async function* runStream(
-    input: WorkflowAgentInput,
-    options: RunOptions = {}
-  ): AsyncGenerator<
-    { type: 'text-delta'; textDelta: string } | { type: 'result'; result: AgentRunResult }
-  > {
+  async function* stream(input: string, options: RunOptions = {}): AsyncIterable<AgentStreamChunk> {
     const result = await run(input, options);
 
     // Emit the content as a single chunk
-    yield { type: 'text-delta', textDelta: result.content };
-    yield { type: 'result', result };
+    yield { type: 'content', delta: result.content };
+    yield { type: 'finish', result };
+  }
+
+  // Chat function for Agent interface
+  async function* chat(
+    _messages: readonly Message[],
+    _options: RunOptions = {}
+  ): AsyncIterable<AgentStreamChunk> {
+    // Not implemented for workflow agents - could be extended to support conversation
+    throw new Error('chat() is not implemented for workflow agents');
   }
 
   // Full workflow execution with detailed result
@@ -168,8 +171,10 @@ export function createWorkflowAgent(config: WorkflowAgentConfig): Agent & {
 
   return {
     name,
-    run: run as Agent['run'],
-    runStream: runStream as Agent['runStream'],
+    tools: [] as const,
+    run,
+    stream,
+    chat,
     runWorkflow,
   };
 }
@@ -263,7 +268,8 @@ export function composeAgents(config: {
     createNode<WorkflowAgentInput, AgentRunResult>({
       name: nodeName,
       execute: async (input, ctx) => {
-        const prevNodeName = index > 0 ? agents[index - 1].name : null;
+        const prevAgent = index > 0 ? agents[index - 1] : null;
+        const prevNodeName = prevAgent?.name ?? null;
         const prevResult = prevNodeName ? (ctx.nodeOutputs[prevNodeName] as AgentRunResult) : null;
 
         const message = extract(prevResult, input, ctx);
@@ -273,16 +279,27 @@ export function composeAgents(config: {
   );
 
   // Create edges to chain agents sequentially
-  const edges = agents.slice(1).map((_, index) => ({
-    from: agents[index].name,
-    to: agents[index + 1].name,
-  }));
+  const edges = agents.slice(1).map((_, index) => {
+    const fromAgent = agents[index];
+    const toAgent = agents[index + 1];
+    if (!fromAgent || !toAgent) {
+      throw new Error('Invalid agent chain configuration');
+    }
+    return {
+      from: fromAgent.name,
+      to: toAgent.name,
+    };
+  });
 
   // Add final output transformation node
   const outputNode = createNode<unknown, WorkflowAgentOutput>({
     name: '_output',
     execute: async (_, ctx) => {
-      const lastAgentName = agents[agents.length - 1].name;
+      const lastAgent = agents[agents.length - 1];
+      if (!lastAgent) {
+        throw new Error('No agents configured in workflow');
+      }
+      const lastAgentName = lastAgent.name;
       const lastResult = ctx.nodeOutputs[lastAgentName] as AgentRunResult;
 
       return {
@@ -296,9 +313,10 @@ export function composeAgents(config: {
   });
 
   // Add edge from last agent to output
-  if (agents.length > 0) {
+  const lastAgentForEdge = agents[agents.length - 1];
+  if (agents.length > 0 && lastAgentForEdge) {
     edges.push({
-      from: agents[agents.length - 1].name,
+      from: lastAgentForEdge.name,
       to: '_output',
     });
   }

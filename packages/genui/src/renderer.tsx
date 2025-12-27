@@ -3,28 +3,28 @@
  * @module @seashore/genui
  */
 
-import React, { createElement } from 'react'
-import type { ReactNode } from 'react'
-import type { GenUIRegistry, ToolCallUI, ToolCallRenderResult, ComponentRendererProps } from './types.js'
-import { isGenUIData } from './registry.js'
+import React, { createElement } from 'react';
+import type {
+  GenUIRegistry,
+  ToolCallUI,
+  ToolCallRenderResult,
+  ComponentRendererProps,
+} from './types.js';
+import { isGenUIData } from './registry.js';
 
 /**
  * Default renderer for non-GenUI tool results
  */
 function DefaultToolResult({ result }: { result: unknown }): React.ReactElement {
   if (result === null || result === undefined) {
-    return <span className="seashore-tool-result-empty">No result</span>
+    return <span className="seashore-tool-result-empty">No result</span>;
   }
 
   if (typeof result === 'string') {
-    return <span className="seashore-tool-result-text">{result}</span>
+    return <span className="seashore-tool-result-text">{result}</span>;
   }
 
-  return (
-    <pre className="seashore-tool-result-json">
-      {JSON.stringify(result, null, 2)}
-    </pre>
-  )
+  return <pre className="seashore-tool-result-json">{JSON.stringify(result, null, 2)}</pre>;
 }
 
 /**
@@ -36,7 +36,7 @@ function DefaultLoading({ toolName }: { toolName: string }): React.ReactElement 
       <span className="seashore-tool-loading-spinner" />
       <span>Running {toolName}...</span>
     </div>
-  )
+  );
 }
 
 /**
@@ -46,9 +46,11 @@ function DefaultError({ error, toolName }: { error: Error; toolName: string }): 
   return (
     <div className="seashore-tool-error">
       <span className="seashore-tool-error-icon">⚠️</span>
-      <span>Error in {toolName}: {error.message}</span>
+      <span>
+        Error in {toolName}: {error.message}
+      </span>
     </div>
-  )
+  );
 }
 
 /**
@@ -61,23 +63,23 @@ export function renderToolCall(
   toolCall: ToolCallUI,
   registry?: GenUIRegistry
 ): ToolCallRenderResult {
-  const { id, name, args, result, isLoading, error } = toolCall
+  const { id, name, result, isLoading, error } = toolCall;
 
   // Handle loading state
   if (isLoading) {
-    const renderer = registry?.get(name)
-    const LoadingComponent = renderer?.loading ?? DefaultLoading
+    const renderer = registry?.get(name);
+    const LoadingComponent = renderer?.loading ?? DefaultLoading;
 
     return {
       element: createElement(LoadingComponent, { toolName: name }),
       isGenUI: false,
-    }
+    };
   }
 
   // Handle error state
   if (error) {
-    const renderer = registry?.get(name)
-    const ErrorComponent = renderer?.error ?? DefaultError
+    const renderer = registry?.get(name);
+    const ErrorComponent = renderer?.error ?? DefaultError;
 
     return {
       element: createElement(ErrorComponent, {
@@ -85,24 +87,24 @@ export function renderToolCall(
         toolName: name,
       }),
       isGenUI: false,
-    }
+    };
   }
 
   // Check if result is GenUI data
   if (isGenUIData(result)) {
-    const renderer = registry?.get(name)
+    const renderer = registry?.get(name);
 
     if (renderer) {
       const props: ComponentRendererProps = {
         data: result.data,
         toolCallId: id,
         toolName: name,
-      }
+      };
 
       return {
         element: createElement(renderer.component, props),
         isGenUI: true,
-      }
+      };
     }
   }
 
@@ -110,7 +112,7 @@ export function renderToolCall(
   return {
     element: createElement(DefaultToolResult, { result }),
     isGenUI: false,
-  }
+  };
 }
 
 /**
@@ -121,5 +123,5 @@ export function renderToolCall(
 export function createToolCallRenderer(
   registry: GenUIRegistry
 ): (toolCall: ToolCallUI) => ToolCallRenderResult {
-  return (toolCall: ToolCallUI) => renderToolCall(toolCall, registry)
+  return (toolCall: ToolCallUI) => renderToolCall(toolCall, registry);
 }

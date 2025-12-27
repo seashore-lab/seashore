@@ -4,8 +4,9 @@
  * Rate limit handling and retry logic for LLM API calls
  */
 
-import type { TextAdapter, Message, StreamChunk } from './types.js';
-import { chat } from './adapters.js';
+import type { AnyTextAdapter, Message, StreamChunk, Tool } from './types';
+import { filterChatMessages } from './types';
+import { chat } from './adapters';
 
 /**
  * Retry configuration
@@ -221,13 +222,13 @@ export async function withRetry<T>(fn: () => Promise<T>, config: RetryConfig = {
  */
 export interface ChatWithRetryOptions {
   /** LLM adapter */
-  readonly adapter: TextAdapter;
+  readonly adapter: AnyTextAdapter;
 
   /** Messages to send */
   readonly messages: readonly Message[];
 
   /** Tools for function calling */
-  readonly tools?: readonly unknown[];
+  readonly tools?: readonly Tool[];
 
   /** Temperature */
   readonly temperature?: number;
@@ -268,6 +269,12 @@ export async function* chatWithRetry(options: ChatWithRetryOptions): AsyncIterab
   const fullConfig = { ...DEFAULT_RETRY_CONFIG, ...retry };
   const { maxRetries, shouldRetry, onRetry } = fullConfig;
 
+  // Filter out system messages and collect system prompts
+  const systemMessages = messages.filter((m) => m.role === 'system');
+  const systemPrompts = systemMessages
+    .map((m) => m.content)
+    .filter((c): c is string => typeof c === 'string');
+
   let lastError: Error | null = null;
 
   for (let attempt = 1; attempt <= maxRetries + 1; attempt++) {
@@ -275,10 +282,10 @@ export async function* chatWithRetry(options: ChatWithRetryOptions): AsyncIterab
       // Yield all chunks from the stream
       for await (const chunk of chat({
         adapter,
-        messages,
-        tools,
+        messages: filterChatMessages(messages),
+        systemPrompts: systemPrompts.length > 0 ? systemPrompts : undefined,
+        tools: tools ? [...tools] : undefined,
         temperature,
-        signal,
       })) {
         yield chunk;
       }

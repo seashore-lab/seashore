@@ -25,16 +25,16 @@ export type {
   RuntimeAdapterOptions,
   RuntimeAdapter,
   Server,
-} from './types.js';
+} from './types';
 
 // Server
-export { createServer } from './server.js';
+export { createServer } from './server';
 
 // Handlers
-export { createChatHandler, createAgentHandler, createStreamHandler } from './handlers.js';
+export { createChatHandler, createAgentHandler, createStreamHandler } from './handlers';
 
 // Adapters
-export { cloudflareAdapter, nodeAdapter } from './adapters.js';
+export { cloudflareAdapter, nodeAdapter } from './adapters';
 
 // SSE
-export { createSSEStream, createSSEHeaders, createNDJSONStream } from './sse.js';
+export { createSSEStream, createSSEHeaders, createNDJSONStream } from './sse';
