@@ -12,7 +12,7 @@ import type {
   DocumentLoader,
   DocumentSplitter,
   RetrievedDocument,
-} from './types.js';
+} from './types';
 
 /**
  * Default system prompt template
@@ -73,10 +73,10 @@ function estimateTokens(text: string): number {
 export function createRAG(config: RAGConfig): RAGPipeline {
   const {
     retriever,
-    systemPrompt = DEFAULT_SYSTEM_PROMPT,
+    systemPrompt: _systemPrompt = DEFAULT_SYSTEM_PROMPT,
     maxContextTokens = 4000,
     k = 4,
-    includeSources = true,
+    includeSources: _includeSources = true,
     contextFormat = 'text',
   } = config;
 

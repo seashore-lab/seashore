@@ -4,7 +4,7 @@
  * Utilities for consolidating and summarizing memories
  */
 
-import type { MemoryEntry, ConsolidationResult } from './types.js';
+import type { MemoryEntry } from './types';
 
 /**
  * Summarization function type
@@ -66,7 +66,7 @@ export function mergeMemories(memories: readonly MemoryEntry[]): {
   const content = sorted.map((m) => m.content).join('\n\n');
 
   // Average importance with recency boost
-  const totalWeight = sorted.reduce((sum, m, i) => sum + (i + 1), 0);
+  const totalWeight = sorted.reduce((sum, _m, i) => sum + (i + 1), 0);
   const weightedImportance = sorted.reduce((sum, m, i) => sum + m.importance * (i + 1), 0);
   const importance = weightedImportance / totalWeight;
 

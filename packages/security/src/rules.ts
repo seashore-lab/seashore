@@ -7,13 +7,11 @@ import type {
   SecurityRule,
   SecurityCheckResult,
   Violation,
-  ViolationSeverity,
   PIIAction,
   LengthAction,
-  TextAdapter,
   RuleBasedSecurityRuleConfig,
   LLMSecurityRuleConfig,
-} from './types.js';
+} from './types';
 
 /**
  * Prompt injection rule configuration
@@ -64,7 +62,7 @@ const DEFAULT_INJECTION_KEYWORDS = [
  * Create prompt injection detection rule
  */
 export function promptInjectionRule(config: PromptInjectionRuleConfig = {}): SecurityRule {
-  const { threshold = 0.8, methods = ['keyword'], additionalKeywords = [] } = config;
+  const { threshold = 0.5, methods = ['keyword'], additionalKeywords = [] } = config;
 
   const keywords = [...DEFAULT_INJECTION_KEYWORDS, ...additionalKeywords];
   const keywordPatterns = keywords.map((k) => new RegExp(k, 'i'));
@@ -82,7 +80,8 @@ export function promptInjectionRule(config: PromptInjectionRuleConfig = {}): Sec
       if (methods.includes('keyword')) {
         const matches = keywordPatterns.filter((p) => p.test(content));
         if (matches.length > 0) {
-          score = Math.min(1, matches.length * 0.3);
+          // Any match is suspicious, multiple matches increase confidence
+          score = Math.min(1, 0.5 + matches.length * 0.15);
         }
       }
 
@@ -191,7 +190,7 @@ export function piiDetectionRule(config: PIIDetectionRuleConfig = {}): SecurityR
 
         const matches = content.match(pattern);
         if (matches && matches.length > 0) {
-          for (const match of matches) {
+          for (const _match of matches) {
             violations.push({
               rule: 'pii_detection',
               severity: category === 'ssn' || category === 'credit_card' ? 'high' : 'medium',
@@ -201,7 +200,8 @@ export function piiDetectionRule(config: PIIDetectionRuleConfig = {}): SecurityR
           }
 
           if (action === 'redact') {
-            output = output.replace(pattern, mergedReplacements[category]);
+            const replacement = mergedReplacements[category] ?? '[REDACTED]';
+            output = output.replace(pattern, replacement);
             transformed = true;
           }
         }
@@ -336,7 +336,8 @@ export function topicBlockRule(config: TopicBlockRuleConfig): SecurityRule {
 
       // Keyword matching
       for (let i = 0; i < blockedTopics.length; i++) {
-        if (topicPatterns[i].test(content)) {
+        const pattern = topicPatterns[i];
+        if (pattern && pattern.test(content)) {
           violations.push({
             rule: 'topic_block',
             severity: 'high',

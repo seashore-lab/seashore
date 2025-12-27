@@ -10,8 +10,8 @@ import type {
   WorkflowExecutionOptions,
   WorkflowExecutionResult,
   WorkflowEvent,
-} from './types.js';
-import { executeWorkflow, executeWorkflowStream } from './execution.js';
+} from './types';
+import { executeWorkflow, executeWorkflowStream } from './execution';
 
 /**
  * Workflow configuration validation error

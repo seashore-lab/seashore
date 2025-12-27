@@ -3,7 +3,7 @@
  * @module @seashore/mcp
  */
 
-import type { z } from 'zod';
+// z type import removed - was unused
 
 /**
  * JSON Schema definition for MCP tool inputs

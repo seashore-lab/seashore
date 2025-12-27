@@ -8,11 +8,15 @@
 export type {
   Message,
   MessageRole,
+  ChatMessage,
+  ChatMessageRole,
   ToolCall,
   TokenUsage,
   StreamChunk,
   StreamChunkType,
   TextAdapter,
+  AnyTextAdapter,
+  TextAdapterConfig,
   ImageAdapter,
   VideoAdapter,
   TranscriptionAdapter,
@@ -31,7 +35,10 @@ export type {
   TranscriptionOptions,
   SpeechOptions,
   EmbeddingOptions,
-} from './types.js';
+} from './types';
+
+// Utility functions
+export { isChatMessage, filterChatMessages } from './types';
 
 // Text adapters (re-exports from @tanstack/ai-*)
 export {
@@ -44,15 +51,10 @@ export {
   createAnthropicAdapter,
   createGeminiAdapter,
   DEFAULT_MODELS,
-} from './adapters.js';
+} from './adapters';
 
 // Embedding adapters
-export {
-  openaiEmbed,
-  geminiEmbed,
-  generateEmbedding,
-  generateBatchEmbeddings,
-} from './embedding.js';
+export { openaiEmbed, geminiEmbed, generateEmbedding, generateBatchEmbeddings } from './embedding';
 
 // Multimodal adapters
 export {
@@ -71,7 +73,7 @@ export {
   openaiTTS,
   geminiTTS,
   generateSpeech,
-} from './multimodal.js';
+} from './multimodal';
 
 // Stream utilities
 export {
@@ -86,7 +88,7 @@ export {
   bufferStream,
   teeStream,
   mergeStreams,
-} from './stream-utils.js';
+} from './stream-utils';
 
 // Structured output
 export {
@@ -95,7 +97,7 @@ export {
   StructuredOutputError,
   type StructuredOutputOptions,
   type StructuredResult,
-} from './structured.js';
+} from './structured';
 
 // Provider options
 export {
@@ -110,7 +112,7 @@ export {
   type GeminiChatOptions,
   type ProviderChatOptions,
   type ModelCapabilities,
-} from './options.js';
+} from './options';
 
 // Retry and rate limiting
 export {
@@ -122,4 +124,4 @@ export {
   RateLimiter,
   type RetryConfig,
   type ChatWithRetryOptions,
-} from './retry.js';
+} from './retry';

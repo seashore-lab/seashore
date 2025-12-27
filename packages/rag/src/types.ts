@@ -4,7 +4,7 @@
  * Types for RAG (Retrieval-Augmented Generation) pipeline
  */
 
-import type { Document, VectorStore, SearchResult } from '@seashore/vectordb';
+import type { VectorStore } from '@seashore/vectordb';
 
 /**
  * Metadata associated with a loaded document

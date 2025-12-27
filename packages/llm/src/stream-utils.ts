@@ -4,7 +4,7 @@
  * Utilities for working with LLM streaming responses
  */
 
-import type { StreamChunk, TokenUsage } from './types.js';
+import type { StreamChunk, TokenUsage } from './types';
 
 /**
  * Convert a stream of chunks to a Web ReadableStream
@@ -118,7 +118,7 @@ export async function collectContent(
     if (chunk.type === 'content' && chunk.delta) {
       content += chunk.delta;
     }
-    if (chunk.type === 'finish' && chunk.usage) {
+    if (chunk.type === 'done' && chunk.usage) {
       usage = chunk.usage;
     }
   }
@@ -230,8 +230,6 @@ export function teeStream(
   const buffer: StreamChunk[] = [];
   let done = false;
   let iterator: AsyncIterator<StreamChunk> | null = null;
-  let reader1Done = false;
-  let reader2Done = false;
   let reader1Index = 0;
   let reader2Index = 0;
 
@@ -249,10 +247,6 @@ export function teeStream(
         if (isReader1) reader1Index = i;
         else reader2Index = i;
       };
-      const setDone = () => {
-        if (isReader1) reader1Done = true;
-        else reader2Done = true;
-      };
 
       while (true) {
         const index = getIndex();
@@ -264,7 +258,6 @@ export function teeStream(
         }
 
         if (done) {
-          setDone();
           return;
         }
 
@@ -272,7 +265,6 @@ export function teeStream(
 
         if (iterDone) {
           done = true;
-          setDone();
           return;
         }
 

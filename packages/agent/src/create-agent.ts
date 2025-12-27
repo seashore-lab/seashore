@@ -5,8 +5,8 @@
  */
 
 import type { Tool } from '@seashore/tool';
-import type { Agent, AgentConfig } from './types.js';
-import { createAgent as createReActAgent } from './react-agent.js';
+import type { Agent, AgentConfig } from './types';
+import { createAgent as createReActAgent } from './react-agent';
 
 /**
  * Create an agent

@@ -4,9 +4,9 @@
  * Wrapper to add persistent storage to agents
  */
 
-import type { Message as LLMMessage } from '@seashore/llm';
 import type { Message, Thread, ThreadRepository, MessageRepository } from '@seashore/storage';
-import type { Agent, AgentConfig, AgentRunResult, AgentStreamChunk, RunOptions } from './types.js';
+import type { Tool } from '@seashore/tool';
+import type { Agent, AgentRunResult, AgentStreamChunk, RunOptions } from './types';
 
 /**
  * Storage-aware run options
@@ -73,7 +73,7 @@ export interface WithStorageConfig {
  * Agent with storage capabilities
  */
 export interface AgentWithStorage<
-  TTools extends readonly unknown[] = readonly unknown[],
+  TTools extends readonly Tool<unknown, unknown>[] = readonly Tool<unknown, unknown>[],
 > extends Agent<TTools> {
   /**
    * Run with storage integration
@@ -106,24 +106,6 @@ export interface AgentWithStorage<
 }
 
 /**
- * Convert storage message to LLM message
- */
-function toMessage(message: Message): LLMMessage {
-  if (message.role === 'tool') {
-    return {
-      role: 'tool',
-      content: message.content ?? '',
-      tool_call_id: message.toolCallId ?? undefined,
-    };
-  }
-
-  return {
-    role: message.role as 'user' | 'assistant' | 'system',
-    content: message.content ?? '',
-  };
-}
-
-/**
  * Add storage integration to an agent
  *
  * @example
@@ -152,10 +134,9 @@ function toMessage(message: Message): LLMMessage {
  * });
  * ```
  */
-export function withStorage<TTools extends readonly unknown[] = readonly unknown[]>(
-  agent: Agent<TTools>,
-  config: WithStorageConfig
-): AgentWithStorage<TTools> {
+export function withStorage<
+  TTools extends readonly Tool<unknown, unknown>[] = readonly Tool<unknown, unknown>[],
+>(agent: Agent<TTools>, config: WithStorageConfig): AgentWithStorage<TTools> {
   const {
     threads,
     messages,
@@ -168,7 +149,12 @@ export function withStorage<TTools extends readonly unknown[] = readonly unknown
   // Create enhanced agent
   const enhancedAgent = Object.create(agent) as AgentWithStorage<TTools>;
 
-  enhancedAgent.storage = config;
+  Object.defineProperty(enhancedAgent, 'storage', {
+    value: config,
+    writable: false,
+    enumerable: true,
+    configurable: false,
+  });
 
   enhancedAgent.getOrCreateThread = async (options) => {
     const { threadId, userId, title } = options;
@@ -214,10 +200,8 @@ export function withStorage<TTools extends readonly unknown[] = readonly unknown
     });
 
     // Load history if enabled
-    let historyMessages: readonly LLMMessage[] = [];
     if (loadHistory) {
-      const storedMessages = await enhancedAgent.loadThreadHistory(thread.id, maxHistory);
-      historyMessages = storedMessages.map(toMessage);
+      await enhancedAgent.loadThreadHistory(thread.id, maxHistory);
     }
 
     // Persist user message

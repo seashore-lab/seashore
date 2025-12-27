@@ -3,7 +3,7 @@
  * @module @seashore/observability
  */
 
-import type { TokenCounter, TokenCounterConfig, TokenUsage } from './types.js';
+import type { TokenCounter, TokenCounterConfig, TokenUsage } from './types';
 
 /**
  * Token pricing per 1K tokens (in USD)
@@ -60,28 +60,26 @@ function estimateMessageTokens(messages: { role: string; content: string }[]): n
  * Token counter implementation
  */
 class TokenCounterImpl implements TokenCounter {
-  private config: TokenCounterConfig;
-
-  constructor(config: TokenCounterConfig = {}) {
-    this.config = config;
+  constructor(_config: TokenCounterConfig = {}) {
+    // Config is reserved for future use
   }
 
-  count(text: string, options?: { model?: string }): number {
+  count(text: string, _options?: { model?: string }): number {
     return estimateTokens(text);
   }
 
   countMessages(
     messages: { role: string; content: string }[],
-    options?: { model?: string }
+    _options?: { model?: string }
   ): number {
     return estimateMessageTokens(messages);
   }
 
-  countBatch(texts: string[], options?: { model?: string }): number[] {
+  countBatch(texts: string[], _options?: { model?: string }): number[] {
     return texts.map((text) => estimateTokens(text));
   }
 
-  countTotal(texts: string[], options?: { model?: string }): number {
+  countTotal(texts: string[], _options?: { model?: string }): number {
     return texts.reduce((total, text) => total + estimateTokens(text), 0);
   }
 
@@ -90,7 +88,7 @@ class TokenCounterImpl implements TokenCounter {
 
     if (!pricing) {
       // Use GPT-4o pricing as default
-      const defaultPricing = MODEL_PRICING['gpt-4o'];
+      const defaultPricing = MODEL_PRICING['gpt-4o'] ?? { input: 0.005, output: 0.015 };
       return (
         (usage.promptTokens / 1000) * defaultPricing.input +
         (usage.completionTokens / 1000) * defaultPricing.output

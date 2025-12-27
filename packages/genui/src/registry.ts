@@ -3,7 +3,7 @@
  * @module @seashore/genui
  */
 
-import type { GenUIRegistry, ComponentRenderer } from './types.js';
+import type { GenUIRegistry, ComponentRenderer } from './types';
 
 /**
  * Create a GenUI registry for custom component rendering

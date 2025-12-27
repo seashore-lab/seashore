@@ -6,9 +6,11 @@
     "moduleResolution": "bundler",
     "lib": [
       "ES2022",
+      "ES2023.Array",
       "DOM",
       "DOM.Iterable"
     ],
+    "jsx": "react-jsx",
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -23,7 +25,8 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
+    // Disabled: causes many false positives with optional properties
+    // "exactOptionalPropertyTypes": true,
     "paths": {
       "@seashore/llm": [
         "./packages/llm/src"

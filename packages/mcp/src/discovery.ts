@@ -7,7 +7,7 @@
 import { readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
-import type { MCPServerConfig, ServerInfo } from './types.js';
+import type { MCPServerConfig, ServerInfo } from './types';
 
 /**
  * MCP configuration file format (mcp.json)
@@ -38,7 +38,7 @@ interface MCPServerEntry {
  * Supports ${VAR} and ${VAR:-default} syntax
  */
 function expandEnvVars(value: string): string {
-  return value.replace(/\$\{([^}]+)\}/g, (match, expr) => {
+  return value.replace(/\$\{([^}]+)\}/g, (_match, expr) => {
     // Handle default value syntax: ${VAR:-default}
     const [varName, defaultValue] = expr.split(':-');
     const envValue = process.env[varName];

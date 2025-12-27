@@ -9,6 +9,6 @@ export {
   MCPError,
   MCPConnectionError,
   MCPTimeoutError,
-} from './stdio.js';
-export { SSETransport, createSSETransport } from './sse.js';
-export { WebSocketTransport, createWebSocketTransport } from './websocket.js';
+} from './stdio';
+export { SSETransport, createSSETransport } from './sse';
+export { WebSocketTransport, createWebSocketTransport } from './websocket';

@@ -9,7 +9,7 @@ import type {
   LoadedDocument,
   DocumentChunk,
   MarkdownSplitterOptions,
-} from '../types.js';
+} from '../types';
 
 /**
  * Markdown section with header info

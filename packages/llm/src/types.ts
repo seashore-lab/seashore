@@ -33,6 +33,45 @@ export interface Message {
 }
 
 /**
+ * Non-system message role (compatible with @tanstack/ai)
+ */
+export type ChatMessageRole = 'user' | 'assistant' | 'tool';
+
+/**
+ * Chat message (excludes system role, compatible with @tanstack/ai)
+ * Note: toolCalls is mutable for @tanstack/ai compatibility
+ * Note: content cannot be undefined (only string | null) for @tanstack/ai compatibility
+ */
+export interface ChatMessage {
+  role: ChatMessageRole;
+  content: string | null;
+  toolCalls?: ToolCall[];
+  toolCallId?: string;
+  name?: string;
+}
+
+/**
+ * Type guard to check if a message is a chat message (not system)
+ */
+export function isChatMessage(message: Message): message is Message & { role: ChatMessageRole } {
+  return message.role !== 'system';
+}
+
+/**
+ * Filter messages to only include chat messages (non-system)
+ * Returns mutable copies for @tanstack/ai compatibility
+ */
+export function filterChatMessages(messages: readonly Message[]): ChatMessage[] {
+  return messages.filter(isChatMessage).map((msg) => ({
+    role: msg.role as ChatMessageRole,
+    content: msg.content ?? null, // Convert undefined to null for @tanstack/ai
+    toolCalls: msg.toolCalls ? [...msg.toolCalls] : undefined,
+    toolCallId: msg.toolCallId,
+    name: msg.name,
+  }));
+}
+
+/**
  * Token usage statistics
  */
 export interface TokenUsage {
@@ -42,15 +81,26 @@ export interface TokenUsage {
 }
 
 /**
- * Stream chunk types
+ * Stream chunk types - aligned with @tanstack/ai
  */
 export type StreamChunkType =
   | 'content'
-  | 'tool-call-start'
-  | 'tool-call-delta'
-  | 'tool-call-end'
-  | 'finish'
-  | 'error';
+  | 'tool_call'
+  | 'tool_result'
+  | 'done'
+  | 'error'
+  | 'approval-requested'
+  | 'tool-input-available'
+  | 'thinking';
+
+/**
+ * Stream chunk error (compatible with @tanstack/ai)
+ */
+export interface StreamChunkError {
+  readonly message: string;
+  readonly name?: string;
+  readonly code?: string;
+}
 
 /**
  * Stream chunk emitted during generation
@@ -59,15 +109,31 @@ export interface StreamChunk {
   readonly type: StreamChunkType;
   readonly delta?: string;
   readonly toolCall?: Partial<ToolCall>;
-  readonly finishReason?: 'stop' | 'tool_calls' | 'length' | 'content_filter';
+  readonly finishReason?: 'stop' | 'tool_calls' | 'length' | 'content_filter' | null;
   readonly usage?: TokenUsage;
-  readonly error?: Error;
+  readonly error?: StreamChunkError;
 }
 
 /**
  * Text generation adapter interface
+ * Re-exported from @tanstack/ai for type compatibility
  */
-export interface TextAdapter {
+import type {
+  TextAdapter as TanstackTextAdapter,
+  AnyTextAdapter as TanstackAnyTextAdapter,
+  Tool as TanstackTool,
+} from '@tanstack/ai';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type TextAdapter = TanstackTextAdapter<any, any, any, any>;
+export type AnyTextAdapter = TanstackAnyTextAdapter;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type Tool = TanstackTool<any, any, any>;
+
+/**
+ * Simple text adapter config (for serialization/config)
+ */
+export interface TextAdapterConfig {
   readonly provider: 'openai' | 'anthropic' | 'gemini';
   readonly model: string;
 }
@@ -192,7 +258,7 @@ export interface BatchEmbeddingResult {
  * Chat options
  */
 export interface ChatOptions {
-  readonly adapter: TextAdapter;
+  readonly adapter: AnyTextAdapter;
   readonly messages: readonly Message[];
   readonly tools?: readonly unknown[];
   readonly temperature?: number;

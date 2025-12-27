@@ -9,7 +9,6 @@ import {
   uuid,
   text,
   integer,
-  real,
   timestamp,
   jsonb,
   index,

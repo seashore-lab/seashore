@@ -4,7 +4,7 @@
  * Node type for LLM operations
  */
 
-import type { WorkflowNode, LLMNodeConfig, WorkflowContext } from '../types.js';
+import type { WorkflowNode, LLMNodeConfig, WorkflowContext } from '../types';
 
 /**
  * LLM node output

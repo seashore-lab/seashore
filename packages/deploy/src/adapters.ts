@@ -3,7 +3,7 @@
  * @module @seashore/deploy
  */
 
-import type { Server, RuntimeAdapter, RuntimeAdapterOptions } from './types.js';
+import type { Server, RuntimeAdapter, RuntimeAdapterOptions } from './types';
 
 /**
  * Cloudflare Workers adapter
@@ -22,7 +22,7 @@ import type { Server, RuntimeAdapter, RuntimeAdapterOptions } from './types.js';
  */
 export const cloudflareAdapter: RuntimeAdapter = (
   server: Server,
-  options?: RuntimeAdapterOptions
+  _options?: RuntimeAdapterOptions
 ) => {
   return {
     async fetch(request: Request): Promise<Response> {

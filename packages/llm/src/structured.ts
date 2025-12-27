@@ -5,15 +5,16 @@
  */
 
 import type { z, ZodSchema, ZodError } from 'zod';
-import type { Message, TextAdapter, TokenUsage, StreamChunk } from './types.js';
-import { chat } from './adapters.js';
+import type { Message, AnyTextAdapter, TokenUsage, StreamChunk } from './types';
+import { filterChatMessages } from './types';
+import { chat } from './adapters';
 
 /**
  * Structured output options
  */
 export interface StructuredOutputOptions<T extends ZodSchema> {
   /** LLM adapter to use */
-  readonly adapter: TextAdapter;
+  readonly adapter: AnyTextAdapter;
 
   /** Messages to send */
   readonly messages: readonly Message[];
@@ -93,20 +94,16 @@ export async function generateStructured<T extends ZodSchema>(
     name = 'output',
     description,
     temperature = 0,
-    signal,
     strict = true,
     systemPrompt,
   } = options;
 
   // Build system message with schema instructions
   const schemaDescription = buildSchemaDescription(schema, name, description);
-  const systemMessage: Message = {
-    role: 'system',
-    content: systemPrompt ?? buildStructuredSystemPrompt(schemaDescription),
-  };
+  const systemPromptContent = systemPrompt ?? buildStructuredSystemPrompt(schemaDescription);
 
-  // Prepare messages with system prompt
-  const fullMessages: Message[] = [systemMessage, ...messages.filter((m) => m.role !== 'system')];
+  // Prepare messages (filter out system messages as they go in systemPrompts)
+  const chatMessages = filterChatMessages(messages);
 
   // Collect response
   let content = '';
@@ -114,14 +111,14 @@ export async function generateStructured<T extends ZodSchema>(
 
   for await (const chunk of chat({
     adapter,
-    messages: fullMessages,
+    messages: chatMessages,
+    systemPrompts: [systemPromptContent],
     temperature,
-    signal,
   })) {
     if (chunk.type === 'content' && chunk.delta) {
       content += chunk.delta;
     }
-    if (chunk.type === 'finish' && chunk.usage) {
+    if (chunk.type === 'done' && chunk.usage) {
       usage = chunk.usage;
     }
   }
@@ -180,23 +177,20 @@ export async function* streamStructured<T extends ZodSchema>(
   chunk: StreamChunk;
   complete: boolean;
 }> {
-  const { adapter, messages, schema, temperature = 0, signal, systemPrompt } = options;
+  const { adapter, messages, schema, temperature = 0, systemPrompt } = options;
 
   const schemaDescription = buildSchemaDescription(schema, options.name ?? 'output');
-  const systemMessage: Message = {
-    role: 'system',
-    content: systemPrompt ?? buildStructuredSystemPrompt(schemaDescription),
-  };
+  const systemPromptContent = systemPrompt ?? buildStructuredSystemPrompt(schemaDescription);
 
-  const fullMessages: Message[] = [systemMessage, ...messages.filter((m) => m.role !== 'system')];
+  const chatMessages = filterChatMessages(messages);
 
   let content = '';
 
   for await (const chunk of chat({
     adapter,
-    messages: fullMessages,
+    messages: chatMessages,
+    systemPrompts: [systemPromptContent],
     temperature,
-    signal,
   })) {
     if (chunk.type === 'content' && chunk.delta) {
       content += chunk.delta;
@@ -208,7 +202,7 @@ export async function* streamStructured<T extends ZodSchema>(
     yield {
       partial,
       chunk,
-      complete: chunk.type === 'finish',
+      complete: chunk.type === 'done',
     };
   }
 }
@@ -231,7 +225,7 @@ export class StructuredOutputError extends Error {
 /**
  * Build a description of the schema for the LLM
  */
-function buildSchemaDescription(schema: ZodSchema, name: string, description?: string): string {
+function buildSchemaDescription(schema: ZodSchema, _name: string, description?: string): string {
   const zodDescription = getZodDescription(schema);
 
   const parts: string[] = [];

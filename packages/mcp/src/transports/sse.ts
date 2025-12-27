@@ -4,8 +4,8 @@
  * @module @seashore/mcp
  */
 
-import type { MCPClientConfig } from '../types.js';
-import { MCPConnectionError, MCPTimeoutError, MCPError } from './stdio.js';
+import type { MCPClientConfig } from '../types';
+import { MCPConnectionError, MCPTimeoutError, MCPError } from './stdio';
 
 /**
  * JSON-RPC types
@@ -83,7 +83,7 @@ export class SSETransport {
         clearTimeout(connectionTimeout);
       };
 
-      this.eventSource.onerror = (event) => {
+      this.eventSource.onerror = (_event) => {
         clearTimeout(connectionTimeout);
         if (!this.connected) {
           reject(new MCPConnectionError('Failed to connect via SSE'));

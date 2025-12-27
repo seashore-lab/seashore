@@ -4,8 +4,8 @@
  * Handles execution of tools during agent runs
  */
 
-import type { Tool, ToolResult, ToolContext } from '@seashore/tool';
-import type { AgentToolContext, ToolCallRecord } from './types.js';
+import type { Tool, ToolContext } from '@seashore/tool';
+import type { AgentToolContext, ToolCallRecord } from './types';
 
 /**
  * Tool call request from LLM

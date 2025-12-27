@@ -9,7 +9,7 @@ import type {
   EmbeddingOptions,
   EmbeddingResult,
   BatchEmbeddingResult,
-} from './types.js';
+} from './types';
 
 /**
  * Create an OpenAI embedding adapter
@@ -42,9 +42,7 @@ export function geminiEmbed(
 /**
  * Generate embedding for a single text input
  */
-export async function generateEmbedding(
-  options: EmbeddingOptions
-): Promise<EmbeddingResult> {
+export async function generateEmbedding(options: EmbeddingOptions): Promise<EmbeddingResult> {
   const { adapter, input } = options;
   const textInput = Array.isArray(input) ? input[0] : input;
 
@@ -112,9 +110,13 @@ async function generateOpenAIEmbedding(
   }
 
   const data = (await response.json()) as OpenAIEmbeddingResponse;
+  const firstEmbedding = data.data[0];
+  if (!firstEmbedding) {
+    throw new Error('OpenAI embedding error: No embedding data returned');
+  }
 
   return {
-    embedding: data.data[0].embedding,
+    embedding: firstEmbedding.embedding,
     model: data.model,
     usage: {
       promptTokens: data.usage.prompt_tokens,

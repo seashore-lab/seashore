@@ -4,7 +4,7 @@
  * In-memory cache for recent conversation context
  */
 
-import type { MemoryEntry, NewMemoryEntry, MemoryStore, ShortTermMemoryConfig } from './types.js';
+import type { MemoryEntry, NewMemoryEntry, ShortTermMemoryConfig } from './types';
 
 /**
  * Default short-term memory configuration

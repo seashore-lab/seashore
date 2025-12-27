@@ -3,7 +3,7 @@
  * @module @seashore/observability
  */
 
-import type { Logger, LoggerConfig, LogLevel, LogEntry, SpanContext } from './types.js';
+import type { Logger, LoggerConfig, LogLevel, LogEntry, SpanContext } from './types';
 
 /**
  * Log level priority

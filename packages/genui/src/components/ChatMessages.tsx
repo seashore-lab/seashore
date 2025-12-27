@@ -4,7 +4,7 @@
  */
 
 import React, { useEffect, useRef } from 'react';
-import type { ChatMessagesProps, ChatMessage as ChatMessageType } from '../types.js';
+import type { ChatMessagesProps } from '../types.js';
 import { ChatMessage } from './ChatMessage.js';
 
 /**

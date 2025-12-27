@@ -6,7 +6,7 @@
 
 import { spawn, type ChildProcess } from 'node:child_process';
 import { createInterface, type Interface as ReadlineInterface } from 'node:readline';
-import type { MCPClientConfig } from '../types.js';
+import type { MCPClientConfig } from '../types';
 
 /**
  * JSON-RPC request/response types

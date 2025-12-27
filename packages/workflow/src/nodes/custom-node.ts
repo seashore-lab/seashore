@@ -5,7 +5,7 @@
  */
 
 import type { ZodSchema } from 'zod';
-import type { WorkflowNode, CustomNodeConfig, WorkflowContext } from '../types.js';
+import type { WorkflowNode, CustomNodeConfig, WorkflowContext } from '../types';
 
 /**
  * Create a custom node with arbitrary logic

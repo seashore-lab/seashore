@@ -8,7 +8,7 @@ import type {
   EvaluationReport,
   BatchEvaluationResult,
   EvaluationResult,
-} from './types.js';
+} from './types';
 
 /**
  * Calculate standard deviation
@@ -33,7 +33,14 @@ function generateDistribution(results: EvaluationResult[]): {
   for (const result of results) {
     const score = result.overallScore;
     for (let i = 0; i < buckets.length - 1; i++) {
-      if (score >= buckets[i] && score < buckets[i + 1]) {
+      const bucketLow = buckets[i];
+      const bucketHigh = buckets[i + 1];
+      if (
+        bucketLow !== undefined &&
+        bucketHigh !== undefined &&
+        score >= bucketLow &&
+        score < bucketHigh
+      ) {
         counts[i]++;
         break;
       }
@@ -95,7 +102,7 @@ function generateMarkdown(
     lines.push('|-------|-------|');
     for (let i = 0; i < dist.counts.length; i++) {
       lines.push(
-        `| ${dist.buckets[i].toFixed(1)}-${dist.buckets[i + 1].toFixed(1)} | ${dist.counts[i]} |`
+        `| ${(dist.buckets[i] ?? 0).toFixed(1)}-${(dist.buckets[i + 1] ?? 0).toFixed(1)} | ${dist.counts[i]} |`
       );
     }
     lines.push('');
@@ -292,7 +299,7 @@ function generateHTML(
             const width = maxCount > 0 ? (count / maxCount) * 100 : 0;
             return `
           <tr>
-            <td>${dist.buckets[i].toFixed(1)}-${dist.buckets[i + 1].toFixed(1)}</td>
+            <td>${(dist.buckets[i] ?? 0).toFixed(1)}-${(dist.buckets[i + 1] ?? 0).toFixed(1)}</td>
             <td>${count}</td>
             <td><div class="bar-container"><div class="bar" style="width: ${width}%"></div></div></td>
           </tr>
@@ -384,8 +391,10 @@ export async function generateReport(config: ReportConfig): Promise<EvaluationRe
       }
 
       const stat = metricStats[detail.metric];
-      stat.min = Math.min(stat.min, detail.score);
-      stat.max = Math.max(stat.max, detail.score);
+      if (stat !== undefined) {
+        stat.min = Math.min(stat.min, detail.score);
+        stat.max = Math.max(stat.max, detail.score);
+      }
     }
   }
 
@@ -398,9 +407,12 @@ export async function generateReport(config: ReportConfig): Promise<EvaluationRe
       (r) => r.details.find((d) => d.metric === metricName)?.passed ?? false
     );
 
-    metricStats[metricName].average = scores.reduce((a, b) => a + b, 0) / scores.length;
-    metricStats[metricName].stdDev = stdDev(scores);
-    metricStats[metricName].passRate = passed.length / results.results.length;
+    const metricStat = metricStats[metricName];
+    if (metricStat !== undefined) {
+      metricStat.average = scores.reduce((a, b) => a + b, 0) / scores.length;
+      metricStat.stdDev = stdDev(scores);
+      metricStat.passRate = passed.length / results.results.length;
+    }
   }
 
   // Generate content

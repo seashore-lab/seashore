@@ -4,7 +4,7 @@
  * Evaluate the importance of memories for consolidation
  */
 
-import type { ImportanceEvaluator, MemoryEntry } from './types.js';
+import type { ImportanceEvaluator, MemoryEntry } from './types';
 
 /**
  * Importance signals detected in content

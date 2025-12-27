@@ -4,7 +4,7 @@
  * Split text recursively using a hierarchy of separators
  */
 
-import type { DocumentSplitter, LoadedDocument, DocumentChunk, SplitterOptions } from '../types.js';
+import type { DocumentSplitter, LoadedDocument, DocumentChunk, SplitterOptions } from '../types';
 
 /**
  * Default separators for text splitting

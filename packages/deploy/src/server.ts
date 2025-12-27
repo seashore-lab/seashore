@@ -6,8 +6,8 @@
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import type { Context, MiddlewareHandler } from 'hono';
-import type { Server, ServerConfig, ThreadResponse } from './types.js';
-import { createChatHandler, createAgentHandler } from './handlers.js';
+import type { Server, ServerConfig, ThreadResponse } from './types';
+import { createChatHandler, createAgentHandler } from './handlers';
 
 /**
  * Parse rate limit window to milliseconds
@@ -17,7 +17,7 @@ function parseWindow(window: string): number {
   if (!match) return 60000; // default 1 minute
 
   const [, value, unit] = match;
-  const num = parseInt(value, 10);
+  const num = parseInt(value ?? '1', 10);
 
   switch (unit) {
     case 's':
@@ -225,7 +225,10 @@ export function createServer(config: ServerConfig): Server {
 
   return {
     app: {
-      fetch: app.fetch.bind(app),
+      fetch: async (request: Request): Promise<Response> => {
+        const result = app.fetch(request);
+        return result instanceof Promise ? result : Promise.resolve(result);
+      },
       get: app.get.bind(app),
       post: app.post.bind(app),
       use: app.use.bind(app),

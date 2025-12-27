@@ -5,7 +5,7 @@
  */
 
 import type { ZodError } from 'zod';
-import type { Tool, ToolContext, ToolResult } from './types.js';
+import type { Tool, ToolContext, ToolResult } from './types';
 
 /**
  * Validation error with detailed issue information

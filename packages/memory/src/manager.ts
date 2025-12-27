@@ -6,10 +6,10 @@
 
 import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import type { VectorStore, EmbeddingFunction } from '@seashore/vectordb';
-import { ShortTermMemory, createShortTermMemory } from './short-term.js';
-import { MidTermMemory, createMidTermMemory } from './mid-term.js';
-import { LongTermMemory, createLongTermMemory } from './long-term.js';
-import { createImportanceEvaluator, defaultImportanceEvaluator } from './importance.js';
+import { ShortTermMemory, createShortTermMemory } from './short-term';
+import { MidTermMemory, createMidTermMemory } from './mid-term';
+import { LongTermMemory, createLongTermMemory } from './long-term';
+import { defaultImportanceEvaluator } from './importance';
 import type {
   MemoryManager,
   MemoryManagerConfig,
@@ -20,7 +20,7 @@ import type {
   ContextOptions,
   ConsolidationResult,
   ImportanceEvaluator,
-} from './types.js';
+} from './types';
 
 /**
  * Default memory manager configuration
@@ -470,9 +470,23 @@ export async function createMemoryManager(config: MemoryManagerConfig): Promise<
   return new MemoryManagerImpl(agentId, db, {
     embeddings,
     config: {
-      shortTerm: shortTerm ?? DEFAULT_CONFIG.shortTerm,
-      midTerm: midTerm ?? DEFAULT_CONFIG.midTerm,
-      longTerm: longTerm ?? DEFAULT_CONFIG.longTerm,
+      shortTerm: {
+        maxEntries: shortTerm?.maxEntries ?? DEFAULT_CONFIG.shortTerm.maxEntries,
+        ttlMs: shortTerm?.ttlMs ?? DEFAULT_CONFIG.shortTerm.ttlMs,
+      },
+      midTerm: {
+        maxEntries: midTerm?.maxEntries ?? DEFAULT_CONFIG.midTerm.maxEntries,
+        ttlMs: midTerm?.ttlMs ?? DEFAULT_CONFIG.midTerm.ttlMs,
+        promotionThreshold:
+          midTerm?.promotionThreshold ?? DEFAULT_CONFIG.midTerm.promotionThreshold,
+      },
+      longTerm: {
+        maxEntries: longTerm?.maxEntries ?? DEFAULT_CONFIG.longTerm.maxEntries,
+        promotionThreshold:
+          longTerm?.promotionThreshold ?? DEFAULT_CONFIG.longTerm.promotionThreshold,
+        enableVectorSearch:
+          longTerm?.enableVectorSearch ?? DEFAULT_CONFIG.longTerm.enableVectorSearch,
+      },
       autoConsolidate: autoConsolidate ?? DEFAULT_CONFIG.autoConsolidate,
       consolidationInterval: consolidationInterval ?? DEFAULT_CONFIG.consolidationInterval,
     },

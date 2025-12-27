@@ -13,7 +13,7 @@ import {
   createSSEHeaders,
   type Agent,
   type StreamChunk,
-} from '../src/index.js';
+} from '../src/index';
 
 // Mock agent
 function createMockAgent(name: string): Agent {

@@ -14,12 +14,12 @@ export { geminiText } from '@tanstack/ai-gemini';
 export { chat, toStreamResponse } from '@tanstack/ai';
 
 // Type-safe adapter factory functions for internal use
-import type { TextAdapter } from './types.js';
+import type { TextAdapterConfig } from './types';
 
 /**
- * Create an OpenAI text adapter
+ * Create an OpenAI text adapter config
  */
-export function createOpenAIAdapter(model: string): TextAdapter {
+export function createOpenAIAdapter(model: string): TextAdapterConfig {
   return {
     provider: 'openai',
     model,
@@ -27,9 +27,9 @@ export function createOpenAIAdapter(model: string): TextAdapter {
 }
 
 /**
- * Create an Anthropic text adapter
+ * Create an Anthropic text adapter config
  */
-export function createAnthropicAdapter(model: string): TextAdapter {
+export function createAnthropicAdapter(model: string): TextAdapterConfig {
   return {
     provider: 'anthropic',
     model,
@@ -37,9 +37,9 @@ export function createAnthropicAdapter(model: string): TextAdapter {
 }
 
 /**
- * Create a Gemini text adapter
+ * Create a Gemini text adapter config
  */
-export function createGeminiAdapter(model: string): TextAdapter {
+export function createGeminiAdapter(model: string): TextAdapterConfig {
   return {
     provider: 'gemini',
     model,

@@ -21,13 +21,13 @@ export type {
   SecurityRuleConfig,
   RuleBasedSecurityRuleConfig,
   LLMSecurityRuleConfig,
-} from './types.js';
+} from './types';
 
 // Guardrails
-export { createGuardrails } from './guardrails.js';
+export { createGuardrails } from './guardrails';
 
 // Filters
-export { createInputFilter, createOutputFilter, type FilterConfig } from './filters.js';
+export { createInputFilter, createOutputFilter, type FilterConfig } from './filters';
 
 // Rules
 export {
@@ -42,7 +42,7 @@ export {
   type ToxicityRuleConfig,
   type TopicBlockRuleConfig,
   type LengthLimitRuleConfig,
-} from './rules.js';
+} from './rules';
 
 // Middleware
 export {
@@ -52,4 +52,4 @@ export {
   type InputViolationResult,
   type OutputViolationResult,
   type MiddlewareResult,
-} from './middleware.js';
+} from './middleware';

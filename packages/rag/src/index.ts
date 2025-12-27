@@ -27,7 +27,7 @@ export type {
   WebLoaderOptions,
   TokenSplitterOptions,
   MarkdownSplitterOptions,
-} from './types.js';
+} from './types';
 
 // Loaders
 export {
@@ -44,7 +44,7 @@ export {
   createWebLoader,
   createMultiWebLoader,
   createSitemapLoader,
-} from './loaders/index.js';
+} from './loaders/index';
 
 // Splitters
 export {
@@ -55,7 +55,7 @@ export {
   estimateTokens,
   createMarkdownSplitter,
   createHeaderSplitter,
-} from './splitters/index.js';
+} from './splitters/index';
 
 // Retrievers
 export {
@@ -66,7 +66,7 @@ export {
   createMultiRetriever,
   type VectorRetrieverOptions,
   type HybridRetrieverOptions,
-} from './retrievers/index.js';
+} from './retrievers/index';
 
 // RAG Pipeline
 export {
@@ -76,4 +76,4 @@ export {
   createRAGChain,
   type QuestionAnswerResult,
   type RAGChainOptions,
-} from './rag.js';
+} from './rag';

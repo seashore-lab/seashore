@@ -35,7 +35,7 @@ export function Chat({
   headers,
   credentials,
 }: ChatProps): React.ReactElement {
-  const { messages, input, setInput, sendMessage, isLoading, error } = useChat({
+  const { messages, sendMessage, isLoading, error } = useChat({
     endpoint,
     initialMessages,
     threadId,

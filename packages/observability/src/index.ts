@@ -21,23 +21,23 @@ export type {
   LoggerConfig,
   LogLevel,
   LogEntry,
-} from './types.js';
+} from './types';
 
 // Tracer
-export { createTracer } from './tracer.js';
+export { createTracer } from './tracer';
 
 // Token Counter
-export { createTokenCounter } from './tokens.js';
+export { createTokenCounter } from './tokens';
 
 // Logger
-export { createLogger } from './logger.js';
+export { createLogger } from './logger';
 
 // Middleware
 export {
   observabilityMiddleware,
   createAgentObserver,
   type ObservabilityContext,
-} from './middleware.js';
+} from './middleware';
 
 // Exporters
 export {
@@ -45,4 +45,4 @@ export {
   createConsoleExporter,
   type OTLPExporterConfig,
   type ConsoleExporterConfig,
-} from './exporters/index.js';
+} from './exporters/index';

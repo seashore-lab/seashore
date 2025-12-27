@@ -6,7 +6,7 @@
 
 import type { VectorStore, VectorStoreOptions, EmbeddingFunction } from '@seashore/vectordb';
 import { createVectorStore } from '@seashore/vectordb';
-import type { Retriever, RetrieverOptions, RetrievedDocument, DocumentChunk } from '../types.js';
+import type { Retriever, RetrieverOptions, RetrievedDocument, DocumentChunk } from '../types';
 
 /**
  * Options for creating a vector retriever
@@ -125,12 +125,15 @@ export async function createVectorRetriever(options: VectorRetrieverOptions): Pr
         metadata: chunk.metadata as Record<string, unknown>,
       }));
 
-      // Add to vector store
-      return vectorStore.addDocuments(documents);
+      // Add to vector store and return document IDs
+      const insertedDocs = await vectorStore.addDocuments(documents);
+      return insertedDocs.map((doc) => doc.id);
     },
 
     async deleteDocuments(ids: readonly string[]): Promise<void> {
-      await vectorStore.deleteDocuments(ids);
+      for (const id of ids) {
+        await vectorStore.deleteDocument(id);
+      }
     },
 
     getVectorStore(): VectorStore {
@@ -153,7 +156,7 @@ export function createInMemoryRetriever(embeddingFn: EmbeddingFunction): Retriev
   /**
    * Calculate cosine similarity
    */
-  function cosineSimilarity(a: number[], b: number[]): number {
+  function cosineSimilarity(a: readonly number[], b: readonly number[]): number {
     let dotProduct = 0;
     let normA = 0;
     let normB = 0;

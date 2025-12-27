@@ -16,7 +16,7 @@ import type {
   TTSAdapter,
   SpeechOptions,
   SpeechResult,
-} from './types.js';
+} from './types';
 
 // ============================================================================
 // Image Adapters
@@ -415,7 +415,10 @@ async function generateGeminiSpeech(options: SpeechOptions): Promise<SpeechResul
   }
 
   const data = (await response.json()) as GeminiSpeechResponse;
-  const audioData = data.candidates[0].content.parts[0].inlineData;
+  const audioData = data.candidates?.[0]?.content?.parts?.[0]?.inlineData;
+  if (!audioData) {
+    throw new Error('Gemini TTS error: No audio data returned');
+  }
 
   return {
     audio: audioData.data,

@@ -7,13 +7,13 @@
 import { eq, and, gte, desc, sql } from 'drizzle-orm';
 import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import type { VectorStore, EmbeddingFunction } from '@seashore/vectordb';
-import { memories } from './schema.js';
+import { memories } from './schema';
 import type {
   MemoryEntry,
   NewMemoryEntry,
   LongTermMemoryConfig,
   SemanticSearchOptions,
-} from './types.js';
+} from './types';
 
 /**
  * Default long-term memory configuration
@@ -129,7 +129,7 @@ export class LongTermMemory {
     // Also delete from vector store if enabled
     if (this.vectorStore) {
       try {
-        await this.vectorStore.deleteDocuments([id]);
+        await this.vectorStore.deleteDocuments({ id });
       } catch {
         // Vector store might not have this document
       }
@@ -169,7 +169,14 @@ export class LongTermMemory {
    * Semantic search for relevant memories
    */
   public async search(options: SemanticSearchOptions): Promise<readonly MemoryEntry[]> {
-    const { agentId, threadId, query, limit = 10, minScore = 0.5, types = ['long'] } = options;
+    const {
+      agentId,
+      threadId,
+      query,
+      limit = 10,
+      minScore = 0.5,
+      types: _types = ['long'],
+    } = options;
 
     // Use vector store if available
     if (this.vectorStore && this.embeddings) {
@@ -262,10 +269,12 @@ export class LongTermMemory {
    */
   private async enforceLimit(agentId: string): Promise<void> {
     // Get count
-    const [{ count }] = await this.db
+    const result = await this.db
       .select({ count: sql<number>`COUNT(*)` })
       .from(memories)
       .where(and(eq(memories.agentId, agentId), eq(memories.type, 'long')));
+
+    const count = result[0]?.count ?? 0;
 
     if (count <= this.config.maxEntries) return;
 
@@ -290,7 +299,7 @@ export class LongTermMemory {
       // Also delete from vector store
       if (this.vectorStore) {
         try {
-          await this.vectorStore.deleteDocuments(ids);
+          await this.vectorStore.deleteDocuments({ id: { $in: ids } });
         } catch {
           // Ignore errors
         }
@@ -342,7 +351,8 @@ export class LongTermMemory {
     // Clean up vector store
     if (this.vectorStore && entries.length > 0) {
       try {
-        await this.vectorStore.deleteDocuments(entries.map((e) => e.id));
+        const ids = entries.map((e) => e.id);
+        await this.vectorStore.deleteDocuments({ id: { $in: ids } });
       } catch {
         // Ignore errors
       }

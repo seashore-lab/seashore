@@ -4,7 +4,7 @@
  * Re-export all schema definitions
  */
 
-export { threads, type ThreadsTable } from './threads.js';
-export { messages, type MessagesTable } from './messages.js';
-export { traces, type TracesTable } from './traces.js';
-export { sessions, type SessionsTable } from './sessions.js';
+export { threads, type ThreadsTable } from './threads';
+export { messages, type MessagesTable } from './messages';
+export { traces, type TracesTable } from './traces';
+export { sessions, type SessionsTable } from './sessions';
