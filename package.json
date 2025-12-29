@@ -25,6 +25,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@nx/js": "^22.3.3",
     "@rollup/plugin-typescript": "^12.1.2",
     "@testcontainers/postgresql": "^11.11.0",
     "@types/node": "^22.15.21",

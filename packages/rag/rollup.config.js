@@ -1,35 +1,7 @@
-import typescript from '@rollup/plugin-typescript';
+import { createRollupConfig } from '../../rollup.config.base.js';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-export default {
-  input: 'src/index.ts',
-  output: [
-    {
-      file: 'dist/index.js',
-      format: 'esm',
-      sourcemap: true,
-    },
-    {
-      file: 'dist/index.cjs',
-      format: 'cjs',
-      sourcemap: true,
-    },
-  ],
-  plugins: [
-    typescript({
-      tsconfig: './tsconfig.json',
-      declaration: true,
-      declarationDir: './dist',
-    }),
-  ],
-  external: [
-    '@seashore/vectordb',
-    '@seashore/llm',
-    'zod',
-    'pdf-parse',
-    'node-html-parser',
-    'fs',
-    'fs/promises',
-    'path',
-    'url',
-  ],
-};
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+export default createRollupConfig(__dirname);

@@ -1,5 +1,7 @@
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
-const baseConfig = require('../../rollup.config.base.cjs');
+import { createRollupConfig } from '../../rollup.config.base.js';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-export default baseConfig;
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+export default createRollupConfig(__dirname);

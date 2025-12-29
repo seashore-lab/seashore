@@ -1,18 +1,13 @@
 import { createRollupConfig } from '../../rollup.config.base.js';
-import copy from 'rollup-plugin-copy';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-const baseConfig = createRollupConfig({
-  input: 'src/index.ts',
-  packageDir: 'packages/genui',
-  external: ['react', 'react-dom', 'react/jsx-runtime'],
-});
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
-export default {
-  ...baseConfig,
-  plugins: [
-    ...baseConfig.plugins,
-    copy({
-      targets: [{ src: 'src/styles.css', dest: 'dist' }],
-    }),
-  ],
-};
+const configs = createRollupConfig(__dirname);
+
+// Add React externals
+export default configs.map((config) => ({
+  ...config,
+  external: [...(Array.isArray(config.external) ? config.external : []), 'react', 'react-dom', 'react/jsx-runtime'],
+}));
