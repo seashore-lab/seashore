@@ -1,27 +1,43 @@
 # Quick Start
 
-This guide walks you through creating your first AI agent with Seashore.
+Let's build your first AI agent with Seashore. In just a few minutes, you'll have a working agent that can answer questions.
 
-## 1. Create a Basic Agent
+## Your First Agent
+
+Create a file called `agent.ts`:
 
 ```typescript
 import { createAgent } from '@seashore/agent'
 import { openaiText } from '@seashore/llm'
 
+// Create an agent
 const agent = createAgent({
-  name: 'my-agent',
-  model: openaiText('gpt-4o', { apiKey: process.env.OPENAI_API_KEY }),
+  name: 'my-first-agent',
+  model: openaiText('gpt-4o'),
   systemPrompt: 'You are a helpful assistant.',
 })
 
-const result = await agent.run({
-  messages: [{ role: 'user', content: 'Hello!' }],
-})
+// Run the agent
+const result = await agent.run('What is TypeScript?')
 
 console.log(result.content)
 ```
 
-## 2. Add Tools
+That's it! You've created an AI agent. Let's break down what happened:
+
+1. **createAgent** — Creates a new agent with a name and model
+2. **openaiText** — Creates an adapter for OpenAI's text models
+3. **agent.run** — Sends a message to the agent and gets a response
+
+Run it with:
+
+```bash
+npx tsx agent.ts
+```
+
+## Adding a Tool
+
+Agents become powerful when they can use tools — functions that let them interact with the world:
 
 ```typescript
 import { createAgent } from '@seashore/agent'
@@ -29,104 +45,78 @@ import { openaiText } from '@seashore/llm'
 import { defineTool } from '@seashore/tool'
 import { z } from 'zod'
 
-const calculatorTool = defineTool({
-  name: 'calculator',
-  description: 'Perform basic math calculations',
-  parameters: z.object({
-    expression: z.string().describe('Math expression to evaluate'),
+// Define a tool
+const weatherTool = defineTool({
+  name: 'get_weather',
+  description: 'Get the weather for a city',
+  inputSchema: z.object({
+    city: z.string().describe('The city name'),
   }),
-  execute: async ({ expression }) => {
-    return { result: eval(expression) }
+  execute: async ({ city }) => {
+    // In a real app, call a weather API
+    return { temperature: 22, condition: 'sunny' }
   },
 })
 
+// Create an agent with the tool
 const agent = createAgent({
-  name: 'math-agent',
+  name: 'weather-agent',
   model: openaiText('gpt-4o'),
-  systemPrompt: 'You are a helpful math assistant.',
-  tools: [calculatorTool],
+  systemPrompt: 'You are a helpful weather assistant.',
+  tools: [weatherTool],
 })
 
-const result = await agent.run({
-  messages: [{ role: 'user', content: 'What is 15 * 7?' }],
-})
+// The agent will automatically use the tool
+const result = await agent.run('What is the weather in Tokyo?')
+console.log(result.content)
+// Output: "The weather in Tokyo is 22°C and sunny."
 ```
 
-## 3. Stream Responses
+## Streaming Responses
+
+For a better user experience, stream responses as they're generated:
 
 ```typescript
-for await (const chunk of agent.stream({
-  messages: [{ role: 'user', content: 'Explain quantum computing' }],
-})) {
-  if (chunk.type === 'text') {
-    process.stdout.write(chunk.content)
-  } else if (chunk.type === 'tool_call') {
-    console.log('Calling tool:', chunk.name)
+const agent = createAgent({
+  name: 'streaming-agent',
+  model: openaiText('gpt-4o'),
+  systemPrompt: 'You are a helpful assistant.',
+})
+
+// Stream the response
+for await (const chunk of agent.chat('Tell me a short story')) {
+  if (chunk.type === 'content' && chunk.delta) {
+    process.stdout.write(chunk.delta)
   }
 }
 ```
 
-## 4. Use RAG
+## Multi-turn Conversations
+
+Maintain conversation context by passing message history:
 
 ```typescript
-import { createRAG, createVectorRetriever } from '@seashore/rag'
-import { createVectorStore } from '@seashore/vectordb'
-import { openaiText, openaiEmbedding } from '@seashore/llm'
+const messages = [
+  { role: 'user' as const, content: 'My name is Alice' },
+  { role: 'assistant' as const, content: 'Hello Alice!' },
+  { role: 'user' as const, content: 'What is my name?' },
+]
 
-// Create vector store
-const vectorStore = await createVectorStore({
-  connectionString: process.env.DATABASE_URL!,
-})
-
-// Create collection and embedding
-const embedding = openaiEmbedding('text-embedding-3-small')
-const collection = await vectorStore.createCollection({
-  name: 'docs',
-  dimension: 1536,
-})
-
-// Create retriever
-const retriever = createVectorRetriever({
-  collection,
-  embed: (text) => embedding.embed(text),
-})
-
-// Create RAG pipeline
-const rag = createRAG({ retriever })
-
-// Add documents
-await collection.addDocuments([
-  { content: 'Our company was founded in 2020...', metadata: {} },
-  { content: 'Our main product is...', metadata: {} },
-])
-
-// Query with LLM
-const llm = openaiText('gpt-4o')
-const context = await rag.retrieve('When was the company founded?')
-const answer = await llm.chat({
-  messages: [
-    { role: 'system', content: context.systemPrompt },
-    { role: 'user', content: 'When was the company founded?' },
-  ],
-})
+for await (const chunk of agent.chat(messages)) {
+  if (chunk.type === 'content' && chunk.delta) {
+    process.stdout.write(chunk.delta)
+  }
+}
+// Output: "Your name is Alice."
 ```
 
-## 5. Deploy as API
+## What's Next?
 
-```typescript
-import { createServer } from '@seashore/deploy'
+You've built your first agent! Here's what to explore next:
 
-const server = createServer({
-  agents: { chat: agent },
-  cors: { origin: '*' },
-})
+- Learn about [Core Concepts](./concepts.md) to understand how agents work
+- Explore [Tools](../tools/index.md) to add more capabilities
+- Build [Workflows](../workflows/index.md) for complex tasks
+- Add [Memory](../memory/index.md) to remember conversations
 
-// Cloudflare Workers
-export default { fetch: server.app.fetch }
-```
-
-## Next Steps
-
-- [Concepts](./concepts.md) - Understand core concepts
-- [Building Custom Tools](../guides/custom-tools.md) - Create your own tools
-- [Creating Workflows](../guides/workflows.md) - Build complex pipelines
+Happy building!
