@@ -2,7 +2,15 @@
   "permissions": {
     "allow": [
       "Bash(done:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "mcp__github__search_repositories",
+      "mcp__github__get_file_contents",
+      "Bash(mdbook-xgettext:*)",
+      "Bash(mdbook build:*)",
+      "Bash(cmd:*)",
+      "Bash(cargo install:*)",
+      "Bash(export:*)",
+      "mcp__github__search_issues"
     ]
   }
 }
