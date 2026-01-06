@@ -10,7 +10,11 @@
       "Bash(cmd:*)",
       "Bash(cargo install:*)",
       "Bash(export:*)",
-      "mcp__github__search_issues"
+      "mcp__github__search_issues",
+      "Bash(pnpm typecheck:*)",
+      "Bash(pnpm lint:*)",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__query-docs"
     ]
   }
 }
