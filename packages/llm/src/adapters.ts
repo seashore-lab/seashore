@@ -23,7 +23,7 @@ export function openaiText(
     baseURL?: string;
     organization?: string;
   }
-): any {
+) {
   return createOpenaiChat(model as any, options?.apiKey ?? process.env.OPENAI_API_KEY ?? '', {
     baseURL: options?.baseURL,
     organization: options?.organization,
@@ -42,7 +42,7 @@ export function anthropicText(
     apiKey?: string;
     baseURL?: string;
   }
-): any {
+) {
   return createAnthropicChat(model as any, options?.apiKey ?? process.env.ANTHROPIC_API_KEY ?? '', {
     baseURL: options?.baseURL,
   });
@@ -60,7 +60,7 @@ export function geminiText(
     apiKey?: string;
     baseURL?: string;
   }
-): any {
+) {
   return createGeminiChat(model as any, options?.apiKey ?? process.env.GEMINI_API_KEY ?? '', {
     baseURL: options?.baseURL,
   });

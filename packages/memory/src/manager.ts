@@ -1,13 +1,12 @@
 /**
  * @seashore/memory - Memory Manager
  *
- * Unified interface for managing short/mid/long-term memory
+ * Unified interface for managing short-term and long-term memory
  */
 
 import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import type { VectorStore, EmbeddingFunction } from '@seashore/vectordb';
 import { ShortTermMemory, createShortTermMemory } from './short-term';
-import { MidTermMemory, createMidTermMemory } from './mid-term';
 import { LongTermMemory, createLongTermMemory } from './long-term';
 import { defaultImportanceEvaluator } from './importance';
 import type {
@@ -28,16 +27,10 @@ import type {
 const DEFAULT_CONFIG = {
   shortTerm: {
     maxEntries: 10,
-    ttlMs: 3600000, // 1 hour
-  },
-  midTerm: {
-    maxEntries: 100,
-    ttlMs: 86400000, // 24 hours
-    promotionThreshold: 0.5,
   },
   longTerm: {
     maxEntries: 1000,
-    promotionThreshold: 0.7,
+    importanceThreshold: 0.7,
     enableVectorSearch: true,
   },
   autoConsolidate: true,
@@ -50,7 +43,6 @@ const DEFAULT_CONFIG = {
 class MemoryManagerImpl implements MemoryManager {
   private agentId: string;
   private shortTerm: ShortTermMemory;
-  private midTerm: MidTermMemory;
   private longTerm: LongTermMemory;
   private embeddings?: EmbeddingFunction;
   private importanceEvaluator: ImportanceEvaluator;
@@ -64,7 +56,6 @@ class MemoryManagerImpl implements MemoryManager {
       vectorStore?: VectorStore;
       embeddings?: EmbeddingFunction;
       shortTerm?: ShortTermMemory;
-      midTerm?: MidTermMemory;
       longTerm?: LongTermMemory;
       importanceEvaluator?: ImportanceEvaluator;
       config?: Partial<typeof DEFAULT_CONFIG>;
@@ -76,8 +67,6 @@ class MemoryManagerImpl implements MemoryManager {
 
     // Initialize memory stores
     this.shortTerm = options.shortTerm ?? createShortTermMemory(this.config.shortTerm);
-
-    this.midTerm = options.midTerm ?? createMidTermMemory(db, this.config.midTerm);
 
     this.longTerm =
       options.longTerm ??
@@ -154,10 +143,9 @@ class MemoryManagerImpl implements MemoryManager {
     // Determine memory type
     let memoryType = type;
     if (!memoryType) {
-      if (importance >= this.config.longTerm.promotionThreshold) {
+      // Use importance threshold to decide between short and long-term
+      if (importance >= this.config.longTerm.importanceThreshold) {
         memoryType = 'long';
-      } else if (importance >= this.config.midTerm.promotionThreshold) {
-        memoryType = 'mid';
       } else {
         memoryType = 'short';
       }
@@ -167,8 +155,6 @@ class MemoryManagerImpl implements MemoryManager {
     switch (memoryType) {
       case 'long':
         return this.longTerm.add({ ...newEntry, type: 'long' });
-      case 'mid':
-        return this.midTerm.add({ ...newEntry, type: 'mid' });
       case 'short':
       default:
         return this.shortTerm.add({ ...newEntry, type: 'short' });
@@ -181,7 +167,7 @@ class MemoryManagerImpl implements MemoryManager {
   public async recall(query: string, options: RecallOptions = {}): Promise<readonly MemoryEntry[]> {
     const {
       threadId,
-      types = ['short', 'mid', 'long'],
+      types = ['short', 'long'],
       limit = 10,
       minScore = 0.5,
       includeRecent = true,
@@ -193,7 +179,7 @@ class MemoryManagerImpl implements MemoryManager {
     if (includeRecent && types.includes('short')) {
       const recent = this.shortTerm.queryByAgent(this.agentId, {
         threadId,
-        limit: 3,
+        limit: 5,
       });
       results.push(...recent);
     }
@@ -208,15 +194,6 @@ class MemoryManagerImpl implements MemoryManager {
         minScore,
       });
       results.push(...longTermResults);
-    }
-
-    // Add mid-term memories
-    if (types.includes('mid')) {
-      const midTermResults = await this.midTerm.queryByAgent(this.agentId, {
-        threadId,
-        limit: Math.ceil(limit / 3),
-      });
-      results.push(...midTermResults);
     }
 
     // Deduplicate and sort by importance/recency
@@ -297,13 +274,6 @@ class MemoryManagerImpl implements MemoryManager {
       );
     }
 
-    const midTermMemories = memories.filter((m) => m.type === 'mid');
-    if (midTermMemories.length > 0) {
-      sections.push(
-        '## Earlier Context\n' + midTermMemories.map((m) => `- ${m.content}`).join('\n')
-      );
-    }
-
     const longTermMemories = memories.filter((m) => m.type === 'long');
     if (longTermMemories.length > 0) {
       sections.push(
@@ -320,32 +290,30 @@ class MemoryManagerImpl implements MemoryManager {
   public async forget(id: string): Promise<void> {
     // Try to delete from all stores (only one will succeed)
     this.shortTerm.delete(id);
-    await this.midTerm.delete(id);
     await this.longTerm.delete(id);
   }
 
   /**
-   * Consolidate memories
+   * Consolidate memories (promote important short-term to long-term)
    */
   public async consolidate(): Promise<ConsolidationResult> {
     const result: ConsolidationResult = {
-      promotedToMid: 0,
+      promotedToMid: 0, // Deprecated, kept for compatibility
       promotedToLong: 0,
       expiredShort: 0,
-      expiredMid: 0,
+      expiredMid: 0, // Deprecated, kept for compatibility
       removed: 0,
     };
 
-    // Get candidates from short-term
+    // Get candidates from short-term for promotion to long-term
     const shortCandidates = this.shortTerm.getConsolidationCandidates(
       this.agentId,
-      this.config.midTerm.promotionThreshold
+      this.config.longTerm.importanceThreshold
     );
 
-    // Promote important short-term to mid-term
+    // Promote important short-term memories to long-term
     for (const memory of shortCandidates) {
-      if (memory.importance >= this.config.longTerm.promotionThreshold) {
-        // Directly to long-term
+      if (memory.importance >= this.config.longTerm.importanceThreshold) {
         await this.longTerm.add({
           agentId: memory.agentId,
           threadId: memory.threadId,
@@ -357,52 +325,8 @@ class MemoryManagerImpl implements MemoryManager {
         });
         this.shortTerm.delete(memory.id);
         result.promotedToLong++;
-      } else if (memory.importance >= this.config.midTerm.promotionThreshold) {
-        await this.midTerm.add({
-          agentId: memory.agentId,
-          threadId: memory.threadId,
-          content: memory.content,
-          importance: memory.importance,
-          embedding: memory.embedding,
-          metadata: memory.metadata,
-          type: 'mid',
-        });
-        this.shortTerm.delete(memory.id);
-        result.promotedToMid++;
       }
     }
-
-    // Clean up expired short-term
-    const expiredShort = this.shortTerm.getExpiredEntries(this.agentId);
-    for (const memory of expiredShort) {
-      this.shortTerm.delete(memory.id);
-      result.expiredShort++;
-    }
-
-    // Get candidates from mid-term for promotion
-    const midCandidates = await this.midTerm.getPromotionCandidates(
-      this.agentId,
-      this.config.longTerm.promotionThreshold
-    );
-
-    // Promote important mid-term to long-term
-    for (const memory of midCandidates) {
-      await this.longTerm.add({
-        agentId: memory.agentId,
-        threadId: memory.threadId,
-        content: memory.content,
-        importance: memory.importance,
-        embedding: memory.embedding,
-        metadata: memory.metadata,
-        type: 'long',
-      });
-      await this.midTerm.delete(memory.id);
-      result.promotedToLong++;
-    }
-
-    // Clean up expired mid-term
-    const expiredMid = await this.midTerm.cleanupExpired(this.agentId);
-    result.expiredMid = expiredMid;
 
     return result;
   }
@@ -412,20 +336,16 @@ class MemoryManagerImpl implements MemoryManager {
    */
   public async getStats(): Promise<MemoryStats> {
     const shortStats = this.shortTerm.getStats(this.agentId);
-    const midStats = await this.midTerm.getStats(this.agentId);
     const longStats = await this.longTerm.getStats(this.agentId);
 
-    const totalCount = shortStats.count + midStats.count + longStats.count;
+    const totalCount = shortStats.count + longStats.count;
     const totalImportance =
-      shortStats.avgImportance * shortStats.count +
-      midStats.avgImportance * midStats.count +
-      longStats.avgImportance * longStats.count;
+      shortStats.avgImportance * shortStats.count + longStats.avgImportance * longStats.count;
 
     return {
       totalCount,
       byType: {
         short: shortStats.count,
-        mid: midStats.count,
         long: longStats.count,
       },
       avgImportance: totalCount > 0 ? totalImportance / totalCount : 0,
@@ -439,7 +359,6 @@ class MemoryManagerImpl implements MemoryManager {
    */
   public async clear(): Promise<void> {
     this.shortTerm.clear(this.agentId);
-    await this.midTerm.clear(this.agentId);
     await this.longTerm.clear(this.agentId);
   }
 }
@@ -453,7 +372,6 @@ export async function createMemoryManager(config: MemoryManagerConfig): Promise<
     store,
     embeddings,
     shortTerm,
-    midTerm,
     longTerm,
     autoConsolidate,
     consolidationInterval,
@@ -472,18 +390,11 @@ export async function createMemoryManager(config: MemoryManagerConfig): Promise<
     config: {
       shortTerm: {
         maxEntries: shortTerm?.maxEntries ?? DEFAULT_CONFIG.shortTerm.maxEntries,
-        ttlMs: shortTerm?.ttlMs ?? DEFAULT_CONFIG.shortTerm.ttlMs,
-      },
-      midTerm: {
-        maxEntries: midTerm?.maxEntries ?? DEFAULT_CONFIG.midTerm.maxEntries,
-        ttlMs: midTerm?.ttlMs ?? DEFAULT_CONFIG.midTerm.ttlMs,
-        promotionThreshold:
-          midTerm?.promotionThreshold ?? DEFAULT_CONFIG.midTerm.promotionThreshold,
       },
       longTerm: {
         maxEntries: longTerm?.maxEntries ?? DEFAULT_CONFIG.longTerm.maxEntries,
-        promotionThreshold:
-          longTerm?.promotionThreshold ?? DEFAULT_CONFIG.longTerm.promotionThreshold,
+        importanceThreshold:
+          longTerm?.importanceThreshold ?? DEFAULT_CONFIG.longTerm.importanceThreshold,
         enableVectorSearch:
           longTerm?.enableVectorSearch ?? DEFAULT_CONFIG.longTerm.enableVectorSearch,
       },

@@ -1,10 +1,11 @@
 /**
- * Example 08 - MCP Filesystem
+ * Example 06 - MCP Filesystem
  *
- * 展示如何通过 MCP (Model Context Protocol) 连接外部工具服务器。
- * 此示例连接到 filesystem MCP server，让 Agent 可以操作文件系统。
+ * This example demonstrates how to create an agent that interacts with the local filesystem
+ * using the Model Context Protocol (MCP) filesystem server.
  *
- * 运行前需要安装: npx -y @modelcontextprotocol/server-filesystem
+ * It should be mentioned that MCP tools feature in Seashore for OpenAI models requires
+ * Responses API to work. Traditional chat completions API might result in a HTTP 400 error.
  */
 
 import 'dotenv/config';
@@ -12,64 +13,62 @@ import { createMCPClient, createMCPToolBridge } from '@seashore/mcp';
 import { createAgent } from '@seashore/agent';
 import { openaiText } from '@seashore/llm';
 import { defineTool } from '@seashore/tool';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 async function main() {
-  console.log('🤖 Example 08: MCP Filesystem\n');
+  console.log('[Example 06: MCP Filesystem]\n');
 
-  // 获取当前目录作为允许访问的路径
-  const allowedPath = process.cwd();
-  console.log(`📂 允许访问的路径: ${allowedPath}\n`);
+  // Get the root path for MCP server
+  const allowedPath = path.resolve(__dirname, '../../');
+  console.log(`📂 Allowed access path: ${allowedPath}\n`);
 
   try {
-    // 1. 连接到 MCP 文件系统服务器
-    console.log('🔌 正在连接 MCP 服务器...');
+    // 1. Connect to MCP filesystem server
+    console.log('🔌 Connecting to MCP server...');
     const client = await createMCPClient({
       transport: 'stdio',
       command: 'npx',
       args: ['-y', '@modelcontextprotocol/server-filesystem', allowedPath],
     });
 
-    console.log('✅ MCP 服务器已连接\n');
+    console.log('✅ MCP server connected\n');
 
-    // 2. 创建工具桥接器
+    // 2. Create tool bridge and get tools
     const bridge = await createMCPToolBridge({
       client,
-      // 可选：重命名工具以避免冲突
-      rename: (name) => `fs_${name}`,
+      rename: (name) => `fs_${name}`, // Optional: Append a prefix to avoid name conflicts
     });
 
     const toolConfigs = bridge.getTools();
-    console.log(`🛠️ 可用工具 (${toolConfigs.length} 个):`);
+    console.log(`🛠️ Available tools (${toolConfigs.length}):`);
     toolConfigs.forEach((tool) => {
-      console.log(`   - ${tool.name}: ${tool.description?.slice(0, 50)}...`);
+      console.log(`   - ${tool.name}`);
     });
-    console.log();
-
-    // 转换为 Seashore Tool 格式
+    // Convert MCP tool configs to actual tools
     const tools = toolConfigs.map((config) => defineTool(config));
 
-    // 3. 创建带 MCP 工具的 Agent
+    // 3. Create agent with the MCP filesystem tools
     const agent = createAgent({
       name: 'filesystem-agent',
       model: openaiText('gpt-5.1', {
         baseURL: process.env.OPENAI_API_BASE_URL || 'https://api.openai.com/v1',
         apiKey: process.env.OPENAI_API_KEY || '',
       }),
-      systemPrompt: `你是一个文件系统助手。你可以使用以下工具操作文件：
-- fs_read_file: 读取文件内容
-- fs_list_directory: 列出目录内容
-- fs_get_file_info: 获取文件信息
-
-请根据用户的请求操作文件系统，并用中文回答。`,
+      systemPrompt: `You are a helpful assistant with access to a filesystem.
+You can use the provided tools to interact with the file system.
+Please operate the file system based on the user's requests.`,
       tools,
     });
 
-    // 4. 测试文件操作
-    console.log('--- 文件操作测试 ---\n');
+    // 4. Test file operations
+    console.log('\n--- File Operations Test ---\n');
 
     const queries = [
-      '请列出当前目录下的文件和文件夹',
-      '读取 package.json 的内容，告诉我这个项目的名称和版本',
+      'Please list the files and folders in the current directory',
+      'Read the contents of package.json and tell me the project name and version',
     ];
 
     for (const query of queries) {
@@ -77,9 +76,8 @@ async function main() {
       const result = await agent.run(query);
       console.log(`🤖 Agent: ${result.content}\n`);
 
-      // 显示工具调用记录
       if (result.toolCalls.length > 0) {
-        console.log('   📋 工具调用:');
+        console.log('   📋 Tool Calls:');
         result.toolCalls.forEach((call) => {
           console.log(`      - ${call.name}: ${call.result.success ? '✅' : '❌'}`);
         });
@@ -87,13 +85,63 @@ async function main() {
       }
     }
 
-    // 5. 断开连接
+    // 5. Close the MCP client connection
     await client.close();
-    console.log('🔌 MCP 连接已关闭');
+    console.log('🔌 MCP connection closed');
   } catch (error) {
-    console.error('❌ MCP 连接失败:', error);
-    console.log('\n💡 提示: 确保已安装 Node.js 并可以运行 npx 命令');
+    console.error('❌ MCP connection failed:', error);
   }
 }
 
 main().catch(console.error);
+
+// [Example 06: MCP Filesystem]
+
+// 📂 Allowed access path: D:\Projects\seashore
+
+// 🔌 Connecting to MCP server...
+// [MCP stderr]: Secure MCP Filesystem Server running on stdio
+
+// ✅ MCP server connected
+
+// 🛠️ Available tools (14):
+//    - fs_read_file
+//    - fs_read_text_file
+//    - fs_read_media_file
+//    - fs_read_multiple_files
+//    - fs_write_file
+//    - fs_edit_file
+//    - fs_create_directory
+//    - fs_list_directory
+//    - fs_list_directory_with_sizes
+//    - fs_directory_tree
+//    - fs_move_file
+//    - fs_search_files
+//    - fs_get_file_info
+//    - fs_list_allowed_directories
+
+// --- File Operations Test ---
+
+// 📝 User: Please list the files and folders in the current directory
+// 🤖 Agent: Here’s what’s in the current directory:
+
+// - Files:
+//   - `.env`
+//   - `.env.example`
+//   - `package.json`
+//   - `README.md`
+//   - `tsconfig.json`
+
+// - Folders:
+//   - `node_modules`
+//   - `src`
+
+//    📋 Tool Calls:
+//       - fs_list_directory: ✅
+
+// 📝 User: Read the contents of package.json and tell me the project name and version
+// 🤖 Agent: The project name is `@seashore/examples` and the version is `0.1.0`.
+
+//    📋 Tool Calls:
+//       - fs_read_text_file: ❌
+//       - fs_read_text_file: ✅

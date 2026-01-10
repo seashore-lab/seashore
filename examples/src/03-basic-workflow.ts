@@ -93,26 +93,21 @@ async function main() {
       case 'workflow_start':
         console.log('🚀 Workflow started\n');
         break;
-
       case 'node_start':
         currentNodeName = event.data.nodeName;
         console.log(`\n📍 Node started: ${currentNodeName}`);
         break;
-
       case 'llm_token':
         // Real-time token streaming. Each token is printed as it's generated.
         const delta = event.data.delta;
         process.stdout.write(delta);
         break;
-
       case 'node_complete':
         console.log(`\n   ✅ Node completed: ${event.data.nodeName}`);
         break;
-
       case 'workflow_complete':
         console.log('\n🎉 Workflow completed!\n');
         break;
-
       case 'workflow_error':
       case 'node_error':
         console.error(`\n❌ Error: ${JSON.stringify(event.data)}`);

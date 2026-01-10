@@ -2,7 +2,7 @@
  * @seashore/memory
  *
  * Memory management for seashore agents
- * Short-term, mid-term, and long-term memory with vector search
+ * Short-term and long-term memory with vector search
  */
 
 // Types
@@ -15,7 +15,6 @@ export type {
   MemoryStore,
   MemoryStats,
   ShortTermMemoryConfig,
-  MidTermMemoryConfig,
   LongTermMemoryConfig,
   MemoryManagerConfig,
   MemoryManager,
@@ -45,9 +44,6 @@ export {
 
 // Short-term memory
 export { ShortTermMemory, createShortTermMemory } from './short-term';
-
-// Mid-term memory
-export { MidTermMemory, createMidTermMemory } from './mid-term';
 
 // Long-term memory
 export { LongTermMemory, createLongTermMemory } from './long-term';

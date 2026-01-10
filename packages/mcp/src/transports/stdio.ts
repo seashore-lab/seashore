@@ -35,7 +35,7 @@ interface JSONRPCNotification {
   params?: unknown;
 }
 
-type JSONRPCMessage = JSONRPCResponse | JSONRPCNotification;
+type JSONRPCMessage = JSONRPCRequest | JSONRPCResponse | JSONRPCNotification;
 
 /**
  * Pending request handler
@@ -171,31 +171,88 @@ export class StdioTransport {
     try {
       const message = JSON.parse(line) as JSONRPCMessage;
 
-      // Handle response
-      if ('id' in message && message.id !== undefined) {
+      // Check if it's a request from server (has id and method)
+      if ('id' in message && 'method' in message && message.id !== undefined) {
+        // This is a request from the server to the client
+        const request = message as JSONRPCRequest;
+        this.handleServerRequest(request);
+        return;
+      }
+
+      // Handle response from server
+      if ('id' in message && !('method' in message) && message.id !== undefined) {
         const pending = this.pendingRequests.get(message.id);
         if (pending) {
           clearTimeout(pending.timeout);
           this.pendingRequests.delete(message.id);
 
-          if ('error' in message && message.error) {
-            pending.reject(new MCPError(message.error.code, message.error.message));
+          const response = message as JSONRPCResponse;
+          if ('error' in response && response.error) {
+            pending.reject(new MCPError(response.error.code, response.error.message));
           } else {
-            pending.resolve(message.result);
+            pending.resolve(response.result);
           }
         }
         return;
       }
 
-      // Handle notification
-      if ('method' in message) {
-        const handler = this.notificationHandlers.get(message.method);
+      // Handle notification from server
+      if ('method' in message && !('id' in message)) {
+        const notification = message as JSONRPCNotification;
+        const handler = this.notificationHandlers.get(notification.method);
         if (handler) {
-          handler(message.params);
+          handler(notification.params);
         }
       }
     } catch {
       // Ignore parse errors for non-JSON lines
+    }
+  }
+
+  /**
+   * Handle requests from server to client
+   */
+  private handleServerRequest(request: JSONRPCRequest): void {
+    // Handle known server-to-client requests
+    if (request.method === 'roots/list') {
+      // Respond with empty roots list
+      this.sendResponse(request.id, { roots: [] });
+    } else {
+      // Send error for unknown methods
+      this.sendError(request.id, -32601, `Method not found: ${request.method}`);
+    }
+  }
+
+  /**
+   * Send a JSON-RPC response
+   */
+  private sendResponse(id: number, result: unknown): void {
+    const response: JSONRPCResponse = {
+      jsonrpc: '2.0',
+      id,
+      result,
+    };
+
+    if (this.process?.stdin?.writable) {
+      this.process.stdin.write(JSON.stringify(response) + '\n');
+    }
+  }
+
+  /**
+   * Send a JSON-RPC error response
+   */
+  private sendError(id: number, code: number, message: string): void {
+    const response: JSONRPCResponse = {
+      jsonrpc: '2.0',
+      id,
+      error: {
+        code,
+        message,
+      },
+    };
+
+    if (this.process?.stdin?.writable) {
+      this.process.stdin.write(JSON.stringify(response) + '\n');
     }
   }
 
@@ -296,7 +353,42 @@ export class StdioTransport {
     this.readline = null;
 
     if (this.process) {
-      this.process.kill('SIGTERM');
+      // Close stdin to signal graceful shutdown
+      this.process.stdin?.end();
+
+      // Wait a bit for graceful shutdown, then force kill if needed
+      const killTimeout = setTimeout(() => {
+        if (this.process && !this.process.killed) {
+          this.process.kill('SIGKILL');
+        }
+      }, 1000);
+
+      // Clean up on process exit
+      this.process.once('exit', () => {
+        clearTimeout(killTimeout);
+      });
+
+      // Try graceful shutdown first
+      if (!this.process.killed) {
+        this.process.kill('SIGTERM');
+      }
+
+      // Wait a short time for process to exit
+      await new Promise<void>((resolve) => {
+        const checkInterval = setInterval(() => {
+          if (!this.process || this.process.killed || this.process.exitCode !== null) {
+            clearInterval(checkInterval);
+            resolve();
+          }
+        }, 50);
+
+        // Max wait 1.5 seconds
+        setTimeout(() => {
+          clearInterval(checkInterval);
+          resolve();
+        }, 1500);
+      });
+
       this.process = null;
     }
   }

@@ -1,13 +1,13 @@
 /**
  * @seashore/memory - Type Definitions
  *
- * Types for agent memory system (short/mid/long-term)
+ * Types for agent memory system (short-term/long-term)
  */
 
 /**
  * Memory entry types
  */
-export type MemoryType = 'short' | 'mid' | 'long';
+export type MemoryType = 'short' | 'long';
 
 /**
  * Memory entry stored in the system
@@ -189,7 +189,6 @@ export interface MemoryStats {
   totalCount: number;
   byType: {
     short: number;
-    mid: number;
     long: number;
   };
   avgImportance: number;
@@ -208,33 +207,11 @@ export interface ShortTermMemoryConfig {
   maxEntries?: number;
 
   /**
-   * TTL in milliseconds (default: 1 hour)
-   * @default 3600000
+   * Maximum tokens to keep in memory
+   * When exceeded, oldest/least important messages are removed
+   * @default undefined (no token limit)
    */
-  ttlMs?: number;
-}
-
-/**
- * Mid-term memory configuration
- */
-export interface MidTermMemoryConfig {
-  /**
-   * Maximum number of entries to keep
-   * @default 100
-   */
-  maxEntries?: number;
-
-  /**
-   * TTL in milliseconds (default: 24 hours)
-   * @default 86400000
-   */
-  ttlMs?: number;
-
-  /**
-   * Minimum importance to promote from short-term
-   * @default 0.5
-   */
-  promotionThreshold?: number;
+  maxTokens?: number;
 }
 
 /**
@@ -248,10 +225,10 @@ export interface LongTermMemoryConfig {
   maxEntries?: number;
 
   /**
-   * Minimum importance to promote from mid-term
+   * Minimum importance to persist to long-term storage
    * @default 0.7
    */
-  promotionThreshold?: number;
+  importanceThreshold?: number;
 
   /**
    * Enable vector search for long-term memory
@@ -283,11 +260,6 @@ export interface MemoryManagerConfig {
    * Short-term memory config
    */
   shortTerm?: ShortTermMemoryConfig;
-
-  /**
-   * Mid-term memory config
-   */
-  midTerm?: MidTermMemoryConfig;
 
   /**
    * Long-term memory config

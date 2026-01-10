@@ -4,8 +4,8 @@ import type { MemoryEntry, MemoryType, MemoryStats, ConsolidationResult } from '
 describe('@seashore/memory', () => {
   describe('Memory Types', () => {
     it('should define correct memory types', () => {
-      const types: MemoryType[] = ['short', 'mid', 'long'];
-      expect(types).toHaveLength(3);
+      const types: MemoryType[] = ['short', 'long'];
+      expect(types).toHaveLength(2);
     });
 
     it('should have correct MemoryEntry structure', () => {
@@ -65,59 +65,6 @@ describe('@seashore/memory', () => {
       entry.lastAccessedAt = new Date();
 
       expect(entry.accessCount).toBe(1);
-    });
-
-    it('should expire memories based on TTL', () => {
-      const ttlMs = 3600000; // 1 hour
-      const now = Date.now();
-      const oldMemory = new Date(now - ttlMs - 1000); // Just expired
-      const newMemory = new Date(now - ttlMs + 1000); // Not expired yet
-
-      const isExpired = (created: Date) => Date.now() - created.getTime() > ttlMs;
-
-      expect(isExpired(oldMemory)).toBe(true);
-      expect(isExpired(newMemory)).toBe(false);
-    });
-  });
-
-  describe('Mid-Term Memory', () => {
-    it('should support promotion threshold', () => {
-      const promotionThreshold = 0.5;
-      const memories: MemoryEntry[] = [
-        {
-          id: '1',
-          agentId: 'a',
-          type: 'short',
-          content: '',
-          importance: 0.3,
-          createdAt: new Date(),
-          lastAccessedAt: new Date(),
-          accessCount: 0,
-        },
-        {
-          id: '2',
-          agentId: 'a',
-          type: 'short',
-          content: '',
-          importance: 0.7,
-          createdAt: new Date(),
-          lastAccessedAt: new Date(),
-          accessCount: 0,
-        },
-        {
-          id: '3',
-          agentId: 'a',
-          type: 'short',
-          content: '',
-          importance: 0.5,
-          createdAt: new Date(),
-          lastAccessedAt: new Date(),
-          accessCount: 0,
-        },
-      ];
-
-      const candidates = memories.filter((m) => m.importance >= promotionThreshold);
-      expect(candidates).toHaveLength(2);
     });
   });
 

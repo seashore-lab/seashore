@@ -113,22 +113,16 @@ const memoryManager = createMemoryManager({
   db: database,
   embeddingAdapter: openaiEmbed('text-embedding-3-small'),
 
-  // 短期记忆配置
+  // 短期记忆配置（会话缓冲）
   shortTerm: {
-    ttlMs: 1000 * 60 * 30, // 30 分钟
     maxEntries: 100,
   },
 
-  // 中期记忆配置
-  midTerm: {
-    ttlMs: 1000 * 60 * 60 * 24, // 24 小时
-    maxEntries: 500,
-  },
-
-  // 长期记忆配置
+  // 长期记忆配置（知识库）
   longTerm: {
+    maxEntries: 1000,
     importanceThreshold: 0.7, // 只保存重要记忆
-    consolidationInterval: 1000 * 60 * 60, // 每小时整合
+    enableVectorSearch: true, // 启用语义搜索
   },
 })
 ```
@@ -432,14 +426,14 @@ export interface MemoryConfig {
   db: Database
   embeddingAdapter: EmbeddingAdapter
   shortTerm?: {
-    ttlMs?: number
     maxEntries?: number
-  }
-  midTerm?: {
-    ttlMs?: number
-    maxEntries?: number
+    maxTokens?: number
   }
   longTerm?: {
+    maxEntries?: number
+    importanceThreshold?: number
+    enableVectorSearch?: boolean
+  }
     importanceThreshold?: number
     consolidationInterval?: number
   }

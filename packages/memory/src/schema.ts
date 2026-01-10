@@ -27,7 +27,7 @@ export const memories = pgTable(
       .$defaultFn(() => crypto.randomUUID()),
     agentId: text('agent_id').notNull(),
     threadId: text('thread_id'),
-    type: text('type', { enum: ['short', 'mid', 'long'] }).notNull(),
+    type: text('type', { enum: ['short', 'long'] }).notNull(),
     content: text('content').notNull(),
     importance: real('importance').notNull().default(0.5),
     embedding: jsonb('embedding').$type<number[]>(),

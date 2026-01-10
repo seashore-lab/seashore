@@ -65,7 +65,10 @@ It states that there is a logarithmic dependence between the transmission of lig
   // Step 3 - Create embeddings
   console.log('🔢 Step 3: Create embeddings');
   const embeddingFn = async (texts: readonly string[]): Promise<number[][]> => {
-    const embedder = openaiEmbed('text-embedding-3-small');
+    const embedder = openaiEmbed('text-embedding-3-small', 1536, {
+      baseURL: process.env.OPENAI_API_BASE_URL || 'https://api.openai.com/v1',
+      apiKey: process.env.OPENAI_API_KEY || '',
+    });
     const result = await generateBatchEmbeddings({
       adapter: embedder,
       input: texts,
@@ -89,7 +92,11 @@ It states that there is a logarithmic dependence between the transmission of lig
 
   for (const question of testQuestions) {
     console.log(`📝 Question: ${question}`);
-    const retrieved = await retriever.retrieve(question);
+    const retrieved = await retriever.retrieve(question, {
+      // Top K most relevant chunks to retrieve using vector similarity search
+      k: 3,
+      searchType: 'vector',
+    });
     console.log(`📋 Retrieved ${retrieved.length} relevant chunks`);
     if (retrieved.length > 0) {
       const preview = retrieved[0].content.slice(0, 80).replace(/\n/g, ' ');
@@ -101,3 +108,32 @@ It states that there is a logarithmic dependence between the transmission of lig
 }
 
 main().catch(console.error);
+
+// [Example 04: RAG Knowledge Base]
+
+// 📚 Step 1: Load documents
+//    Loaded 1 documents
+
+// ✂️ Step 2: Split documents
+//    Split into 6 chunks
+
+// 📄 Split preview:
+//    1. "# Photonelectric Effect..."
+//    2. "# Photonelectric Effect  tonelectric Effect  The photoelectr..."
+//    3. "# Compton Scattering..."
+// 🔢 Step 3: Create embeddings
+
+// 🔍 Step 4: Create in-memory retriever
+//    Documents added to retriever
+
+// --- Test retrieval ---
+
+// 📝 Question: What is the Photoelectric Effect?
+// 📋 Retrieved 4 relevant chunks
+//    Most relevant: "# Photonelectric Effect  tonelectric Effect  The photoelectric effect is the emi..."
+//    Similarity: 72.9%
+
+// 📝 Question: How's Beer-Lambert law related to Photonelectric Effect and Compton scattering?
+// 📋 Retrieved 4 relevant chunks
+//    Most relevant: "# Beer-Lambert Law  # Beer-Lambert Law  The Beer-Lambert law relates the absorpt..."
+//    Similarity: 69.3%

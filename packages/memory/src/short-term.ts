@@ -11,7 +11,6 @@ import type { MemoryEntry, NewMemoryEntry, ShortTermMemoryConfig } from './types
  */
 const DEFAULT_CONFIG: Required<ShortTermMemoryConfig> = {
   maxEntries: 10,
-  ttlMs: 3600000, // 1 hour
 };
 
 /**
@@ -177,41 +176,12 @@ export class ShortTermMemory {
 
     for (const id of agentIds) {
       const entry = this.entries.get(id);
-      if (
-        entry &&
-        !this.isExpired(entry) &&
-        (entry.importance >= minImportance || entry.accessCount >= 3)
-      ) {
+      if (entry && (entry.importance >= minImportance || entry.accessCount >= 3)) {
         candidates.push(entry);
       }
     }
 
     return candidates;
-  }
-
-  /**
-   * Get expired entries for cleanup
-   */
-  public getExpiredEntries(agentId: string): readonly MemoryEntry[] {
-    const agentIds = this.agentIndex.get(agentId) ?? new Set();
-    const expired: MemoryEntry[] = [];
-
-    for (const id of agentIds) {
-      const entry = this.entries.get(id);
-      if (entry && this.isExpired(entry)) {
-        expired.push(entry);
-      }
-    }
-
-    return expired;
-  }
-
-  /**
-   * Check if entry is expired
-   */
-  private isExpired(entry: MemoryEntry): boolean {
-    const age = Date.now() - entry.createdAt.getTime();
-    return age > this.config.ttlMs;
   }
 
   /**
@@ -226,8 +196,8 @@ export class ShortTermMemory {
     for (const id of agentIds) {
       const entry = this.entries.get(id);
       if (entry) {
-        // Score based on importance and recency
-        const recency = 1 - (Date.now() - entry.createdAt.getTime()) / this.config.ttlMs;
+        // Score based on importance and recency (using 1 hour as baseline for recency)
+        const recency = 1 - (Date.now() - entry.createdAt.getTime()) / 3600000;
         const score = entry.importance * 0.7 + Math.max(0, recency) * 0.3;
         entries.push({ id, score });
       }
@@ -244,13 +214,12 @@ export class ShortTermMemory {
   }
 
   /**
-   * Cleanup expired entries
+   * Cleanup old entries based on maxEntries limit per agent
    */
   private cleanup(): void {
-    for (const [id, entry] of this.entries) {
-      if (this.isExpired(entry)) {
-        this.delete(id);
-      }
+    // Enforce max entries for each agent
+    for (const agentId of this.agentIndex.keys()) {
+      this.enforceLimit(agentId);
     }
   }
 
@@ -267,7 +236,7 @@ export class ShortTermMemory {
 
     for (const id of agentIds) {
       const entry = this.entries.get(id);
-      if (entry && !this.isExpired(entry)) {
+      if (entry) {
         totalImportance += entry.importance;
         count++;
       }
