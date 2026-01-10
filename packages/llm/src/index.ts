@@ -16,10 +16,6 @@ export type {
   StreamChunkType,
   TextAdapter,
   AnyTextAdapter,
-  TextAdapterConfig,
-  OpenAIAdapterConfig,
-  AnthropicAdapterConfig,
-  GeminiAdapterConfig,
   ImageAdapter,
   VideoAdapter,
   TranscriptionAdapter,
@@ -40,25 +36,28 @@ export type {
   EmbeddingOptions,
 } from './types';
 
+// Constants
+export { OPENAI_DEFAULT_BASE_URL, GEMINI_DEFAULT_BASE_URL } from './types';
+
 // Utility functions
 export { isChatMessage, filterChatMessages } from './types';
 
 // Text adapters (re-exports from @tanstack/ai-*)
-export {
-  openaiText,
-  anthropicText,
-  geminiText,
-  chat,
-  toStreamResponse,
-  createTextAdapter,
-  createOpenAIAdapter,
-  createAnthropicAdapter,
-  createGeminiAdapter,
-  DEFAULT_MODELS,
-} from './adapters';
+export { openaiText, anthropicText, geminiText, chat } from './adapters';
+
+// Model constants for type hints
+export { OPENAI_CHAT_MODELS } from '@tanstack/ai-openai';
+// Note: ANTHROPIC_MODELS is not exported by @tanstack/ai-anthropic, use Parameters<typeof createAnthropicChat>[0] for type extraction
+export { GeminiTextModels as GEMINI_MODELS } from '@tanstack/ai-gemini';
 
 // Embedding adapters
-export { openaiEmbed, geminiEmbed, generateEmbedding, generateBatchEmbeddings } from './embedding';
+export {
+  openaiEmbed,
+  geminiEmbed,
+  generateEmbedding,
+  generateBatchEmbeddings,
+  type EmbeddingAdapterOptions,
+} from './embedding';
 
 // Multimodal adapters
 export {
@@ -77,6 +76,8 @@ export {
   openaiTTS,
   geminiTTS,
   generateSpeech,
+  // Types
+  type MultimodalAdapterOptions,
 } from './multimodal';
 
 // Stream utilities
@@ -102,21 +103,6 @@ export {
   type StructuredOutputOptions,
   type StructuredResult,
 } from './structured';
-
-// Provider options
-export {
-  normalizeOptions,
-  getDefaultOptions,
-  mergeWithDefaults,
-  validateOptions,
-  getModelCapabilities,
-  type BaseChatOptions,
-  type OpenAIChatOptions,
-  type AnthropicChatOptions,
-  type GeminiChatOptions,
-  type ProviderChatOptions,
-  type ModelCapabilities,
-} from './options';
 
 // Retry and rate limiting
 export {

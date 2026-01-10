@@ -130,57 +130,23 @@ export type AnyTextAdapter = TanstackAnyTextAdapter;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Tool = TanstackTool<any, any, any>;
 
-/**
- * Base configuration shared by all providers
- */
-interface BaseAdapterConfig {
-  /**
-   * The model ID to use (e.g., 'gpt-4', 'claude-3-opus')
-   */
-  readonly model: string;
-
-  /**
-   * API Key for the provider.
-   * If not provided, the adapter will attempt to load it from environment variables.
-   */
-  readonly apiKey?: string;
-}
+// =============================================================================
+// Default Base URLs
+// =============================================================================
 
 /**
- * Configuration for OpenAI provider
+ * Default base URL for OpenAI API
  */
-export interface OpenAIAdapterConfig extends BaseAdapterConfig {
-  readonly provider: 'openai';
-
-  /**
-   * Organization ID (optional)
-   */
-  readonly organization?: string;
-
-  /**
-   * Base URL for the API (e.g., for local proxies or compatible endpoints)
-   */
-  readonly baseURL?: string;
-}
+export const OPENAI_DEFAULT_BASE_URL = 'https://api.openai.com/v1';
 
 /**
- * Configuration for Anthropic provider
+ * Default base URL for Gemini API
  */
-export interface AnthropicAdapterConfig extends BaseAdapterConfig {
-  readonly provider: 'anthropic';
-}
+export const GEMINI_DEFAULT_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta';
 
-/**
- * Configuration for Gemini provider
- */
-export interface GeminiAdapterConfig extends BaseAdapterConfig {
-  readonly provider: 'gemini';
-}
-
-/**
- * Union of all supported adapter configurations
- */
-export type TextAdapterConfig = OpenAIAdapterConfig | AnthropicAdapterConfig | GeminiAdapterConfig;
+// =============================================================================
+// Multimodal Adapter Interfaces
+// =============================================================================
 
 /**
  * Image generation adapter interface
@@ -188,6 +154,16 @@ export type TextAdapterConfig = OpenAIAdapterConfig | AnthropicAdapterConfig | G
 export interface ImageAdapter {
   readonly provider: 'openai' | 'gemini';
   readonly model: string;
+  /**
+   * API Key for the provider.
+   * If not provided, the adapter will attempt to load it from environment variables.
+   */
+  readonly apiKey?: string;
+  /**
+   * Base URL for the API endpoint.
+   * Use this for local proxies, enterprise deployments, or compatible third-party APIs.
+   */
+  readonly baseURL?: string;
 }
 
 /**
@@ -196,6 +172,16 @@ export interface ImageAdapter {
 export interface VideoAdapter {
   readonly provider: 'openai';
   readonly model: string;
+  /**
+   * API Key for the provider.
+   * If not provided, the adapter will attempt to load it from environment variables.
+   */
+  readonly apiKey?: string;
+  /**
+   * Base URL for the API endpoint.
+   * Use this for local proxies, enterprise deployments, or compatible third-party APIs.
+   */
+  readonly baseURL?: string;
 }
 
 /**
@@ -204,6 +190,16 @@ export interface VideoAdapter {
 export interface TranscriptionAdapter {
   readonly provider: 'openai';
   readonly model: string;
+  /**
+   * API Key for the provider.
+   * If not provided, the adapter will attempt to load it from environment variables.
+   */
+  readonly apiKey?: string;
+  /**
+   * Base URL for the API endpoint.
+   * Use this for local proxies, enterprise deployments, or compatible third-party APIs.
+   */
+  readonly baseURL?: string;
 }
 
 /**
@@ -212,6 +208,16 @@ export interface TranscriptionAdapter {
 export interface TTSAdapter {
   readonly provider: 'openai' | 'gemini';
   readonly model: string;
+  /**
+   * API Key for the provider.
+   * If not provided, the adapter will attempt to load it from environment variables.
+   */
+  readonly apiKey?: string;
+  /**
+   * Base URL for the API endpoint.
+   * Use this for local proxies, enterprise deployments, or compatible third-party APIs.
+   */
+  readonly baseURL?: string;
 }
 
 /**
@@ -221,6 +227,16 @@ export interface EmbeddingAdapter {
   readonly provider: 'openai' | 'gemini';
   readonly model: string;
   readonly dimensions?: number | undefined;
+  /**
+   * API Key for the provider.
+   * If not provided, the adapter will attempt to load it from environment variables.
+   */
+  readonly apiKey?: string;
+  /**
+   * Base URL for the API endpoint.
+   * Use this for local proxies, enterprise deployments, or compatible third-party APIs.
+   */
+  readonly baseURL?: string;
 }
 
 /**

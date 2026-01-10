@@ -1,101 +1,67 @@
 /**
  * @seashore/llm - Text Adapters
  *
- * Re-exports text generation adapters from @tanstack/ai-*
+ * Text generation adapters with baseURL support for all providers
  */
 
-import { openaiText } from '@tanstack/ai-openai';
-import { anthropicText } from '@tanstack/ai-anthropic';
-import { geminiText } from '@tanstack/ai-gemini';
-
-// Re-export text adapters from @tanstack/ai-* packages
-// These are thin wrappers that configure the provider and model
-export { openaiText, anthropicText, geminiText };
+import { createOpenaiChat, OPENAI_CHAT_MODELS } from '@tanstack/ai-openai';
+import { createAnthropicChat } from '@tanstack/ai-anthropic';
+import { createGeminiChat, GeminiTextModels } from '@tanstack/ai-gemini';
 
 // Re-export core chat functions
-export { chat, toStreamResponse } from '@tanstack/ai';
-
-// Type-safe adapter factory functions for internal use
-import type { TextAdapter, TextAdapterConfig } from './types';
+export { chat } from '@tanstack/ai';
 
 /**
- * Create a text adapter from configuration
+ * Create an OpenAI text adapter with custom configuration
+ * @param model - Model ID (e.g., 'gpt-4o'). Supports type hints for known models and custom strings.
+ * @param options - Configuration options including apiKey, baseURL, and organization
  */
-export function createTextAdapter(config: TextAdapterConfig): TextAdapter {
-  switch (config.provider) {
-    case 'openai':
-      return openaiText(
-        {
-          apiKey: config.apiKey,
-          organization: config.organization,
-          baseURL: config.baseURL,
-        },
-        config.model
-      );
-    case 'anthropic':
-      return anthropicText(
-        {
-          apiKey: config.apiKey,
-        },
-        config.model
-      );
-    case 'gemini':
-      return geminiText(
-        {
-          apiKey: config.apiKey,
-        },
-        config.model
-      );
+export function openaiText(
+  model: (typeof OPENAI_CHAT_MODELS)[number] | (string & {}),
+  options?: {
+    apiKey?: string;
+    baseURL?: string;
+    organization?: string;
   }
+): any {
+  return createOpenaiChat(model as any, options?.apiKey ?? process.env.OPENAI_API_KEY ?? '', {
+    baseURL: options?.baseURL,
+    organization: options?.organization,
+  });
 }
 
 /**
- * Create an OpenAI text adapter config
+ * Create an Anthropic text adapter with custom configuration
+ * Uses createAnthropicChat for baseURL support
+ * @param model - Model ID (e.g., 'claude-sonnet-4'). Supports type hints for known models and custom strings.
+ * @param options - Configuration options including apiKey and baseURL
  */
-export function createOpenAIAdapter(
-  model: string,
-  options?: { apiKey?: string; organization?: string; baseURL?: string }
-): TextAdapterConfig {
-  return {
-    provider: 'openai',
-    model,
-    ...options,
-  };
+export function anthropicText(
+  model: Parameters<typeof createAnthropicChat>[0] | (string & {}),
+  options?: {
+    apiKey?: string;
+    baseURL?: string;
+  }
+): any {
+  return createAnthropicChat(model as any, options?.apiKey ?? process.env.ANTHROPIC_API_KEY ?? '', {
+    baseURL: options?.baseURL,
+  });
 }
 
 /**
- * Create an Anthropic text adapter config
+ * Create a Gemini text adapter with custom configuration
+ * Uses createGeminiChat for baseURL support
+ * @param model - Model ID (e.g., 'gemini-2.0-flash'). Supports type hints for known models and custom strings.
+ * @param options - Configuration options including apiKey and baseURL
  */
-export function createAnthropicAdapter(
-  model: string,
-  options?: { apiKey?: string }
-): TextAdapterConfig {
-  return {
-    provider: 'anthropic',
-    model,
-    ...options,
-  };
+export function geminiText(
+  model: (typeof GeminiTextModels)[number] | (string & {}),
+  options?: {
+    apiKey?: string;
+    baseURL?: string;
+  }
+): any {
+  return createGeminiChat(model as any, options?.apiKey ?? process.env.GEMINI_API_KEY ?? '', {
+    baseURL: options?.baseURL,
+  });
 }
-
-/**
- * Create a Gemini text adapter config
- */
-export function createGeminiAdapter(
-  model: string,
-  options?: { apiKey?: string }
-): TextAdapterConfig {
-  return {
-    provider: 'gemini',
-    model,
-    ...options,
-  };
-}
-
-/**
- * Default model configurations
- */
-export const DEFAULT_MODELS = {
-  openai: 'gpt-4o',
-  anthropic: 'claude-3-5-sonnet-20241022',
-  gemini: 'gemini-2.0-flash',
-} as const;

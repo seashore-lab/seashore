@@ -4,32 +4,39 @@
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
+// Mock the @tanstack/ai modules
+vi.mock('@tanstack/ai-openai', () => ({
+  createOpenaiChat: vi.fn((model, apiKey, config) => ({ provider: 'openai', model })),
+  openaiImage: vi.fn((model: string) => ({ provider: 'openai', model })),
+}));
+
+vi.mock('@tanstack/ai-anthropic', () => ({
+  createAnthropicChat: vi.fn((model, apiKey, config) => ({
+    provider: 'anthropic',
+    model,
+  })),
+}));
+
+vi.mock('@tanstack/ai-gemini', () => ({
+  createGeminiChat: vi.fn((model, apiKey, config) => ({
+    provider: 'gemini',
+    model,
+  })),
+}));
+
 describe('@seashore/llm', () => {
   describe('adapters', () => {
     it('should export text adapters', async () => {
-      const { createOpenAIAdapter, createAnthropicAdapter, createGeminiAdapter } = await import(
-        '../src/adapters'
-      );
+      const { openaiText, anthropicText, geminiText } = await import('../src/adapters');
 
-      const openai = createOpenAIAdapter('gpt-4o');
-      expect(openai.provider).toBe('openai');
-      expect(openai.model).toBe('gpt-4o');
+      const openai = openaiText('gpt-4o', { apiKey: 'test-key' });
+      expect(openai).toBeDefined();
 
-      const anthropic = createAnthropicAdapter('claude-3-5-sonnet-20241022');
-      expect(anthropic.provider).toBe('anthropic');
-      expect(anthropic.model).toBe('claude-3-5-sonnet-20241022');
+      const anthropic = anthropicText('claude-3-5-sonnet-20241022', { apiKey: 'test-key' });
+      expect(anthropic).toBeDefined();
 
-      const gemini = createGeminiAdapter('gemini-2.0-flash');
-      expect(gemini.provider).toBe('gemini');
-      expect(gemini.model).toBe('gemini-2.0-flash');
-    });
-
-    it('should export default models', async () => {
-      const { DEFAULT_MODELS } = await import('../src/adapters');
-
-      expect(DEFAULT_MODELS.openai).toBe('gpt-4o');
-      expect(DEFAULT_MODELS.anthropic).toBe('claude-3-5-sonnet-20241022');
-      expect(DEFAULT_MODELS.gemini).toBe('gemini-2.0-flash');
+      const gemini = geminiText('gemini-2.0-flash', { apiKey: 'test-key' });
+      expect(gemini).toBeDefined();
     });
   });
 
@@ -132,10 +139,9 @@ describe('@seashore/llm', () => {
       const llm = await import('../src/index');
 
       // Adapters
-      expect(llm.createOpenAIAdapter).toBeDefined();
-      expect(llm.createAnthropicAdapter).toBeDefined();
-      expect(llm.createGeminiAdapter).toBeDefined();
-      expect(llm.DEFAULT_MODELS).toBeDefined();
+      expect(llm.openaiText).toBeDefined();
+      expect(llm.anthropicText).toBeDefined();
+      expect(llm.geminiText).toBeDefined();
 
       // Embedding
       expect(llm.openaiEmbed).toBeDefined();

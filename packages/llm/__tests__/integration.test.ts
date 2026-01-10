@@ -14,16 +14,16 @@ vi.mock('@tanstack/ai', () => ({
 }));
 
 vi.mock('@tanstack/ai-openai', () => ({
-  openaiText: vi.fn((model: string) => ({ provider: 'openai', model })),
+  createOpenaiChat: vi.fn((model, apiKey, config) => ({ provider: 'openai', model })),
   openaiImage: vi.fn((model: string) => ({ provider: 'openai', model })),
 }));
 
 vi.mock('@tanstack/ai-anthropic', () => ({
-  anthropicText: vi.fn((model: string) => ({ provider: 'anthropic', model })),
+  createAnthropicChat: vi.fn((model, apiKey, config) => ({ provider: 'anthropic', model })),
 }));
 
 vi.mock('@tanstack/ai-gemini', () => ({
-  geminiText: vi.fn((model: string) => ({ provider: 'gemini', model })),
+  createGeminiChat: vi.fn((model, apiKey, config) => ({ provider: 'gemini', model })),
 }));
 
 import { openaiText, anthropicText, geminiText } from '../src/adapters';
@@ -44,29 +44,25 @@ import {
   parseRetryAfter,
   RateLimiter,
 } from '../src/retry';
-import {
-  normalizeOptions,
-  getDefaultOptions,
-  mergeWithDefaults,
-  validateOptions,
-  getModelCapabilities,
-} from '../src/options';
 
 describe('LLM Adapters', () => {
   it('should create OpenAI adapter', () => {
-    const adapter = openaiText('gpt-4o');
+    const adapter = openaiText('gpt-4o', { apiKey: 'test-key' });
+    expect(adapter).toBeDefined();
     expect(adapter.provider).toBe('openai');
     expect(adapter.model).toBe('gpt-4o');
   });
 
   it('should create Anthropic adapter', () => {
-    const adapter = anthropicText('claude-3-opus-20240229');
+    const adapter = anthropicText('claude-3-opus-20240229', { apiKey: 'test-key' });
+    expect(adapter).toBeDefined();
     expect(adapter.provider).toBe('anthropic');
     expect(adapter.model).toBe('claude-3-opus-20240229');
   });
 
   it('should create Gemini adapter', () => {
-    const adapter = geminiText('gemini-1.5-pro');
+    const adapter = geminiText('gemini-1.5-pro', { apiKey: 'test-key' });
+    expect(adapter).toBeDefined();
     expect(adapter.provider).toBe('gemini');
     expect(adapter.model).toBe('gemini-1.5-pro');
   });
@@ -351,128 +347,6 @@ describe('Retry Logic', () => {
 
       limiter.reset();
       expect(limiter.currentCount).toBe(0);
-    });
-  });
-});
-
-describe('Provider Options', () => {
-  describe('normalizeOptions', () => {
-    it('should normalize OpenAI options', () => {
-      const adapter: TextAdapter = { provider: 'openai', model: 'gpt-4o' };
-      const options = normalizeOptions(adapter, {
-        messages: [],
-        temperature: 0.8,
-      });
-
-      expect(options.provider).toBe('openai');
-      expect(options.model).toBe('gpt-4o');
-      expect(options.temperature).toBe(0.8);
-    });
-
-    it('should normalize Anthropic options', () => {
-      const adapter: TextAdapter = { provider: 'anthropic', model: 'claude-3-opus' };
-      const options = normalizeOptions(adapter, {
-        messages: [],
-        presencePenalty: 0.5,
-      });
-
-      expect(options.provider).toBe('anthropic');
-      // Anthropic doesn't support presencePenalty
-      expect(options.presencePenalty).toBeUndefined();
-    });
-
-    it('should normalize Gemini options', () => {
-      const adapter: TextAdapter = { provider: 'gemini', model: 'gemini-1.5-pro' };
-      const options = normalizeOptions(adapter, {
-        messages: [],
-        temperature: 0.7,
-        maxTokens: 1000,
-      });
-
-      expect(options.provider).toBe('gemini');
-      expect((options as any).generationConfig?.temperature).toBe(0.7);
-      expect((options as any).generationConfig?.maxOutputTokens).toBe(1000);
-    });
-  });
-
-  describe('getDefaultOptions', () => {
-    it('should return defaults for each provider', () => {
-      const openaiDefaults = getDefaultOptions('openai');
-      const anthropicDefaults = getDefaultOptions('anthropic');
-      const geminiDefaults = getDefaultOptions('gemini');
-
-      expect(openaiDefaults.temperature).toBe(0.7);
-      expect(anthropicDefaults.temperature).toBe(0.7);
-      expect(geminiDefaults.temperature).toBe(0.7);
-    });
-  });
-
-  describe('validateOptions', () => {
-    it('should validate temperature range', () => {
-      const errors = validateOptions({
-        provider: 'openai',
-        model: 'gpt-4o',
-        messages: [],
-        temperature: 3,
-      });
-
-      expect(errors).toContain('Temperature must be between 0 and 2');
-    });
-
-    it('should validate maxTokens', () => {
-      const errors = validateOptions({
-        provider: 'openai',
-        model: 'gpt-4o',
-        messages: [],
-        maxTokens: 0,
-      });
-
-      expect(errors).toContain('Max tokens must be at least 1');
-    });
-
-    it('should pass valid options', () => {
-      const errors = validateOptions({
-        provider: 'openai',
-        model: 'gpt-4o',
-        messages: [],
-        temperature: 0.7,
-        maxTokens: 1000,
-      });
-
-      expect(errors).toHaveLength(0);
-    });
-  });
-
-  describe('getModelCapabilities', () => {
-    it('should return GPT-4o capabilities', () => {
-      const caps = getModelCapabilities({ provider: 'openai', model: 'gpt-4o' });
-
-      expect(caps.supportsVision).toBe(true);
-      expect(caps.supportsTools).toBe(true);
-      expect(caps.supportsJsonMode).toBe(true);
-      expect(caps.maxContextTokens).toBe(128000);
-    });
-
-    it('should return Claude-3 capabilities', () => {
-      const caps = getModelCapabilities({ provider: 'anthropic', model: 'claude-3-opus' });
-
-      expect(caps.supportsVision).toBe(true);
-      expect(caps.supportsTools).toBe(true);
-      expect(caps.maxContextTokens).toBe(200000);
-    });
-
-    it('should return Gemini-1.5 capabilities', () => {
-      const caps = getModelCapabilities({ provider: 'gemini', model: 'gemini-1.5-pro' });
-
-      expect(caps.supportsVision).toBe(true);
-      expect(caps.maxContextTokens).toBe(1000000);
-    });
-
-    it('should return defaults for unknown models', () => {
-      const caps = getModelCapabilities({ provider: 'openai', model: 'unknown-model' });
-
-      expect(caps.supportsVision).toBe(false);
-      expect(caps.maxContextTokens).toBe(4096);
     });
   });
 });

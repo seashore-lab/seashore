@@ -203,17 +203,17 @@ importers:
   packages/llm:
     dependencies:
       '@tanstack/ai':
-        specifier: ^0.1.0
-        version: 0.1.0(@alcyone-labs/zod-to-json-schema@4.0.10(zod@4.2.1))(zod@4.2.1)
+        specifier: 0.2.2
+        version: 0.2.2
       '@tanstack/ai-anthropic':
-        specifier: ^0.1.0
-        version: 0.1.0(@tanstack/ai@0.1.0(@alcyone-labs/zod-to-json-schema@4.0.10(zod@4.2.1))(zod@4.2.1))(zod@4.2.1)
+        specifier: 0.2.0
+        version: 0.2.0(@tanstack/ai@0.2.2)(zod@4.2.1)
       '@tanstack/ai-gemini':
-        specifier: ^0.1.0
-        version: 0.1.0(@modelcontextprotocol/sdk@1.25.1(hono@4.11.3)(zod@4.2.1))(@tanstack/ai@0.1.0(@alcyone-labs/zod-to-json-schema@4.0.10(zod@4.2.1))(zod@4.2.1))(zod@4.2.1)
+        specifier: 0.3.2
+        version: 0.3.2(@modelcontextprotocol/sdk@1.25.1(hono@4.11.3)(zod@4.2.1))(@tanstack/ai@0.2.2)
       '@tanstack/ai-openai':
-        specifier: ^0.1.0
-        version: 0.1.1(@tanstack/ai@0.1.0(@alcyone-labs/zod-to-json-schema@4.0.10(zod@4.2.1))(zod@4.2.1))(ws@8.18.3)(zod@4.2.1)
+        specifier: 0.2.1
+        version: 0.2.1(@tanstack/ai@0.2.2)(ws@8.18.3)(zod@4.2.1)
     devDependencies:
       zod:
         specifier: ^4.0.5
@@ -396,11 +396,6 @@ importers:
         version: 3.2.4(@types/node@22.19.3)(jsdom@23.2.0)(tsx@4.21.0)(yaml@2.8.2)
 
 packages:
-
-  '@alcyone-labs/zod-to-json-schema@4.0.10':
-    resolution: {integrity: sha512-TFsSpAPToqmqmT85SGHXuxoCwEeK9zUDvn512O9aBVvWRhSuy+VvAXZkifzsdllD3ncF0ZjUrf4MpBwIEixdWQ==}
-    peerDependencies:
-      zod: ^4.0.5
 
   '@anthropic-ai/sdk@0.71.2':
     resolution: {integrity: sha512-TGNDEUuEstk/DKu0/TflXAEt+p+p/WhTlFzEnoosvbaDU2LTjm42igSdlL0VijrKpWejtOKxX0b8A7uc+XiSAQ==}
@@ -1960,30 +1955,26 @@ packages:
   '@sinclair/typebox@0.34.41':
     resolution: {integrity: sha512-6gS8pZzSXdyRHTIqoqSVknxolr1kzfy4/CeDnrzsVz8TTIWUbOBr6gnzOmTYJ3eXQNh4IYHIGi5aIL7sOZ2G/g==}
 
-  '@tanstack/ai-anthropic@0.1.0':
-    resolution: {integrity: sha512-7yJ/Z0jPuhhbhdtXCjy+TsgbXqU16ez+dm0Eei8aJc4EY+VSizQrSCLiaeSSJ7PMIXk2x23FaD1yLtKOwzRPqA==}
+  '@tanstack/ai-anthropic@0.2.0':
+    resolution: {integrity: sha512-52uwfHGmclhFQx+xOlaNnqLUfh1O1arcAIPlenzFp8infqgG9wVPwtDfvGRlr8zUkYlEKlXsZSpUxRbT21RYuA==}
     peerDependencies:
-      '@tanstack/ai': 0.1.0
+      '@tanstack/ai': ^0.2.0
       zod: ^4.0.5
 
-  '@tanstack/ai-gemini@0.1.0':
-    resolution: {integrity: sha512-/9d9k0b9oAK3M49TaoVcjJW977QOf6Le6aoO4oMHcdUTwMqwPa090FseNMXtrX4K5t6igIQ8i43uuIQ8T6naWg==}
+  '@tanstack/ai-gemini@0.3.2':
+    resolution: {integrity: sha512-5s4lcmGJAb8G7lKGxkn/8soDLn/+Ao5IEh+2ADmd9PTuyOrwgdAus5n3I672GYW4EI/i2eXcMuTxe50DGAsVnw==}
     peerDependencies:
-      '@tanstack/ai': 0.1.0
+      '@tanstack/ai': ^0.2.2
+
+  '@tanstack/ai-openai@0.2.1':
+    resolution: {integrity: sha512-MCD/WgJ7qZr/oWyik/zlsXzuO++np+Ag5l5n/5ZmX4mXc3R8Ga1qDeCt+/7RSSmxDJbogeGGn/0j6JpQLrLmRA==}
+    peerDependencies:
+      '@tanstack/ai': ^0.2.1
       zod: ^4.0.5
 
-  '@tanstack/ai-openai@0.1.1':
-    resolution: {integrity: sha512-n9fs52ed866VPls2JfAuIf5p1ei0G2rT2rB5G7a/18+9gl6impnA6YGlehDnVtgVLxOJ6AKGkr0RJ7mvte6u6g==}
-    peerDependencies:
-      '@tanstack/ai': 0.1.0
-      zod: ^4.0.5
-
-  '@tanstack/ai@0.1.0':
-    resolution: {integrity: sha512-qvosQxtF6h7b0NcFLJw3JN22UHquWnL99vV29nnxBxGxc1/hgBNdpk/xxUkhf+yLxafdVivi/RPtG4mRQ976LA==}
+  '@tanstack/ai@0.2.2':
+    resolution: {integrity: sha512-qqnUSKYMuJnGhiL6t8BAu3Joc9QhQTJIxUIWgQlObDhdY+dCJMLyv+Z7Zw+WqzCCjDfvWmHgLNWDI8+f3KkOPw==}
     engines: {node: '>=18'}
-    peerDependencies:
-      '@alcyone-labs/zod-to-json-schema': ^4.0.0
-      zod: ^4.0.5
 
   '@tanstack/devtools-event-client@0.4.0':
     resolution: {integrity: sha512-RPfGuk2bDZgcu9bAJodvO2lnZeHuz4/71HjZ0bGb/SPg8+lyTA+RLSKQvo7fSmPSi8/vcH3aKQ8EM9ywf1olaw==}
@@ -4635,10 +4626,6 @@ packages:
 
 snapshots:
 
-  '@alcyone-labs/zod-to-json-schema@4.0.10(zod@4.2.1)':
-    dependencies:
-      zod: 4.2.1
-
   '@anthropic-ai/sdk@0.71.2(zod@4.2.1)':
     dependencies:
       json-schema-to-ts: 3.1.1
@@ -6076,37 +6063,34 @@ snapshots:
 
   '@sinclair/typebox@0.34.41': {}
 
-  '@tanstack/ai-anthropic@0.1.0(@tanstack/ai@0.1.0(@alcyone-labs/zod-to-json-schema@4.0.10(zod@4.2.1))(zod@4.2.1))(zod@4.2.1)':
+  '@tanstack/ai-anthropic@0.2.0(@tanstack/ai@0.2.2)(zod@4.2.1)':
     dependencies:
       '@anthropic-ai/sdk': 0.71.2(zod@4.2.1)
-      '@tanstack/ai': 0.1.0(@alcyone-labs/zod-to-json-schema@4.0.10(zod@4.2.1))(zod@4.2.1)
+      '@tanstack/ai': 0.2.2
       zod: 4.2.1
 
-  '@tanstack/ai-gemini@0.1.0(@modelcontextprotocol/sdk@1.25.1(hono@4.11.3)(zod@4.2.1))(@tanstack/ai@0.1.0(@alcyone-labs/zod-to-json-schema@4.0.10(zod@4.2.1))(zod@4.2.1))(zod@4.2.1)':
+  '@tanstack/ai-gemini@0.3.2(@modelcontextprotocol/sdk@1.25.1(hono@4.11.3)(zod@4.2.1))(@tanstack/ai@0.2.2)':
     dependencies:
       '@google/genai': 1.34.0(@modelcontextprotocol/sdk@1.25.1(hono@4.11.3)(zod@4.2.1))
-      '@tanstack/ai': 0.1.0(@alcyone-labs/zod-to-json-schema@4.0.10(zod@4.2.1))(zod@4.2.1)
-      zod: 4.2.1
+      '@tanstack/ai': 0.2.2
     transitivePeerDependencies:
       - '@modelcontextprotocol/sdk'
       - bufferutil
       - supports-color
       - utf-8-validate
 
-  '@tanstack/ai-openai@0.1.1(@tanstack/ai@0.1.0(@alcyone-labs/zod-to-json-schema@4.0.10(zod@4.2.1))(zod@4.2.1))(ws@8.18.3)(zod@4.2.1)':
+  '@tanstack/ai-openai@0.2.1(@tanstack/ai@0.2.2)(ws@8.18.3)(zod@4.2.1)':
     dependencies:
-      '@tanstack/ai': 0.1.0(@alcyone-labs/zod-to-json-schema@4.0.10(zod@4.2.1))(zod@4.2.1)
+      '@tanstack/ai': 0.2.2
       openai: 6.15.0(ws@8.18.3)(zod@4.2.1)
       zod: 4.2.1
     transitivePeerDependencies:
       - ws
 
-  '@tanstack/ai@0.1.0(@alcyone-labs/zod-to-json-schema@4.0.10(zod@4.2.1))(zod@4.2.1)':
+  '@tanstack/ai@0.2.2':
     dependencies:
-      '@alcyone-labs/zod-to-json-schema': 4.0.10(zod@4.2.1)
       '@tanstack/devtools-event-client': 0.4.0
       partial-json: 0.1.7
-      zod: 4.2.1
 
   '@tanstack/devtools-event-client@0.4.0': {}
 

@@ -5,37 +5,10 @@
  */
 
 import type { ZodSchema } from 'zod';
-import type {
-  TextAdapter,
-  TextAdapterConfig,
-  OpenAIAdapterConfig,
-  AnthropicAdapterConfig,
-  GeminiAdapterConfig,
-} from '@seashore/llm';
+import type { TextAdapter } from '@seashore/llm';
 
 // Re-export adapter types for convenience
-export type {
-  TextAdapter,
-  TextAdapterConfig,
-  OpenAIAdapterConfig,
-  AnthropicAdapterConfig,
-  GeminiAdapterConfig,
-};
-
-/**
- * LLM adapter type: supports both TextAdapter objects and configuration objects
- *
- * @example Using a TextAdapter
- * ```typescript
- * adapter: openaiText('gpt-4o', { baseURL: 'https://api.example.com/v1' })
- * ```
- *
- * @example Using a config object (backward compatible)
- * ```typescript
- * adapter: { provider: 'openai', model: 'gpt-4o' }
- * ```
- */
-export type LLMAdapter = TextAdapter | TextAdapterConfig;
+export type { TextAdapter };
 
 /**
  * Tool interface (compatible with @seashore/tool)
@@ -133,13 +106,16 @@ export interface LLMNodeConfig {
   readonly name: string;
 
   /**
-   * LLM adapter
+   * LLM model adapter
    *
-   * Supports two forms:
-   * 1. TextAdapter object (e.g., openaiText('gpt-4o', { baseURL, apiKey }))
-   * 2. Config object (e.g., { provider: 'openai', model: 'gpt-4o' })
+   * Use a TextAdapter object created via openaiText(), anthropicText(), or geminiText()
+   *
+   * @example
+   * ```typescript
+   * model: openaiText('gpt-4o', { baseURL: 'https://api.example.com/v1', apiKey: 'sk-...' })
+   * ```
    */
-  readonly adapter: LLMAdapter;
+  readonly model: TextAdapter;
 
   /** Static prompt or dynamic prompt function */
   readonly prompt?: string | ((input: unknown, ctx: WorkflowContext) => string | Promise<string>);
@@ -271,6 +247,9 @@ export interface WorkflowContext {
 
   /** Abort signal */
   readonly signal?: AbortSignal;
+
+  /** Get node output with type safety */
+  getNodeOutput<T = unknown>(nodeName: string): T | undefined;
 }
 
 /**
@@ -339,6 +318,9 @@ export interface WorkflowExecutionResult<TOutput = unknown> {
 
   /** Workflow context at completion */
   readonly context?: WorkflowContext;
+
+  /** Get node output with type safety */
+  getNodeOutput<T = unknown>(nodeName: string): T | undefined;
 }
 
 /**
@@ -362,23 +344,88 @@ export interface WorkflowExecutionOptions {
 }
 
 /**
- * Workflow stream event types
+ * LLM token event data
  */
-export type WorkflowEventType =
-  | 'workflow_start'
-  | 'node_start'
-  | 'node_complete'
-  | 'node_error'
-  | 'workflow_complete'
-  | 'workflow_error';
+export interface LLMTokenEventData {
+  /** Node name that produced this token */
+  readonly nodeName: string;
+  /** Token delta content */
+  readonly delta: string;
+  /** Accumulated content so far */
+  readonly content: string;
+}
 
 /**
- * Workflow stream event
+ * Workflow stream event - discriminated union for type-safe event handling
  */
-export interface WorkflowEvent {
-  readonly type: WorkflowEventType;
-  readonly timestamp: number;
-  readonly data?: Record<string, unknown>;
+export type WorkflowEvent =
+  | {
+      readonly type: 'workflow_start';
+      readonly timestamp: number;
+      readonly data: {
+        readonly input: unknown;
+      };
+    }
+  | {
+      readonly type: 'node_start';
+      readonly timestamp: number;
+      readonly data: {
+        readonly nodeName: string;
+        readonly input: unknown;
+      };
+    }
+  | {
+      readonly type: 'node_complete';
+      readonly timestamp: number;
+      readonly data: {
+        readonly nodeName: string;
+        readonly output: unknown;
+      };
+    }
+  | {
+      readonly type: 'node_error';
+      readonly timestamp: number;
+      readonly data: {
+        readonly nodeName: string;
+        readonly error: unknown;
+      };
+    }
+  | {
+      readonly type: 'workflow_complete';
+      readonly timestamp: number;
+      readonly data: {
+        readonly output: unknown;
+      };
+    }
+  | {
+      readonly type: 'workflow_error';
+      readonly timestamp: number;
+      readonly data: {
+        readonly error: unknown;
+      };
+    }
+  | {
+      readonly type: 'llm_token';
+      readonly timestamp: number;
+      readonly data: LLMTokenEventData;
+    };
+
+/**
+ * Workflow stream event types (for convenience)
+ */
+export type WorkflowEventType = WorkflowEvent['type'];
+
+/**
+ * Token callback for streaming LLM nodes
+ */
+export type OnTokenCallback = (data: LLMTokenEventData) => void;
+
+/**
+ * Extended workflow context with streaming support
+ */
+export interface StreamingWorkflowContext extends WorkflowContext {
+  /** Callback for token-level streaming */
+  readonly onToken?: OnTokenCallback;
 }
 
 /**
