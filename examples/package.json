@@ -17,6 +17,11 @@
     "@seashore/evaluation": "workspace:*",
     "@seashore/observability": "workspace:*",
     "@seashore/deploy": "workspace:*",
+    "@seashore/storage": "workspace:*",
+    "@seashore/vectordb": "workspace:*",
+    "@testcontainers/postgresql": "^10.15.0",
+    "drizzle-orm": "^0.44.2",
+    "postgres": "^3.4.5",
     "zod": "^4.0.5"
   },
   "devDependencies": {
