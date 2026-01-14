@@ -399,7 +399,7 @@ export async function* executeWorkflowStream<TInput = unknown, TOutput = unknown
   // Track execution state
   const nodeExecutionOrder: string[] = [];
   let currentOutput: unknown = input;
-  let executionError: Error | null = null;
+  let executionError: unknown = null;
   let executionComplete = false;
 
   // Start async execution
@@ -513,7 +513,7 @@ export async function* executeWorkflowStream<TInput = unknown, TOutput = unknown
         data: { output: currentOutput },
       });
     } catch (error) {
-      executionError = error as Error;
+      executionError = error;
 
       // Emit workflow error event
       pushEvent({
@@ -557,9 +557,9 @@ export async function* executeWorkflowStream<TInput = unknown, TOutput = unknown
     }
 
     throw new WorkflowExecutionError(
-      executionError.message,
+      (executionError as Error).message,
       mutableContext.currentNode || 'unknown',
-      executionError,
+      executionError as Error,
       mutableContext.toContext()
     );
   }

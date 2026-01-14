@@ -11,7 +11,7 @@ import type { MemoryEntry, NewMemoryEntry, ShortTermMemoryConfig } from './types
  */
 const DEFAULT_CONFIG: Required<ShortTermMemoryConfig> = {
   maxEntries: 10,
-};
+} as Required<ShortTermMemoryConfig>;
 
 /**
  * In-memory short-term memory store
@@ -99,12 +99,6 @@ export class ShortTermMemory {
     const entry = this.entries.get(id);
     if (!entry) return null;
 
-    // Check if expired
-    if (this.isExpired(entry)) {
-      this.delete(id);
-      return null;
-    }
-
     // Update access
     entry.lastAccessedAt = new Date();
     entry.accessCount++;
@@ -153,7 +147,7 @@ export class ShortTermMemory {
 
     for (const id of ids) {
       const entry = this.entries.get(id);
-      if (entry && !this.isExpired(entry)) {
+      if (entry) {
         entries.push(entry);
       }
     }

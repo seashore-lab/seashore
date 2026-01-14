@@ -3,14 +3,6 @@
  *
  * This example demonstrates how to use Seashore's storage layer for persisting conversations.
  * It automatically spins up a PostgreSQL container using testcontainers for the demo.
- *
- * Features demonstrated:
- * - Automatic PostgreSQL container startup with testcontainers
- * - Database migrations and initialization
- * - Creating and managing threads (conversation containers)
- * - Persisting messages with automatic history tracking
- * - Using persistence middleware for auto-saving
- * - Querying conversation history
  */
 
 import 'dotenv/config';
@@ -276,3 +268,75 @@ async function main() {
 }
 
 main().catch(console.error);
+
+// [Example 12: Storage and Persistence]
+
+// --- Step 1: Start PostgreSQL Container ---
+
+//    🐳 Starting PostgreSQL container...
+//    This may take a moment on first run (downloading image)
+
+//    ✅ PostgreSQL container started
+//    📍 Connection: postgres://***@localhost:32769/seashore_demo
+
+// --- Step 2: Initialize Database ---
+
+//    ✅ Database connection healthy
+
+//    📦 Running database migrations...
+//    ✅ Database schema created
+
+// --- Step 3: Create Repositories ---
+
+//    ✅ Thread repository created
+//    ✅ Message repository created
+
+// --- Step 4: Create a Thread (Conversation Container) ---
+
+//    ✅ Created thread: a405fb0b-c36a-4abc-9931-16fcde4e00cd
+//       Title: Storage Demo Conversation
+//       Agent: storage-demo-agent
+
+// --- Step 5: Manual Message Persistence ---
+
+// 📝 User: Hello! Can you save a note titled "Meeting" with content "Discuss Q1 goals"?
+//    ✅ Saved user message: cc39dce4-ef65-44e7-8425-d1264d66a660
+//    📝 Saved note: "Meeting"
+// 🤖 Agent: Your note has been saved with the title "Meeting" and content "Discuss Q1 goals."
+//    ✅ Saved assistant message: 974ae240-8f21-4eae-94e7-80391f8429c4
+
+// --- Step 6: Automatic Persistence with Middleware ---
+
+//    ✅ Persistence middleware created
+
+// 📝 User: What notes did I save?
+//    ✅ Auto-saved message: b854feac-0e97-4cd8-a023-55f9234377d3 (user)
+// 🤖 Agent: I don’t have access to any previously saved notes or past interactions in this environment, so I can’t see notes you may have saved before.
+
+// If you tell me what you’d like to keep, I can save new notes for you going forward.
+//    ✅ Auto-saved message: f6c7ba39-dafa-47a5-b0a2-ffec8038b735 (assistant)
+
+// --- Step 7: Query Conversation History ---
+
+//    📚 Retrieved 4 messages from thread history:
+
+//    1. [user] Hello! Can you save a note titled "Meeting" with content "Di...
+//       ID: cc39dce4-ef65-44e7-8425-d1264d66a660 | Created: 2026-01-14T16:53:42.878Z
+//    2. [assistant] Your note has been saved with the title "Meeting" and conten...
+//       ID: 974ae240-8f21-4eae-94e7-80391f8429c4 | Created: 2026-01-14T16:53:47.045Z
+//    3. [user] What notes did I save?...
+//       ID: b854feac-0e97-4cd8-a023-55f9234377d3 | Created: 2026-01-14T16:53:47.065Z
+//    4. [assistant] I don’t have access to any previously saved notes or past in...
+//       ID: f6c7ba39-dafa-47a5-b0a2-ffec8038b735 | Created: 2026-01-14T16:53:49.056Z
+
+// --- Step 8: Thread Management ---
+
+//    📋 Found 1 threads for user 'demo-user':
+//       - Storage Demo Conversation (4 messages)
+
+//    ✅ Updated thread metadata: completed = true
+
+// --- Cleanup ---
+
+//    ✅ Database connection closed
+//    ✅ PostgreSQL container stopped

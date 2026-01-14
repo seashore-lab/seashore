@@ -4,7 +4,7 @@
  * Text generation adapters with baseURL support for all providers
  */
 
-import { createOpenaiChat, OPENAI_CHAT_MODELS } from '@tanstack/ai-openai';
+import { createOpenaiChat } from '@tanstack/ai-openai';
 import { createAnthropicChat } from '@tanstack/ai-anthropic';
 import { createGeminiChat, GeminiTextModels } from '@tanstack/ai-gemini';
 
@@ -17,7 +17,7 @@ export { chat } from '@tanstack/ai';
  * @param options - Configuration options including apiKey, baseURL, and organization
  */
 export function openaiText(
-  model: (typeof OPENAI_CHAT_MODELS)[number] | (string & {}),
+  model: Parameters<typeof createOpenaiChat>[0] | (string & {}),
   options?: {
     apiKey?: string;
     baseURL?: string;

@@ -232,13 +232,6 @@ class MemoryManagerImpl implements MemoryManager {
     });
     memories.push(...shortTerm);
 
-    // Get mid-term
-    const midTerm = await this.midTerm.queryByAgent(this.agentId, {
-      threadId,
-      limit: Math.ceil(maxMessages / 2),
-    });
-    memories.push(...midTerm);
-
     // Get relevant long-term memories if we have recent context
     if (includeLongTerm && memories.length > 0) {
       const recentContent = memories[0]?.content ?? '';

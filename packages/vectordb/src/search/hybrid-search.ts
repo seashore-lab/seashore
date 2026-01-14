@@ -60,16 +60,15 @@ export async function hybridSearch(
 
   const startTime = Date.now();
 
-  // Build base conditions
-  const baseConditions = [eq(documents.collectionId, collection.id)];
+  // Build WHERE clause conditions
+  const collectionCondition = sql`collection_id = ${collection.id}`;
+  const filterCondition =
+    filter && Object.keys(filter).length > 0
+      ? sql`AND metadata @> ${JSON.stringify(filter)}::jsonb`
+      : sql``;
 
-  if (filter && Object.keys(filter).length > 0) {
-    baseConditions.push(sql`${documents.metadata} @> ${JSON.stringify(filter)}::jsonb`);
-  }
-
-  const vectorLiteral = `[${embedding.join(',')}]::vector`;
-  // Distance expression is used in the raw SQL query below
-  const tsquery = sql`websearch_to_tsquery('english', ${query})`;
+  // Format embedding as PostgreSQL vector literal
+  const vectorLiteral = sql.raw(`'[${embedding.join(',')}]'::vector`);
 
   // Use a CTE-based approach for RRF fusion
   // This performs both searches and combines results
@@ -85,19 +84,21 @@ export async function hybridSearch(
     WITH vector_results AS (
       SELECT
         id,
-        ROW_NUMBER() OVER (ORDER BY embedding <=> ${sql.raw(vectorLiteral)}) as rank
+        ROW_NUMBER() OVER (ORDER BY embedding <=> ${vectorLiteral}) as rank
       FROM ${documents}
-      WHERE ${sql.raw(baseConditions.map((c) => `(${c.getSQL()})`).join(' AND '))}
+      WHERE ${collectionCondition}
+        ${filterCondition}
         AND embedding IS NOT NULL
       LIMIT ${limit * 2}
     ),
     text_results AS (
       SELECT
         id,
-        ROW_NUMBER() OVER (ORDER BY ts_rank_cd(search_vector, ${tsquery}) DESC) as rank
+        ROW_NUMBER() OVER (ORDER BY ts_rank_cd(search_vector, websearch_to_tsquery('english', ${query})) DESC) as rank
       FROM ${documents}
-      WHERE ${sql.raw(baseConditions.map((c) => `(${c.getSQL()})`).join(' AND '))}
-        AND search_vector @@ ${tsquery}
+      WHERE ${collectionCondition}
+        ${filterCondition}
+        AND search_vector @@ websearch_to_tsquery('english', ${query})
       LIMIT ${limit * 2}
     ),
     combined AS (
@@ -176,7 +177,8 @@ export async function hybridSearchLinear(
     baseConditions.push(sql`${documents.metadata} @> ${JSON.stringify(filter)}::jsonb`);
   }
 
-  const vectorLiteral = `[${embedding.join(',')}]::vector`;
+  // Format embedding as PostgreSQL vector literal
+  const vectorLiteral = sql.raw(`'[${embedding.join(',')}]'::vector`);
   const tsquery = sql`websearch_to_tsquery('english', ${query})`;
 
   // Combined scoring using linear combination
@@ -189,10 +191,9 @@ export async function hybridSearchLinear(
       content: documents.content,
       metadata: documents.metadata,
       createdAt: documents.createdAt,
-      vectorScore:
-        sql<number>`COALESCE(1 - (${documents.embedding} <=> ${sql.raw(vectorLiteral)}), 0)`.as(
-          'vector_score'
-        ),
+      vectorScore: sql<number>`COALESCE(1 - (${documents.embedding} <=> ${vectorLiteral}), 0)`.as(
+        'vector_score'
+      ),
       textScore: sql<number>`COALESCE(ts_rank_cd(${documents.searchVector}, ${tsquery}), 0)`.as(
         'text_score'
       ),
@@ -200,7 +201,7 @@ export async function hybridSearchLinear(
     .from(documents)
     .where(and(...baseConditions))
     .orderBy(
-      sql`(${vectorWeight} * COALESCE(1 - (${documents.embedding} <=> ${sql.raw(vectorLiteral)}), 0) + 
+      sql`(${vectorWeight} * COALESCE(1 - (${documents.embedding} <=> ${vectorLiteral}), 0) + 
           ${1 - vectorWeight} * COALESCE(ts_rank_cd(${documents.searchVector}, ${tsquery}), 0)) DESC`
     )
     .limit(limit);

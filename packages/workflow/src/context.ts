@@ -106,8 +106,6 @@ export function mergeContexts(...contexts: Partial<WorkflowContext>[]): Workflow
   const metadata: Record<string, unknown> = {};
   let executionPath: readonly string[] = [];
   let signal: AbortSignal | undefined;
-  let currentNode: string | undefined;
-  let loopState: WorkflowContext['loopState'];
 
   const merged: WorkflowContext = {
     nodeOutputs,

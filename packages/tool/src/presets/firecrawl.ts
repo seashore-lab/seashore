@@ -38,7 +38,7 @@ export interface FirecrawlResult {
  * Input schema for Firecrawl tool
  */
 const firecrawlInputSchema = z.object({
-  url: z.string().url().describe('URL of the webpage to scrape'),
+  url: z.string().describe('URL of the webpage to scrape (must be a valid HTTP/HTTPS URL)'),
   includeLinks: z.boolean().optional().describe('Whether to extract links from the page'),
 });
 

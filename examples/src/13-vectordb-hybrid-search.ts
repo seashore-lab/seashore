@@ -3,12 +3,6 @@
  *
  * This example demonstrates how to use Seashore's vector database for semantic search.
  * It automatically spins up a PostgreSQL container with pgvector extension.
- *
- * Features demonstrated:
- * - Automatic PostgreSQL + pgvector container startup
- * - Creating collections with HNSW indexing
- * - Adding documents with embeddings
- * - Hybrid search (combining vector + text search with RRF fusion)
  */
 
 import 'dotenv/config';
@@ -235,15 +229,6 @@ async function main() {
     console.log(`      Dimensions: ${collection.dimensions}`);
     console.log(`      Distance metric: ${collection.distanceMetric}`);
     console.log(`      Storage size: ${(stats.storageBytes / 1024 / 1024).toFixed(2)} MB\n`);
-
-    console.log('--- Summary ---\n');
-    console.log('✨ This example demonstrated:');
-    console.log('   1. Automatic PostgreSQL + pgvector container startup');
-    console.log('   2. Database schema initialization with migrations');
-    console.log('   3. Creating collections with HNSW indexing');
-    console.log('   4. Adding documents with embeddings');
-    console.log('   5. Hybrid search combining vector and text search');
-    console.log('   6. Reciprocal Rank Fusion (RRF) for result scoring\n');
   } finally {
     console.log('--- Cleanup ---\n');
 
@@ -262,3 +247,143 @@ async function main() {
 }
 
 main().catch(console.error);
+
+// [Example 13: Vector Database with Hybrid Search]
+
+// --- Step 1: Start PostgreSQL Container with pgvector ---
+
+//    🐳 Starting PostgreSQL container with pgvector extension...
+//    This may take a moment on first run (downloading image)
+
+//    ✅ PostgreSQL container started
+//    📍 Connection: postgres://***@localhost:32779/seashore_demo
+
+// --- Step 2: Initialize Database Schema ---
+
+//    ✅ Database connection healthy
+
+//    📦 Running storage migrations...
+//    ✅ Storage schema created
+
+//    📦 Running vectordb migrations...
+// {
+//   severity_local: 'NOTICE',
+//   severity: 'NOTICE',
+//   code: '42710',
+//   message: 'extension "uuid-ossp" already exists, skipping',
+//   file: 'extension.c',
+//   line: '1887',
+//   routine: 'CreateExtension'
+// }
+// {
+//   severity_local: 'NOTICE',
+//   severity: 'NOTICE',
+//   code: '00000',
+//   message: 'trigger "documents_search_vector_trigger" for relation "documents" does not exist, skipping',
+//   file: 'dropcmds.c',
+//   line: '528',
+//   routine: 'does_not_exist_skipping'
+// }
+// {
+//   severity_local: 'NOTICE',
+//   severity: 'NOTICE',
+//   code: '00000',
+//   message: 'trigger "update_collection_count_trigger" for relation "documents" does not exist, skipping',
+//   file: 'dropcmds.c',
+//   line: '528',
+//   routine: 'does_not_exist_skipping'
+// }
+//    ✅ Vector database schema created
+
+// --- Step 3: Setup Vector Store and Collection ---
+
+//    ✅ Collection created:
+//       Name: ai_knowledge
+//       Dimensions: 1536
+//       Distance Metric: cosine
+//       HNSW M: 16
+//       HNSW efConstruction: 64
+
+//    ✅ Vector store ready
+
+// --- Step 4: Add Documents with Embeddings ---
+
+//    📝 Generating embeddings and adding documents...
+//    ✅ Added 6 documents to vector store
+
+// --- Step 5: Hybrid Search (Vector + Full-Text with RRF) ---
+
+// 🔍 Query: "How do language models reduce hallucinations?"
+
+//    📊 Found 3 results:
+//    (Hybrid: Vector Similarity + Full-Text Search)
+
+//    1. RRF Score: 0.2%
+//       Topic: AI/ML
+//       Category: Techniques
+//       Preview: "Retrieval-Augmented Generation (RAG) combines information retrieval with text ge..."
+
+//    2. RRF Score: 0.1%
+//       Topic: NLP
+//       Category: Architecture
+//       Preview: "Transformers are a type of neural network architecture that revolutionized NLP. ..."
+
+//    3. RRF Score: 0.1%
+//       Topic: NLP
+//       Category: Introduction
+//       Preview: "Natural Language Processing (NLP) is a branch of AI that helps computers underst..."
+
+// 🔍 Query: "Explain transformer architecture for NLP"
+
+//    📊 Found 3 results:
+//    (Hybrid: Vector Similarity + Full-Text Search)
+
+//    1. RRF Score: 0.1%
+//       Topic: NLP
+//       Category: Architecture
+//       Preview: "Transformers are a type of neural network architecture that revolutionized NLP. ..."
+
+//    2. RRF Score: 0.1%
+//       Topic: NLP
+//       Category: Introduction
+//       Preview: "Natural Language Processing (NLP) is a branch of AI that helps computers underst..."
+
+//    3. RRF Score: 0.1%
+//       Topic: AI/ML
+//       Category: Architecture
+//       Preview: "Neural networks are computing systems inspired by biological neural networks tha..."
+
+// 🔍 Query: "What are vector databases used for?"
+
+//    📊 Found 3 results:
+//    (Hybrid: Vector Similarity + Full-Text Search)
+
+//    1. RRF Score: 0.2%
+//       Topic: Databases
+//       Category: Vector Search
+//       Preview: "Vector databases store data as high-dimensional vectors and enable similarity se..."
+
+//    2. RRF Score: 0.1%
+//       Topic: AI/ML
+//       Category: Techniques
+//       Preview: "Retrieval-Augmented Generation (RAG) combines information retrieval with text ge..."
+
+//    3. RRF Score: 0.1%
+//       Topic: AI/ML
+//       Category: Architecture
+//       Preview: "Neural networks are computing systems inspired by biological neural networks tha..."
+
+// --- Step 6: Collection Statistics ---
+
+//    📈 Collection Statistics:
+//       Collection name: ai_knowledge
+//       Total documents: 6
+//       Embedded documents: 6
+//       Dimensions: 1536
+//       Distance metric: cosine
+//       Storage size: 0.22 MB
+
+// --- Cleanup ---
+
+//    ✅ Database connection closed
+//    ✅ PostgreSQL container stopped

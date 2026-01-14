@@ -370,18 +370,22 @@ function createVectorStoreForCollection(
         .select({
           documentCount: sql<number>`count(*)`,
           embeddedCount: sql<number>`count(${documents.embedding})`,
-          avgEmbeddingSize: sql<number>`avg(array_length(${documents.embedding}, 1))`,
         })
         .from(documents)
         .where(eq(documents.collectionId, collection.id));
 
       const stats = result[0];
 
+      // Get table size for this collection's documents
+      const sizeResult = await db.execute<{ total_bytes: number }>(
+        sql`SELECT pg_total_relation_size('documents') as total_bytes`
+      );
+
       return {
         documentCount: Number(stats?.documentCount ?? 0),
         embeddedCount: Number(stats?.embeddedCount ?? 0),
-        avgEmbeddingSize: Number(stats?.avgEmbeddingSize ?? 0),
-        storageBytes: 0, // Would need pg_total_relation_size
+        dimensions: collection.dimensions,
+        storageBytes: Number(sizeResult[0]?.total_bytes ?? 0),
       };
     },
   };

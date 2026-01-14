@@ -45,8 +45,6 @@ export { isChatMessage, filterChatMessages } from './types';
 // Text adapters (re-exports from @tanstack/ai-*)
 export { openaiText, anthropicText, geminiText, chat } from './adapters';
 
-// Model constants for type hints
-export { OPENAI_CHAT_MODELS } from '@tanstack/ai-openai';
 // Note: ANTHROPIC_MODELS is not exported by @tanstack/ai-anthropic, use Parameters<typeof createAnthropicChat>[0] for type extraction
 export { GeminiTextModels as GEMINI_MODELS } from '@tanstack/ai-gemini';
 

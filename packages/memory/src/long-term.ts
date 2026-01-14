@@ -20,7 +20,7 @@ import type {
  */
 const DEFAULT_CONFIG: Required<LongTermMemoryConfig> = {
   maxEntries: 1000,
-  promotionThreshold: 0.7,
+  importanceThreshold: 0.7,
   enableVectorSearch: true,
 };
 

@@ -19,16 +19,16 @@ import type {
  * Distance function SQL based on metric
  */
 function getDistanceFunction(metric: string, embedding: EmbeddingVector) {
-  const vectorLiteral = `[${embedding.join(',')}]::vector`;
+  const vectorLiteral = sql.raw(`'[${embedding.join(',')}]'::vector`);
 
   switch (metric) {
     case 'euclidean':
-      return sql`${documents.embedding} <-> ${sql.raw(vectorLiteral)}`;
+      return sql`${documents.embedding} <-> ${vectorLiteral}`;
     case 'inner_product':
-      return sql`${documents.embedding} <#> ${sql.raw(vectorLiteral)}`;
+      return sql`${documents.embedding} <#> ${vectorLiteral}`;
     case 'cosine':
     default:
-      return sql`${documents.embedding} <=> ${sql.raw(vectorLiteral)}`;
+      return sql`${documents.embedding} <=> ${vectorLiteral}`;
   }
 }
 

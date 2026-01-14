@@ -9,7 +9,6 @@ import type {
   LLMNodeConfig,
   WorkflowContext,
   StreamingWorkflowContext,
-  OnTokenCallback,
 } from '../types';
 import type { ChatMessage } from '@seashore/llm';
 import { chat } from '@seashore/llm';
