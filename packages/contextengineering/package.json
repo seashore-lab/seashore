@@ -1,0 +1,41 @@
+{
+  "name": "@seashore/contextengineering",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Context engineering utilities for building high-quality LLM prompts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./presets": {
+      "import": "./dist/presets/index.js",
+      "types": "./dist/presets/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "context",
+    "prompt",
+    "llm",
+    "ai",
+    "agent",
+    "seashore",
+    "prompt-engineering",
+    "context-engineering"
+  ],
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {},
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false
+}

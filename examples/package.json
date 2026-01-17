@@ -19,6 +19,7 @@
     "@seashore/deploy": "workspace:*",
     "@seashore/storage": "workspace:*",
     "@seashore/vectordb": "workspace:*",
+    "@seashore/contextengineering": "workspace:*",
     "@testcontainers/postgresql": "^10.15.0",
     "drizzle-orm": "^0.44.2",
     "postgres": "^3.4.5",

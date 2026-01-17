@@ -94,7 +94,6 @@ async function main() {
       '../../packages/storage/drizzle/0000_initial.sql'
     );
     const storageMigrationSql = readFileSync(storageMigrationPath, 'utf-8');
-
     await client.unsafe(storageMigrationSql);
 
     console.log('   ✅ Storage schema created\n');
@@ -106,7 +105,6 @@ async function main() {
       '../../packages/vectordb/drizzle/0000_initial.sql'
     );
     const vectorMigrationSql = readFileSync(vectorMigrationPath, 'utf-8');
-
     await client.unsafe(vectorMigrationSql);
 
     console.log('   ✅ Vector database schema created\n');

@@ -45,6 +45,7 @@ export default defineConfig({
       '@seashore/evaluation': resolve(rootDir, 'packages/evaluation/src'),
       '@seashore/security': resolve(rootDir, 'packages/security/src'),
       '@seashore/deploy': resolve(rootDir, 'packages/deploy/src'),
+      '@seashore/contextengineering': resolve(rootDir, 'packages/contextengineering/src'),
     },
   },
 });

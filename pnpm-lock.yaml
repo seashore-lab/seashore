@@ -65,6 +65,9 @@ importers:
       '@seashore/agent':
         specifier: workspace:*
         version: link:../packages/agent
+      '@seashore/contextengineering':
+        specifier: workspace:*
+        version: link:../packages/contextengineering
       '@seashore/deploy':
         specifier: workspace:*
         version: link:../packages/deploy
@@ -142,6 +145,8 @@ importers:
       zod:
         specifier: ^4.0.5
         version: 4.2.1
+
+  packages/contextengineering: {}
 
   packages/deploy:
     dependencies:
@@ -378,6 +383,9 @@ importers:
         specifier: ^0.2.0
         version: 0.2.1
     devDependencies:
+      drizzle-kit:
+        specifier: ^0.31.1
+        version: 0.31.8
       zod:
         specifier: ^4.0.5
         version: 4.2.1
