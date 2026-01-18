@@ -2,7 +2,6 @@
 title = "Seashore 文档"
 authors = ["Seashore 团队"]
 language = "zh-CN"
-multilingual = false
 src = "."
 description = "一个用于构建 AI 驱动应用程序的现代 TypeScript 智能体框架"
 

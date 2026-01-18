@@ -27,31 +27,33 @@ let container: StartedPostgreSqlContainer | undefined;
  * Setup function called before all tests
  */
 export async function setup(): Promise<void> {
+  let connectionString: string;
+
   // If DATABASE_URL is already set (e.g., in CI), skip container startup
   if (process.env['DATABASE_URL']) {
     console.log('✅ Using existing DATABASE_URL, skipping container startup');
-    return;
+    connectionString = process.env['DATABASE_URL'];
+  } else {
+    console.log('🐳 Starting PostgreSQL container with pgvector...');
+
+    // Start PostgreSQL container using pgvector image (same as CI)
+    // Use fixed port 5432 to avoid random port binding issues on Windows
+    container = await new PostgreSqlContainer('pgvector/pgvector:pg16')
+      .withDatabase('seashore_test')
+      .withUsername('test')
+      .withPassword('test')
+      .withExposedPorts({ container: 5432, host: 5432 })
+      .start();
+
+    connectionString = container.getConnectionUri();
+
+    // Set environment variable for tests to use
+    process.env['DATABASE_URL'] = connectionString;
+
+    console.log(`✅ PostgreSQL container started: ${connectionString}`);
   }
 
-  console.log('🐳 Starting PostgreSQL container with pgvector...');
-
-  // Start PostgreSQL container using pgvector image (same as CI)
-  // Use fixed port 5432 to avoid random port binding issues on Windows
-  container = await new PostgreSqlContainer('pgvector/pgvector:pg16')
-    .withDatabase('seashore_test')
-    .withUsername('test')
-    .withPassword('test')
-    .withExposedPorts({ container: 5432, host: 5432 })
-    .start();
-
-  const connectionString = container.getConnectionUri();
-
-  // Set environment variable for tests to use
-  process.env['DATABASE_URL'] = connectionString;
-
-  console.log(`✅ PostgreSQL container started: ${connectionString}`);
-
-  // Run database migrations
+  // Always run database migrations (both local and CI)
   await runMigrations(connectionString);
 }
 

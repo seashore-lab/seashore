@@ -232,7 +232,7 @@ describe('@seashore/storage integration', () => {
       const children = await traceRepo.findByParentId(parent.id);
 
       expect(children).toHaveLength(1);
-      expect(children[0].name).toBe('child');
+      expect(children?.[0]?.name).toBe('child');
     });
   });
 });

@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import type { Thread, Message, ThreadRepository, MessageRepository } from '../src/types';
+import type { Thread, Message } from '../src/types';
+import type { ThreadRepository, MessageRepository } from '../src/repositories/index';
 
 describe('@seashore/storage Integration', () => {
   describe('Persistence Middleware', () => {
@@ -243,6 +244,7 @@ describe('@seashore/storage Integration', () => {
           }
           return count;
         }),
+        createMany: vi.fn(),
       };
     });
 
