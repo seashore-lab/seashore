@@ -26,17 +26,6 @@ export {
   type WikipediaArticle,
 } from './wikipedia';
 
-// Calculator tools - Mathematical operations
-export {
-  calculatorTool,
-  powerTool,
-  factorialTool,
-  sqrtTool,
-  isPrimeTool,
-  expressionTool,
-  type CalculatorResult,
-} from './calculator';
-
 // Exa tools - AI-powered search
 export {
   exaSearchTool,
