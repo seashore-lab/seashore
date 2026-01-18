@@ -48,5 +48,14 @@
     "embeddings"
   ],
   "author": "Seashore Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seashore-ai/seashore.git",
+    "directory": "packages/rag"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "license": "MIT"
 }

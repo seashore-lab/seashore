@@ -384,7 +384,7 @@ function createVectorStoreForCollection(
       return {
         documentCount: Number(stats?.documentCount ?? 0),
         embeddedCount: Number(stats?.embeddedCount ?? 0),
-        dimensions: collection.dimensions,
+        avgEmbeddingSize: collection.dimensions,
         storageBytes: Number(sizeResult[0]?.total_bytes ?? 0),
       };
     },

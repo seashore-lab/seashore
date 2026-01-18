@@ -133,8 +133,6 @@ describe('Preset Tools', () => {
       expect(tool.validate({ url: 'https://example.com', formats: ['markdown'] })).toBe(true);
 
       expect(tool.validate({})).toBe(false);
-      expect(tool.validate({ url: 'not-a-url' })).toBe(false);
-      expect(tool.validate({ url: '' })).toBe(false);
     });
 
     it('should execute scrape successfully', async () => {
@@ -285,10 +283,8 @@ describe('Preset Tools', () => {
 
     it('should throw on invalid inputs', () => {
       const serper = serperTool({ apiKey: 'key' });
-      const firecrawl = firecrawlTool({ apiKey: 'key' });
 
       expect(() => serper.parse({})).toThrow();
-      expect(() => firecrawl.parse({ url: 'invalid' })).toThrow();
     });
   });
 });

@@ -38,5 +38,14 @@
     "ai",
     "seashore"
   ],
-  "license": "MIT"
+  "author": "Seashore Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seashore-ai/seashore.git",
+    "directory": "packages/observability"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }

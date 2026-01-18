@@ -24,7 +24,16 @@
     "ai",
     "seashore"
   ],
+  "author": "Seashore Team",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seashore-ai/seashore.git",
+    "directory": "packages/agent"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@seashore/llm": "workspace:*",
     "@seashore/tool": "workspace:*",

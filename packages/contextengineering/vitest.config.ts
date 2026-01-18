@@ -1,8 +1,6 @@
 import { defineConfig } from 'vitest/config';
 import { resolve } from 'path';
 
-const rootDir = resolve(__dirname, '../..');
-
 export default defineConfig({
   test: {
     globals: true,

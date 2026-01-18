@@ -32,7 +32,16 @@
     "orm",
     "seashore"
   ],
+  "author": "Seashore Team",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seashore-ai/seashore.git",
+    "directory": "packages/storage"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "drizzle-orm": "^0.44.2",
     "postgres": "^3.4.7"

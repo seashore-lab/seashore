@@ -13,7 +13,11 @@
     "format": "prettier --write \"packages/**/*.{ts,tsx,json}\"",
     "format:check": "prettier --check \"packages/**/*.{ts,tsx,json}\"",
     "typecheck": "tsc --noEmit",
-    "clean": "git clean . -dfX"
+    "clean": "git clean . -dfX",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "pnpm build && changeset publish",
+    "prepublishOnly": "pnpm build && pnpm test"
   },
   "keywords": [
     "agent",
@@ -26,6 +30,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@changesets/cli": "^2.29.8",
     "@nx/js": "^22.3.3",
     "@rollup/plugin-typescript": "^12.1.2",
     "@testcontainers/postgresql": "^11.11.0",

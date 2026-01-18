@@ -37,7 +37,16 @@
     "ai",
     "seashore"
   ],
+  "author": "Seashore Team",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seashore-ai/seashore.git",
+    "directory": "packages/llm"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@tanstack/ai": "~0.1.0",
     "@tanstack/ai-openai": "~0.1.0",
