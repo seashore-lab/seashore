@@ -1,0 +1,24 @@
+[book]
+title = "Seashore Documentation"
+authors = ["Seashore Team"]
+language = "en"
+multilingual = false
+src = "."
+description = "A modern TypeScript agent framework for building AI-powered applications"
+
+[build]
+build-dir = "../../book/en"
+
+[output.html]
+default-theme = "light"
+preferred-dark-theme = "navy"
+git-repository-url = "https://github.com/user/seashore"
+edit-url-template = "https://github.com/user/seashore/edit/main/docs/en-us/{path}"
+site-url = "/seashore/en/"
+
+[output.html.fold]
+enable = true
+level = 1
+
+[output.html.search]
+enable = true

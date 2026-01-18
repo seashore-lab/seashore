@@ -1,72 +1,195 @@
-name: Deploy Documentation to GitHub Pages
+name: Deploy Documentation
 
 on:
   push:
     branches:
-      - master
+      - main
     paths:
-      - 'docs/**'
-      - 'book.toml'
-      - '.github/workflows/deploy-docs.yml'
-      - 'po/**'
-      - 'theme/**'
-  pull_request:
-    branches:
-      - master
-    paths:
-      - 'docs/**'
-      - 'book.toml'
-      - '.github/workflows/deploy-docs.yml'
-      - 'po/**'
-      - 'theme/**'
+      - "docs/**"
+      - ".github/workflows/deploy-docs.yml"
   workflow_dispatch:
 
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
+# Allow only one concurrent deployment
 concurrency:
   group: "pages"
   cancel-in-progress: false
-
-env:
-  LANGUAGES: en,zh-CN
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install mdbook
-        run: |
-          curl -LsSf https://github.com/rust-lang/mdBook/releases/download/v0.4.40/mdbook-v0.4.40-x86_64-unknown-linux-gnu.tar.gz | tar xz
-          sudo mv mdbook /usr/local/bin
-          mdbook --version
+      - name: Setup mdBook
+        uses: peaceiris/actions-mdbook@v2
+        with:
+          mdbook-version: "latest"
 
-      - name: Install mdbook-i18n-helpers
+      - name: Build English Documentation
         run: |
-          cargo install mdbook-i18n-helpers --version 0.2.4
+          cd docs/en-us
+          mdbook build
 
-      - name: Build English documentation
+      - name: Build Chinese Documentation
         run: |
-          mdbook build -d book/en
-          mv book/en/html book/html
+          cd docs/zh-cn
+          mdbook build
 
-      - name: Build Chinese documentation
+      - name: Create deployment directory
         run: |
-          MDBOOK_BOOK__LANGUAGE=zh-CN mdbook build -d book/zh-CN
-          mv book/zh-CN/html book/html/zh-CN
+          mkdir -p public
+          cp -r book/en public/
+          cp -r book/zh public/
+
+      - name: Create index page
+        run: |
+          cat > public/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Seashore Documentation</title>
+              <style>
+                  * {
+                      margin: 0;
+                      padding: 0;
+                      box-sizing: border-box;
+                  }
+                  body {
+                      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      min-height: 100vh;
+                      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                      padding: 20px;
+                  }
+                  .container {
+                      text-align: center;
+                      background: white;
+                      padding: 60px 40px;
+                      border-radius: 20px;
+                      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+                      max-width: 600px;
+                      width: 100%;
+                  }
+                  h1 {
+                      font-size: 3em;
+                      margin-bottom: 10px;
+                      color: #333;
+                      font-weight: 700;
+                  }
+                  .subtitle {
+                      font-size: 1.2em;
+                      color: #666;
+                      margin-bottom: 40px;
+                  }
+                  .language-buttons {
+                      display: flex;
+                      gap: 20px;
+                      justify-content: center;
+                      flex-wrap: wrap;
+                  }
+                  .language-btn {
+                      display: inline-flex;
+                      align-items: center;
+                      gap: 10px;
+                      padding: 18px 40px;
+                      font-size: 1.2em;
+                      font-weight: 600;
+                      text-decoration: none;
+                      color: white;
+                      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                      border-radius: 12px;
+                      transition: all 0.3s ease;
+                      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+                  }
+                  .language-btn:hover {
+                      transform: translateY(-2px);
+                      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+                  }
+                  .language-btn:active {
+                      transform: translateY(0);
+                  }
+                  .flag {
+                      font-size: 1.5em;
+                  }
+                  .footer {
+                      margin-top: 40px;
+                      font-size: 0.9em;
+                      color: #999;
+                  }
+                  .footer a {
+                      color: #667eea;
+                      text-decoration: none;
+                  }
+                  .footer a:hover {
+                      text-decoration: underline;
+                  }
+                  @media (max-width: 600px) {
+                      h1 {
+                          font-size: 2em;
+                      }
+                      .container {
+                          padding: 40px 30px;
+                      }
+                      .language-btn {
+                          width: 100%;
+                      }
+                  }
+              </style>
+          </head>
+          <body>
+              <div class="container">
+                  <h1>🌊 Seashore</h1>
+                  <p class="subtitle">Modern TypeScript Agent Framework</p>
+                  <div class="language-buttons">
+                      <a href="./en/" class="language-btn">
+                          <span class="flag">🇬🇧</span>
+                          <span>English</span>
+                      </a>
+                      <a href="./zh/" class="language-btn">
+                          <span class="flag">🇨🇳</span>
+                          <span>中文</span>
+                      </a>
+                  </div>
+                  <div class="footer">
+                      <p>Built with ❤️ by the Seashore Team</p>
+                      <p><a href="https://github.com/user/seashore" target="_blank">View on GitHub</a></p>
+                  </div>
+              </div>
+              <script>
+                  // Auto-redirect based on browser language
+                  const userLang = navigator.language || navigator.userLanguage;
+                  const isFirstVisit = !sessionStorage.getItem('visited');
+                  
+                  if (isFirstVisit) {
+                      sessionStorage.setItem('visited', 'true');
+                      if (userLang.startsWith('zh')) {
+                          window.location.href = './zh/';
+                      } else {
+                          window.location.href = './en/';
+                      }
+                  }
+              </script>
+          </body>
+          </html>
+          EOF
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./book/html
+          path: ./public
 
   deploy:
-    if: github.event_name != 'pull_request'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

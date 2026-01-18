@@ -1,0 +1,24 @@
+[book]
+title = "Seashore 文档"
+authors = ["Seashore 团队"]
+language = "zh-CN"
+multilingual = false
+src = "."
+description = "一个用于构建 AI 驱动应用程序的现代 TypeScript 智能体框架"
+
+[build]
+build-dir = "../../book/zh"
+
+[output.html]
+default-theme = "light"
+preferred-dark-theme = "navy"
+git-repository-url = "https://github.com/user/seashore"
+edit-url-template = "https://github.com/user/seashore/edit/main/docs/zh-cn/{path}"
+site-url = "/seashore/zh/"
+
+[output.html.fold]
+enable = true
+level = 1
+
+[output.html.search]
+enable = true

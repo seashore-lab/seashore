@@ -8,7 +8,9 @@
 [![npm version](https://badge.fury.io/js/%40seashore%2Fagent.svg)](https://www.npmjs.com/package/@seashore/agent)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-[Documentation](https://github.com/user/seashore#documentation) • [Examples](./examples) • [Contributing](./docs/book/reference/contributing.html)
+📖 [Documentation](https://user.github.io/seashore/) • 🚀 [Examples](./examples) • 🤝 [Contributing](./docs/README.md)
+
+[English Docs](https://user.github.io/seashore/en/) | [中文文档](https://user.github.io/seashore/zh/)
 
 </div>
 
@@ -61,13 +63,63 @@ const result = await agent.run({
 console.log(result.content)
 ```
 
-## 📦 What else
+## 📦 Packages
 
-- Install only what you need
+Seashore is a monorepo containing multiple packages. Install only what you need:
 
-- Documentation is on the way
-- Explore [10+ examples](./examples)
-- Join our Development
+- `@seashore/agent` - ReAct agents and orchestration
+- `@seashore/llm` - Multi-provider LLM adapters
+- `@seashore/tool` - Type-safe tool definitions
+- `@seashore/workflow` - Visual workflow engine
+- `@seashore/rag` - RAG pipeline components
+- `@seashore/memory` - Memory systems
+- `@seashore/storage` - Persistence layer
+- `@seashore/vectordb` - Vector database integrations
+- `@seashore/mcp` - Model Context Protocol support
+- `@seashore/observability` - Tracing and monitoring
+- `@seashore/evaluation` - Testing and evaluation
+- `@seashore/security` - Input/output guardrails
+- `@seashore/deploy` - Production deployment utilities
+- `@seashore/genui` - Generative UI components
+- `@seashore/contextengineering` - Context optimization
+
+## 📚 Documentation
+
+Full documentation is available at [https://user.github.io/seashore/](https://user.github.io/seashore/)
+
+- 📖 [English Documentation](https://user.github.io/seashore/en/)
+- 📖 [中文文档](https://user.github.io/seashore/zh/)
+
+### Local Documentation
+
+To build and serve the documentation locally:
+
+```bash
+cd docs
+./build.ps1      # Build both language versions
+./serve.ps1 en   # Serve English docs
+./serve.ps1 zh   # Serve Chinese docs
+./serve.ps1 both # Serve both
+```
+
+See [docs/README.md](./docs/README.md) for more details.
+
+## 🚀 Examples
+
+Explore [14+ working examples](./examples) covering:
+
+- Basic agents and tool use
+- Streaming responses
+- Workflows and orchestration
+- RAG pipelines
+- Memory systems
+- MCP integration
+- Security guardrails
+- Evaluation frameworks
+- Observability and tracing
+- Production deployment
+
+## 🤝 Contributing
 
 ```bash
 pnpm install && pnpm build && pnpm test
