@@ -234,7 +234,7 @@ export function useChat(options: UseChatOptions): UseChatReturn {
                     updated[lastIndex] = {
                       ...updated[lastIndex],
                       content: fullContent,
-                    };
+                    } as ChatMessage;
                   }
                   return updated;
                 });
@@ -257,7 +257,7 @@ export function useChat(options: UseChatOptions): UseChatReturn {
             updated[lastIndex] = {
               ...updated[lastIndex],
               content: fullContent,
-            };
+            } as ChatMessage;
           }
           return updated;
         });

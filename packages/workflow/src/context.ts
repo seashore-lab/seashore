@@ -37,7 +37,7 @@ export function createMutableWorkflowContext(
   const executionPath: string[] = [...(initial.executionPath ?? [])];
   let loopState = initial.loopState ? { ...initial.loopState } : undefined;
   const signal = initial.signal;
-  let currentNode = initial.currentNode;
+  const currentNode = initial.currentNode;
 
   const ctx: MutableWorkflowContext = {
     nodeOutputs,
@@ -104,7 +104,7 @@ export function createMutableWorkflowContext(
 export function mergeContexts(...contexts: Partial<WorkflowContext>[]): WorkflowContext {
   const nodeOutputs: Record<string, unknown> = {};
   const metadata: Record<string, unknown> = {};
-  let executionPath: readonly string[] = [];
+  const executionPath: readonly string[] = [];
   let signal: AbortSignal | undefined;
 
   const merged: WorkflowContext = {

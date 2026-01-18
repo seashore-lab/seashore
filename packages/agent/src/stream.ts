@@ -15,7 +15,7 @@ export async function collectStream(
 ): Promise<AgentRunResult> {
   let content = '';
   const toolCalls: ToolCallRecord[] = [];
-  let usage: TokenUsage = { promptTokens: 0, completionTokens: 0, totalTokens: 0 };
+  const usage: TokenUsage = { promptTokens: 0, completionTokens: 0, totalTokens: 0 };
   let finishReason: AgentRunResult['finishReason'] = 'stop';
   let error: string | undefined;
   const startTime = Date.now();

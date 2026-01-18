@@ -215,7 +215,7 @@ function createVectorStoreForCollection(
       }
 
       // Generate embeddings if function provided and not already present
-      let processedDocs = [...docs];
+      const processedDocs = [...docs];
       if (embeddings) {
         const textsToEmbed = docs
           .map((doc, i) => ({ text: doc.content, index: i, needsEmbed: !doc.embedding }))
