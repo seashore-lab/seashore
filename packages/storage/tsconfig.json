@@ -4,12 +4,6 @@
     "rootDir": ".",
     "baseUrl": "."
   },
-  "include": [
-    "src/**/*.ts",
-    "__tests__/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "include": ["src/**/*.ts", "__tests__/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }
