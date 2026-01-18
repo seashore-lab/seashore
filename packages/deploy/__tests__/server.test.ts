@@ -34,7 +34,7 @@ function createMockAgent(name: string): Agent {
   };
 }
 
-describe('@seashore/deploy', () => {
+describe('@seashorelab/deploy', () => {
   describe('createServer', () => {
     it('should create a server with agents', () => {
       const agent = createMockAgent('test-agent');

@@ -1,5 +1,5 @@
 /**
- * @seashore/storage - Integration Tests
+ * @seashorelab/storage - Integration Tests
  */
 
 import { describe, it, expect, beforeAll, afterAll, beforeEach } from 'vitest';
@@ -9,7 +9,7 @@ import { describe, it, expect, beforeAll, afterAll, beforeEach } from 'vitest';
  * Testcontainers automatically provides DATABASE_URL via globalSetup.
  * In CI, DATABASE_URL is provided by the postgres service.
  */
-describe('@seashore/storage integration', () => {
+describe('@seashorelab/storage integration', () => {
   let database: Awaited<ReturnType<typeof import('../src/database').createDatabase>>;
   let threadRepo: Awaited<
     ReturnType<typeof import('../src/repositories/thread').createThreadRepository>

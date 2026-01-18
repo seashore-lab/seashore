@@ -1,5 +1,5 @@
 /**
- * @seashore/llm - Stream Utilities
+ * @seashorelab/llm - Stream Utilities
  *
  * Utilities for working with LLM streaming responses
  */
@@ -11,7 +11,7 @@ import type { StreamChunk, TokenUsage } from './types';
  *
  * @example
  * ```typescript
- * import { chat, toReadableStream } from '@seashore/llm';
+ * import { chat, toReadableStream } from '@seashorelab/llm';
  *
  * const response = chat({ adapter, messages });
  * const stream = toReadableStream(response);

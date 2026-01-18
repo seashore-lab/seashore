@@ -11,7 +11,7 @@
 ## 运行方法
 
 ```bash
-pnpm --filter @seashore/examples exec tsx src/02-agent-with-tools-and-stream.ts
+pnpm --filter @seashorelab/examples exec tsx src/02-agent-with-tools-and-stream.ts
 ```
 
 ## 观察要点

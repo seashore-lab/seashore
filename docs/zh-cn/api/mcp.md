@@ -1,6 +1,6 @@
 # API 参考：MCP
 
-包：`@seashore/mcp`
+包：`@seashorelab/mcp`
 
 ## 客户端
 

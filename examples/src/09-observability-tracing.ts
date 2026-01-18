@@ -8,10 +8,10 @@ import {
   createTracer,
   createTokenCounter,
   createConsoleExporter,
-} from '@seashore/observability';
-import { createAgent } from '@seashore/agent';
-import { openaiText } from '@seashore/llm';
-import { defineTool } from '@seashore/tool';
+} from '@seashorelab/observability';
+import { createAgent } from '@seashorelab/agent';
+import { openaiText } from '@seashorelab/llm';
+import { defineTool } from '@seashorelab/tool';
 import { z } from 'zod';
 
 // Create a simple calculator tool

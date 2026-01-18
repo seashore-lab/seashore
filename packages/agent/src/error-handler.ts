@@ -1,5 +1,5 @@
 /**
- * @seashore/agent - Error Handler
+ * @seashorelab/agent - Error Handler
  *
  * Error handling and retry logic for agent execution
  */

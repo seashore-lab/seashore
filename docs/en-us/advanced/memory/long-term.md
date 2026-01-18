@@ -16,7 +16,7 @@ It is usually backed by a database and can optionally support vector search so y
 ## Creating long-term memory
 
 ```ts
-import { createLongTermMemory } from '@seashore/memory'
+import { createLongTermMemory } from '@seashorelab/memory'
 
 const longTerm = createLongTermMemory({
   db,

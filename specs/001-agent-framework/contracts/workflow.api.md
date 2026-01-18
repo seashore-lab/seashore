@@ -1,6 +1,6 @@
-# API Contract: @seashore/workflow
+# API Contract: @seashorelab/workflow
 
-**Package**: `@seashore/workflow`  
+**Package**: `@seashorelab/workflow`  
 **Version**: 0.1.0
 
 ## 概述
@@ -43,8 +43,8 @@ export type { NodeInput, NodeOutput, EdgeCondition } from './types'
 ### createWorkflow
 
 ```typescript
-import { createWorkflow, createNode, createLLMNode, createConditionNode } from '@seashore/workflow'
-import { openaiText } from '@seashore/llm'
+import { createWorkflow, createNode, createLLMNode, createConditionNode } from '@seashorelab/workflow'
+import { openaiText } from '@seashorelab/llm'
 
 const workflow = createWorkflow({
   name: 'customer-support',
@@ -98,7 +98,7 @@ const workflow = createWorkflow({
 LLM 调用节点：
 
 ```typescript
-import { createLLMNode } from '@seashore/workflow'
+import { createLLMNode } from '@seashorelab/workflow'
 
 const node = createLLMNode({
   name: 'summarize',
@@ -129,7 +129,7 @@ const node = createLLMNode({
 工具调用节点：
 
 ```typescript
-import { createToolNode } from '@seashore/workflow'
+import { createToolNode } from '@seashorelab/workflow'
 
 const node = createToolNode({
   name: 'search',
@@ -153,7 +153,7 @@ const node = createToolNode({
 条件路由节点：
 
 ```typescript
-import { createConditionNode } from '@seashore/workflow'
+import { createConditionNode } from '@seashorelab/workflow'
 
 const node = createConditionNode({
   name: 'router',
@@ -178,7 +178,7 @@ const node = createConditionNode({
 并行执行节点：
 
 ```typescript
-import { createParallelNode } from '@seashore/workflow'
+import { createParallelNode } from '@seashorelab/workflow'
 
 const node = createParallelNode({
   name: 'parallel-search',
@@ -209,7 +209,7 @@ const node = createParallelNode({
 自定义节点：
 
 ```typescript
-import { createNode } from '@seashore/workflow'
+import { createNode } from '@seashorelab/workflow'
 
 const node = createNode({
   name: 'custom-processor',
@@ -321,7 +321,7 @@ const workflow = createWorkflow({
 ### executeWorkflow
 
 ```typescript
-import { executeWorkflow } from '@seashore/workflow'
+import { executeWorkflow } from '@seashorelab/workflow'
 
 const result = await executeWorkflow(workflow, {
   input: {

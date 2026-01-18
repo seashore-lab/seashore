@@ -1,5 +1,5 @@
 /**
- * @seashore/storage - Types
+ * @seashorelab/storage - Types
  *
  * Type definitions for storage entities
  */

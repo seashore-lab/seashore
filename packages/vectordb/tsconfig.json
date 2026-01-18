@@ -5,9 +5,17 @@
     "baseUrl": ".",
     "exactOptionalPropertyTypes": false,
     "paths": {
-      "@seashore/storage": ["../storage/src"]
+      "@seashorelab/storage": [
+        "../storage/src"
+      ]
     }
   },
-  "include": ["src/**/*.ts", "__tests__/**/*.ts"],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "src/**/*.ts",
+    "__tests__/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

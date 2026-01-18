@@ -1,5 +1,5 @@
 {
-  "name": "@seashore/rag",
+  "name": "@seashorelab/rag",
   "version": "0.1.0",
   "description": "RAG (Retrieval-Augmented Generation) for seashore agents",
   "type": "module",
@@ -24,8 +24,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@seashore/vectordb": "workspace:*",
-    "@seashore/llm": "workspace:*",
+    "@seashorelab/vectordb": "workspace:*",
+    "@seashorelab/llm": "workspace:*",
     "pdf-parse": "^1.1.1",
     "node-html-parser": "^6.1.12"
   },

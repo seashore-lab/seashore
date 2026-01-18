@@ -8,7 +8,7 @@ Seashore 中的工作流提供显式的多步编排。
 - 您决定节点边界和数据流。
 - 流式传输在节点/Token 级别可用。
 
-工作流 API 位于 `@seashore/workflow` 中。
+工作流 API 位于 `@seashorelab/workflow` 中。
 
 ## 示例
 
@@ -41,8 +41,8 @@ Seashore 中的工作流由以下部分组成：
 ### 基本示例
 
 ```typescript
-import { createWorkflow, createLLMNode } from '@seashore/workflow'
-import { openaiText } from '@seashore/llm'
+import { createWorkflow, createLLMNode } from '@seashorelab/workflow'
+import { openaiText } from '@seashorelab/llm'
 
 const model = openaiText('gpt-4o', {
   apiKey: process.env.OPENAI_API_KEY,
@@ -94,7 +94,7 @@ console.log(content.content)
 使用大语言模型处理输入：
 
 ```typescript
-import { createLLMNode, type LLMNodeOutput } from '@seashore/workflow'
+import { createLLMNode, type LLMNodeOutput } from '@seashorelab/workflow'
 
 const node = createLLMNode({
   name: 'analyzer',
@@ -129,7 +129,7 @@ const node = createLLMNode({
 执行工具：
 
 ```typescript
-import { createToolNode, type ToolNodeOutput } from '@seashore/workflow'
+import { createToolNode, type ToolNodeOutput } from '@seashorelab/workflow'
 
 const toolNode = createToolNode({
   name: 'fetch-data',
@@ -155,7 +155,7 @@ const toolNode = createToolNode({
 基于条件分支：
 
 ```typescript
-import { createConditionNode } from '@seashore/workflow'
+import { createConditionNode } from '@seashorelab/workflow'
 
 const conditionNode = createConditionNode({
   name: 'check-quality',
@@ -173,7 +173,7 @@ const conditionNode = createConditionNode({
 多个分支条件：
 
 ```typescript
-import { createSwitchNode } from '@seashore/workflow'
+import { createSwitchNode } from '@seashorelab/workflow'
 
 const switchNode = createSwitchNode({
   name: 'route-request',
@@ -195,7 +195,7 @@ const switchNode = createSwitchNode({
 并发执行多个节点：
 
 ```typescript
-import { createParallelNode } from '@seashore/workflow'
+import { createParallelNode } from '@seashorelab/workflow'
 
 const parallelNode = createParallelNode({
   name: 'multi-analysis',
@@ -216,7 +216,7 @@ const results = ctx.getNodeOutput('multi-analysis')
 定义自定义处理逻辑：
 
 ```typescript
-import { createNode } from '@seashore/workflow'
+import { createNode } from '@seashorelab/workflow'
 
 const customNode = createNode({
   name: 'processor',
@@ -326,7 +326,7 @@ for await (const event of workflow.stream({ topic: 'AI' })) {
 重复执行直到满足条件：
 
 ```typescript
-import { createLoopNode, breakLoop } from '@seashore/workflow'
+import { createLoopNode, breakLoop } from '@seashorelab/workflow'
 
 const loopNode = createLoopNode({
   name: 'refine',
@@ -353,7 +353,7 @@ const loopNode = createLoopNode({
 处理数组项：
 
 ```typescript
-import { createForEachNode } from '@seashore/workflow'
+import { createForEachNode } from '@seashorelab/workflow'
 
 const forEachNode = createForEachNode({
   name: 'process-items',
@@ -373,7 +373,7 @@ const forEachNode = createForEachNode({
 并行处理，然后聚合：
 
 ```typescript
-import { createMapReduceNode } from '@seashore/workflow'
+import { createMapReduceNode } from '@seashorelab/workflow'
 
 const mapReduceNode = createMapReduceNode({
   name: 'analyze-all',
@@ -406,7 +406,7 @@ const mapReduceNode = createMapReduceNode({
 ### Try-Catch 模式
 
 ```typescript
-import { createNode } from '@seashore/workflow'
+import { createNode } from '@seashorelab/workflow'
 
 const safeNode = createNode({
   name: 'safe-operation',
@@ -428,7 +428,7 @@ const safeNode = createNode({
 ### 验证节点
 
 ```typescript
-import { createValidationNode } from '@seashore/workflow'
+import { createValidationNode } from '@seashorelab/workflow'
 
 const validationNode = createValidationNode({
   name: 'validate-input',
@@ -445,7 +445,7 @@ const validationNode = createValidationNode({
 将工作流组合成更大的系统：
 
 ```typescript
-import { composeWorkflows } from '@seashore/workflow'
+import { composeWorkflows } from '@seashorelab/workflow'
 
 const preprocessing = createWorkflow({
   name: 'preprocess',

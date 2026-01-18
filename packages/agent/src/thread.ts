@@ -1,12 +1,12 @@
 /**
- * @seashore/agent - Thread Continuation
+ * @seashorelab/agent - Thread Continuation
  *
  * Support for continuing conversations across threads
  */
 
-import type { Message as LLMMessage } from '@seashore/llm';
-import type { Message, Thread, ThreadRepository, MessageRepository } from '@seashore/storage';
-import type { Tool } from '@seashore/tool';
+import type { Message as LLMMessage } from '@seashorelab/llm';
+import type { Message, Thread, ThreadRepository, MessageRepository } from '@seashorelab/storage';
+import type { Tool } from '@seashorelab/tool';
 import type { Agent, AgentRunResult, AgentStreamChunk, RunOptions } from './types';
 
 /**
@@ -161,8 +161,8 @@ function createThreadContext(thread: Thread, messages: readonly Message[]): Thre
  *
  * @example
  * ```typescript
- * import { createThreadManager } from '@seashore/agent';
- * import { createDatabase, createThreadRepository, createMessageRepository } from '@seashore/storage';
+ * import { createThreadManager } from '@seashorelab/agent';
+ * import { createDatabase, createThreadRepository, createMessageRepository } from '@seashorelab/storage';
  *
  * const db = createDatabase({ connectionString: process.env.DATABASE_URL! });
  * const threadManager = createThreadManager(

@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import type { LoadedDocument, DocumentChunk, RetrievedDocument, RAGContext } from '../src/types';
 
-describe('@seashore/rag', () => {
+describe('@seashorelab/rag', () => {
   describe('Document Loaders', () => {
     it('should define correct LoadedDocument structure', () => {
       const doc: LoadedDocument = {

@@ -1,5 +1,5 @@
 /**
- * @seashore/tool
+ * @seashorelab/tool
  *
  * Type-safe tool definitions for Seashore Agent Framework
  */

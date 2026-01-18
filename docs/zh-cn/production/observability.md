@@ -34,7 +34,7 @@ Seashore 的可观测性堆栈帮助您理解和操作 Agent 系统：
 ### 创建日志记录器
 
 ```typescript
-import { createLogger } from '@seashore/observability'
+import { createLogger } from '@seashorelab/observability'
 
 const logger = createLogger({
   name: 'my-app',
@@ -82,7 +82,7 @@ toolLogger.info('Tool executed') // 包含 component: 'tool'
 ### 创建追踪器
 
 ```typescript
-import { createTracer } from '@seashore/observability'
+import { createTracer } from '@seashorelab/observability'
 
 const tracer = createTracer({
   serviceName: 'my-ai-service',
@@ -154,7 +154,7 @@ parentSpan.end()
 自动追踪 Agent 执行：
 
 ```typescript
-import { withTracing } from '@seashore/observability'
+import { withTracing } from '@seashorelab/observability'
 
 const tracedAgent = withTracing(agent, {
   tracer,
@@ -170,7 +170,7 @@ const result = await tracedAgent.run('Hello')
 ### 创建 Token 计数器
 
 ```typescript
-import { createTokenCounter } from '@seashore/observability'
+import { createTokenCounter } from '@seashorelab/observability'
 
 const counter = createTokenCounter({
   defaultEncoding: 'cl100k_base', // OpenAI 编码
@@ -223,7 +223,7 @@ console.log(`Cost: $${tracker.getTotalCost().toFixed(4)}`)
 ### 控制台导出器
 
 ```typescript
-import { createConsoleExporter } from '@seashore/observability'
+import { createConsoleExporter } from '@seashorelab/observability'
 
 const exporter = createConsoleExporter({
   format: 'pretty',
@@ -241,7 +241,7 @@ exporter.export({
 ### 自定义导出器
 
 ```typescript
-import { createExporter } from '@seashore/observability'
+import { createExporter } from '@seashorelab/observability'
 
 const customExporter = createExporter({
   name: 'custom-exporter',
@@ -260,7 +260,7 @@ const customExporter = createExporter({
 ### 记录指标
 
 ```typescript
-import { createMetricsCollector } from '@seashore/observability'
+import { createMetricsCollector } from '@seashorelab/observability'
 
 const metrics = createMetricsCollector({
   exporters: [consoleExporter],
@@ -302,9 +302,9 @@ import {
   createTokenCounter,
   createMetricsCollector,
   createConsoleExporter,
-} from '@seashore/observability'
-import { createAgent } from '@seashore/agent'
-import { openaiText } from '@seashore/llm'
+} from '@seashorelab/observability'
+import { createAgent } from '@seashorelab/agent'
+import { openaiText } from '@seashorelab/llm'
 
 // 设置可观测性
 const logger = createLogger({

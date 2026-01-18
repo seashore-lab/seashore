@@ -1,6 +1,6 @@
 /**
  * Security types
- * @module @seashore/security
+ * @module @seashorelab/security
  */
 
 /**

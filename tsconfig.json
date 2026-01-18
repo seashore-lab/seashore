@@ -28,49 +28,49 @@
     // Disabled: causes many false positives with optional properties
     // "exactOptionalPropertyTypes": true,
     "paths": {
-      "@seashore/llm": [
+      "@seashorelab/llm": [
         "./packages/llm/src"
       ],
-      "@seashore/tool": [
+      "@seashorelab/tool": [
         "./packages/tool/src"
       ],
-      "@seashore/agent": [
+      "@seashorelab/agent": [
         "./packages/agent/src"
       ],
-      "@seashore/storage": [
+      "@seashorelab/storage": [
         "./packages/storage/src"
       ],
-      "@seashore/vectordb": [
+      "@seashorelab/vectordb": [
         "./packages/vectordb/src"
       ],
-      "@seashore/rag": [
+      "@seashorelab/rag": [
         "./packages/rag/src"
       ],
-      "@seashore/workflow": [
+      "@seashorelab/workflow": [
         "./packages/workflow/src"
       ],
-      "@seashore/memory": [
+      "@seashorelab/memory": [
         "./packages/memory/src"
       ],
-      "@seashore/mcp": [
+      "@seashorelab/mcp": [
         "./packages/mcp/src"
       ],
-      "@seashore/genui": [
+      "@seashorelab/genui": [
         "./packages/genui/src"
       ],
-      "@seashore/observability": [
+      "@seashorelab/observability": [
         "./packages/observability/src"
       ],
-      "@seashore/evaluation": [
+      "@seashorelab/evaluation": [
         "./packages/evaluation/src"
       ],
-      "@seashore/security": [
+      "@seashorelab/security": [
         "./packages/security/src"
       ],
-      "@seashore/deploy": [
+      "@seashorelab/deploy": [
         "./packages/deploy/src"
       ],
-      "@seashore/contextengineering": [
+      "@seashorelab/contextengineering": [
         "./packages/contextengineering/src"
       ]
     },

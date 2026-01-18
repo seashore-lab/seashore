@@ -1,5 +1,5 @@
 /**
- * @seashore/llm
+ * @seashorelab/llm
  *
  * LLM adapters and multimodal support for Seashore Agent Framework
  */

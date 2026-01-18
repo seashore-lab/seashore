@@ -16,7 +16,7 @@
 ## 运行方法
 
 ```bash
-pnpm --filter @seashore/examples exec tsx src/12-storage-persistence.ts
+pnpm --filter @seashorelab/examples exec tsx src/12-storage-persistence.ts
 ```
 
 ## 核心概念

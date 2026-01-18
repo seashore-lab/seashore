@@ -11,7 +11,7 @@
 ## 示例
 
 ```ts
-import { createShortTermMemory, type NewMemoryEntry } from '@seashore/memory'
+import { createShortTermMemory, type NewMemoryEntry } from '@seashorelab/memory'
 
 const memory = createShortTermMemory({ maxEntries: 20 })
 

@@ -1,6 +1,6 @@
 /**
  * GenUI Hooks exports
- * @module @seashore/genui
+ * @module @seashorelab/genui
  */
 
 export { useChat, type UseChatOptions, type UseChatReturn } from './useChat';

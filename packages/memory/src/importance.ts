@@ -1,5 +1,5 @@
 /**
- * @seashore/memory - Importance Evaluation
+ * @seashorelab/memory - Importance Evaluation
  *
  * Evaluate the importance of memories for consolidation
  */

@@ -1,5 +1,5 @@
 /**
- * @seashore/tool - Tool Approval Handling
+ * @seashorelab/tool - Tool Approval Handling
  *
  * Approval flow for dangerous or sensitive tool operations
  */
@@ -98,7 +98,7 @@ const DEFAULT_APPROVAL_TIMEOUT = 5 * 60 * 1000;
  *
  * @example
  * ```typescript
- * import { defineTool, withApproval } from '@seashore/tool';
+ * import { defineTool, withApproval } from '@seashorelab/tool';
  *
  * const deleteTool = defineTool({
  *   name: 'delete_file',

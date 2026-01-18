@@ -1,6 +1,6 @@
 # API 参考：安全
 
-包：`@seashore/security`
+包：`@seashorelab/security`
 
 ## 防护机制
 

@@ -1,5 +1,5 @@
 /**
- * @seashore/tool - Firecrawl Tool
+ * @seashorelab/tool - Firecrawl Tool
  *
  * Preset tool for web scraping using Firecrawl API
  */
@@ -47,7 +47,7 @@ const firecrawlInputSchema = z.object({
  *
  * @example
  * ```typescript
- * import { firecrawlTool } from '@seashore/tool/presets';
+ * import { firecrawlTool } from '@seashorelab/tool/presets';
  *
  * const scraper = firecrawlTool({
  *   apiKey: process.env.FIRECRAWL_API_KEY!,

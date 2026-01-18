@@ -1,5 +1,5 @@
 {
-  "name": "@seashore/mcp",
+  "name": "@seashorelab/mcp",
   "version": "0.1.0",
   "description": "MCP (Model Context Protocol) client for Seashore Agent framework",
   "type": "module",
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
-    "@seashore/tool": "workspace:*"
+    "@seashorelab/tool": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

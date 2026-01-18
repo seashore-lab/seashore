@@ -1,5 +1,5 @@
 /**
- * @seashore/tool - Types
+ * @seashorelab/tool - Types
  *
  * Type definitions for tools
  */

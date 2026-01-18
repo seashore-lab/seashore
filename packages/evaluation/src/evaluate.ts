@@ -1,6 +1,6 @@
 /**
  * Evaluation functions
- * @module @seashore/evaluation
+ * @module @seashorelab/evaluation
  */
 
 import type { Evaluator, TestCase, EvaluationResult, BatchEvaluationResult } from './types';

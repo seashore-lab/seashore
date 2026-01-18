@@ -2,7 +2,7 @@
 
 文档加载器将"某些东西"（文件路径、字符串、URL、glob）转换为一个或多个 `LoadedDocument` 对象。
 
-Seashore 通过 `@seashore/rag` 提供了几个内置加载器。
+Seashore 通过 `@seashorelab/rag` 提供了几个内置加载器。
 
 ## 常见模式
 
@@ -15,7 +15,7 @@ Seashore 通过 `@seashore/rag` 提供了几个内置加载器。
 ## 从字符串加载 Markdown（示例 04）
 
 ```ts
-import { createMarkdownStringLoader } from '@seashore/rag'
+import { createMarkdownStringLoader } from '@seashorelab/rag'
 
 const loader = createMarkdownStringLoader(`# Title\n\nSome content...`)
 const docs = await loader.load()
@@ -26,7 +26,7 @@ const docs = await loader.load()
 ## 加载纯文本
 
 ```ts
-import { createStringLoader } from '@seashore/rag'
+import { createStringLoader } from '@seashorelab/rag'
 
 const loader = createStringLoader('hello world', {
   source: 'manual-input',
@@ -39,7 +39,7 @@ const docs = await loader.load()
 ## 从文件加载 Markdown
 
 ```ts
-import { createMarkdownLoader } from '@seashore/rag'
+import { createMarkdownLoader } from '@seashorelab/rag'
 
 const loader = createMarkdownLoader({
   extractFrontmatter: true,
@@ -53,7 +53,7 @@ const docs = await loader.load('./README.md')
 ## 加载多个源
 
 ```ts
-import { createMultiMarkdownLoader } from '@seashore/rag'
+import { createMultiMarkdownLoader } from '@seashorelab/rag'
 
 const loader = createMultiMarkdownLoader({ extractHeadings: true })
 const docs = await loader.load([
@@ -65,7 +65,7 @@ const docs = await loader.load([
 ## 按 glob 加载（目录）
 
 ```ts
-import { createGlobLoader } from '@seashore/rag'
+import { createGlobLoader } from '@seashorelab/rag'
 
 const loader = createGlobLoader({
   cwd: process.cwd(),
@@ -79,7 +79,7 @@ const docs = await loader.load()
 ## 加载 PDF
 
 ```ts
-import { createPDFLoader } from '@seashore/rag'
+import { createPDFLoader } from '@seashorelab/rag'
 
 const loader = createPDFLoader({ splitPages: true })
 const docs = await loader.load('./whitepaper.pdf')
@@ -88,7 +88,7 @@ const docs = await loader.load('./whitepaper.pdf')
 ## 加载网页
 
 ```ts
-import { createWebLoader } from '@seashore/rag'
+import { createWebLoader } from '@seashorelab/rag'
 
 const loader = createWebLoader({
   selector: 'article',

@@ -34,7 +34,7 @@ Observability features:
 ### Create Logger
 
 ```typescript
-import { createLogger } from '@seashore/observability'
+import { createLogger } from '@seashorelab/observability'
 
 const logger = createLogger({
   name: 'my-app',
@@ -82,7 +82,7 @@ toolLogger.info('Tool executed') // Includes component: 'tool'
 ### Create Tracer
 
 ```typescript
-import { createTracer } from '@seashore/observability'
+import { createTracer } from '@seashorelab/observability'
 
 const tracer = createTracer({
   serviceName: 'my-ai-service',
@@ -154,7 +154,7 @@ parentSpan.end()
 Trace agent execution automatically:
 
 ```typescript
-import { withTracing } from '@seashore/observability'
+import { withTracing } from '@seashorelab/observability'
 
 const tracedAgent = withTracing(agent, {
   tracer,
@@ -170,7 +170,7 @@ const result = await tracedAgent.run('Hello')
 ### Create Token Counter
 
 ```typescript
-import { createTokenCounter } from '@seashore/observability'
+import { createTokenCounter } from '@seashorelab/observability'
 
 const counter = createTokenCounter({
   defaultEncoding: 'cl100k_base', // OpenAI encoding
@@ -223,7 +223,7 @@ console.log(`Cost: $${tracker.getTotalCost().toFixed(4)}`)
 ### Console Exporter
 
 ```typescript
-import { createConsoleExporter } from '@seashore/observability'
+import { createConsoleExporter } from '@seashorelab/observability'
 
 const exporter = createConsoleExporter({
   format: 'pretty',
@@ -241,7 +241,7 @@ exporter.export({
 ### Custom Exporter
 
 ```typescript
-import { createExporter } from '@seashore/observability'
+import { createExporter } from '@seashorelab/observability'
 
 const customExporter = createExporter({
   name: 'custom-exporter',
@@ -260,7 +260,7 @@ const customExporter = createExporter({
 ### Record Metrics
 
 ```typescript
-import { createMetricsCollector } from '@seashore/observability'
+import { createMetricsCollector } from '@seashorelab/observability'
 
 const metrics = createMetricsCollector({
   exporters: [consoleExporter],
@@ -302,9 +302,9 @@ import {
   createTokenCounter,
   createMetricsCollector,
   createConsoleExporter,
-} from '@seashore/observability'
-import { createAgent } from '@seashore/agent'
-import { openaiText } from '@seashore/llm'
+} from '@seashorelab/observability'
+import { createAgent } from '@seashorelab/agent'
+import { openaiText } from '@seashorelab/llm'
 
 // Setup observability
 const logger = createLogger({

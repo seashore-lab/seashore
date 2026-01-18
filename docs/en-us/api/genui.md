@@ -1,6 +1,6 @@
 # API Reference: GenUI
 
-Package: `@seashore/genui`
+Package: `@seashorelab/genui`
 
 ## Components
 

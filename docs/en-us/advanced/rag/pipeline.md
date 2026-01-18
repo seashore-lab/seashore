@@ -12,9 +12,9 @@ At a high level:
 ## Creating a pipeline
 
 ```ts
-import { createRAG } from '@seashore/rag'
-import { createVectorStore } from '@seashore/vectordb'
-import { openaiText, openaiEmbed } from '@seashore/llm'
+import { createRAG } from '@seashorelab/rag'
+import { createVectorStore } from '@seashorelab/vectordb'
+import { openaiText, openaiEmbed } from '@seashorelab/llm'
 
 const rag = createRAG({
   vectorStore: createVectorStore({

@@ -1,1 +1,1 @@
-# @seashore/workflow
+# @seashorelab/workflow

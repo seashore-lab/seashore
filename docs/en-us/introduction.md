@@ -55,21 +55,21 @@ Build complex multi-step workflows with:
 
 Seashore follows a modular design where you only install what you need:
 
-- `@seashore/agent` - Core agent functionality
-- `@seashore/tool` - Tool definitions and execution
-- `@seashore/llm` - LLM adapters (OpenAI, Anthropic, Gemini)
-- `@seashore/workflow` - Workflow orchestration
-- `@seashore/rag` - Retrieval-augmented generation
-- `@seashore/memory` - Memory systems
-- `@seashore/storage` - Persistence layer
-- `@seashore/vectordb` - Vector database operations
-- `@seashore/mcp` - Model Context Protocol support
-- `@seashore/observability` - Logging, tracing, metrics
-- `@seashore/evaluation` - Agent evaluation tools
-- `@seashore/security` - Guardrails and content moderation
-- `@seashore/deploy` - Deployment utilities
-- `@seashore/genui` - React UI components
-- `@seashore/contextengineering` - Context optimization
+- `@seashorelab/agent` - Core agent functionality
+- `@seashorelab/tool` - Tool definitions and execution
+- `@seashorelab/llm` - LLM adapters (OpenAI, Anthropic, Gemini)
+- `@seashorelab/workflow` - Workflow orchestration
+- `@seashorelab/rag` - Retrieval-augmented generation
+- `@seashorelab/memory` - Memory systems
+- `@seashorelab/storage` - Persistence layer
+- `@seashorelab/vectordb` - Vector database operations
+- `@seashorelab/mcp` - Model Context Protocol support
+- `@seashorelab/observability` - Logging, tracing, metrics
+- `@seashorelab/evaluation` - Agent evaluation tools
+- `@seashorelab/security` - Guardrails and content moderation
+- `@seashorelab/deploy` - Deployment utilities
+- `@seashorelab/genui` - React UI components
+- `@seashorelab/contextengineering` - Context optimization
 
 ## Philosophy
 

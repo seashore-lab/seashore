@@ -1,5 +1,5 @@
 /**
- * @seashore/tool - DuckDuckGo Search Tool
+ * @seashorelab/tool - DuckDuckGo Search Tool
  *
  * Preset tool for web search and news using DuckDuckGo (ddgs library)
  */
@@ -65,7 +65,7 @@ const newsInputSchema = z.object({
  *
  * @example
  * ```typescript
- * import { duckduckgoSearchTool } from '@seashore/tool/presets';
+ * import { duckduckgoSearchTool } from '@seashorelab/tool/presets';
  *
  * const search = duckduckgoSearchTool({
  *   maxResults: 10,
@@ -124,7 +124,7 @@ export function duckduckgoSearchTool(config: DuckDuckGoConfig = {}) {
  *
  * @example
  * ```typescript
- * import { duckduckgoNewsTool } from '@seashore/tool/presets';
+ * import { duckduckgoNewsTool } from '@seashorelab/tool/presets';
  *
  * const news = duckduckgoNewsTool({
  *   maxResults: 10,

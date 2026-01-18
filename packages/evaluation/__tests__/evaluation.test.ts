@@ -23,7 +23,7 @@ function mockAdapter(response: string): TextAdapter {
   };
 }
 
-describe('@seashore/evaluation', () => {
+describe('@seashorelab/evaluation', () => {
   describe('createEvaluator', () => {
     it('should create an evaluator with metrics', () => {
       const evaluator = createEvaluator({

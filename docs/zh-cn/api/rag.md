@@ -1,6 +1,6 @@
 # API 参考：RAG
 
-包：`@seashore/rag`
+包：`@seashorelab/rag`
 
 ## 加载器
 

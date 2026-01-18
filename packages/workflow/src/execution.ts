@@ -1,5 +1,5 @@
 /**
- * @seashore/workflow - Execution Engine
+ * @seashorelab/workflow - Execution Engine
  *
  * Core workflow execution logic with token-level streaming support
  */

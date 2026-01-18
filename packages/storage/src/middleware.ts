@@ -1,5 +1,5 @@
 /**
- * @seashore/storage - Automatic Persistence Middleware
+ * @seashorelab/storage - Automatic Persistence Middleware
  *
  * Middleware for automatic message persistence
  */
@@ -135,7 +135,7 @@ export interface PersistenceMiddleware {
  *
  * @example
  * ```typescript
- * import { createDatabase, createPersistenceMiddleware } from '@seashore/storage';
+ * import { createDatabase, createPersistenceMiddleware } from '@seashorelab/storage';
  *
  * const db = createDatabase({ connectionString: process.env.DATABASE_URL! });
  * const middleware = createPersistenceMiddleware({

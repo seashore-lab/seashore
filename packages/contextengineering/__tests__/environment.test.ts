@@ -1,5 +1,5 @@
 /**
- * @seashore/contextengineering - Environment Provider Tests
+ * @seashorelab/contextengineering - Environment Provider Tests
  */
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';

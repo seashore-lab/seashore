@@ -11,7 +11,7 @@ Source: `examples/src/05-basic-memory.ts`
 ## How to run
 
 ```bash
-pnpm --filter @seashore/examples exec tsx src/05-basic-memory.ts
+pnpm --filter @seashorelab/examples exec tsx src/05-basic-memory.ts
 ```
 
 ## Key concepts

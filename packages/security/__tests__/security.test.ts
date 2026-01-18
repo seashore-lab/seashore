@@ -16,7 +16,7 @@ import {
   securityMiddleware,
 } from '../src/index';
 
-describe('@seashore/security', () => {
+describe('@seashorelab/security', () => {
   describe('promptInjectionRule', () => {
     it('should detect common injection patterns', async () => {
       const rule = promptInjectionRule();

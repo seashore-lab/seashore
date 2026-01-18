@@ -9,7 +9,7 @@ Create custom metrics when:
 ## Rule-based custom metric (Example 08 style)
 
 ```ts
-import { customMetric } from '@seashore/evaluation'
+import { customMetric } from '@seashorelab/evaluation'
 
 const lengthCheck = customMetric({
   name: 'length_check',

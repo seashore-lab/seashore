@@ -6,15 +6,15 @@
  */
 
 import 'dotenv/config';
-import { createAgent } from '@seashore/agent';
-import { openaiText } from '@seashore/llm';
-import { defineTool } from '@seashore/tool';
+import { createAgent } from '@seashorelab/agent';
+import { openaiText } from '@seashorelab/llm';
+import { defineTool } from '@seashorelab/tool';
 import {
   createDatabase,
   createThreadRepository,
   createMessageRepository,
   createPersistenceMiddleware,
-} from '@seashore/storage';
+} from '@seashorelab/storage';
 import { PostgreSqlContainer } from '@testcontainers/postgresql';
 import { readFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';

@@ -5,7 +5,7 @@ Create a client to talk to an MCP server over stdio, SSE, or WebSocket.
 ## Stdio
 
 ```ts
-import { createMCPClient } from '@seashore/mcp'
+import { createMCPClient } from '@seashorelab/mcp'
 
 const client = await createMCPClient({
   transport: 'stdio',

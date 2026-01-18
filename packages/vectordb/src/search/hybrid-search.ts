@@ -1,5 +1,5 @@
 /**
- * @seashore/vectordb - Hybrid Search
+ * @seashorelab/vectordb - Hybrid Search
  *
  * Combined vector + text search with RRF fusion
  */

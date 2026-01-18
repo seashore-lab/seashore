@@ -132,21 +132,21 @@ git push
 
 ```markdown
 ---
-"@seashore/agent": patch
-"@seashore/llm": patch
-"@seashore/tool": patch
-"@seashore/workflow": patch
-"@seashore/storage": patch
-"@seashore/vectordb": patch
-"@seashore/rag": patch
-"@seashore/memory": patch
-"@seashore/mcp": patch
-"@seashore/security": patch
-"@seashore/evaluation": patch
-"@seashore/deploy": patch
-"@seashore/observability": patch
-"@seashore/genui": patch
-"@seashore/contextengineering": patch
+"@seashorelab/agent": patch
+"@seashorelab/llm": patch
+"@seashorelab/tool": patch
+"@seashorelab/workflow": patch
+"@seashorelab/storage": patch
+"@seashorelab/vectordb": patch
+"@seashorelab/rag": patch
+"@seashorelab/memory": patch
+"@seashorelab/mcp": patch
+"@seashorelab/security": patch
+"@seashorelab/evaluation": patch
+"@seashorelab/deploy": patch
+"@seashorelab/observability": patch
+"@seashorelab/genui": patch
+"@seashorelab/contextengineering": patch
 ---
 
 Initial release of Seashore Agent Framework v0.1.0
@@ -168,38 +168,38 @@ git push
 包会按照依赖关系自动以正确的顺序发布：
 
 1. **基础层**（无依赖）
-   - @seashore/llm
-   - @seashore/tool
-   - @seashore/storage
-   - @seashore/contextengineering
+   - @seashorelab/llm
+   - @seashorelab/tool
+   - @seashorelab/storage
+   - @seashorelab/contextengineering
 
 2. **中间层**
-   - @seashore/workflow
-   - @seashore/vectordb
-   - @seashore/mcp
+   - @seashorelab/workflow
+   - @seashorelab/vectordb
+   - @seashorelab/mcp
 
 3. **高级层**
-   - @seashore/agent
-   - @seashore/rag
-   - @seashore/memory
-   - @seashore/observability
+   - @seashorelab/agent
+   - @seashorelab/rag
+   - @seashorelab/memory
+   - @seashorelab/observability
 
 4. **应用层**
-   - @seashore/genui
-   - @seashore/deploy
-   - @seashore/evaluation
-   - @seashore/security
+   - @seashorelab/genui
+   - @seashorelab/deploy
+   - @seashorelab/evaluation
+   - @seashorelab/security
 
 ## 验证发布
 
 发布后，在以下位置验证：
 
-1. NPM：https://www.npmjs.com/package/@seashore/agent
+1. NPM：https://www.npmjs.com/package/@seashorelab/agent
 2. 测试安装：
    ```bash
    npm create vite@latest test-seashore
    cd test-seashore
-   npm install @seashore/agent @seashore/llm
+   npm install @seashorelab/agent @seashorelab/llm
    ```
 
 ## 常见问题
@@ -224,7 +224,7 @@ pnpm publish --access public
 
 A:
 ```bash
-npm unpublish @seashore/agent@0.1.0
+npm unpublish @seashorelab/agent@0.1.0
 ```
 
 **注意**：只能在发布后 72 小时内撤销。

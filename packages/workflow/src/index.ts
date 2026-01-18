@@ -1,5 +1,5 @@
 /**
- * @seashore/workflow - Main Entry Point
+ * @seashorelab/workflow - Main Entry Point
  *
  * A workflow orchestration library for building multi-step AI workflows
  */

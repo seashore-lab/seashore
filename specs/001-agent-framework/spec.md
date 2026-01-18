@@ -17,7 +17,7 @@
 
 **Acceptance Scenarios**:
 
-1. **Given** 开发者已安装 `@seashore/agent` 包, **When** 开发者使用 `createAgent()` 定义 Agent 配置（系统提示词、工具列表、LLM 模型）, **Then** 返回一个可运行的 Agent 实例
+1. **Given** 开发者已安装 `@seashorelab/agent` 包, **When** 开发者使用 `createAgent()` 定义 Agent 配置（系统提示词、工具列表、LLM 模型）, **Then** 返回一个可运行的 Agent 实例
 2. **Given** Agent 实例已创建, **When** 调用 `agent.run("查询北京天气")`, **Then** Agent 自动识别需要调用 weather 工具，执行后返回包含天气信息的结构化响应
 3. **Given** Agent 运行过程中, **When** 工具执行失败, **Then** Agent 能够捕获错误并尝试替代方案或返回友好的错误提示
 
@@ -145,7 +145,7 @@
 
 **Acceptance Scenarios**:
 
-1. **Given** 开发者使用 React 构建前端, **When** 导入 `@seashore/genui` 组件, **Then** 获得开箱即用的聊天 UI 组件
+1. **Given** 开发者使用 React 构建前端, **When** 导入 `@seashorelab/genui` 组件, **Then** 获得开箱即用的聊天 UI 组件
 2. **Given** 聊天 UI 已渲染, **When** Agent 流式返回响应, **Then** UI 实时显示打字机效果
 3. **Given** Agent 调用了工具, **When** 工具执行中, **Then** UI 显示工具调用状态和结果
 

@@ -1,13 +1,13 @@
 /**
- * @seashore/agent - ReAct Agent
+ * @seashorelab/agent - ReAct Agent
  *
  * Implementation of the ReAct (Reasoning + Acting) agent pattern
  */
 
-import { chat } from '@seashore/llm';
-import type { Message, TokenUsage } from '@seashore/llm';
-import { filterChatMessages } from '@seashore/llm';
-import type { Tool } from '@seashore/tool';
+import { chat } from '@seashorelab/llm';
+import type { Message, TokenUsage } from '@seashorelab/llm';
+import { filterChatMessages } from '@seashorelab/llm';
+import type { Tool } from '@seashorelab/tool';
 import type {
   Agent,
   AgentConfig,
@@ -37,9 +37,9 @@ const DEFAULT_TEMPERATURE = 0.7;
  *
  * @example
  * ```typescript
- * import { createAgent } from '@seashore/agent';
- * import { openaiText } from '@seashore/llm';
- * import { defineTool } from '@seashore/tool';
+ * import { createAgent } from '@seashorelab/agent';
+ * import { openaiText } from '@seashorelab/llm';
+ * import { defineTool } from '@seashorelab/tool';
  *
  * const weatherTool = defineTool({
  *   name: 'get_weather',

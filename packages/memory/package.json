@@ -1,5 +1,5 @@
 {
-  "name": "@seashore/memory",
+  "name": "@seashorelab/memory",
   "version": "0.1.0",
   "description": "Memory management for seashore agents (short/mid/long-term)",
   "type": "module",
@@ -24,9 +24,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@seashore/storage": "workspace:*",
-    "@seashore/vectordb": "workspace:*",
-    "@seashore/llm": "workspace:*",
+    "@seashorelab/storage": "workspace:*",
+    "@seashorelab/vectordb": "workspace:*",
+    "@seashorelab/llm": "workspace:*",
     "drizzle-orm": "^0.44.2"
   },
   "devDependencies": {

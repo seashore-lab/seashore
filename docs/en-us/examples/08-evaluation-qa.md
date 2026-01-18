@@ -12,7 +12,7 @@ Source: `examples/src/08-evaluation-qa.ts`
 ## How to run
 
 ```bash
-pnpm --filter @seashore/examples exec tsx src/08-evaluation-qa.ts
+pnpm --filter @seashorelab/examples exec tsx src/08-evaluation-qa.ts
 ```
 
 ## Key concepts

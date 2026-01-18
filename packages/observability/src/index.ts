@@ -1,7 +1,7 @@
 /**
- * @seashore/observability
+ * @seashorelab/observability
  * Observability package for agent tracing, logging, and metrics
- * @module @seashore/observability
+ * @module @seashorelab/observability
  */
 
 // Types

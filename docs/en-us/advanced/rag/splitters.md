@@ -13,7 +13,7 @@ Splitters turn a `LoadedDocument` into many `DocumentChunk` entries that are eas
 This is the splitter used in the RAG example.
 
 ```ts
-import { createMarkdownSplitter } from '@seashore/rag'
+import { createMarkdownSplitter } from '@seashorelab/rag'
 
 const splitter = createMarkdownSplitter({
   chunkSize: 200,
@@ -29,7 +29,7 @@ const chunks = await splitter.split(doc)
 Try multiple separators in order:
 
 ```ts
-import { createRecursiveSplitter } from '@seashore/rag'
+import { createRecursiveSplitter } from '@seashorelab/rag'
 
 const splitter = createRecursiveSplitter({
   chunkSize: 1000,
@@ -41,7 +41,7 @@ const splitter = createRecursiveSplitter({
 ## Character splitter
 
 ```ts
-import { createCharacterSplitter } from '@seashore/rag'
+import { createCharacterSplitter } from '@seashorelab/rag'
 
 const splitter = createCharacterSplitter({
   chunkSize: 1000,
@@ -55,7 +55,7 @@ const splitter = createCharacterSplitter({
 Token splitters help keep chunk size aligned with model tokenization.
 
 ```ts
-import { createTokenSplitter } from '@seashore/rag'
+import { createTokenSplitter } from '@seashorelab/rag'
 
 const splitter = createTokenSplitter({
   chunkSize: 400,
@@ -68,7 +68,7 @@ const splitter = createTokenSplitter({
 Useful when you want one chunk per header section:
 
 ```ts
-import { createHeaderSplitter } from '@seashore/rag'
+import { createHeaderSplitter } from '@seashorelab/rag'
 
 const splitter = createHeaderSplitter({
   maxDepth: 3,

@@ -1,5 +1,5 @@
 /**
- * @seashore/memory
+ * @seashorelab/memory
  *
  * Memory management for seashore agents
  * Short-term and long-term memory with vector search

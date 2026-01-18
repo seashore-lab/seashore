@@ -1,5 +1,5 @@
 /**
- * @seashore/storage - Database Connection
+ * @seashorelab/storage - Database Connection
  *
  * PostgreSQL database connection with Drizzle ORM
  */
@@ -19,7 +19,7 @@ export type DrizzleDB = ReturnType<typeof drizzle<typeof schema>>;
  *
  * @example
  * ```typescript
- * import { createDatabase } from '@seashore/storage';
+ * import { createDatabase } from '@seashorelab/storage';
  *
  * const database = createDatabase({
  *   connectionString: process.env.DATABASE_URL!,

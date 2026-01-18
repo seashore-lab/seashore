@@ -27,8 +27,8 @@ import {
   createMarkdownSplitter,
   createInMemoryRetriever,
   type DocumentChunk,
-} from '@seashore/rag'
-import { openaiEmbed, generateBatchEmbeddings } from '@seashore/llm'
+} from '@seashorelab/rag'
+import { openaiEmbed, generateBatchEmbeddings } from '@seashorelab/llm'
 
 const loader = createMarkdownStringLoader('# Title\nSome content...')
 const docs = await loader.load()
@@ -77,7 +77,7 @@ console.log(results[0]?.score)
 Fast, in-memory vector search:
 
 ```typescript
-import { createInMemoryRetriever } from '@seashore/rag'
+import { createInMemoryRetriever } from '@seashorelab/rag'
 
 const retriever = createInMemoryRetriever(embeddingFn, {
   scoreThreshold: 0.7, // Minimum similarity score
@@ -96,8 +96,8 @@ const results = await retriever.retrieve('query', {
 Persistent vector search with PostgreSQL + pgvector:
 
 ```typescript
-import { createDatabaseRetriever } from '@seashore/rag'
-import { createVectorStore } from '@seashore/vectordb'
+import { createDatabaseRetriever } from '@seashorelab/rag'
+import { createVectorStore } from '@seashorelab/vectordb'
 
 const vectorStore = await createVectorStore({
   db: myDatabase,
@@ -143,7 +143,7 @@ const results = await retriever.retrieve('machine learning', {
 Combine vector and keyword search:
 
 ```typescript
-import { hybridSearch } from '@seashore/vectordb'
+import { hybridSearch } from '@seashorelab/vectordb'
 
 const results = await hybridSearch({
   vectorStore,
@@ -182,8 +182,8 @@ const results = await retriever.retrieve('tutorial', {
 ### Manual RAG
 
 ```typescript
-import { createAgent } from '@seashore/agent'
-import { openaiText } from '@seashore/llm'
+import { createAgent } from '@seashorelab/agent'
+import { openaiText } from '@seashorelab/llm'
 
 const agent = createAgent({
   name: 'assistant',
@@ -213,7 +213,7 @@ Answer the question based only on the context provided.
 Create a tool that retrieves information:
 
 ```typescript
-import { defineTool } from '@seashore/tool'
+import { defineTool } from '@seashorelab/tool'
 import { z } from 'zod'
 
 const retrievalTool = defineTool({

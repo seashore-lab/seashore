@@ -1,6 +1,6 @@
 /**
  * Exporters module
- * @module @seashore/observability
+ * @module @seashorelab/observability
  */
 
 export { createOTLPExporter, type OTLPExporterConfig } from './otlp';

@@ -12,7 +12,7 @@ import {
   createConsoleExporter,
 } from '../src/index';
 
-describe('@seashore/observability', () => {
+describe('@seashorelab/observability', () => {
   describe('createTracer', () => {
     it('should create a tracer with service name', () => {
       const tracer = createTracer({ serviceName: 'test-service' });

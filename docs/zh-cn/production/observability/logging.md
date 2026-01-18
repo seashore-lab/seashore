@@ -5,7 +5,7 @@
 ## 基本用法
 
 ```ts
-import { createLogger } from '@seashore/observability'
+import { createLogger } from '@seashorelab/observability'
 
 const logger = createLogger({
   name: 'my-service',

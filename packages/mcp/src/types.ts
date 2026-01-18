@@ -1,6 +1,6 @@
 /**
  * MCP (Model Context Protocol) type definitions
- * @module @seashore/mcp
+ * @module @seashorelab/mcp
  */
 
 // z type import removed - was unused

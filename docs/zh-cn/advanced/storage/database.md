@@ -5,7 +5,7 @@
 ## 创建数据库连接
 
 ```ts
-import { createDatabase } from '@seashore/storage'
+import { createDatabase } from '@seashorelab/storage'
 
 const db = createDatabase({
   connectionString: process.env.DATABASE_URL,

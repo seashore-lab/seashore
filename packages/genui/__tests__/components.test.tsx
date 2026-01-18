@@ -1,6 +1,6 @@
 /**
  * GenUI component tests
- * @module @seashore/genui
+ * @module @seashorelab/genui
  */
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
@@ -15,7 +15,7 @@ import {
 } from '../src/index.js';
 import type { ChatMessageType, ToolCallUI } from '../src/types.js';
 
-describe('@seashore/genui', () => {
+describe('@seashorelab/genui', () => {
   describe('createGenUIRegistry', () => {
     it('should create a registry', () => {
       const registry = createGenUIRegistry();

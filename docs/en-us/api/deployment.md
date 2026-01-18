@@ -1,6 +1,6 @@
 # API Reference: Deployment
 
-Package: `@seashore/deploy`
+Package: `@seashorelab/deploy`
 
 ## Server
 

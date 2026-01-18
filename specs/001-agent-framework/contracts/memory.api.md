@@ -1,6 +1,6 @@
-# API Contract: @seashore/memory
+# API Contract: @seashorelab/memory
 
-**Package**: `@seashore/memory`  
+**Package**: `@seashorelab/memory`  
 **Version**: 0.1.0
 
 ## 概述
@@ -106,8 +106,8 @@ export const memories = pgTable(
 ### createMemoryManager
 
 ```typescript
-import { createMemoryManager } from '@seashore/memory'
-import { openaiEmbed } from '@seashore/llm'
+import { createMemoryManager } from '@seashorelab/memory'
+import { openaiEmbed } from '@seashorelab/llm'
 
 const memoryManager = createMemoryManager({
   db: database,
@@ -303,8 +303,8 @@ await memoryManager.runConsolidationCycle()
 ### 使用 LLM 评估重要性
 
 ```typescript
-import { createImportanceEvaluator } from '@seashore/memory'
-import { openaiText } from '@seashore/llm'
+import { createImportanceEvaluator } from '@seashorelab/memory'
+import { openaiText } from '@seashorelab/llm'
 
 const evaluator = createImportanceEvaluator({
   adapter: openaiText('gpt-4o-mini'),
@@ -335,8 +335,8 @@ const scores = await evaluator.evaluateBatch([
 为 Agent 添加记忆能力：
 
 ```typescript
-import { createAgent } from '@seashore/agent'
-import { withMemory } from '@seashore/memory'
+import { createAgent } from '@seashorelab/agent'
+import { withMemory } from '@seashorelab/memory'
 
 const agent = createAgent({
   name: 'memory-agent',

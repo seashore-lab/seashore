@@ -1,5 +1,5 @@
 /**
- * @seashore/workflow - Condition Node
+ * @seashorelab/workflow - Condition Node
  *
  * Node type for conditional routing
  */
@@ -22,7 +22,7 @@ export interface ConditionNodeOutput {
  *
  * @example
  * ```typescript
- * import { createConditionNode } from '@seashore/workflow';
+ * import { createConditionNode } from '@seashorelab/workflow';
  *
  * const routeNode = createConditionNode({
  *   name: 'route',
@@ -88,7 +88,7 @@ export interface SwitchNodeOutput {
  *
  * @example
  * ```typescript
- * import { createSwitchNode } from '@seashore/workflow';
+ * import { createSwitchNode } from '@seashorelab/workflow';
  *
  * const routeNode = createSwitchNode({
  *   name: 'route-by-type',

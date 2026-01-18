@@ -9,7 +9,7 @@ Gemini text adapters are created with `geminiText()`.
 ## Example
 
 ```ts
-import { geminiText } from '@seashore/llm'
+import { geminiText } from '@seashorelab/llm'
 
 const model = geminiText('gemini-2.0-flash', {
   apiKey: process.env.GOOGLE_API_KEY,

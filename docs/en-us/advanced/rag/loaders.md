@@ -2,7 +2,7 @@
 
 Document loaders turn “something” (a file path, a string, a URL, a glob) into one or more `LoadedDocument` objects.
 
-Seashore provides several built-in loaders via `@seashore/rag`.
+Seashore provides several built-in loaders via `@seashorelab/rag`.
 
 ## Common patterns
 
@@ -15,7 +15,7 @@ Most loaders return an array, even if it’s usually length 1.
 ## Loading markdown from a string (Example 04)
 
 ```ts
-import { createMarkdownStringLoader } from '@seashore/rag'
+import { createMarkdownStringLoader } from '@seashorelab/rag'
 
 const loader = createMarkdownStringLoader(`# Title\n\nSome content...`)
 const docs = await loader.load()
@@ -26,7 +26,7 @@ Use this for unit tests, demos, or content stored in a database.
 ## Loading plain text
 
 ```ts
-import { createStringLoader } from '@seashore/rag'
+import { createStringLoader } from '@seashorelab/rag'
 
 const loader = createStringLoader('hello world', {
   source: 'manual-input',
@@ -39,7 +39,7 @@ const docs = await loader.load()
 ## Loading markdown from files
 
 ```ts
-import { createMarkdownLoader } from '@seashore/rag'
+import { createMarkdownLoader } from '@seashorelab/rag'
 
 const loader = createMarkdownLoader({
   extractFrontmatter: true,
@@ -53,7 +53,7 @@ const docs = await loader.load('./README.md')
 ## Loading multiple sources
 
 ```ts
-import { createMultiMarkdownLoader } from '@seashore/rag'
+import { createMultiMarkdownLoader } from '@seashorelab/rag'
 
 const loader = createMultiMarkdownLoader({ extractHeadings: true })
 const docs = await loader.load([
@@ -65,7 +65,7 @@ const docs = await loader.load([
 ## Loading by glob (directories)
 
 ```ts
-import { createGlobLoader } from '@seashore/rag'
+import { createGlobLoader } from '@seashorelab/rag'
 
 const loader = createGlobLoader({
   cwd: process.cwd(),
@@ -79,7 +79,7 @@ const docs = await loader.load()
 ## Loading PDFs
 
 ```ts
-import { createPDFLoader } from '@seashore/rag'
+import { createPDFLoader } from '@seashorelab/rag'
 
 const loader = createPDFLoader({ splitPages: true })
 const docs = await loader.load('./whitepaper.pdf')
@@ -88,7 +88,7 @@ const docs = await loader.load('./whitepaper.pdf')
 ## Loading web pages
 
 ```ts
-import { createWebLoader } from '@seashore/rag'
+import { createWebLoader } from '@seashorelab/rag'
 
 const loader = createWebLoader({
   selector: 'article',

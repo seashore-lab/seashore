@@ -11,7 +11,7 @@ Source: `examples/src/07-security-guardrails.ts`
 ## How to run
 
 ```bash
-pnpm --filter @seashore/examples exec tsx src/07-security-guardrails.ts
+pnpm --filter @seashorelab/examples exec tsx src/07-security-guardrails.ts
 ```
 
 ## Key concepts

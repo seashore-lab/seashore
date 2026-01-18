@@ -1,5 +1,5 @@
 /**
- * @seashore/memory - Memory Consolidation
+ * @seashorelab/memory - Memory Consolidation
  *
  * Utilities for consolidating and summarizing memories
  */

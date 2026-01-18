@@ -1,6 +1,6 @@
-# API Contract: @seashore/deploy
+# API Contract: @seashorelab/deploy
 
-**Package**: `@seashore/deploy`  
+**Package**: `@seashorelab/deploy`  
 **Version**: 0.1.0
 
 ## 概述
@@ -40,9 +40,9 @@ export type { ChatRequest, ChatResponse, AgentRequest } from './types'
 ### createServer
 
 ```typescript
-import { createServer } from '@seashore/deploy'
-import { createAgent } from '@seashore/agent'
-import { openaiText } from '@seashore/llm'
+import { createServer } from '@seashorelab/deploy'
+import { createAgent } from '@seashorelab/agent'
+import { openaiText } from '@seashorelab/llm'
 
 const agent = createAgent({
   name: 'chat-agent',
@@ -84,7 +84,7 @@ const server = createServer({
 Server 返回标准 Hono 应用：
 
 ```typescript
-import { createServer } from '@seashore/deploy'
+import { createServer } from '@seashorelab/deploy'
 
 const server = createServer({ agents: { chat: agent } })
 
@@ -172,7 +172,7 @@ interface ThreadResponse {
 ### SSE 流
 
 ```typescript
-import { createServer } from '@seashore/deploy'
+import { createServer } from '@seashorelab/deploy'
 
 const server = createServer({
   agents: { chat: agent },
@@ -277,9 +277,9 @@ id = "xxx"
 
 ```typescript
 // src/index.ts
-import { createServer, cloudflareAdapter } from '@seashore/deploy'
-import { createAgent } from '@seashore/agent'
-import { openaiText } from '@seashore/llm'
+import { createServer, cloudflareAdapter } from '@seashorelab/deploy'
+import { createAgent } from '@seashorelab/agent'
+import { openaiText } from '@seashorelab/llm'
 
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext) {
@@ -306,7 +306,7 @@ interface Env {
 ### SSE Streaming 注意事项
 
 ```typescript
-import { createServer, cloudflareAdapter } from '@seashore/deploy'
+import { createServer, cloudflareAdapter } from '@seashorelab/deploy'
 
 const server = createServer({
   agents: { chat: agent },
@@ -329,7 +329,7 @@ const server = createServer({
 ### 独立服务器
 
 ```typescript
-import { createServer, nodeAdapter } from '@seashore/deploy'
+import { createServer, nodeAdapter } from '@seashorelab/deploy'
 import { serve } from '@hono/node-server'
 
 const server = createServer({
@@ -348,7 +348,7 @@ console.log('Server running on http://localhost:3000')
 
 ```typescript
 import express from 'express'
-import { createServer } from '@seashore/deploy'
+import { createServer } from '@seashorelab/deploy'
 
 const app = express()
 const server = createServer({ agents: { chat: agent } })
@@ -380,7 +380,7 @@ app.listen(3000)
 ### 认证
 
 ```typescript
-import { createServer } from '@seashore/deploy'
+import { createServer } from '@seashorelab/deploy'
 import { bearerAuth } from 'hono/bearer-auth'
 
 const server = createServer({

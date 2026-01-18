@@ -1,6 +1,6 @@
-# API Contract: @seashore/mcp
+# API Contract: @seashorelab/mcp
 
-**Package**: `@seashore/mcp`  
+**Package**: `@seashorelab/mcp`  
 **Version**: 0.1.0
 
 ## 概述
@@ -32,7 +32,7 @@ export type { MCPTool, MCPResource, MCPPrompt, MCPServerConfig } from './types'
 ### createMCPClient
 
 ```typescript
-import { createMCPClient } from '@seashore/mcp'
+import { createMCPClient } from '@seashorelab/mcp'
 
 // 连接到 stdio 服务器
 const client = await createMCPClient({
@@ -183,8 +183,8 @@ console.log('Messages:', result.messages)
 将 MCP 工具转换为 Seashore 工具格式：
 
 ```typescript
-import { createMCPToolBridge } from '@seashore/mcp'
-import { createAgent } from '@seashore/agent'
+import { createMCPToolBridge } from '@seashorelab/mcp'
+import { createAgent } from '@seashorelab/agent'
 
 // 创建桥接器
 const bridge = await createMCPToolBridge({
@@ -229,7 +229,7 @@ const result = await searchTool.execute({ query: 'test' })
 ### 连接多个 MCP 服务器
 
 ```typescript
-import { createMCPClient, createMCPToolBridge } from '@seashore/mcp'
+import { createMCPClient, createMCPToolBridge } from '@seashorelab/mcp'
 
 // 连接多个服务器
 const filesystemClient = await createMCPClient({
@@ -273,7 +273,7 @@ const agent = createAgent({
 从配置文件发现 MCP 服务器：
 
 ```typescript
-import { discoverMCPServers } from '@seashore/mcp'
+import { discoverMCPServers } from '@seashorelab/mcp'
 
 // 从 mcp.json 发现服务器
 const servers = await discoverMCPServers('./mcp.json')
@@ -312,7 +312,7 @@ for (const server of servers) {
 ### 批量连接
 
 ```typescript
-import { discoverMCPServers, createMCPClient, createMCPToolBridge } from '@seashore/mcp'
+import { discoverMCPServers, createMCPClient, createMCPToolBridge } from '@seashorelab/mcp'
 
 const configs = await discoverMCPServers('./mcp.json')
 
@@ -334,7 +334,7 @@ const allTools = bridges.flatMap((bridge) => bridge.getTools())
 ## 错误处理
 
 ```typescript
-import { MCPError, MCPConnectionError, MCPTimeoutError } from '@seashore/mcp'
+import { MCPError, MCPConnectionError, MCPTimeoutError } from '@seashorelab/mcp'
 
 try {
   const result = await client.callTool('risky_operation', { param: 'value' })

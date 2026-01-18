@@ -1,6 +1,6 @@
 /**
  * Console exporter for development and debugging
- * @module @seashore/observability
+ * @module @seashorelab/observability
  */
 
 import type { Span, SpanExporter, BaseExporterConfig } from '../types';

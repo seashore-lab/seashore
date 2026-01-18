@@ -1,5 +1,5 @@
 /**
- * @seashore/tool - Validation Middleware
+ * @seashorelab/tool - Validation Middleware
  *
  * Middleware for validating tool inputs before execution
  */
@@ -69,7 +69,7 @@ export interface ValidationMiddlewareOptions {
  *
  * @example
  * ```typescript
- * import { defineTool, withValidation } from '@seashore/tool';
+ * import { defineTool, withValidation } from '@seashorelab/tool';
  *
  * const baseTool = defineTool({
  *   name: 'search',

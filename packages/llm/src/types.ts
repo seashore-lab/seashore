@@ -1,5 +1,5 @@
 /**
- * @seashore/llm - Types
+ * @seashorelab/llm - Types
  *
  * Core type definitions for LLM adapters and operations
  */

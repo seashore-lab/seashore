@@ -1,5 +1,5 @@
 /**
- * @seashore/rag - Token Splitter
+ * @seashorelab/rag - Token Splitter
  *
  * Split text by token count using tiktoken-compatible encoding
  */

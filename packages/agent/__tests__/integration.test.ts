@@ -1,5 +1,5 @@
 /**
- * @seashore/agent - Integration Tests
+ * @seashorelab/agent - Integration Tests
  *
  * End-to-end tests with mock LLM adapter
  */
@@ -33,8 +33,8 @@ function setMockResponses(responses: MockResponse[]) {
 /**
  * Mock the @seashore/llm chat function
  */
-vi.mock('@seashore/llm', async (importOriginal) => {
-  const original = await importOriginal<typeof import('@seashore/llm')>();
+vi.mock('@seashorelab/llm', async (importOriginal) => {
+  const original = await importOriginal<typeof import('@seashorelab/llm')>();
 
   const mockChat = async function* (options: {
     adapter: TextAdapter;

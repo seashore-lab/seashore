@@ -1,5 +1,5 @@
 /**
- * @seashore/memory - Short-Term Memory
+ * @seashorelab/memory - Short-Term Memory
  *
  * In-memory cache for recent conversation context
  */

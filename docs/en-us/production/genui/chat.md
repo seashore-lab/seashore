@@ -3,7 +3,7 @@
 ## Full UI
 
 ```tsx
-import { Chat } from '@seashore/genui'
+import { Chat } from '@seashorelab/genui'
 
 export function App() {
   return <Chat endpoint="/api/chat" welcomeMessage="Hello!" />
@@ -13,7 +13,7 @@ export function App() {
 ## Hook-based UI
 
 ```tsx
-import { useChat } from '@seashore/genui'
+import { useChat } from '@seashorelab/genui'
 
 export function MinimalChat() {
   const { messages, input, setInput, sendMessage, isLoading } = useChat({

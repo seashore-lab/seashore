@@ -1,6 +1,6 @@
 # API Reference: Evaluation
 
-Package: `@seashore/evaluation`
+Package: `@seashorelab/evaluation`
 
 ## Evaluators
 

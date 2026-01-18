@@ -1,6 +1,6 @@
 # Vector Databases
 
-The Vector DB module (`@seashore/vectordb`) provides pgvector-backed storage and search, including hybrid search (vector + full-text).
+The Vector DB module (`@seashorelab/vectordb`) provides pgvector-backed storage and search, including hybrid search (vector + full-text).
 
 If you want a runnable reference, see [examples/13-vectordb-hybrid-search.md](../examples/13-vectordb-hybrid-search.md).
 

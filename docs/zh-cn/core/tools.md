@@ -8,12 +8,12 @@
 - **自描述**：为大语言模型派生 JSON 模式
 - **可执行**：工具具有返回结构化数据的 `execute()` 函数
 
-工具在 `@seashore/tool` 中定义，并被智能体（`@seashore/agent`）和工作流（`@seashore/workflow`）使用。
+工具在 `@seashorelab/tool` 中定义，并被智能体（`@seashorelab/agent`）和工作流（`@seashorelab/workflow`）使用。
 
 ## 快速示例
 
 ```ts
-import { defineTool } from '@seashore/tool'
+import { defineTool } from '@seashorelab/tool'
 import { z } from 'zod'
 
 export const calculatorTool = defineTool({
@@ -56,7 +56,7 @@ Seashore 中的工具由以下部分组成：
 ### 基本工具
 
 ```typescript
-import { defineTool } from '@seashore/tool'
+import { defineTool } from '@seashorelab/tool'
 import { z } from 'zod'
 
 const weatherTool = defineTool({
@@ -260,7 +260,7 @@ const calculatorTool = defineTool({
 使用 `withValidation` 进行额外的运行时验证：
 
 ```typescript
-import { withValidation, ValidationError } from '@seashore/tool'
+import { withValidation, ValidationError } from '@seashorelab/tool'
 
 const userTool = defineTool({
   name: 'update_user',
@@ -291,7 +291,7 @@ const validatedTool = withValidation(userTool, {
 对于敏感操作，在执行前需要用户批准：
 
 ```typescript
-import { withApproval, createMemoryApprovalHandler } from '@seashore/tool'
+import { withApproval, createMemoryApprovalHandler } from '@seashorelab/tool'
 
 // 创建审批处理程序
 const approvalHandler = createMemoryApprovalHandler()
@@ -326,7 +326,7 @@ approvalHandler.approve(pendingRequests[0].id, 'user-123')
 定义在客户端（浏览器）执行的工具：
 
 ```typescript
-import { defineClientTool } from '@seashore/tool'
+import { defineClientTool } from '@seashorelab/tool'
 
 const showMapTool = defineClientTool({
   name: 'show_map',
@@ -358,7 +358,7 @@ Seashore 提供现成可用的工具：
 由 Serper API 提供支持的网页搜索：
 
 ```typescript
-import { serperTool } from '@seashore/tool'
+import { serperTool } from '@seashorelab/tool'
 
 const searchTool = serperTool({
   apiKey: process.env.SERPER_API_KEY,
@@ -373,7 +373,7 @@ const searchTool = serperTool({
 使用 Firecrawl 进行网页抓取：
 
 ```typescript
-import { firecrawlTool } from '@seashore/tool'
+import { firecrawlTool } from '@seashorelab/tool'
 
 const scrapeTool = firecrawlTool({
   apiKey: process.env.FIRECRAWL_API_KEY,
@@ -395,7 +395,7 @@ const scrapeTool = firecrawlTool({
 ## 示例：完整的工具实现
 
 ```typescript
-import { defineTool } from '@seashore/tool'
+import { defineTool } from '@seashorelab/tool'
 import { z } from 'zod'
 
 const emailTool = defineTool({

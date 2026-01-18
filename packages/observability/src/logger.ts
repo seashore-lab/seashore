@@ -1,6 +1,6 @@
 /**
  * Logger implementation
- * @module @seashore/observability
+ * @module @seashorelab/observability
  */
 
 import type { Logger, LoggerConfig, LogLevel, LogEntry, SpanContext } from './types';

@@ -1,6 +1,6 @@
 /**
  * ChatInput component
- * @module @seashore/genui
+ * @module @seashorelab/genui
  */
 
 import React, { useState, useRef, useCallback, KeyboardEvent, ChangeEvent } from 'react';

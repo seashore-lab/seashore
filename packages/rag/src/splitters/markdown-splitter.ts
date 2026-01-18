@@ -1,5 +1,5 @@
 /**
- * @seashore/rag - Markdown Splitter
+ * @seashorelab/rag - Markdown Splitter
  *
  * Split markdown documents by structure (headers, code blocks, etc.)
  */

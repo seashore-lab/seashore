@@ -1,5 +1,5 @@
 /**
- * @seashore/vectordb
+ * @seashorelab/vectordb
  *
  * Vector database utilities for pgvector
  * HNSW indexing, hybrid search (vector + full-text)

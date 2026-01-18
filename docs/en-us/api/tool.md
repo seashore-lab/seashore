@@ -1,6 +1,6 @@
 # API Reference: Tool
 
-Package: `@seashore/tool`
+Package: `@seashorelab/tool`
 
 ## Defining tools
 

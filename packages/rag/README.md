@@ -1,1 +1,1 @@
-# @seashore/rag
+# @seashorelab/rag

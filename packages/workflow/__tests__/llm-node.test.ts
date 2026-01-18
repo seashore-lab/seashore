@@ -1,5 +1,5 @@
 /**
- * @seashore/workflow - LLM Node Tests
+ * @seashorelab/workflow - LLM Node Tests
  *
  * Tests for LLM node functionality with model configuration
  */
@@ -9,8 +9,8 @@ import { createLLMNode } from '../src/nodes/llm-node';
 import { createWorkflowContext } from '../src/context';
 
 // Mock @seashore/llm module
-vi.mock('@seashore/llm', async () => {
-  const actual = await vi.importActual('@seashore/llm');
+vi.mock('@seashorelab/llm', async () => {
+  const actual = await vi.importActual('@seashorelab/llm');
   return {
     ...actual,
     chat: vi.fn(),
@@ -18,7 +18,7 @@ vi.mock('@seashore/llm', async () => {
 });
 
 // Import the mocked functions
-import { chat } from '@seashore/llm';
+import { chat } from '@seashorelab/llm';
 
 const mockChat = chat as ReturnType<typeof vi.fn>;
 

@@ -1,5 +1,5 @@
 /**
- * @seashore/workflow - Custom Node
+ * @seashorelab/workflow - Custom Node
  *
  * Node type for custom logic
  */

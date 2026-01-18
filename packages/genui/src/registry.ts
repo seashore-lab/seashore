@@ -1,6 +1,6 @@
 /**
  * GenUI Registry - registers component renderers for tool calls
- * @module @seashore/genui
+ * @module @seashorelab/genui
  */
 
 import type { GenUIRegistry, ComponentRenderer } from './types';

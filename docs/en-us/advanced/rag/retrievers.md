@@ -10,7 +10,7 @@ Retrievers take a user query and return the most relevant chunks. Seashore suppo
 ## In-memory retriever (Example 04)
 
 ```ts
-import { createInMemoryRetriever } from '@seashore/rag'
+import { createInMemoryRetriever } from '@seashorelab/rag'
 
 const retriever = createInMemoryRetriever(embeddingFn)
 await retriever.addDocuments(chunks)
@@ -26,9 +26,9 @@ const results = await retriever.retrieve('What is it?', {
 Use this when you want persistence and scalable retrieval.
 
 ```ts
-import { createVectorRetriever } from '@seashore/rag'
-import { createVectorStore } from '@seashore/vectordb'
-import { openaiEmbed } from '@seashore/llm'
+import { createVectorRetriever } from '@seashorelab/rag'
+import { createVectorStore } from '@seashorelab/vectordb'
+import { openaiEmbed } from '@seashorelab/llm'
 
 const vectorStore = createVectorStore({
   db,
@@ -47,7 +47,7 @@ const retriever = createVectorRetriever({
 Hybrid retrieval combines vector similarity with text search for better recall.
 
 ```ts
-import { createHybridRetriever } from '@seashore/rag'
+import { createHybridRetriever } from '@seashorelab/rag'
 
 const retriever = createHybridRetriever({
   store: vectorStore,
@@ -65,7 +65,7 @@ For complex domains, consider:
 - reranking top-$k$ results with another model
 
 ```ts
-import { createMultiRetriever, createRerankingRetriever } from '@seashore/rag'
+import { createMultiRetriever, createRerankingRetriever } from '@seashorelab/rag'
 
 const combined = createMultiRetriever([
   vectorRetriever,

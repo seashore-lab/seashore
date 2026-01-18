@@ -42,8 +42,8 @@ OPENAI_API_KEY=your_api_key_here
 
 ```typescript
 import 'dotenv/config'
-import { createAgent } from '@seashore/agent'
-import { openaiText } from '@seashore/llm'
+import { createAgent } from '@seashorelab/agent'
+import { openaiText } from '@seashorelab/llm'
 
 // 创建一个简单的智能体
 const agent = createAgent({
@@ -73,9 +73,9 @@ npx tsx basic-agent.ts
 
 ```typescript
 import 'dotenv/config'
-import { createAgent } from '@seashore/agent'
-import { openaiText } from '@seashore/llm'
-import { defineTool } from '@seashore/tool'
+import { createAgent } from '@seashorelab/agent'
+import { openaiText } from '@seashorelab/llm'
+import { defineTool } from '@seashorelab/tool'
 import { z } from 'zod'
 
 // 定义一个天气工具
@@ -122,8 +122,8 @@ console.log(result.content)
 
 ```typescript
 import 'dotenv/config'
-import { createAgent } from '@seashore/agent'
-import { openaiText } from '@seashore/llm'
+import { createAgent } from '@seashorelab/agent'
+import { openaiText } from '@seashorelab/llm'
 
 const agent = createAgent({
   name: 'assistant',
@@ -146,8 +146,8 @@ for await (const chunk of agent.stream('给我讲一个短故事')) {
 
 ```typescript
 import 'dotenv/config'
-import { createAgent } from '@seashore/agent'
-import { openaiText } from '@seashore/llm'
+import { createAgent } from '@seashorelab/agent'
+import { openaiText } from '@seashorelab/llm'
 
 const agent = createAgent({
   name: 'assistant',
@@ -177,7 +177,7 @@ Seashore 支持多个 LLM 提供商。只需交换适配器：
 ### Anthropic Claude
 
 ```typescript
-import { anthropicText } from '@seashore/llm'
+import { anthropicText } from '@seashorelab/llm'
 
 const agent = createAgent({
   name: 'assistant',
@@ -190,7 +190,7 @@ const agent = createAgent({
 ### Google Gemini
 
 ```typescript
-import { geminiText } from '@seashore/llm'
+import { geminiText } from '@seashorelab/llm'
 
 const agent = createAgent({
   name: 'assistant',
@@ -229,7 +229,7 @@ const agent = createAgent({
 ### 错误处理
 
 ```typescript
-import { AgentError } from '@seashore/agent'
+import { AgentError } from '@seashorelab/agent'
 
 try {
   const result = await agent.run('您的问题')
@@ -246,7 +246,7 @@ try {
 ### 带退避的重试
 
 ```typescript
-import { withRetry } from '@seashore/agent'
+import { withRetry } from '@seashorelab/agent'
 
 const result = await withRetry(
   () => agent.run('您的问题'),

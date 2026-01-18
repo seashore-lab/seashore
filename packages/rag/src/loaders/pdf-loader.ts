@@ -1,5 +1,5 @@
 /**
- * @seashore/rag - PDF Loader
+ * @seashorelab/rag - PDF Loader
  *
  * Load PDF documents using pdf-parse
  */

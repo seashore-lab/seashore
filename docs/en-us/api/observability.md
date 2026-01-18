@@ -1,6 +1,6 @@
 # API Reference: Observability
 
-Package: `@seashore/observability`
+Package: `@seashorelab/observability`
 
 ## Logging
 

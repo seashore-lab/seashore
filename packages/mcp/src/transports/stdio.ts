@@ -1,7 +1,7 @@
 /**
  * Stdio transport for MCP
  * Communicates with MCP server via subprocess stdin/stdout
- * @module @seashore/mcp
+ * @module @seashorelab/mcp
  */
 
 import { spawn, type ChildProcess } from 'node:child_process';
@@ -153,7 +153,7 @@ export class StdioTransport {
         roots: { listChanged: true },
       },
       clientInfo: {
-        name: '@seashore/mcp',
+        name: '@seashorelab/mcp',
         version: '0.1.0',
       },
     });

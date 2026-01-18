@@ -6,9 +6,9 @@
  */
 
 import 'dotenv/config';
-import { createServer, type Agent as DeployAgent, type Message } from '@seashore/deploy';
-import { createAgent } from '@seashore/agent';
-import { openaiText } from '@seashore/llm';
+import { createServer, type Agent as DeployAgent, type Message } from '@seashorelab/deploy';
+import { createAgent } from '@seashorelab/agent';
+import { openaiText } from '@seashorelab/llm';
 import { serve } from '@hono/node-server';
 
 const agent = createAgent({

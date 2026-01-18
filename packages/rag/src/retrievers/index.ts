@@ -1,5 +1,5 @@
 /**
- * @seashore/rag - Retrievers Index
+ * @seashorelab/rag - Retrievers Index
  *
  * Re-exports all retriever implementations
  */

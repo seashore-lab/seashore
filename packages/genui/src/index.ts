@@ -1,11 +1,11 @@
 /**
- * @seashore/genui - Generative UI components for Seashore Agent framework
- * @module @seashore/genui
+ * @seashorelab/genui - Generative UI components for Seashore Agent framework
+ * @module @seashorelab/genui
  *
  * @example Basic chat usage
  * ```tsx
- * import { Chat } from '@seashore/genui'
- * import '@seashore/genui/styles.css'
+ * import { Chat } from '@seashorelab/genui'
+ * import '@seashorelab/genui/styles.css'
  *
  * function App() {
  *   return (
@@ -20,7 +20,7 @@
  *
  * @example Custom GenUI components
  * ```tsx
- * import { Chat, createGenUIRegistry } from '@seashore/genui'
+ * import { Chat, createGenUIRegistry } from '@seashorelab/genui'
  *
  * const registry = createGenUIRegistry()
  *

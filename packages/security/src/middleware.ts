@@ -1,6 +1,6 @@
 /**
  * Security middleware for agent integration
- * @module @seashore/security
+ * @module @seashorelab/security
  */
 
 import type { Guardrails, Violation } from './types';

@@ -1,6 +1,6 @@
 /**
  * GenUI type definitions
- * @module @seashore/genui
+ * @module @seashorelab/genui
  */
 
 import type { ReactNode, ComponentType } from 'react';

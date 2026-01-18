@@ -1,6 +1,6 @@
 # 多模态支持
 
-`@seashore/llm` 还公开了用于多模态任务的适配器：
+`@seashorelab/llm` 还公开了用于多模态任务的适配器：
 
 - 图像生成（例如 DALL·E、Imagen）
 - 视频生成（例如 Sora）

@@ -1,5 +1,5 @@
 /**
- * @seashore/workflow - Context Management
+ * @seashorelab/workflow - Context Management
  *
  * Workflow context utilities and management
  */

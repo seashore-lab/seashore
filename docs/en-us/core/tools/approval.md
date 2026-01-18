@@ -2,7 +2,7 @@
 
 For sensitive tools (web scraping, shell execution, payments, etc.), you often want an approval step.
 
-Seashore provides an approval wrapper and an in-memory approval handler via `@seashore/tool`.
+Seashore provides an approval wrapper and an in-memory approval handler via `@seashorelab/tool`.
 
 ## Example (Firecrawl with Approval)
 

@@ -1,5 +1,5 @@
 /**
- * @seashore/vectordb - Collections Schema
+ * @seashorelab/vectordb - Collections Schema
  *
  * Database schema for vector collections
  */

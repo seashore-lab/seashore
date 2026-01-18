@@ -1,5 +1,5 @@
 /**
- * @seashore/storage - Messages Schema
+ * @seashorelab/storage - Messages Schema
  *
  * Drizzle schema for messages table
  */

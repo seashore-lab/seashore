@@ -1,5 +1,5 @@
 /**
- * @seashore/llm - Structured Output
+ * @seashorelab/llm - Structured Output
  *
  * Support for structured/typed LLM outputs using Zod schemas
  */
@@ -69,7 +69,7 @@ export interface StructuredResult<T> {
  *
  * @example
  * ```typescript
- * import { generateStructured, openaiText } from '@seashore/llm';
+ * import { generateStructured, openaiText } from '@seashorelab/llm';
  * import { z } from 'zod';
  *
  * const result = await generateStructured({

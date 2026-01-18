@@ -1,6 +1,6 @@
 /**
  * useChatStream hook for SSE streaming
- * @module @seashore/genui
+ * @module @seashorelab/genui
  */
 
 import { useState, useCallback, useRef, useEffect } from 'react';

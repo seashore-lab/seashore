@@ -1,5 +1,5 @@
 /**
- * @seashore/contextengineering - Template Tests
+ * @seashorelab/contextengineering - Template Tests
  */
 
 import { describe, it, expect } from 'vitest';

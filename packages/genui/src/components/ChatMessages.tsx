@@ -1,6 +1,6 @@
 /**
  * ChatMessages component
- * @module @seashore/genui
+ * @module @seashorelab/genui
  */
 
 import React, { useEffect, useRef } from 'react';

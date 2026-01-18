@@ -1,6 +1,6 @@
 /**
  * MCP Client tests
- * @module @seashore/mcp
+ * @module @seashorelab/mcp
  */
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
@@ -74,7 +74,7 @@ function createMockClient(): MCPClient & { _connected: boolean } {
   };
 }
 
-describe('@seashore/mcp', () => {
+describe('@seashorelab/mcp', () => {
   describe('createMCPClient', () => {
     it('should throw error for missing command in stdio transport', async () => {
       await expect(

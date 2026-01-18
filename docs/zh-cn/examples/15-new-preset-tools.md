@@ -4,7 +4,7 @@
 
 ## 演示内容
 
-- 展示 `@seashore/tool/presets` 中的预设工具
+- 展示 `@seashorelab/tool/presets` 中的预设工具
 - 离线工具（计算器系列）
 - 网络工具（DuckDuckGo、Wikipedia、GitHub、金融、arXiv、文章提取）
 - 用于受控命令执行的受限 shell 工具
@@ -13,7 +13,7 @@
 ## 运行方法
 
 ```bash
-pnpm --filter @seashore/examples exec tsx src/15-new-preset-tools.ts
+pnpm --filter @seashorelab/examples exec tsx src/15-new-preset-tools.ts
 ```
 
 ## 注意事项

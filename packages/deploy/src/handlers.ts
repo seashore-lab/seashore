@@ -1,6 +1,6 @@
 /**
  * Request handlers
- * @module @seashore/deploy
+ * @module @seashorelab/deploy
  */
 
 import type { Context } from 'hono';

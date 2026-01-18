@@ -1,5 +1,5 @@
 {
-  "name": "@seashore/llm",
+  "name": "@seashorelab/llm",
   "version": "0.1.0",
   "type": "module",
   "description": "LLM adapters and multimodal support for Seashore Agent Framework",

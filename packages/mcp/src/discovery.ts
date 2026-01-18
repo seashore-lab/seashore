@@ -1,7 +1,7 @@
 /**
  * MCP Server Discovery
  * Discovers MCP servers from configuration files
- * @module @seashore/mcp
+ * @module @seashorelab/mcp
  */
 
 import { readFile } from 'node:fs/promises';
@@ -113,7 +113,7 @@ function entryToServerInfo(name: string, entry: MCPServerEntry, basePath: string
  * @returns Array of server configurations
  * @example
  * ```typescript
- * import { discoverMCPServers, createMCPClient } from '@seashore/mcp'
+ * import { discoverMCPServers, createMCPClient } from '@seashorelab/mcp'
  *
  * const servers = await discoverMCPServers('./mcp.json')
  *

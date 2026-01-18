@@ -1,5 +1,5 @@
 {
-  "name": "@seashore/deploy",
+  "name": "@seashorelab/deploy",
   "version": "0.1.0",
   "description": "Hono-based agent deployment for Seashore framework",
   "type": "module",
@@ -22,7 +22,7 @@
     "hono": "^4.0.0"
   },
   "peerDependencies": {
-    "@seashore/agent": "workspace:*"
+    "@seashorelab/agent": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",

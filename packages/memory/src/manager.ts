@@ -1,11 +1,11 @@
 /**
- * @seashore/memory - Memory Manager
+ * @seashorelab/memory - Memory Manager
  *
  * Unified interface for managing short-term and long-term memory
  */
 
 import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
-import type { VectorStore, EmbeddingFunction } from '@seashore/vectordb';
+import type { VectorStore, EmbeddingFunction } from '@seashorelab/vectordb';
 import { ShortTermMemory, createShortTermMemory } from './short-term';
 import { LongTermMemory, createLongTermMemory } from './long-term';
 import { defaultImportanceEvaluator } from './importance';

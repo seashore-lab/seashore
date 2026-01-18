@@ -1,1 +1,1 @@
-# @seashore/security
+# @seashorelab/security

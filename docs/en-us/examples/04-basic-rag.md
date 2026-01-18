@@ -6,13 +6,13 @@ Source: `examples/src/04-basic-rag.ts`
 
 - Loading a markdown knowledge base from a string
 - Splitting into chunks using a markdown-aware splitter
-- Embedding chunks via `@seashore/llm` embeddings
+- Embedding chunks via `@seashorelab/llm` embeddings
 - In-memory retrieval using vector similarity
 
 ## How to run
 
 ```bash
-pnpm --filter @seashore/examples exec tsx src/04-basic-rag.ts
+pnpm --filter @seashorelab/examples exec tsx src/04-basic-rag.ts
 ```
 
 ## Key concepts

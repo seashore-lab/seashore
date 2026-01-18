@@ -1,6 +1,6 @@
 # API Reference: Security
 
-Package: `@seashore/security`
+Package: `@seashorelab/security`
 
 ## Guardrails
 

@@ -1,5 +1,5 @@
 /**
- * @seashore/tool - Exa Tool
+ * @seashorelab/tool - Exa Tool
  *
  * Preset tool for AI-powered search using Exa API
  */
@@ -113,7 +113,7 @@ const EXA_BASE_URL = 'https://api.exa.ai';
  *
  * @example
  * ```typescript
- * import { exaSearchTool } from '@seashore/tool/presets';
+ * import { exaSearchTool } from '@seashorelab/tool/presets';
  *
  * const search = exaSearchTool({ apiKey: process.env.EXA_API_KEY! });
  * const results = await search.execute({
@@ -191,7 +191,7 @@ export function exaSearchTool(config: ExaToolConfig) {
  *
  * @example
  * ```typescript
- * import { exaFindSimilarTool } from '@seashore/tool/presets';
+ * import { exaFindSimilarTool } from '@seashorelab/tool/presets';
  *
  * const findSimilar = exaFindSimilarTool({ apiKey: process.env.EXA_API_KEY! });
  * const results = await findSimilar.execute({
@@ -258,7 +258,7 @@ export function exaFindSimilarTool(config: ExaToolConfig) {
  *
  * @example
  * ```typescript
- * import { exaGetContentsTool } from '@seashore/tool/presets';
+ * import { exaGetContentsTool } from '@seashorelab/tool/presets';
  *
  * const getContents = exaGetContentsTool({ apiKey: process.env.EXA_API_KEY! });
  * const results = await getContents.execute({

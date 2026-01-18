@@ -1,10 +1,10 @@
 /**
- * @seashore/agent - Workflow Agent
+ * @seashorelab/agent - Workflow Agent
  *
  * Integration between Agent and Workflow packages
  */
 
-import type { Message } from '@seashore/llm';
+import type { Message } from '@seashorelab/llm';
 import type { Agent, AgentRunResult, AgentStreamChunk, RunOptions } from './types';
 import type {
   Workflow,
@@ -12,8 +12,8 @@ import type {
   WorkflowContext,
   WorkflowExecutionResult,
   WorkflowExecutionOptions,
-} from '@seashore/workflow';
-import { createWorkflow, createNode, executeWorkflow } from '@seashore/workflow';
+} from '@seashorelab/workflow';
+import { createWorkflow, createNode, executeWorkflow } from '@seashorelab/workflow';
 
 /**
  * Workflow agent configuration
@@ -62,8 +62,8 @@ export interface WorkflowAgentOutput {
  *
  * @example
  * ```typescript
- * import { createWorkflowAgent } from '@seashore/agent';
- * import { createWorkflow, createLLMNode, createToolNode } from '@seashore/workflow';
+ * import { createWorkflowAgent } from '@seashorelab/agent';
+ * import { createWorkflow, createLLMNode, createToolNode } from '@seashorelab/workflow';
  *
  * const workflow = createWorkflow({
  *   name: 'research-workflow',
@@ -184,8 +184,8 @@ export function createWorkflowAgent(config: WorkflowAgentConfig): Agent & {
  *
  * @example
  * ```typescript
- * import { createAgentNode } from '@seashore/agent';
- * import { createAgent } from '@seashore/agent';
+ * import { createAgentNode } from '@seashorelab/agent';
+ * import { createAgent } from '@seashorelab/agent';
  *
  * const researchAgent = createAgent({
  *   name: 'researcher',
@@ -226,7 +226,7 @@ export function createAgentNode(config: {
  *
  * @example
  * ```typescript
- * import { composeAgents } from '@seashore/agent';
+ * import { composeAgents } from '@seashorelab/agent';
  *
  * const composedWorkflow = composeAgents({
  *   name: 'multi-agent-pipeline',

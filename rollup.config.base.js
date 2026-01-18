@@ -10,12 +10,12 @@ import { fileURLToPath } from 'url';
  */
 export function createRollupConfig(packageDir) {
   const pkg = JSON.parse(readFileSync(resolve(packageDir, 'package.json'), 'utf-8'));
-  const packageName = pkg.name.replace('@seashore/', '');
+  const packageName = pkg.name.replace('@seashorelab/', '');
 
   const external = [
     ...Object.keys(pkg.dependencies || {}),
     ...Object.keys(pkg.peerDependencies || {}),
-    /^@seashore\//,
+    /^@seashorelab\//,
     /^node:/,
   ];
 

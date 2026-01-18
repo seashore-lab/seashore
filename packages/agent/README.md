@@ -1,1 +1,1 @@
-# @seashore/agent
+# @seashorelab/agent

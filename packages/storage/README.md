@@ -1,1 +1,1 @@
-# @seashore/storage
+# @seashorelab/storage

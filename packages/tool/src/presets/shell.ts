@@ -1,5 +1,5 @@
 /**
- * @seashore/tool - Shell Tool
+ * @seashorelab/tool - Shell Tool
  *
  * Preset tool for executing shell commands
  */
@@ -128,7 +128,7 @@ function isCommandBlocked(command: string, blockedCommands?: string[]): boolean 
  *
  * @example
  * ```typescript
- * import { shellTool } from '@seashore/tool/presets';
+ * import { shellTool } from '@seashorelab/tool/presets';
  *
  * // Basic usage
  * const shell = shellTool();
@@ -223,7 +223,7 @@ export function shellTool(config: ShellToolConfig = {}) {
  *
  * @example
  * ```typescript
- * import { restrictedShellTool } from '@seashore/tool/presets';
+ * import { restrictedShellTool } from '@seashorelab/tool/presets';
  *
  * const shell = restrictedShellTool({
  *   allowedCommands: ['git', 'npm', 'node'],
@@ -252,7 +252,7 @@ const runScriptInputSchema = z.object({
  *
  * @example
  * ```typescript
- * import { runScriptTool } from '@seashore/tool/presets';
+ * import { runScriptTool } from '@seashorelab/tool/presets';
  *
  * const runScript = runScriptTool({ cwd: '/path/to/scripts' });
  * const result = await runScript.execute({

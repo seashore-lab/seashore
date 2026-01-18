@@ -1,6 +1,6 @@
 # 存储与持久化
 
-存储模块 (`@seashore/storage`) 提供：
+存储模块 (`@seashorelab/storage`) 提供：
 
 - PostgreSQL + Drizzle 数据库设置
 - 线程、消息、跟踪、会话的模式
@@ -33,7 +33,7 @@
 ### 使用 Drizzle 的 PostgreSQL
 
 ```typescript
-import { createDatabase } from '@seashore/storage'
+import { createDatabase } from '@seashorelab/storage'
 
 const database = createDatabase({
   connectionString: process.env.DATABASE_URL,
@@ -79,7 +79,7 @@ await client.unsafe(migrationSql)
 线程代表对话：
 
 ```typescript
-import { createThreadRepository } from '@seashore/storage'
+import { createThreadRepository } from '@seashorelab/storage'
 
 const threadRepo = createThreadRepository(database.db)
 
@@ -126,7 +126,7 @@ interface Thread {
 线程中的消息：
 
 ```typescript
-import { createMessageRepository } from '@seashore/storage'
+import { createMessageRepository } from '@seashorelab/storage'
 
 const messageRepo = createMessageRepository(database.db)
 
@@ -174,8 +174,8 @@ interface Message {
 自动保存智能体对话：
 
 ```typescript
-import { createAgent, withStorage } from '@seashore/agent'
-import { createPersistenceMiddleware } from '@seashore/storage'
+import { createAgent, withStorage } from '@seashorelab/agent'
+import { createPersistenceMiddleware } from '@seashorelab/storage'
 
 const agent = createAgent({
   name: 'assistant',
@@ -204,7 +204,7 @@ const messages = await messageRepo.listByThread(thread.id)
 从数据库恢复对话：
 
 ```typescript
-import { continueThread, streamContinueThread } from '@seashore/agent'
+import { continueThread, streamContinueThread } from '@seashorelab/agent'
 
 // 非流式
 const result = await continueThread({
@@ -232,7 +232,7 @@ for await (const chunk of streamContinueThread({
 高级线程管理：
 
 ```typescript
-import { createThreadManager } from '@seashore/agent'
+import { createThreadManager } from '@seashorelab/agent'
 
 const manager = createThreadManager({
   database,
@@ -381,9 +381,9 @@ await container.stop()
 ## 示例：完整的存储设置
 
 ```typescript
-import { createDatabase, createThreadRepository, createMessageRepository } from '@seashore/storage'
-import { createAgent, withStorage } from '@seashore/agent'
-import { openaiText } from '@seashore/llm'
+import { createDatabase, createThreadRepository, createMessageRepository } from '@seashorelab/storage'
+import { createAgent, withStorage } from '@seashorelab/agent'
+import { openaiText } from '@seashorelab/llm'
 
 // 设置数据库
 const database = createDatabase({

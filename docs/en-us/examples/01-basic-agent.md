@@ -11,7 +11,7 @@ Source: `examples/src/01-basic-agent.ts`
 ## How to run
 
 ```bash
-pnpm --filter @seashore/examples exec tsx src/01-basic-agent.ts
+pnpm --filter @seashorelab/examples exec tsx src/01-basic-agent.ts
 ```
 
 ## Key concepts

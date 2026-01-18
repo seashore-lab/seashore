@@ -54,7 +54,7 @@ packages/
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-### @seashore/llm Package (Foundation)
+### @seashorelab/llm Package (Foundation)
 
 - [X] T009 Create packages/llm/package.json with @tanstack/ai-\* dependencies
 - [X] T010 [P] Define LLM types in packages/llm/src/types.ts (TextAdapter, Message, TokenUsage)
@@ -64,7 +64,7 @@ packages/
 - [X] T014 Create main export in packages/llm/src/index.ts
 - [X] T015 Add unit tests in packages/llm/\_\_tests\_\_/adapters.test.ts
 
-### @seashore/tool Package (Foundation)
+### @seashorelab/tool Package (Foundation)
 
 - [X] T016 Create packages/tool/package.json with zod dependency
 - [X] T017 [P] Define tool types in packages/tool/src/types.ts (ToolConfig, ToolResult, ToolContext)
@@ -74,7 +74,7 @@ packages/
 - [X] T021 Create main export in packages/tool/src/index.ts
 - [X] T022 Add unit tests in packages/tool/\_\_tests\_\_/define-tool.test.ts
 
-### @seashore/storage Package (Foundation)
+### @seashorelab/storage Package (Foundation)
 
 - [X] T023 Create packages/storage/package.json with drizzle-orm, pg dependencies
 - [X] T024 [P] Define storage types in packages/storage/src/types.ts (Thread, Message, Trace, Session)
@@ -191,7 +191,7 @@ packages/
 
 **Independent Test**: 导入几篇文档，查询 "项目截止日期"，返回最相关的文档片段
 
-### @seashore/vectordb Package
+### @seashorelab/vectordb Package
 
 - [X] T071 [US5] Create packages/vectordb/package.json with pgvector dependency
 - [X] T072 [US5] Define vectordb types in packages/vectordb/src/types.ts (Document, Collection, SearchResult)
@@ -204,7 +204,7 @@ packages/
 - [X] T079 [US5] Create main export in packages/vectordb/src/index.ts
 - [X] T080 [US5] Add integration tests in packages/vectordb/\_\_tests\_\_/search.test.ts
 
-### @seashore/rag Package
+### @seashorelab/rag Package
 
 - [X] T081 [US5] Create packages/rag/package.json
 - [X] T082 [US5] Define RAG types in packages/rag/src/types.ts (LoadedDocument, DocumentChunk, Retriever)

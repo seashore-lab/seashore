@@ -16,7 +16,7 @@ Source: `examples/src/12-storage-persistence.ts`
 ## How to run
 
 ```bash
-pnpm --filter @seashore/examples exec tsx src/12-storage-persistence.ts
+pnpm --filter @seashorelab/examples exec tsx src/12-storage-persistence.ts
 ```
 
 ## Key concepts

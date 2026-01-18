@@ -1,5 +1,5 @@
 /**
- * @seashore/workflow - Unit Tests
+ * @seashorelab/workflow - Unit Tests
  *
  * Comprehensive tests for workflow package
  */

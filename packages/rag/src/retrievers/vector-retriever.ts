@@ -1,11 +1,11 @@
 /**
- * @seashore/rag - Vector Retriever
+ * @seashorelab/rag - Vector Retriever
  *
  * Retriever using vector similarity search
  */
 
-import type { VectorStore, VectorStoreOptions, EmbeddingFunction } from '@seashore/vectordb';
-import { createVectorStore } from '@seashore/vectordb';
+import type { VectorStore, VectorStoreOptions, EmbeddingFunction } from '@seashorelab/vectordb';
+import { createVectorStore } from '@seashorelab/vectordb';
 import type { Retriever, RetrieverOptions, RetrievedDocument, DocumentChunk } from '../types';
 
 /**

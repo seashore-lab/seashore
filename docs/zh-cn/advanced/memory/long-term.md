@@ -16,7 +16,7 @@
 ## 创建长期记忆
 
 ```ts
-import { createLongTermMemory } from '@seashore/memory'
+import { createLongTermMemory } from '@seashorelab/memory'
 
 const longTerm = createLongTermMemory({
   db,

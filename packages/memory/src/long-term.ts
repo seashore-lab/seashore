@@ -1,12 +1,12 @@
 /**
- * @seashore/memory - Long-Term Memory
+ * @seashorelab/memory - Long-Term Memory
  *
  * Persistent memory with vector search support
  */
 
 import { eq, and, gte, desc, sql } from 'drizzle-orm';
 import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
-import type { VectorStore, EmbeddingFunction } from '@seashore/vectordb';
+import type { VectorStore, EmbeddingFunction } from '@seashorelab/vectordb';
 import { memories } from './schema';
 import type {
   MemoryEntry,

@@ -1,6 +1,6 @@
 # API Reference: Vector DB
 
-Package: `@seashore/vectordb`
+Package: `@seashorelab/vectordb`
 
 ## Store and collections
 

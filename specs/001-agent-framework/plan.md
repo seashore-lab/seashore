@@ -192,20 +192,20 @@ packages/
 
 ```
                     ┌──────────────────────────────────────┐
-                    │              @seashore/agent         │
+                    │              @seashorelab/agent         │
                     │     (ReAct Agent, Workflow Agent)    │
                     └──────────────────────────────────────┘
                                        │
           ┌────────────────────────────┼────────────────────────────┐
           ▼                            ▼                            ▼
 ┌─────────────────┐          ┌─────────────────┐          ┌─────────────────┐
-│ @seashore/llm   │          │ @seashore/tool  │          │ @seashore/memory│
+│ @seashorelab/llm   │          │ @seashorelab/tool  │          │ @seashorelab/memory│
 │ (LLM Adapters)  │          │ (Tool Defs)     │          │ (Memory Mgmt)   │
 └─────────────────┘          └─────────────────┘          └─────────────────┘
           │                            │                            │
           │                            │                            ▼
           ▼                            ▼                  ┌─────────────────┐
-┌─────────────────┐          ┌─────────────────┐          │@seashore/storage│
+┌─────────────────┐          ┌─────────────────┐          │@seashorelab/storage│
 │ @tanstack/ai-*  │          │ Serper/Firecrawl│          │ (Drizzle + PG)  │
 │ (OpenAI/Gemini/ │          │ (Preset Tools)  │          └─────────────────┘
 │  Anthropic)     │          └─────────────────┘                    │
@@ -217,12 +217,12 @@ packages/
           ▲                            ▲
           │                            │
 ┌─────────────────┐          ┌─────────────────┐
-│@seashore/vectordb│         │ @seashore/rag   │
+│@seashorelab/vectordb│         │ @seashorelab/rag   │
 │ (Vector Store)   │◄────────│(Hybrid Search)  │
 └─────────────────┘          └─────────────────┘
 
 ┌─────────────────┐          ┌─────────────────┐          ┌─────────────────┐
-│ @seashore/mcp   │          │@seashore/genui  │          │@seashore/deploy │
+│ @seashorelab/mcp   │          │@seashorelab/genui  │          │@seashorelab/deploy │
 │ (MCP Client)    │          │ (React UI)      │          │ (Hono Server)   │
 └─────────────────┘          └─────────────────┘          └─────────────────┘
           │                            │                            │
@@ -233,7 +233,7 @@ packages/
 └─────────────────┘          └─────────────────┘          └─────────────────┘
 
 ┌─────────────────┐          ┌─────────────────┐          ┌─────────────────┐
-│@seashore/observe│          │@seashore/eval   │          │@seashore/security│
+│@seashorelab/observe│          │@seashorelab/eval   │          │@seashorelab/security│
 │ (Tracing)       │          │ (Evaluation)    │          │ (Guardrails)    │
 └─────────────────┘          └─────────────────┘          └─────────────────┘
 ```
@@ -249,29 +249,29 @@ packages/
 
 ### Phase 1: 核心模块 (P1)
 
-1. `@seashore/llm` - LLM 适配层
-2. `@seashore/tool` - 工具定义 + Serper/Firecrawl
-3. `@seashore/agent` - ReAct Agent
+1. `@seashorelab/llm` - LLM 适配层
+2. `@seashorelab/tool` - 工具定义 + Serper/Firecrawl
+3. `@seashorelab/agent` - ReAct Agent
 
 ### Phase 2: 数据层 (P2)
 
-1. `@seashore/storage` - Drizzle + PostgreSQL
-2. `@seashore/vectordb` - pgvector + HNSW
-3. `@seashore/rag` - 混合检索
-4. `@seashore/memory` - 记忆管理
-5. `@seashore/workflow` - 工作流引擎
+1. `@seashorelab/storage` - Drizzle + PostgreSQL
+2. `@seashorelab/vectordb` - pgvector + HNSW
+3. `@seashorelab/rag` - 混合检索
+4. `@seashorelab/memory` - 记忆管理
+5. `@seashorelab/workflow` - 工作流引擎
 
 ### Phase 3: 扩展模块 (P3)
 
-1. `@seashore/mcp` - MCP 协议
-2. `@seashore/genui` - React UI
-3. `@seashore/observability` - 可观测性
-4. `@seashore/evaluation` - 评测
-5. `@seashore/security` - Guardrails
+1. `@seashorelab/mcp` - MCP 协议
+2. `@seashorelab/genui` - React UI
+3. `@seashorelab/observability` - 可观测性
+4. `@seashorelab/evaluation` - 评测
+5. `@seashorelab/security` - Guardrails
 
 ### Phase 4: 部署模块 (P4)
 
-1. `@seashore/deploy` - Hono 服务器
+1. `@seashorelab/deploy` - Hono 服务器
 2. Cloudflare Workers 适配
 3. 传统 Node.js 适配
 

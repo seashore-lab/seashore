@@ -1,6 +1,6 @@
 # 智能体配置
 
-本页面描述由 `@seashore/agent` 实现的 `createAgent` 的配置。
+本页面描述由 `@seashorelab/agent` 实现的 `createAgent` 的配置。
 
 公共类型位于 `packages/agent/src/types.ts` 中，并在规范契约 `specs/001-agent-framework/contracts/agent.api.md` 中进行了总结。
 
@@ -9,8 +9,8 @@
 最小配置：
 
 ```ts
-import { createAgent } from '@seashore/agent'
-import { openaiText } from '@seashore/llm'
+import { createAgent } from '@seashorelab/agent'
+import { openaiText } from '@seashorelab/llm'
 
 const agent = createAgent({
   name: 'assistant',
@@ -30,15 +30,15 @@ const agent = createAgent({
 
 ### `systemPrompt: string`
 
-智能体级别的指令块。Seashore 将其作为系统提示词传递给底层的 `@seashore/llm` `chat()` 调用。
+智能体级别的指令块。Seashore 将其作为系统提示词传递给底层的 `@seashorelab/llm` `chat()` 调用。
 
 ### `model: AnyTextAdapter`
 
-由 `@seashore/llm` 生成的大语言模型适配器（例如 `openaiText(...)`、`anthropicText(...)`、`geminiText(...)`）。
+由 `@seashorelab/llm` 生成的大语言模型适配器（例如 `openaiText(...)`、`anthropicText(...)`、`geminiText(...)`）。
 
 ### `tools?: Tool[]`
 
-可选工具列表。每个工具都使用 `@seashore/tool` 定义，具有：
+可选工具列表。每个工具都使用 `@seashorelab/tool` 定义，具有：
 
 - 派生自 Zod 的 JSON 模式
 - 运行时 `execute()` 函数

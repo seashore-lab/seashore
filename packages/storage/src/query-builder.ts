@@ -1,5 +1,5 @@
 /**
- * @seashore/storage - Query Builder Utilities
+ * @seashorelab/storage - Query Builder Utilities
  *
  * Fluent query builder for common patterns
  */

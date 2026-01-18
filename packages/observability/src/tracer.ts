@@ -1,6 +1,6 @@
 /**
  * Tracer implementation
- * @module @seashore/observability
+ * @module @seashorelab/observability
  */
 
 import type {

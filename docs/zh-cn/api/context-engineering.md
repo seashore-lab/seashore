@@ -1,6 +1,6 @@
 # API 参考：上下文工程
 
-包：`@seashore/contextengineering`
+包：`@seashorelab/contextengineering`
 
 ## 上下文构建器
 

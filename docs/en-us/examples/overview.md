@@ -35,7 +35,7 @@ The examples package does not rely on npm scripts; run files directly with `tsx`
 From the repository root:
 
 ```bash
-pnpm --filter @seashore/examples exec tsx src/01-basic-agent.ts
+pnpm --filter @seashorelab/examples exec tsx src/01-basic-agent.ts
 ```
 
 Or from the `examples/` folder:
@@ -46,5 +46,5 @@ pnpm exec tsx src/01-basic-agent.ts
 
 ## Tips
 
-- If you see `Cannot find module '@seashore/...'`, you likely skipped `pnpm build`.
+- If you see `Cannot find module '@seashorelab/...'`, you likely skipped `pnpm build`.
 - For container-based examples (12, 13), you need Docker running.

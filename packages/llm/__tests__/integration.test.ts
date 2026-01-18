@@ -1,5 +1,5 @@
 /**
- * @seashore/llm - Integration Tests
+ * @seashorelab/llm - Integration Tests
  *
  * Tests for LLM adapters and utilities
  */

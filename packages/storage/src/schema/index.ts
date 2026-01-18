@@ -1,5 +1,5 @@
 /**
- * @seashore/storage - Schema Index
+ * @seashorelab/storage - Schema Index
  *
  * Re-export all schema definitions
  */

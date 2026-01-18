@@ -1,5 +1,5 @@
 {
-  "name": "@seashore/storage",
+  "name": "@seashorelab/storage",
   "version": "0.1.0",
   "type": "module",
   "description": "PostgreSQL storage layer with Drizzle ORM for Seashore Agent Framework",

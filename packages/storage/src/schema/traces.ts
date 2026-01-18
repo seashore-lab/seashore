@@ -1,5 +1,5 @@
 /**
- * @seashore/storage - Traces Schema
+ * @seashorelab/storage - Traces Schema
  *
  * Drizzle schema for traces table (observability)
  */

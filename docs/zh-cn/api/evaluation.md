@@ -1,6 +1,6 @@
 # API 参考：评估
 
-包：`@seashore/evaluation`
+包：`@seashorelab/evaluation`
 
 ## 评估器
 

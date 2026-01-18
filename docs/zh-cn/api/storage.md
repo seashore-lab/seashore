@@ -1,6 +1,6 @@
 # API 参考：存储
 
-包：`@seashore/storage`
+包：`@seashorelab/storage`
 
 ## 数据库
 

@@ -5,7 +5,7 @@ Tracing records spans for operations like `agent.run`, tool execution, and LLM c
 ## Creating a tracer
 
 ```ts
-import { createTracer } from '@seashore/observability'
+import { createTracer } from '@seashorelab/observability'
 
 const tracer = createTracer({
   serviceName: 'seashore-example',

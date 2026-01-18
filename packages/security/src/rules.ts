@@ -1,6 +1,6 @@
 /**
  * Built-in security rules
- * @module @seashore/security
+ * @module @seashorelab/security
  */
 
 import type {

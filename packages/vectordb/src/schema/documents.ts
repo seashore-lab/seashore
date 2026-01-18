@@ -1,5 +1,5 @@
 /**
- * @seashore/vectordb - Documents Schema
+ * @seashorelab/vectordb - Documents Schema
  *
  * Database schema for vector documents with pgvector and tsvector support
  */

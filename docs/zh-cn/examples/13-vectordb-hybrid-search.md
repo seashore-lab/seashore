@@ -16,7 +16,7 @@
 ## 运行方法
 
 ```bash
-pnpm --filter @seashore/examples exec tsx src/13-vectordb-hybrid-search.ts
+pnpm --filter @seashorelab/examples exec tsx src/13-vectordb-hybrid-search.ts
 ```
 
 ## 核心概念

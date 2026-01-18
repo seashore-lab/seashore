@@ -1,5 +1,5 @@
 /**
- * @seashore/storage - Sessions Schema
+ * @seashorelab/storage - Sessions Schema
  *
  * Drizzle schema for sessions table
  */

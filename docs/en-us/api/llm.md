@@ -1,6 +1,6 @@
 # API Reference: LLM
 
-Package: `@seashore/llm`
+Package: `@seashorelab/llm`
 
 Seashore uses “adapters” so agents and workflows can swap providers.
 

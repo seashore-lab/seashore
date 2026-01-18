@@ -6,13 +6,13 @@
 
 - 从字符串加载 markdown 知识库
 - 使用支持 markdown 的分割器将其分块
-- 通过 `@seashore/llm` 嵌入为块生成向量
+- 通过 `@seashorelab/llm` 嵌入为块生成向量
 - 使用向量相似性进行内存检索
 
 ## 运行方法
 
 ```bash
-pnpm --filter @seashore/examples exec tsx src/04-basic-rag.ts
+pnpm --filter @seashorelab/examples exec tsx src/04-basic-rag.ts
 ```
 
 ## 核心概念

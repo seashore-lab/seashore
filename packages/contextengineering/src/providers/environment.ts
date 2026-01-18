@@ -1,5 +1,5 @@
 /**
- * @seashore/contextengineering - Environment Provider
+ * @seashorelab/contextengineering - Environment Provider
  *
  * Provides runtime environment information (time, date, timezone, etc.)
  */

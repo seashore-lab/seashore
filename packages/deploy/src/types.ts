@@ -1,6 +1,6 @@
 /**
  * Deploy types
- * @module @seashore/deploy
+ * @module @seashorelab/deploy
  */
 
 import type { Context, MiddlewareHandler } from 'hono';

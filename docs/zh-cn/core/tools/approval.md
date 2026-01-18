@@ -2,7 +2,7 @@
 
 对于敏感工具（网页抓取、shell 执行、支付等），通常需要审批步骤。
 
-Seashore 通过 `@seashore/tool` 提供审批包装器和内存审批处理程序。
+Seashore 通过 `@seashorelab/tool` 提供审批包装器和内存审批处理程序。
 
 ## 示例（带有审批的 Firecrawl）
 

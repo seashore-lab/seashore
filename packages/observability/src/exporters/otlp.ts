@@ -1,6 +1,6 @@
 /**
  * OTLP (OpenTelemetry Protocol) exporter
- * @module @seashore/observability
+ * @module @seashorelab/observability
  */
 
 import type { Span, SpanExporter, BaseExporterConfig } from '../types';
@@ -159,7 +159,7 @@ export function createOTLPExporter(config: OTLPExporterConfig): SpanExporter {
           },
           scopeSpans: [
             {
-              scope: { name: '@seashore/observability', version: '1.0.0' },
+              scope: { name: '@seashorelab/observability', version: '1.0.0' },
               spans: spansToExport.map(spanToOTLP),
             },
           ],

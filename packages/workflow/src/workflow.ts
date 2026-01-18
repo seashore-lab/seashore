@@ -1,5 +1,5 @@
 /**
- * @seashore/workflow - Workflow Factory
+ * @seashorelab/workflow - Workflow Factory
  *
  * Create workflow instances from configuration
  */
@@ -59,8 +59,8 @@ function validateWorkflowConfig(config: WorkflowConfig): void {
  *
  * @example
  * ```typescript
- * import { createWorkflow, createLLMNode, createConditionNode } from '@seashore/workflow';
- * import { openaiText } from '@seashore/llm';
+ * import { createWorkflow, createLLMNode, createConditionNode } from '@seashorelab/workflow';
+ * import { openaiText } from '@seashorelab/llm';
  *
  * const analyzeNode = createLLMNode({
  *   name: 'analyze',

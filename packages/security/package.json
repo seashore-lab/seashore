@@ -1,5 +1,5 @@
 {
-  "name": "@seashore/security",
+  "name": "@seashorelab/security",
   "version": "0.1.0",
   "description": "Security guardrails and content filtering for Seashore framework",
   "type": "module",
@@ -19,7 +19,7 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "@seashore/llm": "workspace:*"
+    "@seashorelab/llm": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",

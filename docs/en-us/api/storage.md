@@ -1,6 +1,6 @@
 # API Reference: Storage
 
-Package: `@seashore/storage`
+Package: `@seashorelab/storage`
 
 ## Database
 

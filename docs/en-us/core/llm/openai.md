@@ -10,7 +10,7 @@ OpenAI text adapters are created with `openaiText()`.
 ## Example
 
 ```ts
-import { openaiText } from '@seashore/llm'
+import { openaiText } from '@seashorelab/llm'
 
 const model = openaiText('gpt-5.1', {
   apiKey: process.env.OPENAI_API_KEY,

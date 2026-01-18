@@ -5,7 +5,7 @@ Storage is built around PostgreSQL and Drizzle.
 ## Create a database connection
 
 ```ts
-import { createDatabase } from '@seashore/storage'
+import { createDatabase } from '@seashorelab/storage'
 
 const db = createDatabase({
   connectionString: process.env.DATABASE_URL,

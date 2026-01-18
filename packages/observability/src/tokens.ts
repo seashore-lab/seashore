@@ -1,6 +1,6 @@
 /**
  * Token counter implementation
- * @module @seashore/observability
+ * @module @seashorelab/observability
  */
 
 import type { TokenCounter, TokenCounterConfig, TokenUsage } from './types';

@@ -1,5 +1,5 @@
 /**
- * @seashore/vectordb - Vector Search
+ * @seashorelab/vectordb - Vector Search
  *
  * HNSW-based vector similarity search
  */

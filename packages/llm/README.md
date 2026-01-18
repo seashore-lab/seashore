@@ -1,4 +1,4 @@
-# @seashore/llm
+# @seashorelab/llm
 
 LLM adapters and multimodal capabilities for the Seashore Agent Framework.
 
@@ -24,7 +24,7 @@ pnpm add @seashore/llm
 Text adapters provide **type-safe model names** with IDE auto-completion, while still allowing custom model names:
 
 ```typescript
-import { openaiText, anthropicText, geminiText, chat } from '@seashore/llm';
+import { openaiText, anthropicText, geminiText, chat } from '@seashorelab/llm';
 
 // Type hints for known models (e.g., 'gpt-4o', 'gpt-4o-mini', 'gpt-4', etc.)
 const adapter = openaiText('gpt-4o', {
@@ -61,7 +61,7 @@ const response = await chat({
 import { 
   OPENAI_CHAT_MODELS, 
   GEMINI_MODELS 
-} from '@seashore/llm';
+} from '@seashorelab/llm';
 import { createAnthropicChat } from '@tanstack/ai-anthropic';
 
 console.log('Available OpenAI models:', OPENAI_CHAT_MODELS);
@@ -76,7 +76,7 @@ type AnthropicModel = Parameters<typeof createAnthropicChat>[0];
 Embedding adapters support optional `apiKey` and `baseURL` configuration:
 
 ```typescript
-import { openaiEmbed, geminiEmbed, generateEmbedding } from '@seashore/llm';
+import { openaiEmbed, geminiEmbed, generateEmbedding } from '@seashorelab/llm';
 
 // Default: Uses OPENAI_API_KEY env var and default OpenAI endpoint
 const defaultAdapter = openaiEmbed();
@@ -115,7 +115,7 @@ const result = await generateEmbedding({
 Image adapters also support optional `apiKey` and `baseURL`:
 
 ```typescript
-import { openaiImage, geminiImage, generateImage } from '@seashore/llm';
+import { openaiImage, geminiImage, generateImage } from '@seashorelab/llm';
 
 // Default configuration
 const imageAdapter = openaiImage('dall-e-3');
@@ -136,7 +136,7 @@ const result = await generateImage({
 ### Video Generation
 
 ```typescript
-import { openaiVideo, generateVideo, checkVideoStatus } from '@seashore/llm';
+import { openaiVideo, generateVideo, checkVideoStatus } from '@seashorelab/llm';
 
 const videoAdapter = openaiVideo('sora-2', {
   apiKey: 'sk-my-key',
@@ -156,7 +156,7 @@ const status = await checkVideoStatus(job.jobId, videoAdapter);
 ### Transcription
 
 ```typescript
-import { openaiTranscription, generateTranscription } from '@seashore/llm';
+import { openaiTranscription, generateTranscription } from '@seashorelab/llm';
 
 const transcriptionAdapter = openaiTranscription('whisper-1', {
   apiKey: 'sk-my-key',
@@ -173,7 +173,7 @@ const result = await generateTranscription({
 ### Text-to-Speech
 
 ```typescript
-import { openaiTTS, geminiTTS, generateSpeech } from '@seashore/llm';
+import { openaiTTS, geminiTTS, generateSpeech } from '@seashorelab/llm';
 
 const ttsAdapter = openaiTTS('tts-1', {
   apiKey: 'sk-my-key',

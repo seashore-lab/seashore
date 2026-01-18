@@ -9,7 +9,7 @@ At the high level, a workflow is:
 Example:
 
 ```ts
-import { createWorkflow, createLLMNode } from '@seashore/workflow'
+import { createWorkflow, createLLMNode } from '@seashorelab/workflow'
 
 const outline = createLLMNode({
   name: 'outline',

@@ -1,6 +1,6 @@
 # Multimodal Support
 
-`@seashore/llm` also exposes adapters for multimodal tasks:
+`@seashorelab/llm` also exposes adapters for multimodal tasks:
 
 - image generation (e.g. DALL·E, Imagen)
 - video generation (e.g. Sora)

@@ -1,6 +1,6 @@
-# API Contract: @seashore/genui
+# API Contract: @seashorelab/genui
 
-**Package**: `@seashore/genui`  
+**Package**: `@seashorelab/genui`  
 **Version**: 0.1.0
 
 ## 概述
@@ -57,7 +57,7 @@ export type { ChatMessage, ToolCallUI, GenUIComponent } from './types'
 完整的聊天界面组件：
 
 ```tsx
-import { Chat } from '@seashore/genui'
+import { Chat } from '@seashorelab/genui'
 
 function App() {
   return (
@@ -83,7 +83,7 @@ function App() {
 消息列表组件：
 
 ```tsx
-import { ChatMessages, ChatMessage } from '@seashore/genui'
+import { ChatMessages, ChatMessage } from '@seashorelab/genui'
 
 function CustomChat() {
   const messages: ChatMessage[] = [
@@ -115,7 +115,7 @@ function CustomChat() {
 输入组件：
 
 ```tsx
-import { ChatInput } from '@seashore/genui'
+import { ChatInput } from '@seashorelab/genui'
 
 function CustomInput() {
   return (
@@ -145,7 +145,7 @@ function CustomInput() {
 ### 基本用法
 
 ```tsx
-import { useChat } from '@seashore/genui'
+import { useChat } from '@seashorelab/genui'
 
 function ChatComponent() {
   const { messages, input, setInput, sendMessage, isLoading, error, stop, reload } =
@@ -263,7 +263,7 @@ interface UseChatReturn {
 基于 Tool Call 的组件注册：
 
 ```tsx
-import { createGenUIRegistry } from '@seashore/genui'
+import { createGenUIRegistry } from '@seashorelab/genui'
 
 const registry = createGenUIRegistry()
 
@@ -315,7 +315,7 @@ registry.register('show_chart', {
 ### 在 Chat 中使用
 
 ```tsx
-import { Chat } from '@seashore/genui'
+import { Chat } from '@seashorelab/genui'
 
 function App() {
   return <Chat endpoint="/api/chat" genUIRegistry={registry} />
@@ -329,7 +329,7 @@ function App() {
 ### 定义 UI Tool
 
 ```typescript
-import { defineTool } from '@seashore/tool'
+import { defineTool } from '@seashorelab/tool'
 
 // 股票查询 Tool（返回 UI）
 const showStockTool = defineTool({
@@ -378,7 +378,7 @@ const showWeatherTool = defineTool({
 ### Agent 配置
 
 ```typescript
-import { createAgent } from '@seashore/agent'
+import { createAgent } from '@seashorelab/agent'
 
 const agent = createAgent({
   name: 'ui-agent',
@@ -399,7 +399,7 @@ const agent = createAgent({
 手动渲染 Tool Call 结果：
 
 ```tsx
-import { renderToolCall } from '@seashore/genui'
+import { renderToolCall } from '@seashorelab/genui'
 
 function MessageWithTools({ message, registry }) {
   return (
@@ -421,7 +421,7 @@ function MessageWithTools({ message, registry }) {
 创建自定义渲染器：
 
 ```tsx
-import { createToolCallRenderer } from '@seashore/genui'
+import { createToolCallRenderer } from '@seashorelab/genui'
 
 const renderer = createToolCallRenderer({
   registry,
@@ -451,7 +451,7 @@ const ui = renderer.render(toolCall)
 ### 渐进式渲染
 
 ```tsx
-import { useChatStream } from '@seashore/genui'
+import { useChatStream } from '@seashorelab/genui'
 
 function StreamingChat() {
   const { messages, streamingMessage, isStreaming, sendMessage } = useChatStream({
@@ -539,7 +539,7 @@ registry.register('search', {
 ### 完全自定义
 
 ```tsx
-import { ChatMessages, ChatInput, useChat } from '@seashore/genui'
+import { ChatMessages, ChatInput, useChat } from '@seashorelab/genui'
 
 function CustomChat() {
   const chat = useChat({ endpoint: '/api/chat' })

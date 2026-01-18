@@ -7,7 +7,7 @@
 
 ```bash
 # 安装核心包
-pnpm add @seashore/agent @seashore/llm @seashore/tool
+pnpm add @seashorelab/agent @seashorelab/llm @seashorelab/tool
 
 # 安装 LLM Provider 适配器（选择需要的）
 pnpm add @tanstack/ai-openai @tanstack/ai-anthropic @tanstack/ai-gemini
@@ -19,7 +19,7 @@ pnpm add @tanstack/ai-openai @tanstack/ai-anthropic @tanstack/ai-gemini
 
 ```typescript
 // tools/weather.ts
-import { defineTool } from '@seashore/tool'
+import { defineTool } from '@seashorelab/tool'
 import { z } from 'zod'
 
 export const weatherTool = defineTool({
@@ -44,7 +44,7 @@ export const weatherTool = defineTool({
 
 ```typescript
 // agent.ts
-import { createAgent } from '@seashore/agent'
+import { createAgent } from '@seashorelab/agent'
 import { openaiText } from '@tanstack/ai-openai'
 import { weatherTool } from './tools/weather'
 
@@ -83,8 +83,8 @@ main()
 ## 使用预置工具
 
 ```typescript
-import { createAgent } from '@seashore/agent'
-import { serperTool, firecrawlTool } from '@seashore/tool/presets'
+import { createAgent } from '@seashorelab/agent'
+import { serperTool, firecrawlTool } from '@seashorelab/tool/presets'
 import { openaiText } from '@tanstack/ai-openai'
 
 const researchAgent = createAgent({
@@ -102,7 +102,7 @@ const researchAgent = createAgent({
 
 ```typescript
 // server.ts
-import { createServer } from '@seashore/deploy'
+import { createServer } from '@seashorelab/deploy'
 import { weatherAgent } from './agent'
 
 const app = createServer({
@@ -143,9 +143,9 @@ while (true) {
 ## 添加 RAG 能力
 
 ```typescript
-import { createAgent } from '@seashore/agent'
-import { createVectorStore } from '@seashore/vectordb'
-import { createRAG } from '@seashore/rag'
+import { createAgent } from '@seashorelab/agent'
+import { createVectorStore } from '@seashorelab/vectordb'
+import { createRAG } from '@seashorelab/rag'
 import { openaiText } from '@tanstack/ai-openai'
 
 // 创建向量存储
@@ -177,7 +177,7 @@ const ragAgent = createAgent({
 
 ```tsx
 // ChatApp.tsx
-import { Chat, useChat } from '@seashore/genui'
+import { Chat, useChat } from '@seashorelab/genui'
 import { WeatherCard, StockChart } from './components'
 
 // 注册自定义 UI 组件

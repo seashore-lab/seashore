@@ -9,7 +9,7 @@ Token counting lets you:
 ## Basic usage
 
 ```ts
-import { createTokenCounter } from '@seashore/observability'
+import { createTokenCounter } from '@seashorelab/observability'
 
 const counter = createTokenCounter({ defaultEncoding: 'cl100k_base' })
 const inputTokens = counter.count('Hello')

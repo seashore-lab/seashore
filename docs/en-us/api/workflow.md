@@ -1,6 +1,6 @@
 # API Reference: Workflow
 
-Package: `@seashore/workflow`
+Package: `@seashorelab/workflow`
 
 ## Creating workflows
 

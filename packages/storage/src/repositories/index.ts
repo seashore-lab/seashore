@@ -1,5 +1,5 @@
 /**
- * @seashore/storage - Repositories Index
+ * @seashorelab/storage - Repositories Index
  *
  * Re-export all repository factories
  */

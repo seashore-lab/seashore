@@ -10,7 +10,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@seashore/contextengineering': resolve(__dirname, 'src'),
+      '@seashorelab/contextengineering': resolve(__dirname, 'src'),
     },
   },
 });

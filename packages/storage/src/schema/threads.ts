@@ -1,5 +1,5 @@
 /**
- * @seashore/storage - Threads Schema
+ * @seashorelab/storage - Threads Schema
  *
  * Drizzle schema for threads table
  */

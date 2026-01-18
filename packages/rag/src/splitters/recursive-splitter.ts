@@ -1,5 +1,5 @@
 /**
- * @seashore/rag - Recursive Text Splitter
+ * @seashorelab/rag - Recursive Text Splitter
  *
  * Split text recursively using a hierarchy of separators
  */

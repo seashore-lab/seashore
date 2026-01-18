@@ -1,5 +1,5 @@
 /**
- * @seashore/tool - Preset Tools
+ * @seashorelab/tool - Preset Tools
  *
  * Re-export all preset tools
  */

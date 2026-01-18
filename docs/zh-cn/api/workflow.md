@@ -1,6 +1,6 @@
 # API 参考：工作流
 
-包：`@seashore/workflow`
+包：`@seashorelab/workflow`
 
 ## 创建工作流
 

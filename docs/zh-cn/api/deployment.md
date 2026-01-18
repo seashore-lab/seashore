@@ -1,6 +1,6 @@
 # API 参考：部署
 
-包：`@seashore/deploy`
+包：`@seashorelab/deploy`
 
 ## 服务器
 

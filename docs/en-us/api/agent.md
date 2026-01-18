@@ -1,6 +1,6 @@
 # API Reference: Agent
 
-Package: `@seashore/agent`
+Package: `@seashorelab/agent`
 
 ## Primary entry
 

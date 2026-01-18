@@ -1,5 +1,5 @@
 /**
- * @seashore/tool - Preset Tools Tests
+ * @seashorelab/tool - Preset Tools Tests
  *
  * Tests for preset tools (serper, firecrawl)
  */

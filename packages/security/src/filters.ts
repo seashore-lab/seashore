@@ -1,6 +1,6 @@
 /**
  * Input and output filters
- * @module @seashore/security
+ * @module @seashorelab/security
  */
 
 import type {

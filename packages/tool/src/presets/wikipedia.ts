@@ -1,5 +1,5 @@
 /**
- * @seashore/tool - Wikipedia Tool
+ * @seashorelab/tool - Wikipedia Tool
  *
  * Preset tool for searching Wikipedia and retrieving article summaries
  */
@@ -58,7 +58,7 @@ const summaryInputSchema = z.object({
  *
  * @example
  * ```typescript
- * import { wikipediaSearchTool } from '@seashore/tool/presets';
+ * import { wikipediaSearchTool } from '@seashorelab/tool/presets';
  *
  * const search = wikipediaSearchTool({ language: 'en' });
  * const result = await search.execute({ query: 'artificial intelligence' });
@@ -115,7 +115,7 @@ export function wikipediaSearchTool(config: WikipediaConfig = {}) {
  *
  * @example
  * ```typescript
- * import { wikipediaSummaryTool } from '@seashore/tool/presets';
+ * import { wikipediaSummaryTool } from '@seashorelab/tool/presets';
  *
  * const summary = wikipediaSummaryTool({ language: 'en' });
  * const result = await summary.execute({ title: 'Artificial intelligence' });

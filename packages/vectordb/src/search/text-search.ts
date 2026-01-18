@@ -1,5 +1,5 @@
 /**
- * @seashore/vectordb - Text Search
+ * @seashorelab/vectordb - Text Search
  *
  * PostgreSQL full-text search using tsvector
  */

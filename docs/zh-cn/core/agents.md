@@ -17,8 +17,8 @@
 最简单的智能体只需要名称、系统提示词和模型：
 
 ```typescript
-import { createAgent } from '@seashore/agent'
-import { openaiText } from '@seashore/llm'
+import { createAgent } from '@seashorelab/agent'
+import { openaiText } from '@seashorelab/llm'
 
 const agent = createAgent({
   name: 'assistant',
@@ -227,7 +227,7 @@ Final Answer: The weather in Tokyo is 22°C and sunny. 15 + 27 equals 42.
 智能体使用重试逻辑优雅地处理错误：
 
 ```typescript
-import { AgentError, isRetryableError, withRetry } from '@seashore/agent'
+import { AgentError, isRetryableError, withRetry } from '@seashorelab/agent'
 
 try {
   const result = await agent.run('Your question')
@@ -304,7 +304,7 @@ try {
 使用实用函数处理流：
 
 ```typescript
-import { collectStream } from '@seashore/agent'
+import { collectStream } from '@seashorelab/agent'
 
 // 将所有块收集到单个结果中
 const result = await collectStream(agent.stream('Your question'))
@@ -321,7 +321,7 @@ console.log(result.usage) // 总 Token 使用
 默认且当前唯一的智能体类型。实现带有工具调用的 ReAct 模式。
 
 ```typescript
-import { createReActAgent } from '@seashore/agent'
+import { createReActAgent } from '@seashorelab/agent'
 
 // 显式创建 ReAct 智能体（与 createAgent 相同）
 const agent = createReActAgent({

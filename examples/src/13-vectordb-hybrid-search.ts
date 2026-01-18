@@ -8,8 +8,8 @@
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
-import { createVectorStore, createCollection, hybridSearch } from '@seashore/vectordb';
-import { openaiEmbed, generateBatchEmbeddings } from '@seashore/llm';
+import { createVectorStore, createCollection, hybridSearch } from '@seashorelab/vectordb';
+import { openaiEmbed, generateBatchEmbeddings } from '@seashorelab/llm';
 import { PostgreSqlContainer } from '@testcontainers/postgresql';
 import { readFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';

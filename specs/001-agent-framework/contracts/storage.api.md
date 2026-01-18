@@ -1,6 +1,6 @@
-# API Contract: @seashore/storage
+# API Contract: @seashorelab/storage
 
-**Package**: `@seashore/storage`  
+**Package**: `@seashorelab/storage`  
 **Version**: 0.1.0
 
 ## 概述
@@ -44,7 +44,7 @@ export type {
 ### createDatabase
 
 ```typescript
-import { createDatabase } from '@seashore/storage'
+import { createDatabase } from '@seashorelab/storage'
 
 const db = createDatabase({
   connectionString: process.env.DATABASE_URL,
@@ -166,7 +166,7 @@ export const sessions = pgTable('sessions', {
 ### createThreadRepository
 
 ```typescript
-import { createDatabase, createThreadRepository } from '@seashore/storage'
+import { createDatabase, createThreadRepository } from '@seashorelab/storage'
 
 const db = createDatabase({ connectionString: process.env.DATABASE_URL })
 const threadRepo = createThreadRepository(db)
@@ -366,7 +366,7 @@ export interface Trace {
 ## 事务支持
 
 ```typescript
-import { createDatabase } from '@seashore/storage'
+import { createDatabase } from '@seashorelab/storage'
 
 const db = createDatabase({ connectionString: process.env.DATABASE_URL })
 

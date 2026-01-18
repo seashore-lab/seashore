@@ -1,7 +1,7 @@
 /**
  * SSE (Server-Sent Events) transport for MCP
  * Communicates with MCP server via HTTP SSE
- * @module @seashore/mcp
+ * @module @seashorelab/mcp
  */
 
 import type { MCPClientConfig } from '../types';
@@ -127,7 +127,7 @@ export class SSETransport {
         roots: { listChanged: true },
       },
       clientInfo: {
-        name: '@seashore/mcp',
+        name: '@seashorelab/mcp',
         version: '0.1.0',
       },
     });

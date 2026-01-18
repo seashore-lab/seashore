@@ -1,6 +1,6 @@
 /**
  * Evaluator creation
- * @module @seashore/evaluation
+ * @module @seashorelab/evaluation
  */
 
 import type {

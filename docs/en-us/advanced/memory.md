@@ -41,7 +41,7 @@ Memory types:
 For current conversation context:
 
 ```typescript
-import { createShortTermMemory, type NewMemoryEntry } from '@seashore/memory'
+import { createShortTermMemory, type NewMemoryEntry } from '@seashorelab/memory'
 
 const memory = createShortTermMemory({
   maxEntries: 50, // Max items to store
@@ -72,7 +72,7 @@ const summary = memory.getSummary('conv-123')
 For session-level context:
 
 ```typescript
-import { createMidTermMemory } from '@seashore/memory'
+import { createMidTermMemory } from '@seashorelab/memory'
 
 const memory = createMidTermMemory({
   maxEntries: 100,
@@ -98,8 +98,8 @@ const memories = memory.queryByAgent('assistant', {
 Persistent memory across sessions:
 
 ```typescript
-import { createLongTermMemory } from '@seashore/memory'
-import { createDatabase } from '@seashore/storage'
+import { createLongTermMemory } from '@seashorelab/memory'
+import { createDatabase } from '@seashorelab/storage'
 
 const database = createDatabase({
   connectionString: process.env.DATABASE_URL,
@@ -148,8 +148,8 @@ interface MemoryEntry {
 ### Manual Memory Management
 
 ```typescript
-import { createAgent } from '@seashore/agent'
-import { createShortTermMemory } from '@seashore/memory'
+import { createAgent } from '@seashorelab/agent'
+import { createShortTermMemory } from '@seashorelab/memory'
 
 const agent = createAgent({
   name: 'memory-assistant',
@@ -199,7 +199,7 @@ memory.add({
 Automatic memory integration:
 
 ```typescript
-import { withMemory } from '@seashore/agent'
+import { withMemory } from '@seashorelab/agent'
 
 const memoryAgent = withMemory(agent, {
   memory,
@@ -252,7 +252,7 @@ const memories = memory.queryByTimeRange(
 Search memories by meaning:
 
 ```typescript
-import { createSemanticMemory } from '@seashore/memory'
+import { createSemanticMemory } from '@seashorelab/memory'
 
 const semanticMemory = createSemanticMemory({
   embeddingFunction: embeddingFn,
@@ -417,8 +417,8 @@ memory.import(data)
 ## Example: Complete Memory System
 
 ```typescript
-import { createAgent } from '@seashore/agent'
-import { createShortTermMemory, createLongTermMemory } from '@seashore/memory'
+import { createAgent } from '@seashorelab/agent'
+import { createShortTermMemory, createLongTermMemory } from '@seashorelab/memory'
 
 // Short-term for conversation
 const shortTerm = createShortTermMemory({ maxEntries: 50 })

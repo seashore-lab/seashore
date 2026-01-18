@@ -1,5 +1,5 @@
 /**
- * @seashore/storage - Thread Repository
+ * @seashorelab/storage - Thread Repository
  *
  * Repository for thread CRUD operations
  */
@@ -40,7 +40,7 @@ export interface ThreadRepository {
  *
  * @example
  * ```typescript
- * import { createDatabase, createThreadRepository } from '@seashore/storage';
+ * import { createDatabase, createThreadRepository } from '@seashorelab/storage';
  *
  * const database = createDatabase({ connectionString: process.env.DATABASE_URL! });
  * const threadRepo = createThreadRepository(database.db);

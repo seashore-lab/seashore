@@ -1,11 +1,11 @@
 /**
- * @seashore/workflow - Types
+ * @seashorelab/workflow - Types
  *
  * Type definitions for workflow orchestration
  */
 
 import type { ZodSchema } from 'zod';
-import type { TextAdapter } from '@seashore/llm';
+import type { TextAdapter } from '@seashorelab/llm';
 
 // Re-export adapter types for convenience
 export type { TextAdapter };

@@ -1,6 +1,6 @@
 /**
  * ChatToolResult component
- * @module @seashore/genui
+ * @module @seashorelab/genui
  */
 
 import React from 'react';

@@ -1,6 +1,6 @@
 /**
  * MCP Transport exports
- * @module @seashore/mcp
+ * @module @seashorelab/mcp
  */
 
 export {

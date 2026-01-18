@@ -13,7 +13,7 @@ Source: `examples/src/14-context-engineering.ts`
 ## How to run
 
 ```bash
-pnpm --filter @seashore/examples exec tsx src/14-context-engineering.ts
+pnpm --filter @seashorelab/examples exec tsx src/14-context-engineering.ts
 ```
 
 ## Key concepts

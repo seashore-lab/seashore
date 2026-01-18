@@ -1,6 +1,6 @@
 # Storage & Persistence
 
-The Storage module (`@seashore/storage`) provides:
+The Storage module (`@seashorelab/storage`) provides:
 
 - PostgreSQL + Drizzle database setup
 - schemas for threads, messages, traces, sessions
@@ -33,7 +33,7 @@ Storage features:
 ### PostgreSQL with Drizzle
 
 ```typescript
-import { createDatabase } from '@seashore/storage'
+import { createDatabase } from '@seashorelab/storage'
 
 const database = createDatabase({
   connectionString: process.env.DATABASE_URL,
@@ -56,7 +56,7 @@ const client = postgres(connectionString)
 const db = drizzle(client)
 
 await migrate(db, {
-  migrationsFolder: './node_modules/@seashore/storage/drizzle',
+  migrationsFolder: './node_modules/@seashorelab/storage/drizzle',
 })
 ```
 
@@ -68,7 +68,7 @@ import postgres from 'postgres'
 
 const client = postgres(connectionString)
 const migrationSql = readFileSync(
-  './node_modules/@seashore/storage/drizzle/0000_initial.sql',
+  './node_modules/@seashorelab/storage/drizzle/0000_initial.sql',
   'utf-8'
 )
 await client.unsafe(migrationSql)
@@ -79,7 +79,7 @@ await client.unsafe(migrationSql)
 Threads represent conversations:
 
 ```typescript
-import { createThreadRepository } from '@seashore/storage'
+import { createThreadRepository } from '@seashorelab/storage'
 
 const threadRepo = createThreadRepository(database.db)
 
@@ -126,7 +126,7 @@ interface Thread {
 Messages within threads:
 
 ```typescript
-import { createMessageRepository } from '@seashore/storage'
+import { createMessageRepository } from '@seashorelab/storage'
 
 const messageRepo = createMessageRepository(database.db)
 
@@ -174,8 +174,8 @@ interface Message {
 Automatically save agent conversations:
 
 ```typescript
-import { createAgent, withStorage } from '@seashore/agent'
-import { createPersistenceMiddleware } from '@seashore/storage'
+import { createAgent, withStorage } from '@seashorelab/agent'
+import { createPersistenceMiddleware } from '@seashorelab/storage'
 
 const agent = createAgent({
   name: 'assistant',
@@ -204,7 +204,7 @@ const messages = await messageRepo.listByThread(thread.id)
 Resume conversations from database:
 
 ```typescript
-import { continueThread, streamContinueThread } from '@seashore/agent'
+import { continueThread, streamContinueThread } from '@seashorelab/agent'
 
 // Non-streaming
 const result = await continueThread({
@@ -232,7 +232,7 @@ for await (const chunk of streamContinueThread({
 High-level thread management:
 
 ```typescript
-import { createThreadManager } from '@seashore/agent'
+import { createThreadManager } from '@seashorelab/agent'
 
 const manager = createThreadManager({
   database,
@@ -381,9 +381,9 @@ await container.stop()
 ## Example: Complete Storage Setup
 
 ```typescript
-import { createDatabase, createThreadRepository, createMessageRepository } from '@seashore/storage'
-import { createAgent, withStorage } from '@seashore/agent'
-import { openaiText } from '@seashore/llm'
+import { createDatabase, createThreadRepository, createMessageRepository } from '@seashorelab/storage'
+import { createAgent, withStorage } from '@seashorelab/agent'
+import { openaiText } from '@seashorelab/llm'
 
 // Setup database
 const database = createDatabase({

@@ -1,5 +1,5 @@
 /**
- * @seashore/contextengineering - Types
+ * @seashorelab/contextengineering - Types
  *
  * Core type definitions for context engineering
  */

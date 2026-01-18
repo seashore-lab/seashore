@@ -5,9 +5,9 @@
  */
 
 import 'dotenv/config';
-import { createAgent } from '@seashore/agent';
-import { openaiText } from '@seashore/llm';
-import { createShortTermMemory, type NewMemoryEntry } from '@seashore/memory';
+import { createAgent } from '@seashorelab/agent';
+import { openaiText } from '@seashorelab/llm';
+import { createShortTermMemory, type NewMemoryEntry } from '@seashorelab/memory';
 
 async function main() {
   console.log('[Example 05: Memory Conversation]\n');

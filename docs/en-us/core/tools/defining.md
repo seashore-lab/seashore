@@ -1,6 +1,6 @@
 # Defining Tools
 
-Seashore tools are defined with `defineTool()` from `@seashore/tool`.
+Seashore tools are defined with `defineTool()` from `@seashorelab/tool`.
 
 ## Design Goals
 
@@ -11,7 +11,7 @@ Seashore tools are defined with `defineTool()` from `@seashore/tool`.
 ## Anatomy
 
 ```ts
-import { defineTool } from '@seashore/tool'
+import { defineTool } from '@seashorelab/tool'
 import { z } from 'zod'
 
 const tool = defineTool({

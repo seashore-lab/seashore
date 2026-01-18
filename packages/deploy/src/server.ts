@@ -1,6 +1,6 @@
 /**
  * Server creation
- * @module @seashore/deploy
+ * @module @seashorelab/deploy
  */
 
 import { Hono } from 'hono';

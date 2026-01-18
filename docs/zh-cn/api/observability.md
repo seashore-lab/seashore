@@ -1,6 +1,6 @@
 # API 参考：可观测性
 
-包：`@seashore/observability`
+包：`@seashorelab/observability`
 
 ## 日志
 

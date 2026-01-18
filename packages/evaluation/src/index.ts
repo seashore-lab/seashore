@@ -1,7 +1,7 @@
 /**
- * @seashore/evaluation
+ * @seashorelab/evaluation
  * Agent evaluation and metrics package
- * @module @seashore/evaluation
+ * @module @seashorelab/evaluation
  */
 
 // Types

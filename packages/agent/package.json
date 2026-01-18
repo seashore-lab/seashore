@@ -1,5 +1,5 @@
 {
-  "name": "@seashore/agent",
+  "name": "@seashorelab/agent",
   "version": "0.1.0",
   "type": "module",
   "description": "ReAct and Workflow agents for Seashore Agent Framework",
@@ -35,9 +35,9 @@
     "access": "public"
   },
   "dependencies": {
-    "@seashore/llm": "workspace:*",
-    "@seashore/tool": "workspace:*",
-    "@seashore/workflow": "workspace:*"
+    "@seashorelab/llm": "workspace:*",
+    "@seashorelab/tool": "workspace:*",
+    "@seashorelab/workflow": "workspace:*"
   },
   "peerDependencies": {
     "zod": "^4.0.5"

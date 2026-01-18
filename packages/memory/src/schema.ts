@@ -1,5 +1,5 @@
 /**
- * @seashore/memory - Schema Definitions
+ * @seashorelab/memory - Schema Definitions
  *
  * Drizzle ORM schema for memory storage
  */

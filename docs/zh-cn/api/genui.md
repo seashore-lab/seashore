@@ -1,6 +1,6 @@
 # API 参考：GenUI
 
-包：`@seashore/genui`
+包：`@seashorelab/genui`
 
 ## 组件
 

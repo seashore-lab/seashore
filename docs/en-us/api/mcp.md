@@ -1,6 +1,6 @@
 # API Reference: MCP
 
-Package: `@seashore/mcp`
+Package: `@seashorelab/mcp`
 
 ## Client
 

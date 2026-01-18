@@ -9,7 +9,7 @@
 ## 基于规则的自定义指标（示例 08 风格）
 
 ```ts
-import { customMetric } from '@seashore/evaluation'
+import { customMetric } from '@seashorelab/evaluation'
 
 const lengthCheck = customMetric({
   name: 'length_check',

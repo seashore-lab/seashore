@@ -9,10 +9,10 @@
  */
 
 import 'dotenv/config';
-import { createMCPClient, createMCPToolBridge } from '@seashore/mcp';
-import { createAgent } from '@seashore/agent';
-import { openaiText } from '@seashore/llm';
-import { defineTool } from '@seashore/tool';
+import { createMCPClient, createMCPToolBridge } from '@seashorelab/mcp';
+import { createAgent } from '@seashorelab/agent';
+import { openaiText } from '@seashorelab/llm';
+import { defineTool } from '@seashorelab/tool';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -140,7 +140,7 @@ main().catch(console.error);
 //       - fs_list_directory: ✅
 
 // 📝 User: Read the contents of package.json and tell me the project name and version
-// 🤖 Agent: The project name is `@seashore/examples` and the version is `0.1.0`.
+// 🤖 Agent: The project name is `@seashorelab/examples` and the version is `0.1.0`.
 
 //    📋 Tool Calls:
 //       - fs_read_text_file: ❌

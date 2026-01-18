@@ -12,9 +12,9 @@ import {
   coherenceMetric,
   customMetric,
   type TestCase,
-} from '@seashore/evaluation';
-import { createAgent } from '@seashore/agent';
-import { openaiText } from '@seashore/llm';
+} from '@seashorelab/evaluation';
+import { createAgent } from '@seashorelab/agent';
+import { openaiText } from '@seashorelab/llm';
 
 async function main() {
   console.log('[📊 Example 08: Evaluation QA]\n');

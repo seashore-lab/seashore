@@ -5,7 +5,7 @@
 ## 线程存储库
 
 ```ts
-import { createDatabase, createThreadRepository } from '@seashore/storage'
+import { createDatabase, createThreadRepository } from '@seashorelab/storage'
 
 const db = createDatabase({ connectionString: process.env.DATABASE_URL })
 const threads = createThreadRepository(db)
@@ -20,7 +20,7 @@ const thread = await threads.create({
 ## 消息存储库
 
 ```ts
-import { createMessageRepository } from '@seashore/storage'
+import { createMessageRepository } from '@seashorelab/storage'
 
 const messages = createMessageRepository(db)
 await messages.create({

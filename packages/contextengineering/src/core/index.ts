@@ -1,5 +1,5 @@
 /**
- * @seashore/contextengineering - Core
+ * @seashorelab/contextengineering - Core
  *
  * Core context engineering utilities
  */

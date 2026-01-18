@@ -14,7 +14,7 @@ import {
   piiDetectionRule,
   topicBlockRule,
   lengthLimitRule,
-} from '@seashore/security';
+} from '@seashorelab/security';
 
 async function main() {
   console.log('[🛡️ Example 07: Security Guardrails]');

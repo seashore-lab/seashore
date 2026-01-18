@@ -1,5 +1,5 @@
 /**
- * @seashore/workflow - Parallel Node
+ * @seashorelab/workflow - Parallel Node
  *
  * Node type for parallel execution
  */
@@ -32,7 +32,7 @@ export interface ParallelNodeOutput<T = unknown> {
  *
  * @example
  * ```typescript
- * import { createParallelNode } from '@seashore/workflow';
+ * import { createParallelNode } from '@seashorelab/workflow';
  *
  * const parallelNode = createParallelNode({
  *   name: 'parallel-search',
@@ -153,7 +153,7 @@ export function createParallelNode(
  *
  * @example
  * ```typescript
- * import { createMapReduceNode } from '@seashore/workflow';
+ * import { createMapReduceNode } from '@seashorelab/workflow';
  *
  * const mapReduceNode = createMapReduceNode({
  *   name: 'process-items',

@@ -1,1 +1,1 @@
-# @seashore/memory
+# @seashorelab/memory

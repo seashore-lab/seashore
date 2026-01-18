@@ -1,5 +1,5 @@
 /**
- * @seashore/storage - Trace Repository
+ * @seashorelab/storage - Trace Repository
  *
  * Repository for trace CRUD operations (observability)
  */
@@ -40,7 +40,7 @@ export interface TraceRepository {
  *
  * @example
  * ```typescript
- * import { createDatabase, createTraceRepository } from '@seashore/storage';
+ * import { createDatabase, createTraceRepository } from '@seashorelab/storage';
  *
  * const database = createDatabase({ connectionString: process.env.DATABASE_URL! });
  * const traceRepo = createTraceRepository(database.db);

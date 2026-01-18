@@ -27,8 +27,8 @@ import {
   createMarkdownSplitter,
   createInMemoryRetriever,
   type DocumentChunk,
-} from '@seashore/rag'
-import { openaiEmbed, generateBatchEmbeddings } from '@seashore/llm'
+} from '@seashorelab/rag'
+import { openaiEmbed, generateBatchEmbeddings } from '@seashorelab/llm'
 
 const loader = createMarkdownStringLoader('# Title\nSome content...')
 const docs = await loader.load()
@@ -77,7 +77,7 @@ console.log(results[0]?.score)
 快速的内存向量搜索：
 
 ```typescript
-import { createInMemoryRetriever } from '@seashore/rag'
+import { createInMemoryRetriever } from '@seashorelab/rag'
 
 const retriever = createInMemoryRetriever(embeddingFn, {
   scoreThreshold: 0.7, // 最小相似度分数
@@ -96,8 +96,8 @@ const results = await retriever.retrieve('query', {
 使用 PostgreSQL + pgvector 的持久向量搜索：
 
 ```typescript
-import { createDatabaseRetriever } from '@seashore/rag'
-import { createVectorStore } from '@seashore/vectordb'
+import { createDatabaseRetriever } from '@seashorelab/rag'
+import { createVectorStore } from '@seashorelab/vectordb'
 
 const vectorStore = await createVectorStore({
   db: myDatabase,
@@ -143,7 +143,7 @@ const results = await retriever.retrieve('machine learning', {
 结合向量和关键字搜索：
 
 ```typescript
-import { hybridSearch } from '@seashore/vectordb'
+import { hybridSearch } from '@seashorelab/vectordb'
 
 const results = await hybridSearch({
   vectorStore,
@@ -182,8 +182,8 @@ const results = await retriever.retrieve('tutorial', {
 ### 手动 RAG
 
 ```typescript
-import { createAgent } from '@seashore/agent'
-import { openaiText } from '@seashore/llm'
+import { createAgent } from '@seashorelab/agent'
+import { openaiText } from '@seashorelab/llm'
 
 const agent = createAgent({
   name: 'assistant',
@@ -213,7 +213,7 @@ ${context}
 创建检索信息的工具：
 
 ```typescript
-import { defineTool } from '@seashore/tool'
+import { defineTool } from '@seashorelab/tool'
 import { z } from 'zod'
 
 const retrievalTool = defineTool({

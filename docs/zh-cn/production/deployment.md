@@ -1,6 +1,6 @@
 # 部署
 
-部署模块 (`@seashore/deploy`) 为 Agent 提供 HTTP 服务器（基于 Hono 构建），具有以下功能：
+部署模块 (`@seashorelab/deploy`) 为 Agent 提供 HTTP 服务器（基于 Hono 构建），具有以下功能：
 
 - 标准聊天和 Agent 端点
 - 可选的流式端点

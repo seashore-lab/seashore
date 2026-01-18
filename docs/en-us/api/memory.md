@@ -1,6 +1,6 @@
 # API Reference: Memory
 
-Package: `@seashore/memory`
+Package: `@seashorelab/memory`
 
 ## Stores
 

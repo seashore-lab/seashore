@@ -1,6 +1,6 @@
-# API Contract: @seashore/observability
+# API Contract: @seashorelab/observability
 
-**Package**: `@seashore/observability`  
+**Package**: `@seashorelab/observability`  
 **Version**: 0.1.0
 
 ## 概述
@@ -35,7 +35,7 @@ export type { Span, SpanContext, TraceEvent, TokenUsage } from './types'
 ### createTracer
 
 ```typescript
-import { createTracer } from '@seashore/observability'
+import { createTracer } from '@seashorelab/observability'
 
 const tracer = createTracer({
   serviceName: 'my-agent-service',
@@ -129,7 +129,7 @@ await Promise.all(
 ### createTokenCounter
 
 ```typescript
-import { createTokenCounter } from '@seashore/observability'
+import { createTokenCounter } from '@seashorelab/observability'
 
 const counter = createTokenCounter({
   // 默认编码
@@ -187,7 +187,7 @@ const total = counter.countTotal(texts)
 ### createLogger
 
 ```typescript
-import { createLogger } from '@seashore/observability'
+import { createLogger } from '@seashorelab/observability'
 
 const logger = createLogger({
   name: 'my-agent',
@@ -237,8 +237,8 @@ agentLogger.info('Agent started')
 为 Agent 添加可观测性：
 
 ```typescript
-import { createAgent } from '@seashore/agent'
-import { observabilityMiddleware } from '@seashore/observability'
+import { createAgent } from '@seashorelab/agent'
+import { observabilityMiddleware } from '@seashorelab/observability'
 
 const agent = createAgent({
   name: 'observed-agent',
@@ -278,7 +278,7 @@ const agent = createAgent({
 ### 手动追踪 Agent 执行
 
 ```typescript
-import { traceAgentRun } from '@seashore/observability'
+import { traceAgentRun } from '@seashorelab/observability'
 
 const result = await traceAgentRun(tracer, {
   agentName: 'my-agent',
@@ -305,7 +305,7 @@ const result = await traceAgentRun(tracer, {
 ### 查询 Traces
 
 ```typescript
-import { createTraceRepository } from '@seashore/storage'
+import { createTraceRepository } from '@seashorelab/storage'
 
 const traceRepo = createTraceRepository(database)
 
@@ -376,7 +376,7 @@ const tracer = createTracer({
 ### 自定义导出器
 
 ```typescript
-import { createTracer, type TraceExporter } from '@seashore/observability'
+import { createTracer, type TraceExporter } from '@seashorelab/observability'
 
 const customExporter: TraceExporter = {
   export: async (spans) => {

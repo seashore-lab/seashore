@@ -1,5 +1,5 @@
 /**
- * @seashore/contextengineering - Presets Tests
+ * @seashorelab/contextengineering - Presets Tests
  */
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';

@@ -1,6 +1,6 @@
 /**
  * MCP Client implementation
- * @module @seashore/mcp
+ * @module @seashorelab/mcp
  */
 
 import type {

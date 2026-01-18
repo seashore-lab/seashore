@@ -166,7 +166,7 @@ Follow-up TODOs: None
 **执行要求**:
 
 - 子包 MAY 依赖同 workspace 内的其他包
-- 核心公共包（如 `@seashore/llm`）SHOULD 保持独立可用
+- 核心公共包（如 `@seashorelab/llm`）SHOULD 保持独立可用
 - 依赖关系 MUST 在 `package.json` 中显式声明
 
 ### X. 架构文档先于实现

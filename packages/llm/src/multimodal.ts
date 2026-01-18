@@ -1,5 +1,5 @@
 /**
- * @seashore/llm - Multimodal Capabilities
+ * @seashorelab/llm - Multimodal Capabilities
  *
  * Image generation, video generation, TTS, and transcription
  */

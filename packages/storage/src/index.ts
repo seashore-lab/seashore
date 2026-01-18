@@ -1,5 +1,5 @@
 /**
- * @seashore/storage
+ * @seashorelab/storage
  *
  * PostgreSQL storage layer with Drizzle ORM for Seashore Agent Framework
  */

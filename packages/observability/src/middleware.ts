@@ -1,6 +1,6 @@
 /**
  * Observability middleware
- * @module @seashore/observability
+ * @module @seashorelab/observability
  */
 
 import type { Tracer, TokenCounter, Logger, SpanType } from './types';

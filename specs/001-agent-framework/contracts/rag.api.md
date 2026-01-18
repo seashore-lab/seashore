@@ -1,6 +1,6 @@
-# API Contract: @seashore/rag
+# API Contract: @seashorelab/rag
 
-**Package**: `@seashore/rag`  
+**Package**: `@seashorelab/rag`  
 **Version**: 0.1.0
 
 ## 概述
@@ -52,9 +52,9 @@ export type { LoadedDocument, DocumentChunk, RetrievalResult } from './types'
 ### createRAG
 
 ```typescript
-import { createRAG } from '@seashore/rag'
-import { createVectorStore } from '@seashore/vectordb'
-import { openaiText, openaiEmbed } from '@seashore/llm'
+import { createRAG } from '@seashorelab/rag'
+import { createVectorStore } from '@seashorelab/vectordb'
+import { openaiText, openaiEmbed } from '@seashorelab/llm'
 
 const rag = createRAG({
   vectorStore: createVectorStore({
@@ -165,7 +165,7 @@ interface RAGStreamChunk {
 ### createTextLoader
 
 ```typescript
-import { createTextLoader } from '@seashore/rag'
+import { createTextLoader } from '@seashorelab/rag'
 
 const loader = createTextLoader()
 
@@ -182,7 +182,7 @@ const doc = await loader.loadFromString('Hello World', {
 ### createMarkdownLoader
 
 ```typescript
-import { createMarkdownLoader } from '@seashore/rag'
+import { createMarkdownLoader } from '@seashorelab/rag'
 
 const loader = createMarkdownLoader({
   extractFrontmatter: true, // 提取 YAML frontmatter
@@ -198,7 +198,7 @@ const docs = await loader.load('./README.md')
 ### createPDFLoader
 
 ```typescript
-import { createPDFLoader } from '@seashore/rag'
+import { createPDFLoader } from '@seashorelab/rag'
 
 const loader = createPDFLoader({
   splitPages: true, // 按页分割
@@ -212,7 +212,7 @@ const docs = await loader.load('./document.pdf')
 ### createWebLoader
 
 ```typescript
-import { createWebLoader } from '@seashore/rag'
+import { createWebLoader } from '@seashorelab/rag'
 
 const loader = createWebLoader({
   // 可选：使用 Firecrawl 进行高质量抓取
@@ -231,7 +231,7 @@ const docs = await loader.load('https://example.com/article')
 ### 加载目录
 
 ```typescript
-import { createMarkdownLoader } from '@seashore/rag'
+import { createMarkdownLoader } from '@seashorelab/rag'
 
 const loader = createMarkdownLoader()
 
@@ -252,7 +252,7 @@ const docs = await loader.loadDirectory('./docs', {
 推荐使用的通用分割器：
 
 ```typescript
-import { createRecursiveSplitter } from '@seashore/rag'
+import { createRecursiveSplitter } from '@seashorelab/rag'
 
 const splitter = createRecursiveSplitter({
   chunkSize: 1000, // 目标块大小（字符数）
@@ -268,7 +268,7 @@ const chunks = await splitter.split(document)
 基于 Token 数量的分割：
 
 ```typescript
-import { createTokenSplitter } from '@seashore/rag'
+import { createTokenSplitter } from '@seashorelab/rag'
 
 const splitter = createTokenSplitter({
   chunkSize: 500, // Token 数量
@@ -284,7 +284,7 @@ const chunks = await splitter.split(document)
 保留 Markdown 结构的分割：
 
 ```typescript
-import { createMarkdownSplitter } from '@seashore/rag'
+import { createMarkdownSplitter } from '@seashorelab/rag'
 
 const splitter = createMarkdownSplitter({
   chunkSize: 1000,
@@ -303,7 +303,7 @@ const chunks = await splitter.split(markdownDocument)
 ### createVectorRetriever
 
 ```typescript
-import { createVectorRetriever } from '@seashore/rag'
+import { createVectorRetriever } from '@seashorelab/rag'
 
 const retriever = createVectorRetriever({
   vectorStore,
@@ -318,7 +318,7 @@ const results = await retriever.retrieve('query text')
 ### createHybridRetriever
 
 ```typescript
-import { createHybridRetriever } from '@seashore/rag'
+import { createHybridRetriever } from '@seashorelab/rag'
 
 const retriever = createHybridRetriever({
   vectorStore,
@@ -337,7 +337,7 @@ const results = await retriever.retrieve('query text')
 使用 LLM 生成上下文增强的检索：
 
 ```typescript
-import { createContextualRetriever } from '@seashore/rag'
+import { createContextualRetriever } from '@seashorelab/rag'
 
 const retriever = createContextualRetriever({
   vectorStore,
@@ -363,7 +363,7 @@ const results = await retriever.retrieve('how to use react hooks')
 一站式文档摄入：
 
 ```typescript
-import { createRAG, createMarkdownLoader, createRecursiveSplitter } from '@seashore/rag'
+import { createRAG, createMarkdownLoader, createRecursiveSplitter } from '@seashorelab/rag'
 
 const rag = createRAG({ ... })
 

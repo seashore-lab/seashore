@@ -14,7 +14,7 @@ Use a stronger model for evaluation than the model being evaluated, to reduce bi
 ## Batch evaluation
 
 ```ts
-import { createEvaluator, evaluateBatch, relevanceMetric, coherenceMetric } from '@seashore/evaluation'
+import { createEvaluator, evaluateBatch, relevanceMetric, coherenceMetric } from '@seashorelab/evaluation'
 
 const evaluator = createEvaluator({
   metrics: [relevanceMetric({ threshold: 0.7 }), coherenceMetric({ threshold: 0.6 })],

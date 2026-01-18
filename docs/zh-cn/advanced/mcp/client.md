@@ -5,7 +5,7 @@
 ## Stdio
 
 ```ts
-import { createMCPClient } from '@seashore/mcp'
+import { createMCPClient } from '@seashorelab/mcp'
 
 const client = await createMCPClient({
   transport: 'stdio',

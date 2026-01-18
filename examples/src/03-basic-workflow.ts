@@ -12,8 +12,8 @@ import {
   createLLMNode,
   type WorkflowContext,
   type LLMNodeOutput,
-} from '@seashore/workflow';
-import { openaiText } from '@seashore/llm';
+} from '@seashorelab/workflow';
+import { openaiText } from '@seashorelab/llm';
 
 async function main() {
   console.log('[Example 03: Workflow Basic]\n');

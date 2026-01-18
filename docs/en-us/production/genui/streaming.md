@@ -4,7 +4,7 @@ For responsive UIs, consume server streaming (typically SSE) and update message 
 
 GenUI provides `useChatStream` to simplify streaming protocols.
 
-When combined with `@seashore/deploy` streaming endpoints, you can render:
+When combined with `@seashorelab/deploy` streaming endpoints, you can render:
 
 - partial assistant text
 - tool calls as they occur

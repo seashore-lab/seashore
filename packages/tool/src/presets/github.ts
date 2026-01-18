@@ -1,5 +1,5 @@
 /**
- * @seashore/tool - GitHub Tool
+ * @seashorelab/tool - GitHub Tool
  *
  * Preset tools for interacting with GitHub API
  */
@@ -166,7 +166,7 @@ function createHeaders(token?: string): Record<string, string> {
  *
  * @example
  * ```typescript
- * import { githubSearchReposTool } from '@seashore/tool/presets';
+ * import { githubSearchReposTool } from '@seashorelab/tool/presets';
  *
  * const search = githubSearchReposTool({ token: process.env.GITHUB_TOKEN });
  * const results = await search.execute({
@@ -253,7 +253,7 @@ export function githubSearchReposTool(config: GitHubToolConfig = {}) {
  *
  * @example
  * ```typescript
- * import { githubGetRepoTool } from '@seashore/tool/presets';
+ * import { githubGetRepoTool } from '@seashorelab/tool/presets';
  *
  * const getRepo = githubGetRepoTool({ token: process.env.GITHUB_TOKEN });
  * const repo = await getRepo.execute({ owner: 'microsoft', repo: 'vscode' });
@@ -323,7 +323,7 @@ export function githubGetRepoTool(config: GitHubToolConfig = {}) {
  *
  * @example
  * ```typescript
- * import { githubListIssuesTool } from '@seashore/tool/presets';
+ * import { githubListIssuesTool } from '@seashorelab/tool/presets';
  *
  * const listIssues = githubListIssuesTool({ token: process.env.GITHUB_TOKEN });
  * const issues = await listIssues.execute({
@@ -423,7 +423,7 @@ export function githubListIssuesTool(config: GitHubToolConfig = {}) {
  *
  * @example
  * ```typescript
- * import { githubListPullRequestsTool } from '@seashore/tool/presets';
+ * import { githubListPullRequestsTool } from '@seashorelab/tool/presets';
  *
  * const listPRs = githubListPullRequestsTool({ token: process.env.GITHUB_TOKEN });
  * const prs = await listPRs.execute({
@@ -513,7 +513,7 @@ export function githubListPullRequestsTool(config: GitHubToolConfig = {}) {
  *
  * @example
  * ```typescript
- * import { githubGetFileContentTool } from '@seashore/tool/presets';
+ * import { githubGetFileContentTool } from '@seashorelab/tool/presets';
  *
  * const getFile = githubGetFileContentTool({ token: process.env.GITHUB_TOKEN });
  * const content = await getFile.execute({
@@ -576,7 +576,7 @@ export function githubGetFileContentTool(config: GitHubToolConfig = {}) {
  *
  * @example
  * ```typescript
- * import { githubSearchCodeTool } from '@seashore/tool/presets';
+ * import { githubSearchCodeTool } from '@seashorelab/tool/presets';
  *
  * const searchCode = githubSearchCodeTool({ token: process.env.GITHUB_TOKEN });
  * const results = await searchCode.execute({

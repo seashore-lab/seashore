@@ -1,5 +1,5 @@
 /**
- * @seashore/vectordb - Types
+ * @seashorelab/vectordb - Types
  *
  * Type definitions for vector database operations
  */

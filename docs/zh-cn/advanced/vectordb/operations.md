@@ -3,8 +3,8 @@
 ## 创建存储
 
 ```ts
-import { createVectorStore } from '@seashore/vectordb'
-import { openaiEmbed } from '@seashore/llm'
+import { createVectorStore } from '@seashorelab/vectordb'
+import { openaiEmbed } from '@seashorelab/llm'
 
 const store = createVectorStore({
   db,

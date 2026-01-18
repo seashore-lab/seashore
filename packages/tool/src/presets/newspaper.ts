@@ -1,5 +1,5 @@
 /**
- * @seashore/tool - Newspaper Tool
+ * @seashorelab/tool - Newspaper Tool
  *
  * Preset tools for extracting and parsing web articles
  */
@@ -228,7 +228,7 @@ function extractArticle(html: string, url: string): ExtractedArticle {
  *
  * @example
  * ```typescript
- * import { extractArticleTool } from '@seashore/tool/presets';
+ * import { extractArticleTool } from '@seashorelab/tool/presets';
  *
  * const extract = extractArticleTool();
  * const article = await extract.execute({
@@ -275,7 +275,7 @@ export function extractArticleTool() {
  *
  * @example
  * ```typescript
- * import { batchExtractArticlesTool } from '@seashore/tool/presets';
+ * import { batchExtractArticlesTool } from '@seashorelab/tool/presets';
  *
  * const batchExtract = batchExtractArticlesTool();
  * const articles = await batchExtract.execute({
@@ -346,7 +346,7 @@ export function batchExtractArticlesTool() {
  *
  * @example
  * ```typescript
- * import { extractHeadlinesTool } from '@seashore/tool/presets';
+ * import { extractHeadlinesTool } from '@seashorelab/tool/presets';
  *
  * const headlines = extractHeadlinesTool();
  * const result = await headlines.execute({

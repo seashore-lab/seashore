@@ -1,5 +1,5 @@
 /**
- * @seashore/tool - Zod to JSON Schema Converter
+ * @seashorelab/tool - Zod to JSON Schema Converter
  *
  * Converts Zod schemas to JSON Schema for LLM function calling
  * Uses Zod 4's built-in toJSONSchema function

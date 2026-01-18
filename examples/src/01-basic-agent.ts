@@ -6,8 +6,8 @@
  */
 
 import 'dotenv/config';
-import { createAgent } from '@seashore/agent';
-import { openaiText } from '@seashore/llm';
+import { createAgent } from '@seashorelab/agent';
+import { openaiText } from '@seashorelab/llm';
 
 async function main() {
   console.log('[Example 01: Basic Agent]\n');

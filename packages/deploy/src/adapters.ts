@@ -1,6 +1,6 @@
 /**
  * Runtime adapters
- * @module @seashore/deploy
+ * @module @seashorelab/deploy
  */
 
 import type { Server, RuntimeAdapter, RuntimeAdapterOptions } from './types';

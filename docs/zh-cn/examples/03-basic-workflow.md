@@ -11,7 +11,7 @@
 ## 运行方法
 
 ```bash
-pnpm --filter @seashore/examples exec tsx src/03-basic-workflow.ts
+pnpm --filter @seashorelab/examples exec tsx src/03-basic-workflow.ts
 ```
 
 ## 核心概念

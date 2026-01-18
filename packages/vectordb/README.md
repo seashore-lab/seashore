@@ -1,1 +1,1 @@
-# @seashore/vectordb
+# @seashorelab/vectordb

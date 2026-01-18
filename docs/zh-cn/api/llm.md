@@ -1,6 +1,6 @@
 # API 参考：LLM
 
-包：`@seashore/llm`
+包：`@seashorelab/llm`
 
 Seashore 使用"适配器"以便 agent 和工作流可以交换提供商。
 

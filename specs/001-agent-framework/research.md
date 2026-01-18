@@ -138,7 +138,7 @@ const result = await generateSpeech({
 
 ### 决策
 
-- **采纳**: 在 `@seashore/llm` 中导出所有多模态函数
+- **采纳**: 在 `@seashorelab/llm` 中导出所有多模态函数
 - **延迟**: 视频生成（Sora 仍在受限访问）
 
 ---

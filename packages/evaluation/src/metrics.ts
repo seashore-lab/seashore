@@ -1,6 +1,6 @@
 /**
  * Built-in evaluation metrics
- * @module @seashore/evaluation
+ * @module @seashorelab/evaluation
  */
 
 import type { Metric, MetricConfig, MetricResult } from './types';

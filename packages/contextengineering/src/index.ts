@@ -1,5 +1,5 @@
 /**
- * @seashore/contextengineering
+ * @seashorelab/contextengineering
  *
  * Context engineering utilities for building high-quality LLM prompts
  */

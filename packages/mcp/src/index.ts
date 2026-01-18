@@ -1,12 +1,12 @@
 /**
- * @seashore/mcp - MCP (Model Context Protocol) client for Seashore Agent framework
- * @module @seashore/mcp
+ * @seashorelab/mcp - MCP (Model Context Protocol) client for Seashore Agent framework
+ * @module @seashorelab/mcp
  *
  * @example Basic usage
  * ```typescript
- * import { createMCPClient, createMCPToolBridge } from '@seashore/mcp'
- * import { createAgent } from '@seashore/agent'
- * import { openaiText } from '@seashore/llm'
+ * import { createMCPClient, createMCPToolBridge } from '@seashorelab/mcp'
+ * import { createAgent } from '@seashorelab/agent'
+ * import { openaiText } from '@seashorelab/llm'
  *
  * // Connect to an MCP server
  * const client = await createMCPClient({

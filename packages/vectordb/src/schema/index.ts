@@ -1,5 +1,5 @@
 /**
- * @seashore/vectordb - Schema Index
+ * @seashorelab/vectordb - Schema Index
  *
  * Re-exports all schema definitions
  */

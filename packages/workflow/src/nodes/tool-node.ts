@@ -1,5 +1,5 @@
 /**
- * @seashore/workflow - Tool Node
+ * @seashorelab/workflow - Tool Node
  *
  * Node type for tool execution
  */
@@ -28,7 +28,7 @@ export interface ToolNodeOutput<T = unknown> {
  *
  * @example
  * ```typescript
- * import { createToolNode } from '@seashore/workflow';
+ * import { createToolNode } from '@seashorelab/workflow';
  * import { searchTool } from './tools';
  *
  * const searchNode = createToolNode({

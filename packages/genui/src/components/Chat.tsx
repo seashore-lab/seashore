@@ -1,6 +1,6 @@
 /**
  * Chat composite component
- * @module @seashore/genui
+ * @module @seashorelab/genui
  */
 
 import React, { useEffect } from 'react';

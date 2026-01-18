@@ -1,5 +1,5 @@
 {
-  "name": "@seashore/tool",
+  "name": "@seashorelab/tool",
   "version": "0.1.0",
   "type": "module",
   "description": "Type-safe tool definitions for Seashore Agent Framework",

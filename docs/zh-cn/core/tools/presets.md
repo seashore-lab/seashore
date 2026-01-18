@@ -1,6 +1,6 @@
 # 工具预设
 
-预设工具是 `@seashore/tool` 提供的预构建集成。
+预设工具是 `@seashorelab/tool` 提供的预构建集成。
 
 有两类：
 

@@ -1,6 +1,6 @@
 # "内存中"向量存储（开发模式）
 
-`@seashore/vectordb` 专为 PostgreSQL + pgvector 设计，而不是纯内存实现。
+`@seashorelab/vectordb` 专为 PostgreSQL + pgvector 设计，而不是纯内存实现。
 
 但是，在开发期间，您可以通过以下方式获得"类似内存"的行为：
 

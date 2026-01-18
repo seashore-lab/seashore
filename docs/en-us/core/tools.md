@@ -8,12 +8,12 @@ In Seashore, tools are:
 - **self-describing**: JSON Schema is derived for the LLM
 - **executable**: tools have an `execute()` function that returns structured data
 
-Tools are defined in `@seashore/tool` and consumed by agents (`@seashore/agent`) and workflows (`@seashore/workflow`).
+Tools are defined in `@seashorelab/tool` and consumed by agents (`@seashorelab/agent`) and workflows (`@seashorelab/workflow`).
 
 ## Quick Example
 
 ```ts
-import { defineTool } from '@seashore/tool'
+import { defineTool } from '@seashorelab/tool'
 import { z } from 'zod'
 
 export const calculatorTool = defineTool({
@@ -55,7 +55,7 @@ Tools are defined using `defineTool()` and provide full type safety from definit
 ### Basic Tool
 
 ```typescript
-import { defineTool } from '@seashore/tool'
+import { defineTool } from '@seashorelab/tool'
 import { z } from 'zod'
 
 const weatherTool = defineTool({
@@ -259,7 +259,7 @@ If the agent provides invalid input, the validation error is returned as a tool 
 Use `withValidation` for additional runtime validation:
 
 ```typescript
-import { withValidation, ValidationError } from '@seashore/tool'
+import { withValidation, ValidationError } from '@seashorelab/tool'
 
 const userTool = defineTool({
   name: 'update_user',
@@ -290,7 +290,7 @@ const validatedTool = withValidation(userTool, {
 For sensitive operations, require user approval before execution:
 
 ```typescript
-import { withApproval, createMemoryApprovalHandler } from '@seashore/tool'
+import { withApproval, createMemoryApprovalHandler } from '@seashorelab/tool'
 
 // Create approval handler
 const approvalHandler = createMemoryApprovalHandler()
@@ -325,7 +325,7 @@ approvalHandler.approve(pendingRequests[0].id, 'user-123')
 Define tools that execute on the client side (browser):
 
 ```typescript
-import { defineClientTool } from '@seashore/tool'
+import { defineClientTool } from '@seashorelab/tool'
 
 const showMapTool = defineClientTool({
   name: 'show_map',
@@ -357,7 +357,7 @@ Seashore provides ready-to-use tools:
 Web search powered by Serper API:
 
 ```typescript
-import { serperTool } from '@seashore/tool'
+import { serperTool } from '@seashorelab/tool'
 
 const searchTool = serperTool({
   apiKey: process.env.SERPER_API_KEY,
@@ -372,7 +372,7 @@ const searchTool = serperTool({
 Web scraping with Firecrawl:
 
 ```typescript
-import { firecrawlTool } from '@seashore/tool'
+import { firecrawlTool } from '@seashorelab/tool'
 
 const scrapeTool = firecrawlTool({
   apiKey: process.env.FIRECRAWL_API_KEY,
@@ -394,7 +394,7 @@ const scrapeTool = firecrawlTool({
 ## Example: Complete Tool Implementation
 
 ```typescript
-import { defineTool } from '@seashore/tool'
+import { defineTool } from '@seashorelab/tool'
 import { z } from 'zod'
 
 const emailTool = defineTool({

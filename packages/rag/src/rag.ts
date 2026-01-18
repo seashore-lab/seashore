@@ -1,5 +1,5 @@
 /**
- * @seashore/rag - RAG Pipeline
+ * @seashorelab/rag - RAG Pipeline
  *
  * Retrieval-Augmented Generation pipeline implementation
  */

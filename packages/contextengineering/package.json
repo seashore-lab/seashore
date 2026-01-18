@@ -1,5 +1,5 @@
 {
-  "name": "@seashore/contextengineering",
+  "name": "@seashorelab/contextengineering",
   "version": "0.1.0",
   "type": "module",
   "description": "Context engineering utilities for building high-quality LLM prompts",

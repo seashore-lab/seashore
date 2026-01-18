@@ -1,1 +1,1 @@
-# @seashore/observability
+# @seashorelab/observability

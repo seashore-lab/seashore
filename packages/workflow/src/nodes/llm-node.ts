@@ -1,5 +1,5 @@
 /**
- * @seashore/workflow - LLM Node
+ * @seashorelab/workflow - LLM Node
  *
  * Node type for LLM operations with streaming token support
  */
@@ -10,8 +10,8 @@ import type {
   WorkflowContext,
   StreamingWorkflowContext,
 } from '../types';
-import type { ChatMessage } from '@seashore/llm';
-import { chat } from '@seashore/llm';
+import type { ChatMessage } from '@seashorelab/llm';
+import { chat } from '@seashorelab/llm';
 import { NodeExecutionError } from '../error-handler';
 
 /**
@@ -45,8 +45,8 @@ export interface LLMNodeOutput {
  *
  * @example
  * ```typescript
- * import { createLLMNode } from '@seashore/workflow';
- * import { openaiText } from '@seashore/llm';
+ * import { createLLMNode } from '@seashorelab/workflow';
+ * import { openaiText } from '@seashorelab/llm';
  *
  * const analyzeNode = createLLMNode({
  *   name: 'analyze',

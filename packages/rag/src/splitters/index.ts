@@ -1,5 +1,5 @@
 /**
- * @seashore/rag - Splitters Index
+ * @seashorelab/rag - Splitters Index
  *
  * Re-exports all document splitters
  */

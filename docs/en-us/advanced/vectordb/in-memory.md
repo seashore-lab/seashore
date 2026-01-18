@@ -1,6 +1,6 @@
 # “In-Memory” Vector Store (Development Patterns)
 
-`@seashore/vectordb` is designed for PostgreSQL + pgvector, not a pure in-memory implementation.
+`@seashorelab/vectordb` is designed for PostgreSQL + pgvector, not a pure in-memory implementation.
 
 However, during development you can get “in-memory-like” behavior by:
 

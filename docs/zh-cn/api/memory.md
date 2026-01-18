@@ -1,6 +1,6 @@
 # API 参考：记忆
 
-包：`@seashore/memory`
+包：`@seashorelab/memory`
 
 ## 存储
 

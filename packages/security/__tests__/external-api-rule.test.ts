@@ -1,5 +1,5 @@
 /**
- * @seashore/security - External API Rule Tests
+ * @seashorelab/security - External API Rule Tests
  *
  * Tests for creating security rules that call external APIs
  */

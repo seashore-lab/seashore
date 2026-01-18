@@ -1,6 +1,6 @@
 # API Reference: Context Engineering
 
-Package: `@seashore/contextengineering`
+Package: `@seashorelab/contextengineering`
 
 ## Context builder
 

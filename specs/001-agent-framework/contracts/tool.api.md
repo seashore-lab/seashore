@@ -1,6 +1,6 @@
-# API Contract: @seashore/tool
+# API Contract: @seashorelab/tool
 
-**Package**: `@seashore/tool`  
+**Package**: `@seashorelab/tool`  
 **Version**: 0.1.0
 
 ## 概述
@@ -89,7 +89,7 @@ interface Tool<TInput, TOutput> {
 ### 示例
 
 ```typescript
-import { defineTool } from '@seashore/tool'
+import { defineTool } from '@seashorelab/tool'
 import { z } from 'zod'
 
 const calculatorTool = defineTool({
@@ -119,7 +119,7 @@ const result = await calculatorTool.execute({ expression: '2 + 3' })
 基于 Serper API 的搜索工具。
 
 ```typescript
-import { serperTool } from '@seashore/tool/presets'
+import { serperTool } from '@seashorelab/tool/presets'
 
 const searchTool = serperTool({
   apiKey: process.env.SERPER_API_KEY!,
@@ -161,7 +161,7 @@ interface SerperResult {
 基于 Firecrawl API 的网页抓取工具。
 
 ```typescript
-import { firecrawlTool } from '@seashore/tool/presets'
+import { firecrawlTool } from '@seashorelab/tool/presets'
 
 const crawlTool = firecrawlTool({
   apiKey: process.env.FIRECRAWL_API_KEY!,
@@ -249,7 +249,7 @@ interface ToolResult<T> {
 ## 错误处理
 
 ```typescript
-import { ToolValidationError, ToolTimeoutError } from '@seashore/tool'
+import { ToolValidationError, ToolTimeoutError } from '@seashorelab/tool'
 
 try {
   await myTool.execute(input)

@@ -1,9 +1,9 @@
 /**
  * MCP Tool Bridge - bridges MCP tools to Seashore tool format
- * @module @seashore/mcp
+ * @module @seashorelab/mcp
  */
 
-import type { ToolConfig } from '@seashore/tool';
+import type { ToolConfig } from '@seashorelab/tool';
 import type { MCPClient, MCPTool, ToolBridgeConfig, JSONSchema } from './types';
 import { z } from 'zod';
 
@@ -133,8 +133,8 @@ function createSeahoreTool(
  * Converts MCP tools to Seashore tool format
  * @example
  * ```typescript
- * import { createMCPClient, createMCPToolBridge } from '@seashore/mcp'
- * import { createAgent } from '@seashore/agent'
+ * import { createMCPClient, createMCPToolBridge } from '@seashorelab/mcp'
+ * import { createAgent } from '@seashorelab/agent'
  *
  * const client = await createMCPClient({
  *   transport: 'stdio',

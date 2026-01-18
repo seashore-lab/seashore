@@ -1,5 +1,5 @@
 /**
- * @seashore/llm - Unit Tests
+ * @seashorelab/llm - Unit Tests
  */
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
@@ -24,7 +24,7 @@ vi.mock('@tanstack/ai-gemini', () => ({
   })),
 }));
 
-describe('@seashore/llm', () => {
+describe('@seashorelab/llm', () => {
   describe('adapters', () => {
     it('should export text adapters', async () => {
       const { openaiText, anthropicText, geminiText } = await import('../src/adapters');

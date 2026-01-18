@@ -1,11 +1,11 @@
 /**
- * @seashore/agent - Streaming Utilities
+ * @seashorelab/agent - Streaming Utilities
  *
  * Utilities for streaming agent responses
  */
 
 import type { AgentStreamChunk, AgentRunResult, ToolCallRecord } from './types';
-import type { TokenUsage } from '@seashore/llm';
+import type { TokenUsage } from '@seashorelab/llm';
 
 /**
  * Create an async iterator that collects stream chunks into a final result

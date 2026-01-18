@@ -1,6 +1,6 @@
 # API 参考：向量数据库
 
-包：`@seashore/vectordb`
+包：`@seashorelab/vectordb`
 
 ## 存储和集合
 

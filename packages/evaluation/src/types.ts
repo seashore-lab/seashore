@@ -1,6 +1,6 @@
 /**
  * Evaluation types
- * @module @seashore/evaluation
+ * @module @seashorelab/evaluation
  */
 
 /**

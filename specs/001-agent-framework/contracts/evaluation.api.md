@@ -1,6 +1,6 @@
-# API Contract: @seashore/evaluation
+# API Contract: @seashorelab/evaluation
 
-**Package**: `@seashore/evaluation`  
+**Package**: `@seashorelab/evaluation`  
 **Version**: 0.1.0
 
 ## 概述
@@ -49,8 +49,8 @@ import {
   createEvaluator,
   relevanceMetric,
   faithfulnessMetric,
-} from '@seashore/evaluation'
-import { openaiText } from '@seashore/llm'
+} from '@seashorelab/evaluation'
+import { openaiText } from '@seashorelab/llm'
 
 const evaluator = createEvaluator({
   // 用于 LLM-based 评估的适配器
@@ -74,7 +74,7 @@ const evaluator = createEvaluator({
 ### evaluate
 
 ```typescript
-import { evaluate } from '@seashore/evaluation'
+import { evaluate } from '@seashorelab/evaluation'
 
 const result = await evaluate({
   evaluator,
@@ -143,7 +143,7 @@ interface EvaluationResult {
 ### evaluateBatch
 
 ```typescript
-import { evaluateBatch } from '@seashore/evaluation'
+import { evaluateBatch } from '@seashorelab/evaluation'
 
 const results = await evaluateBatch({
   evaluator,
@@ -180,7 +180,7 @@ console.log('Pass rate:', results.passRate)
 评估输出与问题的相关性：
 
 ```typescript
-import { relevanceMetric } from '@seashore/evaluation'
+import { relevanceMetric } from '@seashorelab/evaluation'
 
 const metric = relevanceMetric({
   threshold: 0.7, // 通过阈值
@@ -199,7 +199,7 @@ const metric = relevanceMetric({
 评估输出是否忠于提供的上下文（无幻觉）：
 
 ```typescript
-import { faithfulnessMetric } from '@seashore/evaluation'
+import { faithfulnessMetric } from '@seashorelab/evaluation'
 
 const metric = faithfulnessMetric({
   threshold: 0.8,
@@ -222,7 +222,7 @@ await evaluate({
 评估输出的连贯性和流畅性：
 
 ```typescript
-import { coherenceMetric } from '@seashore/evaluation'
+import { coherenceMetric } from '@seashorelab/evaluation'
 
 const metric = coherenceMetric({
   threshold: 0.7,
@@ -234,7 +234,7 @@ const metric = coherenceMetric({
 检测输出中的有害内容：
 
 ```typescript
-import { harmfulnessMetric } from '@seashore/evaluation'
+import { harmfulnessMetric } from '@seashorelab/evaluation'
 
 const metric = harmfulnessMetric({
   threshold: 0.1, // 低于此值才通过
@@ -254,7 +254,7 @@ const metric = harmfulnessMetric({
 创建自定义指标：
 
 ```typescript
-import { customMetric } from '@seashore/evaluation'
+import { customMetric } from '@seashorelab/evaluation'
 
 // LLM-based 自定义指标
 const technicalAccuracyMetric = customMetric({
@@ -302,7 +302,7 @@ const lengthMetric = customMetric({
 ### createDataset
 
 ```typescript
-import { createDataset } from '@seashore/evaluation'
+import { createDataset } from '@seashorelab/evaluation'
 
 const dataset = createDataset({
   name: 'qa-test-cases',
@@ -327,7 +327,7 @@ await dataset.save('./datasets/qa-tests.json')
 ### loadDataset
 
 ```typescript
-import { loadDataset } from '@seashore/evaluation'
+import { loadDataset } from '@seashorelab/evaluation'
 
 // 从文件加载
 const dataset = await loadDataset('./datasets/qa-tests.json')
@@ -363,8 +363,8 @@ for (const testCase of dataset) {
 ### 端到端评估
 
 ```typescript
-import { createAgent } from '@seashore/agent'
-import { createEvaluator, evaluateBatch, loadDataset } from '@seashore/evaluation'
+import { createAgent } from '@seashorelab/agent'
+import { createEvaluator, evaluateBatch, loadDataset } from '@seashorelab/evaluation'
 
 // 创建 Agent
 const agent = createAgent({
@@ -408,7 +408,7 @@ console.log('Average relevance:', results.averageScores.relevance)
 ### generateReport
 
 ```typescript
-import { generateReport } from '@seashore/evaluation'
+import { generateReport } from '@seashorelab/evaluation'
 
 const report = await generateReport({
   results: evaluationResults,

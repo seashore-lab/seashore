@@ -16,7 +16,7 @@ Source: `examples/src/11-tool-presets.ts`
 ## How to run
 
 ```bash
-pnpm --filter @seashore/examples exec tsx src/11-tool-presets.ts
+pnpm --filter @seashorelab/examples exec tsx src/11-tool-presets.ts
 ```
 
 ## Key concepts

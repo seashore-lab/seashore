@@ -1,5 +1,5 @@
 /**
- * @seashore/storage - Message Repository
+ * @seashorelab/storage - Message Repository
  *
  * Repository for message CRUD operations
  */
@@ -37,7 +37,7 @@ export interface MessageRepository {
  *
  * @example
  * ```typescript
- * import { createDatabase, createMessageRepository } from '@seashore/storage';
+ * import { createDatabase, createMessageRepository } from '@seashorelab/storage';
  *
  * const database = createDatabase({ connectionString: process.env.DATABASE_URL! });
  * const messageRepo = createMessageRepository(database.db);

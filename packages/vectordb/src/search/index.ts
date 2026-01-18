@@ -1,5 +1,5 @@
 /**
- * @seashore/vectordb - Search Index
+ * @seashorelab/vectordb - Search Index
  *
  * Re-exports search functions
  */

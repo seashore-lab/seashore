@@ -1,5 +1,5 @@
 /**
- * @seashore/contextengineering - Template
+ * @seashorelab/contextengineering - Template
  *
  * Template system for variable interpolation in prompts
  */

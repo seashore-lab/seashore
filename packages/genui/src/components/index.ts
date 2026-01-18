@@ -1,6 +1,6 @@
 /**
  * GenUI Components exports
- * @module @seashore/genui
+ * @module @seashorelab/genui
  */
 
 export { Chat } from './Chat';

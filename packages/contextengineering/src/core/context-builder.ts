@@ -1,5 +1,5 @@
 /**
- * @seashore/contextengineering - Context Builder
+ * @seashorelab/contextengineering - Context Builder
  *
  * Fluent API for building structured prompts
  */

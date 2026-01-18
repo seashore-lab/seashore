@@ -67,26 +67,26 @@ pnpm test --coverage
 
 ```
 Foundation Layer:
-  @seashore/storage       (PostgreSQL + Drizzle, no deps)
-  @seashore/tool          (Type-safe tools, no internal deps)
+  @seashorelab/storage       (PostgreSQL + Drizzle, no deps)
+  @seashorelab/tool          (Type-safe tools, no internal deps)
 
 LLM Layer:
-  @seashore/llm           (TanStack AI adapters: OpenAI, Anthropic, Gemini)
-  @seashore/vectordb      (Vector DB, depends on storage)
+  @seashorelab/llm           (TanStack AI adapters: OpenAI, Anthropic, Gemini)
+  @seashorelab/vectordb      (Vector DB, depends on storage)
 
 Agent Layer:
-  @seashore/workflow      (Node-based workflows, depends on llm, tool)
-  @seashore/agent         (ReAct/workflow agents, depends on workflow, llm, tool)
+  @seashorelab/workflow      (Node-based workflows, depends on llm, tool)
+  @seashorelab/agent         (ReAct/workflow agents, depends on workflow, llm, tool)
 
 Specialized Layer:
-  @seashore/rag           (RAG pipeline, depends on vectordb, llm)
-  @seashore/memory        (Memory systems, depends on storage, vectordb, llm)
-  @seashore/security      (Guardrails, depends on llm)
-  @seashore/mcp           (MCP client)
-  @seashore/genui         (Generative UI)
-  @seashore/observability (Tracing, logging)
-  @seashore/evaluation    (Evaluation metrics)
-  @seashore/deploy        (Hono-based deployment)
+  @seashorelab/rag           (RAG pipeline, depends on vectordb, llm)
+  @seashorelab/memory        (Memory systems, depends on storage, vectordb, llm)
+  @seashorelab/security      (Guardrails, depends on llm)
+  @seashorelab/mcp           (MCP client)
+  @seashorelab/genui         (Generative UI)
+  @seashorelab/observability (Tracing, logging)
+  @seashorelab/evaluation    (Evaluation metrics)
+  @seashorelab/deploy        (Hono-based deployment)
 ```
 
 ### Key Architectural Patterns
@@ -95,7 +95,7 @@ Specialized Layer:
 Tools are defined with Zod schemas for type-safe input validation:
 
 ```typescript
-import { defineTool } from '@seashore/tool'
+import { defineTool } from '@seashorelab/tool'
 import { z } from 'zod'
 
 const tool = defineTool({
@@ -111,7 +111,7 @@ const tool = defineTool({
 ```
 
 #### 2. LLM Abstraction
-The `@seashore/llm` package wraps TanStack AI adapters with unified interfaces for:
+The `@seashorelab/llm` package wraps TanStack AI adapters with unified interfaces for:
 - `openaiText()`, `anthropicText()`, `geminiText()` for text generation
 - `openaiEmbedding()` for embeddings
 - Structured output, streaming, and multimodal support
@@ -120,8 +120,8 @@ The `@seashore/llm` package wraps TanStack AI adapters with unified interfaces f
 ReAct agents combine tools and LLMs:
 
 ```typescript
-import { createAgent } from '@seashore/agent'
-import { openaiText } from '@seashore/llm'
+import { createAgent } from '@seashorelab/agent'
+import { openaiText } from '@seashorelab/llm'
 
 const agent = createAgent({
   name: 'assistant',
@@ -139,8 +139,8 @@ const result = await agent.run({
 Workflows use a node-based composition pattern with LLM nodes, tool nodes, condition nodes, and parallel execution. See `packages/workflow/src/` for node types.
 
 #### 5. Storage & Vector DB
-- `@seashore/storage` uses Drizzle ORM with PostgreSQL
-- `@seashore/vectordb` provides vector collections with similarity search
+- `@seashorelab/storage` uses Drizzle ORM with PostgreSQL
+- `@seashorelab/vectordb` provides vector collections with similarity search
 - Both require `DATABASE_URL` for integration tests (testcontainers used in CI)
 
 ## Package Scripts
@@ -163,9 +163,9 @@ nx run agent:build
 
 Use path mappings defined in `tsconfig.json`:
 ```typescript
-import { createAgent } from '@seashore/agent'
-import { openaiText } from '@seashore/llm'
-import { defineTool } from '@seashore/tool'
+import { createAgent } from '@seashorelab/agent'
+import { openaiText } from '@seashorelab/llm'
+import { defineTool } from '@seashorelab/tool'
 ```
 
 ## Environment Variables

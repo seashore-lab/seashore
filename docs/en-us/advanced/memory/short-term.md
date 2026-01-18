@@ -11,7 +11,7 @@ This is the pattern used in Example 05.
 ## Example
 
 ```ts
-import { createShortTermMemory, type NewMemoryEntry } from '@seashore/memory'
+import { createShortTermMemory, type NewMemoryEntry } from '@seashorelab/memory'
 
 const memory = createShortTermMemory({ maxEntries: 20 })
 

@@ -11,7 +11,7 @@ Source: `examples/src/09-observability-tracing.ts`
 ## How to run
 
 ```bash
-pnpm --filter @seashore/examples exec tsx src/09-observability-tracing.ts
+pnpm --filter @seashorelab/examples exec tsx src/09-observability-tracing.ts
 ```
 
 ## Key concepts

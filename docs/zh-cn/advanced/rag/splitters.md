@@ -13,7 +13,7 @@
 这是 RAG 示例中使用的分割器。
 
 ```ts
-import { createMarkdownSplitter } from '@seashore/rag'
+import { createMarkdownSplitter } from '@seashorelab/rag'
 
 const splitter = createMarkdownSplitter({
   chunkSize: 200,
@@ -29,7 +29,7 @@ const chunks = await splitter.split(doc)
 按顺序尝试多个分隔符：
 
 ```ts
-import { createRecursiveSplitter } from '@seashore/rag'
+import { createRecursiveSplitter } from '@seashorelab/rag'
 
 const splitter = createRecursiveSplitter({
   chunkSize: 1000,
@@ -41,7 +41,7 @@ const splitter = createRecursiveSplitter({
 ## 字符分割器
 
 ```ts
-import { createCharacterSplitter } from '@seashore/rag'
+import { createCharacterSplitter } from '@seashorelab/rag'
 
 const splitter = createCharacterSplitter({
   chunkSize: 1000,
@@ -55,7 +55,7 @@ const splitter = createCharacterSplitter({
 Token 分割器有助于保持块大小与模型 tokenization 对齐。
 
 ```ts
-import { createTokenSplitter } from '@seashore/rag'
+import { createTokenSplitter } from '@seashorelab/rag'
 
 const splitter = createTokenSplitter({
   chunkSize: 400,
@@ -68,7 +68,7 @@ const splitter = createTokenSplitter({
 当您希望每个标题部分一个块时很有用：
 
 ```ts
-import { createHeaderSplitter } from '@seashore/rag'
+import { createHeaderSplitter } from '@seashorelab/rag'
 
 const splitter = createHeaderSplitter({
   maxDepth: 3,

@@ -1,5 +1,5 @@
 /**
- * @seashore/tool - Schema Inference Tests
+ * @seashorelab/tool - Schema Inference Tests
  *
  * Tests for Zod to JSON Schema conversion and type inference
  */

@@ -1,5 +1,5 @@
 /**
- * @seashore/llm - Retry Logic
+ * @seashorelab/llm - Retry Logic
  *
  * Rate limit handling and retry logic for LLM API calls
  */
@@ -172,7 +172,7 @@ function sleep(ms: number, signal?: AbortSignal): Promise<void> {
  *
  * @example
  * ```typescript
- * import { withRetry } from '@seashore/llm';
+ * import { withRetry } from '@seashorelab/llm';
  *
  * const result = await withRetry(
  *   () => fetchData(),
@@ -245,7 +245,7 @@ export interface ChatWithRetryOptions {
  *
  * @example
  * ```typescript
- * import { chatWithRetry, openaiText } from '@seashore/llm';
+ * import { chatWithRetry, openaiText } from '@seashorelab/llm';
  *
  * const stream = chatWithRetry({
  *   adapter: openaiText('gpt-4o'),

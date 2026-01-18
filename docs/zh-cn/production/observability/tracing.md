@@ -5,7 +5,7 @@
 ## 创建追踪器
 
 ```ts
-import { createTracer } from '@seashore/observability'
+import { createTracer } from '@seashorelab/observability'
 
 const tracer = createTracer({
   serviceName: 'seashore-example',

@@ -4,14 +4,14 @@
 
 ## 演示内容
 
-- 使用 `@seashore/deploy` 将 Seashore agent 封装在 HTTP 端点后面
+- 使用 `@seashorelab/deploy` 将 Seashore agent 封装在 HTTP 端点后面
 - 使用 `@hono/node-server` 启动 Hono 服务器
 - 内置 CORS 和速率限制
 
 ## 运行方法
 
 ```bash
-pnpm --filter @seashore/examples exec tsx src/10-deploy-api-server.ts
+pnpm --filter @seashorelab/examples exec tsx src/10-deploy-api-server.ts
 ```
 
 ## 试用

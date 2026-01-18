@@ -12,8 +12,8 @@ import {
   createMarkdownSplitter,
   createInMemoryRetriever,
   type DocumentChunk,
-} from '@seashore/rag';
-import { openaiEmbed, generateBatchEmbeddings } from '@seashore/llm';
+} from '@seashorelab/rag';
+import { openaiEmbed, generateBatchEmbeddings } from '@seashorelab/llm';
 
 async function main() {
   console.log('[Example 04: RAG Knowledge Base]\n');

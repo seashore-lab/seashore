@@ -11,7 +11,7 @@ Source: `examples/src/03-basic-workflow.ts`
 ## How to run
 
 ```bash
-pnpm --filter @seashore/examples exec tsx src/03-basic-workflow.ts
+pnpm --filter @seashorelab/examples exec tsx src/03-basic-workflow.ts
 ```
 
 ## Key concepts

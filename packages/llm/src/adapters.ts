@@ -1,5 +1,5 @@
 /**
- * @seashore/llm - Text Adapters
+ * @seashorelab/llm - Text Adapters
  *
  * Text generation adapters with baseURL support for all providers
  */

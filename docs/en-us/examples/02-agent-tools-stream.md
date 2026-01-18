@@ -11,7 +11,7 @@ Source: `examples/src/02-agent-with-tools-and-stream.ts`
 ## How to run
 
 ```bash
-pnpm --filter @seashore/examples exec tsx src/02-agent-with-tools-and-stream.ts
+pnpm --filter @seashorelab/examples exec tsx src/02-agent-with-tools-and-stream.ts
 ```
 
 ## What to look for

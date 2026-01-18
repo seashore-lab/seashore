@@ -1,5 +1,5 @@
 /**
- * @seashore/tool - Unit Tests
+ * @seashorelab/tool - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
@@ -7,7 +7,7 @@ import { z } from 'zod';
 import { defineTool } from '../src/define-tool';
 import { zodToJsonSchema } from '../src/zod-to-json-schema';
 
-describe('@seashore/tool', () => {
+describe('@seashorelab/tool', () => {
   describe('defineTool', () => {
     it('should create a tool with correct properties', () => {
       const tool = defineTool({

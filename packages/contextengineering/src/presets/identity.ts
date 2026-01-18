@@ -1,5 +1,5 @@
 /**
- * @seashore/contextengineering - Identity Preset
+ * @seashorelab/contextengineering - Identity Preset
  *
  * Preset block for agent identity configuration
  */

@@ -13,15 +13,15 @@
  */
 
 import 'dotenv/config';
-import { createAgent } from '@seashore/agent';
-import { openaiText } from '@seashore/llm';
+import { createAgent } from '@seashorelab/agent';
+import { openaiText } from '@seashorelab/llm';
 import {
   createContext,
   createEnvironmentProvider,
   env,
   presets,
   createTemplate,
-} from '@seashore/contextengineering';
+} from '@seashorelab/contextengineering';
 
 async function main() {
   console.log('[Example 14: Context Engineering]\n');

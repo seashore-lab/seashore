@@ -1,6 +1,6 @@
 /**
  * useChat hook for chat functionality
- * @module @seashore/genui
+ * @module @seashorelab/genui
  */
 
 import { useState, useCallback, useRef } from 'react';

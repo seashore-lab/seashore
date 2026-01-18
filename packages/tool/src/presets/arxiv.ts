@@ -1,5 +1,5 @@
 /**
- * @seashore/tool - Arxiv Tool
+ * @seashorelab/tool - Arxiv Tool
  *
  * Preset tools for searching and retrieving academic papers from arXiv
  */
@@ -188,7 +188,7 @@ function buildSearchQuery(query: string, categories?: string[], author?: string)
  *
  * @example
  * ```typescript
- * import { arxivSearchTool } from '@seashore/tool/presets';
+ * import { arxivSearchTool } from '@seashorelab/tool/presets';
  *
  * const search = arxivSearchTool();
  * const results = await search.execute({
@@ -253,7 +253,7 @@ export function arxivSearchTool(config: ArxivToolConfig = {}) {
  *
  * @example
  * ```typescript
- * import { arxivGetPaperTool } from '@seashore/tool/presets';
+ * import { arxivGetPaperTool } from '@seashorelab/tool/presets';
  *
  * const getPaper = arxivGetPaperTool();
  * const paper = await getPaper.execute({ id: '2301.07041' });
@@ -300,7 +300,7 @@ export function arxivGetPaperTool() {
  *
  * @example
  * ```typescript
- * import { arxivAuthorSearchTool } from '@seashore/tool/presets';
+ * import { arxivAuthorSearchTool } from '@seashorelab/tool/presets';
  *
  * const search = arxivAuthorSearchTool();
  * const results = await search.execute({
@@ -355,7 +355,7 @@ export function arxivAuthorSearchTool(config: ArxivToolConfig = {}) {
  *
  * @example
  * ```typescript
- * import { arxivRecentPapersTool } from '@seashore/tool/presets';
+ * import { arxivRecentPapersTool } from '@seashorelab/tool/presets';
  *
  * const recent = arxivRecentPapersTool();
  * const results = await recent.execute({

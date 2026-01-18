@@ -1,7 +1,7 @@
 /**
- * @seashore/security
+ * @seashorelab/security
  * Security guardrails and content filtering package
- * @module @seashore/security
+ * @module @seashorelab/security
  */
 
 // Types

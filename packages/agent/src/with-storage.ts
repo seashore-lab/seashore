@@ -1,11 +1,11 @@
 /**
- * @seashore/agent - Storage Integration
+ * @seashorelab/agent - Storage Integration
  *
  * Wrapper to add persistent storage to agents
  */
 
-import type { Message, Thread, ThreadRepository, MessageRepository } from '@seashore/storage';
-import type { Tool } from '@seashore/tool';
+import type { Message, Thread, ThreadRepository, MessageRepository } from '@seashorelab/storage';
+import type { Tool } from '@seashorelab/tool';
 import type { Agent, AgentRunResult, AgentStreamChunk, RunOptions } from './types';
 
 /**
@@ -110,8 +110,8 @@ export interface AgentWithStorage<
  *
  * @example
  * ```typescript
- * import { createAgent, withStorage } from '@seashore/agent';
- * import { createDatabase, createThreadRepository, createMessageRepository } from '@seashore/storage';
+ * import { createAgent, withStorage } from '@seashorelab/agent';
+ * import { createDatabase, createThreadRepository, createMessageRepository } from '@seashorelab/storage';
  *
  * const db = createDatabase({ connectionString: process.env.DATABASE_URL! });
  * const agent = createAgent({

@@ -1,6 +1,6 @@
 /**
  * Guardrails implementation
- * @module @seashore/security
+ * @module @seashorelab/security
  */
 
 import type {

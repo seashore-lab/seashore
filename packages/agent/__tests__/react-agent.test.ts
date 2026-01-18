@@ -1,5 +1,5 @@
 /**
- * @seashore/agent - Unit Tests
+ * @seashorelab/agent - Unit Tests
  */
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
@@ -7,11 +7,11 @@ import type { TextAdapter } from '../../llm/src/types';
 import type { Tool } from '../../tool/src/types';
 
 // Mock @seashore/llm
-vi.mock('@seashore/llm', () => ({
+vi.mock('@seashorelab/llm', () => ({
   chat: vi.fn(),
 }));
 
-describe('@seashore/agent', () => {
+describe('@seashorelab/agent', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });

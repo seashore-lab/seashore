@@ -1,5 +1,5 @@
 /**
- * @seashore/workflow - Loop Control
+ * @seashorelab/workflow - Loop Control
  *
  * Loop and iteration management for workflows
  */

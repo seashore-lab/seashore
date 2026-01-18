@@ -1,5 +1,5 @@
 /**
- * @seashore/contextengineering - Presets
+ * @seashorelab/contextengineering - Presets
  *
  * Pre-built context blocks for common use cases
  */
@@ -22,7 +22,7 @@ import { outputConstraints } from './output-constraints';
  *
  * @example
  * ```typescript
- * import { presets } from '@seashore/contextengineering'
+ * import { presets } from '@seashorelab/contextengineering'
  *
  * const context = createContext({
  *   blocks: [

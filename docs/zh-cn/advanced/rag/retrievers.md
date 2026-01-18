@@ -10,7 +10,7 @@
 ## 内存检索器（示例 04）
 
 ```ts
-import { createInMemoryRetriever } from '@seashore/rag'
+import { createInMemoryRetriever } from '@seashorelab/rag'
 
 const retriever = createInMemoryRetriever(embeddingFn)
 await retriever.addDocuments(chunks)
@@ -26,9 +26,9 @@ const results = await retriever.retrieve('What is it?', {
 当您需要持久化和可扩展的检索时使用此选项。
 
 ```ts
-import { createVectorRetriever } from '@seashore/rag'
-import { createVectorStore } from '@seashore/vectordb'
-import { openaiEmbed } from '@seashore/llm'
+import { createVectorRetriever } from '@seashorelab/rag'
+import { createVectorStore } from '@seashorelab/vectordb'
+import { openaiEmbed } from '@seashorelab/llm'
 
 const vectorStore = createVectorStore({
   db,
@@ -47,7 +47,7 @@ const retriever = createVectorRetriever({
 混合检索将向量相似度与文本搜索结合以获得更好的召回率。
 
 ```ts
-import { createHybridRetriever } from '@seashore/rag'
+import { createHybridRetriever } from '@seashorelab/rag'
 
 const retriever = createHybridRetriever({
   store: vectorStore,
@@ -65,7 +65,7 @@ const retriever = createHybridRetriever({
 - 使用另一个模型重新排列 top-$k$ 结果
 
 ```ts
-import { createMultiRetriever, createRerankingRetriever } from '@seashore/rag'
+import { createMultiRetriever, createRerankingRetriever } from '@seashorelab/rag'
 
 const combined = createMultiRetriever([
   vectorRetriever,

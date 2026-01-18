@@ -1,5 +1,5 @@
 /**
- * @seashore/vectordb - Vector Store
+ * @seashorelab/vectordb - Vector Store
  *
  * Main vector store implementation
  */

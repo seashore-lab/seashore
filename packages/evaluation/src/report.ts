@@ -1,6 +1,6 @@
 /**
  * Evaluation report generation
- * @module @seashore/evaluation
+ * @module @seashorelab/evaluation
  */
 
 import type {

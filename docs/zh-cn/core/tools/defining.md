@@ -1,6 +1,6 @@
 # 定义工具
 
-Seashore 工具使用 `@seashore/tool` 中的 `defineTool()` 定义。
+Seashore 工具使用 `@seashorelab/tool` 中的 `defineTool()` 定义。
 
 ## 设计目标
 
@@ -11,7 +11,7 @@ Seashore 工具使用 `@seashore/tool` 中的 `defineTool()` 定义。
 ## 结构
 
 ```ts
-import { defineTool } from '@seashore/tool'
+import { defineTool } from '@seashorelab/tool'
 import { z } from 'zod'
 
 const tool = defineTool({

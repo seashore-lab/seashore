@@ -1,6 +1,6 @@
 /**
  * Observability type definitions
- * @module @seashore/observability
+ * @module @seashorelab/observability
  */
 
 /**

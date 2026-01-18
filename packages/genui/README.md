@@ -1,1 +1,1 @@
-# @seashore/genui
+# @seashorelab/genui

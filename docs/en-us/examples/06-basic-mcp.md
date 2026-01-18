@@ -17,7 +17,7 @@ Source: `examples/src/06-basic-mcp.ts`
 ## How to run
 
 ```bash
-pnpm --filter @seashore/examples exec tsx src/06-basic-mcp.ts
+pnpm --filter @seashorelab/examples exec tsx src/06-basic-mcp.ts
 ```
 
 ## Key concepts

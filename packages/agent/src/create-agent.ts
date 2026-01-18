@@ -1,10 +1,10 @@
 /**
- * @seashore/agent - Create Agent
+ * @seashorelab/agent - Create Agent
  *
  * Factory function for creating agents
  */
 
-import type { Tool } from '@seashore/tool';
+import type { Tool } from '@seashorelab/tool';
 import type { Agent, AgentConfig } from './types';
 import { createAgent as createReActAgent } from './react-agent';
 
@@ -16,8 +16,8 @@ import { createAgent as createReActAgent } from './react-agent';
  *
  * @example
  * ```typescript
- * import { createAgent } from '@seashore/agent';
- * import { openaiText } from '@seashore/llm';
+ * import { createAgent } from '@seashorelab/agent';
+ * import { openaiText } from '@seashorelab/llm';
  *
  * const agent = createAgent({
  *   name: 'Assistant',

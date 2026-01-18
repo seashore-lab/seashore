@@ -16,15 +16,15 @@
 ## 🚀 Quick Start
 
 ```bash
-pnpm add @seashore/agent @seashore/llm @seashore/tool
+pnpm add @seashorelab/agent @seashorelab/llm @seashorelab/tool
 ```
 
 Create an agent in seconds:
 
 ```typescript
-import { createAgent } from '@seashore/agent'
-import { openaiText } from '@seashore/llm'
-import { defineTool } from '@seashore/tool'
+import { createAgent } from '@seashorelab/agent'
+import { openaiText } from '@seashorelab/llm'
+import { defineTool } from '@seashorelab/tool'
 import { z } from 'zod'
 
 const weatherTool = defineTool({
@@ -56,21 +56,21 @@ Seashore is a monorepo containing multiple packages. Install only what you need:
 
 | Package | Description |
 | :--- | :--- |
-| `@seashore/agent` | ReAct agents and orchestration |
-| `@seashore/llm` | Multi-provider LLM adapters |
-| `@seashore/tool` | Type-safe tool definitions |
-| `@seashore/workflow` | Visual workflow engine |
-| `@seashore/rag` | RAG pipeline components |
-| `@seashore/memory` | Memory systems |
-| `@seashore/storage` | Persistence layer |
-| `@seashore/vectordb` | Vector database integrations |
-| `@seashore/mcp` | Model Context Protocol support |
-| `@seashore/observability` | Tracing and monitoring |
-| `@seashore/evaluation` | Testing and evaluation |
-| `@seashore/security` | Input/output guardrails |
-| `@seashore/deploy` | Production deployment utilities |
-| `@seashore/genui` | Generative UI components |
-| `@seashore/contextengineering` | Context optimization |
+| `@seashorelab/agent` | ReAct agents and orchestration |
+| `@seashorelab/llm` | Multi-provider LLM adapters |
+| `@seashorelab/tool` | Type-safe tool definitions |
+| `@seashorelab/workflow` | Visual workflow engine |
+| `@seashorelab/rag` | RAG pipeline components |
+| `@seashorelab/memory` | Memory systems |
+| `@seashorelab/storage` | Persistence layer |
+| `@seashorelab/vectordb` | Vector database integrations |
+| `@seashorelab/mcp` | Model Context Protocol support |
+| `@seashorelab/observability` | Tracing and monitoring |
+| `@seashorelab/evaluation` | Testing and evaluation |
+| `@seashorelab/security` | Input/output guardrails |
+| `@seashorelab/deploy` | Production deployment utilities |
+| `@seashorelab/genui` | Generative UI components |
+| `@seashorelab/contextengineering` | Context optimization |
 
 ## 📄 License
 

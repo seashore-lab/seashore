@@ -1,5 +1,5 @@
 /**
- * @seashore/contextengineering - Output Constraints Preset
+ * @seashorelab/contextengineering - Output Constraints Preset
  *
  * Preset block for output format constraints
  */

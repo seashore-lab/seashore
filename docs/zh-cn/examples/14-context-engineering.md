@@ -13,7 +13,7 @@
 ## 运行方法
 
 ```bash
-pnpm --filter @seashore/examples exec tsx src/14-context-engineering.ts
+pnpm --filter @seashorelab/examples exec tsx src/14-context-engineering.ts
 ```
 
 ## 核心概念

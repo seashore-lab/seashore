@@ -1,5 +1,5 @@
 /**
- * @seashore/tool - Define Tool
+ * @seashorelab/tool - Define Tool
  *
  * Main function for creating type-safe tools
  */
@@ -18,7 +18,7 @@ const DEFAULT_TIMEOUT = 30000;
  *
  * @example
  * ```typescript
- * import { defineTool } from '@seashore/tool';
+ * import { defineTool } from '@seashorelab/tool';
  * import { z } from 'zod';
  *
  * const calculatorTool = defineTool({

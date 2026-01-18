@@ -1,6 +1,6 @@
 /**
  * SSE stream utilities
- * @module @seashore/deploy
+ * @module @seashorelab/deploy
  */
 
 import type { SSEStreamConfig, StreamChunk } from './types';

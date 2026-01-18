@@ -1,12 +1,12 @@
 /**
- * @seashore/agent - Types
+ * @seashorelab/agent - Types
  *
  * Type definitions for agents
  */
 
 import type { ZodSchema } from 'zod';
-import type { AnyTextAdapter, Message, TokenUsage } from '@seashore/llm';
-import type { Tool, ToolResult } from '@seashore/tool';
+import type { AnyTextAdapter, Message, TokenUsage } from '@seashorelab/llm';
+import type { Tool, ToolResult } from '@seashorelab/tool';
 
 /**
  * Run options for agent execution

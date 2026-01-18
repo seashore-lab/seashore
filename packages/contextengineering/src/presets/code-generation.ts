@@ -1,5 +1,5 @@
 /**
- * @seashore/contextengineering - Code Generation Preset
+ * @seashorelab/contextengineering - Code Generation Preset
  *
  * Preset block for code generation tasks
  */

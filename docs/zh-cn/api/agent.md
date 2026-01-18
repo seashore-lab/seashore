@@ -1,6 +1,6 @@
 # API 参考：Agent
 
-包：`@seashore/agent`
+包：`@seashorelab/agent`
 
 ## 主要入口
 

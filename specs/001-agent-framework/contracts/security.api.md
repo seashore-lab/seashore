@@ -1,6 +1,6 @@
-# API Contract: @seashore/security
+# API Contract: @seashorelab/security
 
-**Package**: `@seashore/security`  
+**Package**: `@seashorelab/security`  
 **Version**: 0.1.0
 
 ## 概述
@@ -52,8 +52,8 @@ import {
   promptInjectionRule,
   piiDetectionRule,
   toxicityRule,
-} from '@seashore/security'
-import { openaiText } from '@seashore/llm'
+} from '@seashorelab/security'
+import { openaiText } from '@seashorelab/llm'
 
 const guardrails = createGuardrails({
   // 用于 LLM-based 检测
@@ -113,7 +113,7 @@ if (outputCheck.transformed) {
 检测提示词注入攻击：
 
 ```typescript
-import { promptInjectionRule } from '@seashore/security'
+import { promptInjectionRule } from '@seashorelab/security'
 
 const rule = promptInjectionRule({
   threshold: 0.8,
@@ -131,7 +131,7 @@ const rule = promptInjectionRule({
 检测和处理个人身份信息：
 
 ```typescript
-import { piiDetectionRule } from '@seashore/security'
+import { piiDetectionRule } from '@seashorelab/security'
 
 const rule = piiDetectionRule({
   // 检测类别
@@ -167,7 +167,7 @@ const rule = piiDetectionRule({
 检测有害内容：
 
 ```typescript
-import { toxicityRule } from '@seashore/security'
+import { toxicityRule } from '@seashorelab/security'
 
 const rule = toxicityRule({
   threshold: 0.7,
@@ -185,7 +185,7 @@ const rule = toxicityRule({
 阻止特定话题：
 
 ```typescript
-import { topicBlockRule } from '@seashore/security'
+import { topicBlockRule } from '@seashorelab/security'
 
 const rule = topicBlockRule({
   // 阻止的话题
@@ -202,7 +202,7 @@ const rule = topicBlockRule({
 限制输入/输出长度：
 
 ```typescript
-import { lengthLimitRule } from '@seashore/security'
+import { lengthLimitRule } from '@seashorelab/security'
 
 const rule = lengthLimitRule({
   maxTokens: 4000,
@@ -218,7 +218,7 @@ const rule = lengthLimitRule({
 ## 自定义规则
 
 ```typescript
-import { createSecurityRule } from '@seashore/security'
+import { createSecurityRule } from '@seashorelab/security'
 
 const customRule = createSecurityRule({
   name: 'no_code_execution',
@@ -284,8 +284,8 @@ const llmRule = createSecurityRule({
 ### securityMiddleware
 
 ```typescript
-import { createAgent } from '@seashore/agent'
-import { securityMiddleware, createGuardrails } from '@seashore/security'
+import { createAgent } from '@seashorelab/agent'
+import { securityMiddleware, createGuardrails } from '@seashorelab/security'
 
 const guardrails = createGuardrails({ ... })
 
@@ -332,7 +332,7 @@ import {
   createInputFilter,
   promptInjectionRule,
   piiDetectionRule,
-} from '@seashore/security'
+} from '@seashorelab/security'
 
 const inputFilter = createInputFilter({
   rules: [promptInjectionRule(), piiDetectionRule({ action: 'redact' })],
@@ -354,7 +354,7 @@ const safeInput = result.output
 单独使用输出过滤：
 
 ```typescript
-import { createOutputFilter, toxicityRule, piiDetectionRule } from '@seashore/security'
+import { createOutputFilter, toxicityRule, piiDetectionRule } from '@seashorelab/security'
 
 const outputFilter = createOutputFilter({
   rules: [toxicityRule(), piiDetectionRule({ action: 'redact' })],
@@ -386,7 +386,7 @@ const violations = results.flatMap((r) => r.violations)
 ## 审计日志
 
 ```typescript
-import { createGuardrails, createAuditLogger } from '@seashore/security'
+import { createGuardrails, createAuditLogger } from '@seashorelab/security'
 
 const auditLogger = createAuditLogger({
   storage: {

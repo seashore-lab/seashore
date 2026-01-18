@@ -17,8 +17,8 @@ An agent in Seashore is created using the `createAgent` function with configurat
 The simplest agent needs just a name, system prompt, and model:
 
 ```typescript
-import { createAgent } from '@seashore/agent'
-import { openaiText } from '@seashore/llm'
+import { createAgent } from '@seashorelab/agent'
+import { openaiText } from '@seashorelab/llm'
 
 const agent = createAgent({
   name: 'assistant',
@@ -227,7 +227,7 @@ Final Answer: The weather in Tokyo is 22°C and sunny. 15 + 27 equals 42.
 Agents handle errors gracefully with retry logic:
 
 ```typescript
-import { AgentError, isRetryableError, withRetry } from '@seashore/agent'
+import { AgentError, isRetryableError, withRetry } from '@seashorelab/agent'
 
 try {
   const result = await agent.run('Your question')
@@ -304,7 +304,7 @@ try {
 Use utility functions to work with streams:
 
 ```typescript
-import { collectStream } from '@seashore/agent'
+import { collectStream } from '@seashorelab/agent'
 
 // Collect all chunks into a single result
 const result = await collectStream(agent.stream('Your question'))
@@ -321,7 +321,7 @@ console.log(result.usage) // Total token usage
 The default and currently only agent type. Implements the ReAct pattern with tool calling.
 
 ```typescript
-import { createReActAgent } from '@seashore/agent'
+import { createReActAgent } from '@seashorelab/agent'
 
 // Explicit ReAct agent creation (same as createAgent)
 const agent = createReActAgent({

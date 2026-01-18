@@ -24,7 +24,7 @@ cp .env.example .env
 
 ```bash
 # 从根目录
-pnpm --filter @seashore/examples run 01-basic-agent
+pnpm --filter @seashorelab/examples run 01-basic-agent
 
 # 或在 examples 目录
 pnpm run 01-basic-agent
@@ -69,7 +69,7 @@ pnpm run 01-basic-agent
 
 ## 常见问题
 
-### Cannot find module '@seashore/xxx'
+### Cannot find module '@seashorelab/xxx'
 
 确保已执行 `pnpm install` 和 `pnpm build`。
 

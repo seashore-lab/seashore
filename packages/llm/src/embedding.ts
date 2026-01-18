@@ -1,5 +1,5 @@
 /**
- * @seashore/llm - Embedding Adapters
+ * @seashorelab/llm - Embedding Adapters
  *
  * Embedding vector generation adapters
  */

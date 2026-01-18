@@ -1,10 +1,10 @@
 /**
- * @seashore/agent - Tool Executor
+ * @seashorelab/agent - Tool Executor
  *
  * Handles execution of tools during agent runs
  */
 
-import type { Tool, ToolContext } from '@seashore/tool';
+import type { Tool, ToolContext } from '@seashorelab/tool';
 import type { AgentToolContext, ToolCallRecord } from './types';
 
 /**

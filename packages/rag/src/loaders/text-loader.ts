@@ -1,5 +1,5 @@
 /**
- * @seashore/rag - Text Loader
+ * @seashorelab/rag - Text Loader
  *
  * Load plain text files
  */

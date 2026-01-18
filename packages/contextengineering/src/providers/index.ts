@@ -1,5 +1,5 @@
 /**
- * @seashore/contextengineering - Providers
+ * @seashorelab/contextengineering - Providers
  *
  * Context providers for injecting runtime information
  */

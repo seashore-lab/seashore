@@ -1,5 +1,5 @@
 /**
- * @seashore/contextengineering - Time Awareness Preset
+ * @seashorelab/contextengineering - Time Awareness Preset
  *
  * Preset block for making LLMs aware of current time/date
  */

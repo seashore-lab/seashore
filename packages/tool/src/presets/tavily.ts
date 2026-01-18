@@ -1,5 +1,5 @@
 /**
- * @seashore/tool - Tavily Tool
+ * @seashorelab/tool - Tavily Tool
  *
  * Preset tools for AI-powered search using Tavily API
  */
@@ -100,7 +100,7 @@ const TAVILY_BASE_URL = 'https://api.tavily.com';
  *
  * @example
  * ```typescript
- * import { tavilySearchTool } from '@seashore/tool/presets';
+ * import { tavilySearchTool } from '@seashorelab/tool/presets';
  *
  * const search = tavilySearchTool({ apiKey: process.env.TAVILY_API_KEY! });
  * const results = await search.execute({
@@ -196,7 +196,7 @@ export function tavilySearchTool(config: TavilyToolConfig) {
  *
  * @example
  * ```typescript
- * import { tavilyExtractTool } from '@seashore/tool/presets';
+ * import { tavilyExtractTool } from '@seashorelab/tool/presets';
  *
  * const extract = tavilyExtractTool({ apiKey: process.env.TAVILY_API_KEY! });
  * const content = await extract.execute({
@@ -257,7 +257,7 @@ export function tavilyExtractTool(config: TavilyToolConfig) {
  *
  * @example
  * ```typescript
- * import { tavilyQnaTool } from '@seashore/tool/presets';
+ * import { tavilyQnaTool } from '@seashorelab/tool/presets';
  *
  * const qna = tavilyQnaTool({ apiKey: process.env.TAVILY_API_KEY! });
  * const result = await qna.execute({
@@ -332,7 +332,7 @@ export function tavilyQnaTool(config: TavilyToolConfig) {
  *
  * @example
  * ```typescript
- * import { tavilyNewsTool } from '@seashore/tool/presets';
+ * import { tavilyNewsTool } from '@seashorelab/tool/presets';
  *
  * const news = tavilyNewsTool({ apiKey: process.env.TAVILY_API_KEY! });
  * const results = await news.execute({

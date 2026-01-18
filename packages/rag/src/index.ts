@@ -1,5 +1,5 @@
 /**
- * @seashore/rag
+ * @seashorelab/rag
  *
  * RAG (Retrieval-Augmented Generation) utilities
  * Document loaders, splitters, retrievers, and pipeline

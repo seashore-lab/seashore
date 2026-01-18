@@ -3,7 +3,7 @@
 The MCP bridge turns MCP tools into Seashore tools so the agent can call them.
 
 ```ts
-import { createMCPToolBridge } from '@seashore/mcp'
+import { createMCPToolBridge } from '@seashorelab/mcp'
 
 const bridge = await createMCPToolBridge({
   client,

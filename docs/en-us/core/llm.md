@@ -1,6 +1,6 @@
 # LLM Adapters
 
-`@seashore/llm` provides provider-specific adapters with a unified interface. Agents and workflows use these adapters through the shared `chat()` API.
+`@seashorelab/llm` provides provider-specific adapters with a unified interface. Agents and workflows use these adapters through the shared `chat()` API.
 
 ## Text Adapters
 
@@ -11,7 +11,7 @@
 Example:
 
 ```ts
-import { openaiText } from '@seashore/llm'
+import { openaiText } from '@seashorelab/llm'
 
 const model = openaiText('gpt-5.1', {
   apiKey: process.env.OPENAI_API_KEY,
@@ -47,7 +47,7 @@ Seashore provides unified adapters for multiple LLM providers. All adapters impl
 ### OpenAI
 
 ```typescript
-import { openaiText } from '@seashore/llm'
+import { openaiText } from '@seashorelab/llm'
 
 const model = openaiText('gpt-4o', {
   apiKey: process.env.OPENAI_API_KEY,
@@ -66,7 +66,7 @@ const model = openaiText('gpt-4o', {
 ### Anthropic Claude
 
 ```typescript
-import { anthropicText } from '@seashore/llm'
+import { anthropicText } from '@seashorelab/llm'
 
 const model = anthropicText('claude-3-5-sonnet-20241022', {
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -83,7 +83,7 @@ const model = anthropicText('claude-3-5-sonnet-20241022', {
 ### Google Gemini
 
 ```typescript
-import { geminiText } from '@seashore/llm'
+import { geminiText } from '@seashorelab/llm'
 
 const model = geminiText('gemini-2.0-flash-exp', {
   apiKey: process.env.GEMINI_API_KEY,
@@ -103,7 +103,7 @@ const model = geminiText('gemini-2.0-flash-exp', {
 You can use adapters directly without agents:
 
 ```typescript
-import { openaiText, chat } from '@seashore/llm'
+import { openaiText, chat } from '@seashorelab/llm'
 
 const model = openaiText('gpt-4o', {
   apiKey: process.env.OPENAI_API_KEY,
@@ -120,7 +120,7 @@ console.log(response.content) // "Hello! How can I help you today?"
 ### Streaming
 
 ```typescript
-import { openaiText } from '@seashore/llm'
+import { openaiText } from '@seashorelab/llm'
 
 const model = openaiText('gpt-4o', {
   apiKey: process.env.OPENAI_API_KEY,
@@ -140,8 +140,8 @@ for await (const chunk of model.chat([
 Adapters are primarily used with agents:
 
 ```typescript
-import { createAgent } from '@seashore/agent'
-import { openaiText } from '@seashore/llm'
+import { createAgent } from '@seashorelab/agent'
+import { openaiText } from '@seashorelab/llm'
 
 const agent = createAgent({
   name: 'assistant',
@@ -251,7 +251,7 @@ console.log(response.usage)
 Generate text embeddings for semantic search:
 
 ```typescript
-import { openaiEmbed, generateEmbedding, generateBatchEmbeddings } from '@seashore/llm'
+import { openaiEmbed, generateEmbedding, generateBatchEmbeddings } from '@seashorelab/llm'
 
 const embedder = openaiEmbed('text-embedding-3-small', 1536, {
   apiKey: process.env.OPENAI_API_KEY,
@@ -282,7 +282,7 @@ console.log(batchResult.embeddings) // number[][] array
 ### Image Generation
 
 ```typescript
-import { openaiImage, generateImage } from '@seashore/llm'
+import { openaiImage, generateImage } from '@seashorelab/llm'
 
 const generator = openaiImage('dall-e-3', {
   apiKey: process.env.OPENAI_API_KEY,
@@ -301,7 +301,7 @@ console.log(result.images[0].url) // Image URL
 ### Vision (Image Understanding)
 
 ```typescript
-import { openaiText, chat } from '@seashore/llm'
+import { openaiText, chat } from '@seashorelab/llm'
 
 const model = openaiText('gpt-4o', {
   apiKey: process.env.OPENAI_API_KEY,
@@ -324,7 +324,7 @@ const response = await chat(model, [
 ### Text-to-Speech
 
 ```typescript
-import { openaiTTS, generateSpeech } from '@seashore/llm'
+import { openaiTTS, generateSpeech } from '@seashorelab/llm'
 
 const tts = openaiTTS('tts-1', {
   apiKey: process.env.OPENAI_API_KEY,
@@ -342,7 +342,7 @@ const result = await generateSpeech({
 ### Speech-to-Text
 
 ```typescript
-import { openaiTranscription, transcribeAudio } from '@seashore/llm'
+import { openaiTranscription, transcribeAudio } from '@seashorelab/llm'
 
 const transcriber = openaiTranscription('whisper-1', {
   apiKey: process.env.OPENAI_API_KEY,
@@ -362,7 +362,7 @@ console.log(result.text) // Transcribed text
 All adapters throw standardized errors:
 
 ```typescript
-import { chat } from '@seashore/llm'
+import { chat } from '@seashorelab/llm'
 
 try {
   const response = await chat(model, messages)

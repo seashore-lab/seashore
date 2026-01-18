@@ -14,7 +14,7 @@
 ## 批量评估
 
 ```ts
-import { createEvaluator, evaluateBatch, relevanceMetric, coherenceMetric } from '@seashore/evaluation'
+import { createEvaluator, evaluateBatch, relevanceMetric, coherenceMetric } from '@seashorelab/evaluation'
 
 const evaluator = createEvaluator({
   metrics: [relevanceMetric({ threshold: 0.7 }), coherenceMetric({ threshold: 0.6 })],

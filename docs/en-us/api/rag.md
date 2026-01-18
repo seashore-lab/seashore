@@ -1,6 +1,6 @@
 # API Reference: RAG
 
-Package: `@seashore/rag`
+Package: `@seashorelab/rag`
 
 ## Loaders
 

@@ -4,7 +4,7 @@ Source: `examples/src/15-new-preset-tools.ts`
 
 ## What it demonstrates
 
-- A showcase of preset tools in `@seashore/tool/presets`
+- A showcase of preset tools in `@seashorelab/tool/presets`
 - Offline tools (calculator family)
 - Network tools (DuckDuckGo, Wikipedia, GitHub, finance, arXiv, article extraction)
 - A restricted shell tool for controlled command execution
@@ -13,7 +13,7 @@ Source: `examples/src/15-new-preset-tools.ts`
 ## How to run
 
 ```bash
-pnpm --filter @seashore/examples exec tsx src/15-new-preset-tools.ts
+pnpm --filter @seashorelab/examples exec tsx src/15-new-preset-tools.ts
 ```
 
 ## Notes

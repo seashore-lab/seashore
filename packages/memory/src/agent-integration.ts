@@ -1,5 +1,5 @@
 /**
- * @seashore/memory - Agent Integration
+ * @seashorelab/memory - Agent Integration
  *
  * Wrapper to add memory capabilities to agents
  */

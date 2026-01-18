@@ -1,6 +1,6 @@
-# API Contract: @seashore/agent
+# API Contract: @seashorelab/agent
 
-**Package**: `@seashore/agent`  
+**Package**: `@seashorelab/agent`  
 **Version**: 0.1.0
 
 ## 概述
@@ -84,7 +84,7 @@ interface Agent<TTools extends Tool[]> {
 ### 示例
 
 ```typescript
-import { createAgent } from '@seashore/agent'
+import { createAgent } from '@seashorelab/agent'
 import { openaiText } from '@tanstack/ai-openai'
 import { weatherTool } from './tools'
 
@@ -208,7 +208,7 @@ interface RunOptions {
 ## 错误处理
 
 ```typescript
-import { AgentError, ToolExecutionError, MaxIterationsError } from '@seashore/agent'
+import { AgentError, ToolExecutionError, MaxIterationsError } from '@seashorelab/agent'
 
 try {
   await agent.run('...')

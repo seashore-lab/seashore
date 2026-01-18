@@ -1,6 +1,6 @@
 # Tool Presets
 
-Preset tools are prebuilt integrations shipped with `@seashore/tool`.
+Preset tools are prebuilt integrations shipped with `@seashorelab/tool`.
 
 There are two categories:
 

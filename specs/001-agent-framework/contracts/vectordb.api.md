@@ -1,6 +1,6 @@
-# API Contract: @seashore/vectordb
+# API Contract: @seashorelab/vectordb
 
-**Package**: `@seashore/vectordb`  
+**Package**: `@seashorelab/vectordb`  
 **Version**: 0.1.0
 
 ## 概述
@@ -104,8 +104,8 @@ export const documents = pgTable(
 ### createVectorStore
 
 ```typescript
-import { createVectorStore } from '@seashore/vectordb'
-import { openaiEmbed } from '@seashore/llm'
+import { createVectorStore } from '@seashorelab/vectordb'
+import { openaiEmbed } from '@seashorelab/llm'
 
 const vectorStore = createVectorStore({
   db: database,
@@ -214,7 +214,7 @@ await vectorStore.deleteDocuments({
 基于向量相似度的语义搜索：
 
 ```typescript
-import { vectorSearch } from '@seashore/vectordb'
+import { vectorSearch } from '@seashorelab/vectordb'
 
 const results = await vectorSearch({
   store: vectorStore,
@@ -254,7 +254,7 @@ interface SearchResult {
 基于 PostgreSQL tsvector 的全文搜索：
 
 ```typescript
-import { textSearch } from '@seashore/vectordb'
+import { textSearch } from '@seashorelab/vectordb'
 
 const results = await textSearch({
   store: vectorStore,
@@ -306,7 +306,7 @@ const not = await textSearch({
 结合向量相似度和全文搜索的混合检索：
 
 ```typescript
-import { hybridSearch } from '@seashore/vectordb'
+import { hybridSearch } from '@seashorelab/vectordb'
 
 const results = await hybridSearch({
   store: vectorStore,

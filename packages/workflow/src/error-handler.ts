@@ -1,5 +1,5 @@
 /**
- * @seashore/workflow - Error Handling
+ * @seashorelab/workflow - Error Handling
  *
  * Error handling, retry logic, and fallback mechanisms for workflows
  */
@@ -129,7 +129,7 @@ function calculateDelay(
  *
  * @example
  * ```typescript
- * import { withRetry, createNode } from '@seashore/workflow';
+ * import { withRetry, createNode } from '@seashorelab/workflow';
  *
  * const unreliableNode = createNode({
  *   name: 'api-call',
@@ -227,7 +227,7 @@ export function withRetry<TInput = unknown, TOutput = unknown>(
  *
  * @example
  * ```typescript
- * import { withFallback, createNode } from '@seashore/workflow';
+ * import { withFallback, createNode } from '@seashorelab/workflow';
  *
  * const primaryNode = createNode({
  *   name: 'primary-api',
@@ -278,7 +278,7 @@ export function withFallback<TInput = unknown, TOutput = unknown>(
  *
  * @example
  * ```typescript
- * import { withErrorTransform, createNode } from '@seashore/workflow';
+ * import { withErrorTransform, createNode } from '@seashorelab/workflow';
  *
  * const node = createNode({
  *   name: 'api-call',
@@ -314,7 +314,7 @@ export function withErrorTransform<TInput = unknown, TOutput = unknown>(
  *
  * @example
  * ```typescript
- * import { withTimeout, createNode } from '@seashore/workflow';
+ * import { withTimeout, createNode } from '@seashorelab/workflow';
  *
  * const slowNode = createNode({
  *   name: 'slow-operation',
@@ -357,7 +357,7 @@ export function withTimeout<TInput = unknown, TOutput = unknown>(
  *
  * @example
  * ```typescript
- * import { createCircuitBreaker, createNode } from '@seashore/workflow';
+ * import { createCircuitBreaker, createNode } from '@seashorelab/workflow';
  *
  * const apiNode = createNode({
  *   name: 'api-call',

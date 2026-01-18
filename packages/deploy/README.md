@@ -1,1 +1,1 @@
-# @seashore/deploy
+# @seashorelab/deploy

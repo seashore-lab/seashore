@@ -1,6 +1,6 @@
 # Deployment
 
-The deploy module (`@seashore/deploy`) provides an HTTP server for agents (built on Hono) with:
+The deploy module (`@seashorelab/deploy`) provides an HTTP server for agents (built on Hono) with:
 
 - standard chat and agent endpoints
 - optional streaming endpoints

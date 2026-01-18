@@ -1,5 +1,5 @@
 {
-  "name": "@seashore/vectordb",
+  "name": "@seashorelab/vectordb",
   "version": "0.1.0",
   "type": "module",
   "description": "Vector database with pgvector for Seashore Agent Framework",
@@ -43,7 +43,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@seashore/storage": "workspace:*",
+    "@seashorelab/storage": "workspace:*",
     "drizzle-orm": "^0.44.2",
     "pgvector": "^0.2.0"
   },

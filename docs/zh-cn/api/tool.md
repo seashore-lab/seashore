@@ -1,6 +1,6 @@
 # API 参考：工具
 
-包：`@seashore/tool`
+包：`@seashorelab/tool`
 
 ## 定义工具
 

@@ -14,7 +14,7 @@ This improves recall for:
 ## Using hybrid search
 
 ```ts
-import { hybridSearch } from '@seashore/vectordb'
+import { hybridSearch } from '@seashorelab/vectordb'
 
 const results = await hybridSearch({
   store: vectorStore,

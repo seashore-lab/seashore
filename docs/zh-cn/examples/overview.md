@@ -35,7 +35,7 @@ examples 包不依赖 npm 脚本；使用 `tsx` 直接运行文件。
 在仓库根目录下：
 
 ```bash
-pnpm --filter @seashore/examples exec tsx src/01-basic-agent.ts
+pnpm --filter @seashorelab/examples exec tsx src/01-basic-agent.ts
 ```
 
 或在 `examples/` 文件夹中：
@@ -46,5 +46,5 @@ pnpm exec tsx src/01-basic-agent.ts
 
 ## 提示
 
-- 如果看到 `Cannot find module '@seashore/...'`，你可能跳过了 `pnpm build`。
+- 如果看到 `Cannot find module '@seashorelab/...'`，你可能跳过了 `pnpm build`。
 - 对于基于容器的示例（12、13），你需要运行 Docker。

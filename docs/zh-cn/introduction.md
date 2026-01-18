@@ -55,21 +55,21 @@ const weatherTool = defineTool({
 
 Seashore 采用模块化设计，您只需安装所需的内容：
 
-- `@seashore/agent` - 核心智能体功能
-- `@seashore/tool` - 工具定义和执行
-- `@seashore/llm` - LLM 适配器（OpenAI、Anthropic、Gemini）
-- `@seashore/workflow` - 工作流编排
-- `@seashore/rag` - 检索增强生成
-- `@seashore/memory` - 内存系统
-- `@seashore/storage` - 持久化层
-- `@seashore/vectordb` - 向量数据库操作
-- `@seashore/mcp` - 模型上下文协议支持
-- `@seashore/observability` - 日志记录、追踪、指标
-- `@seashore/evaluation` - 智能体评估工具
-- `@seashore/security` - 防护和内容审核
-- `@seashore/deploy` - 部署实用工具
-- `@seashore/genui` - React UI 组件
-- `@seashore/contextengineering` - 上下文优化
+- `@seashorelab/agent` - 核心智能体功能
+- `@seashorelab/tool` - 工具定义和执行
+- `@seashorelab/llm` - LLM 适配器（OpenAI、Anthropic、Gemini）
+- `@seashorelab/workflow` - 工作流编排
+- `@seashorelab/rag` - 检索增强生成
+- `@seashorelab/memory` - 内存系统
+- `@seashorelab/storage` - 持久化层
+- `@seashorelab/vectordb` - 向量数据库操作
+- `@seashorelab/mcp` - 模型上下文协议支持
+- `@seashorelab/observability` - 日志记录、追踪、指标
+- `@seashorelab/evaluation` - 智能体评估工具
+- `@seashorelab/security` - 防护和内容审核
+- `@seashorelab/deploy` - 部署实用工具
+- `@seashorelab/genui` - React UI 组件
+- `@seashorelab/contextengineering` - 上下文优化
 
 ## 设计理念
 

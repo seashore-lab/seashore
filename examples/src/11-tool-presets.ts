@@ -6,14 +6,14 @@
  */
 
 import 'dotenv/config';
-import { createAgent } from '@seashore/agent';
-import { openaiText } from '@seashore/llm';
+import { createAgent } from '@seashorelab/agent';
+import { openaiText } from '@seashorelab/llm';
 import {
   serperTool,
   firecrawlTool,
   withApproval,
   createMemoryApprovalHandler,
-} from '@seashore/tool';
+} from '@seashorelab/tool';
 
 async function main() {
   console.log('[Example 11: Tool Presets with Approval]\n');

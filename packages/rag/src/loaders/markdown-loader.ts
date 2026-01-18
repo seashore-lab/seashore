@@ -1,5 +1,5 @@
 /**
- * @seashore/rag - Markdown Loader
+ * @seashorelab/rag - Markdown Loader
  *
  * Load markdown files with optional frontmatter extraction
  */

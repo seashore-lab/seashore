@@ -41,7 +41,7 @@ Seashore 为所有三个层次提供原语，但您可以自由选择如何应�
 用于当前对话上下文：
 
 ```typescript
-import { createShortTermMemory, type NewMemoryEntry } from '@seashore/memory'
+import { createShortTermMemory, type NewMemoryEntry } from '@seashorelab/memory'
 
 const memory = createShortTermMemory({
   maxEntries: 50, // 最大存储条目数
@@ -72,7 +72,7 @@ const summary = memory.getSummary('conv-123')
 用于会话级上下文：
 
 ```typescript
-import { createMidTermMemory } from '@seashore/memory'
+import { createMidTermMemory } from '@seashorelab/memory'
 
 const memory = createMidTermMemory({
   maxEntries: 100,
@@ -98,8 +98,8 @@ const memories = memory.queryByAgent('assistant', {
 跨会话的持久记忆：
 
 ```typescript
-import { createLongTermMemory } from '@seashore/memory'
-import { createDatabase } from '@seashore/storage'
+import { createLongTermMemory } from '@seashorelab/memory'
+import { createDatabase } from '@seashorelab/storage'
 
 const database = createDatabase({
   connectionString: process.env.DATABASE_URL,
@@ -148,8 +148,8 @@ interface MemoryEntry {
 ### 手动记忆管理
 
 ```typescript
-import { createAgent } from '@seashore/agent'
-import { createShortTermMemory } from '@seashore/memory'
+import { createAgent } from '@seashorelab/agent'
+import { createShortTermMemory } from '@seashorelab/memory'
 
 const agent = createAgent({
   name: 'memory-assistant',
@@ -199,7 +199,7 @@ memory.add({
 自动记忆集成：
 
 ```typescript
-import { withMemory } from '@seashore/agent'
+import { withMemory } from '@seashorelab/agent'
 
 const memoryAgent = withMemory(agent, {
   memory,
@@ -252,7 +252,7 @@ const memories = memory.queryByTimeRange(
 按含义搜索记忆：
 
 ```typescript
-import { createSemanticMemory } from '@seashore/memory'
+import { createSemanticMemory } from '@seashorelab/memory'
 
 const semanticMemory = createSemanticMemory({
   embeddingFunction: embeddingFn,
@@ -417,8 +417,8 @@ memory.import(data)
 ## 示例：完整的记忆系统
 
 ```typescript
-import { createAgent } from '@seashore/agent'
-import { createShortTermMemory, createLongTermMemory } from '@seashore/memory'
+import { createAgent } from '@seashorelab/agent'
+import { createShortTermMemory, createLongTermMemory } from '@seashorelab/memory'
 
 // 用于对话的短期记忆
 const shortTerm = createShortTermMemory({ maxEntries: 50 })

@@ -1,5 +1,5 @@
 {
-  "name": "@seashore/observability",
+  "name": "@seashorelab/observability",
   "version": "0.1.0",
   "description": "Observability and tracing for Seashore Agent framework",
   "type": "module",
@@ -23,7 +23,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@seashore/storage": "workspace:*"
+    "@seashorelab/storage": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

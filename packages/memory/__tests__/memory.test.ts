@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import type { MemoryEntry, MemoryType, MemoryStats, ConsolidationResult } from '../src/types';
 
-describe('@seashore/memory', () => {
+describe('@seashorelab/memory', () => {
   describe('Memory Types', () => {
     it('should define correct memory types', () => {
       const types: MemoryType[] = ['short', 'long'];

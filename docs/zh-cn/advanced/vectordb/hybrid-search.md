@@ -14,7 +14,7 @@
 ## 使用混合搜索
 
 ```ts
-import { hybridSearch } from '@seashore/vectordb'
+import { hybridSearch } from '@seashorelab/vectordb'
 
 const results = await hybridSearch({
   store: vectorStore,

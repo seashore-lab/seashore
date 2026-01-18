@@ -9,7 +9,7 @@ Anthropic text adapters are created with `anthropicText()`.
 ## Example
 
 ```ts
-import { anthropicText } from '@seashore/llm'
+import { anthropicText } from '@seashorelab/llm'
 
 const model = anthropicText('claude-sonnet-4', {
   apiKey: process.env.ANTHROPIC_API_KEY,

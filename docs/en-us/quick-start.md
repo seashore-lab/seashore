@@ -15,13 +15,13 @@ Before you begin, ensure you have:
 Seashore is organized into modular packages. For a basic agent, you'll need:
 
 ```bash
-pnpm add @seashore/agent @seashore/llm @seashore/tool zod
+pnpm add @seashorelab/agent @seashorelab/llm @seashorelab/tool zod
 ```
 
 Or using npm:
 
 ```bash
-npm install @seashore/agent @seashore/llm @seashore/tool zod
+npm install @seashorelab/agent @seashorelab/llm @seashorelab/tool zod
 ```
 
 ## Your First Agent
@@ -42,8 +42,8 @@ Create a file named `basic-agent.ts`:
 
 ```typescript
 import 'dotenv/config'
-import { createAgent } from '@seashore/agent'
-import { openaiText } from '@seashore/llm'
+import { createAgent } from '@seashorelab/agent'
+import { openaiText } from '@seashorelab/llm'
 
 // Create a simple agent
 const agent = createAgent({
@@ -73,9 +73,9 @@ Agents become powerful when they can use tools. Let's create an agent with a wea
 
 ```typescript
 import 'dotenv/config'
-import { createAgent } from '@seashore/agent'
-import { openaiText } from '@seashore/llm'
-import { defineTool } from '@seashore/tool'
+import { createAgent } from '@seashorelab/agent'
+import { openaiText } from '@seashorelab/llm'
+import { defineTool } from '@seashorelab/tool'
 import { z } from 'zod'
 
 // Define a weather tool
@@ -122,8 +122,8 @@ For a better user experience, stream the agent's responses:
 
 ```typescript
 import 'dotenv/config'
-import { createAgent } from '@seashore/agent'
-import { openaiText } from '@seashore/llm'
+import { createAgent } from '@seashorelab/agent'
+import { openaiText } from '@seashorelab/llm'
 
 const agent = createAgent({
   name: 'assistant',
@@ -146,8 +146,8 @@ Build conversational agents by passing message history:
 
 ```typescript
 import 'dotenv/config'
-import { createAgent } from '@seashore/agent'
-import { openaiText } from '@seashore/llm'
+import { createAgent } from '@seashorelab/agent'
+import { openaiText } from '@seashorelab/llm'
 
 const agent = createAgent({
   name: 'assistant',
@@ -177,7 +177,7 @@ Seashore supports multiple LLM providers. Simply swap the adapter:
 ### Anthropic Claude
 
 ```typescript
-import { anthropicText } from '@seashore/llm'
+import { anthropicText } from '@seashorelab/llm'
 
 const agent = createAgent({
   name: 'assistant',
@@ -190,7 +190,7 @@ const agent = createAgent({
 ### Google Gemini
 
 ```typescript
-import { geminiText } from '@seashore/llm'
+import { geminiText } from '@seashorelab/llm'
 
 const agent = createAgent({
   name: 'assistant',
@@ -229,7 +229,7 @@ Check out the [Examples](./examples/overview.md) section for 15+ complete workin
 ### Error Handling
 
 ```typescript
-import { AgentError } from '@seashore/agent'
+import { AgentError } from '@seashorelab/agent'
 
 try {
   const result = await agent.run('Your question')
@@ -246,7 +246,7 @@ try {
 ### Retries with Backoff
 
 ```typescript
-import { withRetry } from '@seashore/agent'
+import { withRetry } from '@seashorelab/agent'
 
 const result = await withRetry(
   () => agent.run('Your question'),
@@ -298,7 +298,7 @@ import 'dotenv/config' // Must be at the top of your file
 Ensure you have the latest versions:
 
 ```bash
-pnpm update @seashore/agent @seashore/llm @seashore/tool
+pnpm update @seashorelab/agent @seashorelab/llm @seashorelab/tool
 ```
 
 ### Stream Not Working

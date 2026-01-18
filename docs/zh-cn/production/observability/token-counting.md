@@ -9,7 +9,7 @@ Token 计数让您能够：
 ## 基本用法
 
 ```ts
-import { createTokenCounter } from '@seashore/observability'
+import { createTokenCounter } from '@seashorelab/observability'
 
 const counter = createTokenCounter({ defaultEncoding: 'cl100k_base' })
 const inputTokens = counter.count('Hello')

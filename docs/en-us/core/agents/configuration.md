@@ -1,6 +1,6 @@
 # Agent Configuration
 
-This page describes the configuration of `createAgent` as implemented by `@seashore/agent`.
+This page describes the configuration of `createAgent` as implemented by `@seashorelab/agent`.
 
 The public types live in `packages/agent/src/types.ts` and are summarized in the spec contract at `specs/001-agent-framework/contracts/agent.api.md`.
 
@@ -9,8 +9,8 @@ The public types live in `packages/agent/src/types.ts` and are summarized in the
 Minimal configuration:
 
 ```ts
-import { createAgent } from '@seashore/agent'
-import { openaiText } from '@seashore/llm'
+import { createAgent } from '@seashorelab/agent'
+import { openaiText } from '@seashorelab/llm'
 
 const agent = createAgent({
   name: 'assistant',
@@ -30,15 +30,15 @@ Logical identifier for logs, tracing, storage attribution, etc.
 
 ### `systemPrompt: string`
 
-The agent-level instruction block. Seashore passes this as a system prompt to the underlying `@seashore/llm` `chat()` call.
+The agent-level instruction block. Seashore passes this as a system prompt to the underlying `@seashorelab/llm` `chat()` call.
 
 ### `model: AnyTextAdapter`
 
-The LLM adapter produced by `@seashore/llm` (e.g. `openaiText(...)`, `anthropicText(...)`, `geminiText(...)`).
+The LLM adapter produced by `@seashorelab/llm` (e.g. `openaiText(...)`, `anthropicText(...)`, `geminiText(...)`).
 
 ### `tools?: Tool[]`
 
-Optional tool list. Each tool is defined with `@seashore/tool` and has:
+Optional tool list. Each tool is defined with `@seashorelab/tool` and has:
 
 - a Zod-derived JSON schema
 - a runtime `execute()` function

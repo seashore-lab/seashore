@@ -1,5 +1,5 @@
 /**
- * @seashore/tool - Serper Search Tool
+ * @seashorelab/tool - Serper Search Tool
  *
  * Preset tool for web search using Serper API
  */
@@ -65,7 +65,7 @@ const serperInputSchema = z.object({
  *
  * @example
  * ```typescript
- * import { serperTool } from '@seashore/tool/presets';
+ * import { serperTool } from '@seashorelab/tool/presets';
  *
  * const search = serperTool({
  *   apiKey: process.env.SERPER_API_KEY!,

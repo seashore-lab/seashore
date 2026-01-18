@@ -1,5 +1,5 @@
 /**
- * @seashore/tool - Client-Side Tool Support
+ * @seashorelab/tool - Client-Side Tool Support
  *
  * Tools that execute in the client (browser) rather than server-side
  */
@@ -92,7 +92,7 @@ export interface ClientToolPending<TOutput> {
  *
  * @example
  * ```typescript
- * import { defineClientTool } from '@seashore/tool';
+ * import { defineClientTool } from '@seashorelab/tool';
  *
  * const confirmTool = defineClientTool({
  *   name: 'confirm_action',

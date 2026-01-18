@@ -1,5 +1,5 @@
 /**
- * @seashore/contextengineering - Safety Guidelines Preset
+ * @seashorelab/contextengineering - Safety Guidelines Preset
  *
  * Preset block for common safety guidelines
  */

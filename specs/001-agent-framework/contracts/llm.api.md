@@ -1,6 +1,6 @@
-# API Contract: @seashore/llm
+# API Contract: @seashorelab/llm
 
-**Package**: `@seashore/llm`  
+**Package**: `@seashorelab/llm`  
 **Version**: 0.1.0
 
 ## 概述
@@ -59,8 +59,8 @@ export type {
 ### 使用方式
 
 ```typescript
-import { openaiText, anthropicText, geminiText } from '@seashore/llm'
-import { chat } from '@seashore/llm'
+import { openaiText, anthropicText, geminiText } from '@seashorelab/llm'
+import { chat } from '@seashorelab/llm'
 
 // OpenAI
 const openaiAdapter = openaiText('gpt-4o')
@@ -106,7 +106,7 @@ const adapter = createOpenaiText({
 ### generateImage
 
 ```typescript
-import { generateImage, openaiImage, geminiImage } from '@seashore/llm'
+import { generateImage, openaiImage, geminiImage } from '@seashorelab/llm'
 
 // OpenAI DALL-E
 const result = await generateImage({
@@ -155,7 +155,7 @@ interface ImageGenerationResult {
 ### generateVideo
 
 ```typescript
-import { generateVideo, openaiVideo } from '@seashore/llm'
+import { generateVideo, openaiVideo } from '@seashorelab/llm'
 
 // 创建视频生成任务
 const job = await generateVideo({
@@ -181,7 +181,7 @@ if (status.status === 'completed') {
 ### generateTranscription
 
 ```typescript
-import { generateTranscription, openaiTranscription } from '@seashore/llm'
+import { generateTranscription, openaiTranscription } from '@seashorelab/llm'
 import { readFile } from 'fs/promises'
 
 const audioBuffer = await readFile('./recording.mp3')
@@ -215,7 +215,7 @@ console.log('Segments:', result.segments)
 ### generateSpeech
 
 ```typescript
-import { generateSpeech, openaiTTS, geminiSpeech } from '@seashore/llm'
+import { generateSpeech, openaiTTS, geminiSpeech } from '@seashorelab/llm'
 
 // OpenAI TTS
 const result = await generateSpeech({
@@ -252,7 +252,7 @@ interface SpeechResult {
 ### generateEmbedding
 
 ```typescript
-import { generateEmbedding, openaiEmbed } from '@seashore/llm'
+import { generateEmbedding, openaiEmbed } from '@seashorelab/llm'
 
 const result = await generateEmbedding({
   adapter: openaiEmbed('text-embedding-3-small'),
@@ -283,8 +283,8 @@ console.log('Embeddings:', results.embeddings) // number[][]
 将 @tanstack/ai 流转换为标准 Response 对象：
 
 ```typescript
-import { chat, toStreamResponse } from '@seashore/llm'
-import { openaiText } from '@seashore/llm'
+import { chat, toStreamResponse } from '@seashorelab/llm'
+import { openaiText } from '@seashorelab/llm'
 
 // 在 Hono 路由中
 app.post('/api/chat', async (c) => {
@@ -304,7 +304,7 @@ app.post('/api/chat', async (c) => {
 转换为 SSE 格式：
 
 ```typescript
-import { chat, toServerSentEventsStream } from '@seashore/llm'
+import { chat, toServerSentEventsStream } from '@seashorelab/llm'
 
 app.post('/api/chat', async (c) => {
   const { messages } = await c.req.json()

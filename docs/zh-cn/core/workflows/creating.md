@@ -9,7 +9,7 @@
 示例：
 
 ```ts
-import { createWorkflow, createLLMNode } from '@seashore/workflow'
+import { createWorkflow, createLLMNode } from '@seashorelab/workflow'
 
 const outline = createLLMNode({
   name: 'outline',

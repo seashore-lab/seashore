@@ -1,4 +1,4 @@
-# @seashore/contextengineering
+# @seashorelab/contextengineering
 
 Context engineering utilities for building high-quality LLM prompts in the Seashore Agent Framework.
 
@@ -25,7 +25,7 @@ pnpm add @seashore/contextengineering
 Make your LLM aware of the current time and date:
 
 ```typescript
-import { createEnvironmentProvider } from '@seashore/contextengineering'
+import { createEnvironmentProvider } from '@seashorelab/contextengineering'
 
 const env = createEnvironmentProvider({
   currentDateTime: true,
@@ -53,7 +53,7 @@ ${env.format()}
 Build structured prompts with a fluent API:
 
 ```typescript
-import { createContext } from '@seashore/contextengineering'
+import { createContext } from '@seashorelab/contextengineering'
 
 const context = createContext({
   identity: {
@@ -79,7 +79,7 @@ const systemPrompt = await context.build()
 ### Using Presets
 
 ```typescript
-import { presets } from '@seashore/contextengineering'
+import { presets } from '@seashorelab/contextengineering'
 
 const context = createContext({
   blocks: [
@@ -96,7 +96,7 @@ const context = createContext({
 Use templates with variable interpolation:
 
 ```typescript
-import { createTemplate } from '@seashore/contextengineering'
+import { createTemplate } from '@seashorelab/contextengineering'
 
 const template = createTemplate(`
 # Identity

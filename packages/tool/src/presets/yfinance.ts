@@ -1,5 +1,5 @@
 /**
- * @seashore/tool - YFinance Tool
+ * @seashorelab/tool - YFinance Tool
  *
  * Preset tools for fetching financial data (stocks, crypto, etc.)
  */
@@ -87,7 +87,7 @@ const YAHOO_SEARCH_API = 'https://query1.finance.yahoo.com/v1/finance/search';
  *
  * @example
  * ```typescript
- * import { stockQuoteTool } from '@seashore/tool/presets';
+ * import { stockQuoteTool } from '@seashorelab/tool/presets';
  *
  * const quote = stockQuoteTool();
  * const result = await quote.execute({ symbols: ['AAPL', 'GOOGL'] });
@@ -178,7 +178,7 @@ export function stockQuoteTool() {
  *
  * @example
  * ```typescript
- * import { stockHistoricalTool } from '@seashore/tool/presets';
+ * import { stockHistoricalTool } from '@seashorelab/tool/presets';
  *
  * const historical = stockHistoricalTool();
  * const result = await historical.execute({
@@ -290,7 +290,7 @@ export function stockHistoricalTool() {
  *
  * @example
  * ```typescript
- * import { stockSearchTool } from '@seashore/tool/presets';
+ * import { stockSearchTool } from '@seashorelab/tool/presets';
  *
  * const search = stockSearchTool();
  * const result = await search.execute({ query: 'Apple' });
@@ -369,7 +369,7 @@ export function stockSearchTool() {
  *
  * @example
  * ```typescript
- * import { cryptoQuoteTool } from '@seashore/tool/presets';
+ * import { cryptoQuoteTool } from '@seashorelab/tool/presets';
  *
  * const crypto = cryptoQuoteTool();
  * const result = await crypto.execute({ symbols: ['BTC-USD', 'ETH-USD'] });

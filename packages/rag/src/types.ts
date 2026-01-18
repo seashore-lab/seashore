@@ -1,10 +1,10 @@
 /**
- * @seashore/rag - Type Definitions
+ * @seashorelab/rag - Type Definitions
  *
  * Types for RAG (Retrieval-Augmented Generation) pipeline
  */
 
-import type { VectorStore } from '@seashore/vectordb';
+import type { VectorStore } from '@seashorelab/vectordb';
 
 /**
  * Metadata associated with a loaded document

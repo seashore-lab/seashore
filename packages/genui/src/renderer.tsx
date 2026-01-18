@@ -1,6 +1,6 @@
 /**
  * Tool Call Renderer - renders tool call results
- * @module @seashore/genui
+ * @module @seashorelab/genui
  */
 
 import React, { createElement } from 'react';

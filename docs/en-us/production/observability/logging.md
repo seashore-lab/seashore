@@ -5,7 +5,7 @@ Use `createLogger` for consistent structured logs.
 ## Basic usage
 
 ```ts
-import { createLogger } from '@seashore/observability'
+import { createLogger } from '@seashorelab/observability'
 
 const logger = createLogger({
   name: 'my-service',

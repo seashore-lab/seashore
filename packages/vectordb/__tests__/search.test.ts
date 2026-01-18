@@ -25,7 +25,7 @@ const mockCollection: Collection = {
 // Mock embedding
 const mockEmbedding: EmbeddingVector = Array(1536).fill(0.1) as EmbeddingVector;
 
-describe('@seashore/vectordb search tests', () => {
+describe('@seashorelab/vectordb search tests', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });

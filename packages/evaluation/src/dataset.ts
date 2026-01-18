@@ -1,6 +1,6 @@
 /**
  * Dataset management
- * @module @seashore/evaluation
+ * @module @seashorelab/evaluation
  */
 
 import type { Dataset, DatasetConfig, TestCase } from './types';

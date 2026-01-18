@@ -1,5 +1,5 @@
 /**
- * @seashore/memory - Type Definitions
+ * @seashorelab/memory - Type Definitions
  *
  * Types for agent memory system (short-term/long-term)
  */

@@ -1,5 +1,5 @@
 /**
- * @seashore/agent
+ * @seashorelab/agent
  *
  * ReAct and Workflow agents for Seashore Agent Framework
  */

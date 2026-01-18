@@ -1,1 +1,1 @@
-# @seashore/mcp
+# @seashorelab/mcp

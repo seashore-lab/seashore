@@ -10,7 +10,7 @@ OpenAI 文本适配器使用 `openaiText()` 创建。
 ## 示例
 
 ```ts
-import { openaiText } from '@seashore/llm'
+import { openaiText } from '@seashorelab/llm'
 
 const model = openaiText('gpt-5.1', {
   apiKey: process.env.OPENAI_API_KEY,

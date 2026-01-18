@@ -1,1 +1,1 @@
-# @seashore/tool
+# @seashorelab/tool

@@ -1,5 +1,5 @@
 /**
- * @seashore/rag - Web Loader
+ * @seashorelab/rag - Web Loader
  *
  * Load content from web pages
  */

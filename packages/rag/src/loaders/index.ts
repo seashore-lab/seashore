@@ -1,5 +1,5 @@
 /**
- * @seashore/rag - Loaders Index
+ * @seashorelab/rag - Loaders Index
  *
  * Re-exports all document loaders
  */

@@ -1,7 +1,7 @@
 /**
- * @seashore/deploy
+ * @seashorelab/deploy
  * Hono-based agent deployment package
- * @module @seashore/deploy
+ * @module @seashorelab/deploy
  */
 
 // Types

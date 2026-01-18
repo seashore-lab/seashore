@@ -1,5 +1,5 @@
 {
-  "name": "@seashore/genui",
+  "name": "@seashorelab/genui",
   "version": "0.1.0",
   "description": "Generative UI components for Seashore Agent framework",
   "type": "module",
@@ -24,8 +24,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@seashore/agent": "workspace:*",
-    "@seashore/tool": "workspace:*"
+    "@seashorelab/agent": "workspace:*",
+    "@seashorelab/tool": "workspace:*"
   },
   "devDependencies": {
     "@testing-library/react": "^14.0.0",
