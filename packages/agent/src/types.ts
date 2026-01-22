@@ -13,22 +13,17 @@ import type { Tool, ToolResult } from '@seashorelab/tool';
  */
 export interface RunOptions {
   /** Thread ID for conversation context */
-  readonly threadId?: string;
-
+  threadId?: string;
   /** User ID for attribution */
-  readonly userId?: string;
-
+  userId?: string;
   /** Abort signal for cancellation */
-  readonly signal?: AbortSignal;
-
+  signal?: AbortSignal;
   /** Custom metadata */
-  readonly metadata?: Record<string, unknown>;
-
+  metadata?: Record<string, unknown>;
   /** Override max iterations for this run */
-  readonly maxIterations?: number;
-
+  maxIterations?: number;
   /** Override temperature for this run */
-  readonly temperature?: number;
+  temperature?: number;
 }
 
 /**
@@ -38,25 +33,19 @@ export interface AgentConfig<
   TTools extends readonly Tool<unknown, unknown>[] = readonly Tool<unknown, unknown>[],
 > {
   /** Agent name */
-  readonly name: string;
-
+  name: string;
   /** System prompt */
-  readonly systemPrompt: string;
-
+  systemPrompt: string;
   /** LLM model adapter */
-  readonly model: AnyTextAdapter;
-
+  model: AnyTextAdapter;
   /** Available tools */
-  readonly tools?: TTools;
-
+  tools?: TTools;
   /** Maximum tool call iterations */
-  readonly maxIterations?: number;
-
+  maxIterations?: number;
   /** Temperature parameter */
-  readonly temperature?: number;
-
+  temperature?: number;
   /** Structured output schema (optional) */
-  readonly outputSchema?: ZodSchema;
+  outputSchema?: ZodSchema;
 }
 
 /**
@@ -112,26 +101,26 @@ export type AgentStreamChunkType =
  * Agent stream chunk
  */
 export interface AgentStreamChunk {
-  readonly type: AgentStreamChunkType;
+  type: AgentStreamChunkType;
 
   /** Text delta for 'thinking' or 'content' chunks */
-  readonly delta?: string;
+  delta?: string;
 
   /** Tool call information */
-  readonly toolCall?: {
-    readonly id: string;
-    readonly name: string;
-    readonly arguments?: unknown;
+  toolCall?: {
+    id: string;
+    name: string;
+    arguments?: unknown;
   };
 
   /** Tool result for 'tool-result' chunks */
-  readonly toolResult?: ToolResult<unknown>;
+  toolResult?: ToolResult<unknown>;
 
   /** Final result for 'finish' chunks */
-  readonly result?: AgentRunResult;
+  result?: AgentRunResult;
 
   /** Error for 'error' chunks */
-  readonly error?: Error;
+  error?: Error;
 }
 
 /**

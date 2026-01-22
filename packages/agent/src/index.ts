@@ -16,11 +16,8 @@ export type {
   AgentToolContext,
 } from './types';
 
-// Agent creation
-export { createAgent } from './create-agent';
-
 // ReAct agent (direct export for advanced use)
-export { createAgent as createReActAgent } from './react-agent';
+export { createAgent, createAgent as createReActAgent } from './react-agent';
 
 // Tool execution
 export { executeTool, executeTools, formatToolResult, type ToolCallRequest } from './tool-executor';

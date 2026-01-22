@@ -4,7 +4,7 @@
  * Implementation of the ReAct (Reasoning + Acting) agent pattern
  */
 
-import { chat } from '@seashorelab/llm';
+import { _chat } from '@seashorelab/llm';
 import type { Message, TokenUsage } from '@seashorelab/llm';
 import { filterChatMessages } from '@seashorelab/llm';
 import type { Tool } from '@seashorelab/tool';
@@ -72,8 +72,7 @@ export function createAgent<
     outputSchema,
   } = config;
 
-  // Convert tools to LLM tool format
-  // @tanstack/ai expects inputSchema, not parameters
+  // Convert tools to LLM tool format that @tanstack/ai accepts
   const llmTools = tools.map((tool) => ({
     name: tool.name,
     description: tool.description,
@@ -94,15 +93,12 @@ export function createAgent<
       yield* this.chat(messages, options);
     },
 
-    async *chat(
-      messages: readonly Message[],
-      options?: RunOptions
-    ): AsyncIterable<AgentStreamChunk> {
+    async *chat(messages: Message[], options?: RunOptions): AsyncIterable<AgentStreamChunk> {
       const startTime = Date.now();
       const effectiveMaxIterations = options?.maxIterations ?? maxIterations;
       const effectiveTemperature = options?.temperature ?? temperature;
 
-      // Build conversation history (system prompt passed separately to chat)
+      // Build conversation history (system prompt passed separately to chat later)
       const conversationMessages: Message[] = [...messages];
 
       const allToolCalls: ToolCallRecord[] = [];
@@ -121,7 +117,7 @@ export function createAgent<
           const pendingToolCalls: Map<string, { name: string; arguments: string }> = new Map();
 
           try {
-            for await (const chunk of chat({
+            for await (const chunk of _chat({
               adapter: model,
               messages: filterChatMessages(conversationMessages),
               systemPrompts: [systemPrompt],
