@@ -14,8 +14,8 @@ export type { TextAdapter };
  * Tool interface (compatible with @seashore/tool)
  */
 export interface Tool<TInput = unknown, TOutput = unknown> {
-  readonly name: string;
-  readonly description: string;
+  name: string;
+  description: string;
   execute(input: TInput): Promise<{ success: boolean; data?: TOutput; error?: string }>;
 }
 
@@ -24,25 +24,25 @@ export interface Tool<TInput = unknown, TOutput = unknown> {
  */
 export interface WorkflowConfig {
   /** Workflow name */
-  readonly name: string;
+  name: string;
 
   /** Workflow description */
-  readonly description?: string;
+  description?: string;
 
   /** Workflow nodes (array format for creation) */
-  readonly nodes: readonly WorkflowNode[];
+  nodes: WorkflowNode[];
 
   /** Edges connecting nodes */
-  readonly edges: readonly Edge[];
+  edges: Edge[];
 
   /** Entry/start node name (optional, defaults to first node without incoming edges) */
-  readonly startNode?: string;
+  startNode?: string;
 
   /** Global timeout in milliseconds */
-  readonly timeout?: number;
+  timeout?: number;
 
   /** Metadata */
-  readonly metadata?: Record<string, unknown>;
+  metadata?: Record<string, unknown>;
 }
 
 /**
@@ -50,13 +50,13 @@ export interface WorkflowConfig {
  */
 export interface Edge {
   /** Source node name */
-  readonly from: string;
+  from: string;
 
   /** Target node name */
-  readonly to: string;
+  to: string;
 
   /** Optional condition for this edge */
-  readonly condition?: (ctx: WorkflowContext) => boolean | Promise<boolean>;
+  condition?: (ctx: WorkflowContext) => boolean | Promise<boolean>;
 }
 
 /**
@@ -64,13 +64,13 @@ export interface Edge {
  */
 export interface LoopConfig {
   /** Nodes included in the loop */
-  readonly nodes: readonly string[];
+  nodes: string[];
 
   /** Maximum iterations */
-  readonly maxIterations: number;
+  maxIterations: number;
 
   /** Exit condition */
-  readonly exitCondition?: (ctx: WorkflowContext) => boolean | Promise<boolean>;
+  exitCondition?: (ctx: WorkflowContext) => boolean | Promise<boolean>;
 }
 
 /**
@@ -78,19 +78,19 @@ export interface LoopConfig {
  */
 export interface WorkflowNode<TInput = unknown, TOutput = unknown> {
   /** Node name */
-  readonly name: string;
+  name: string;
 
   /** Node type */
-  readonly type?: NodeType;
+  type?: NodeType;
 
   /** Execute the node */
   execute: (input: TInput, ctx: WorkflowContext) => Promise<TOutput>;
 
   /** Input schema for validation */
-  readonly inputSchema?: ZodSchema;
+  inputSchema?: ZodSchema;
 
   /** Output schema for validation */
-  readonly outputSchema?: ZodSchema;
+  outputSchema?: ZodSchema;
 }
 
 /**
@@ -103,43 +103,31 @@ export type NodeType = 'llm' | 'tool' | 'condition' | 'parallel' | 'custom';
  */
 export interface LLMNodeConfig {
   /** Node name */
-  readonly name: string;
+  name: string;
 
-  /**
-   * LLM model adapter
-   *
-   * Use a TextAdapter object created via openaiText(), anthropicText(), or geminiText()
-   *
-   * @example
-   * ```typescript
-   * model: openaiText('gpt-4o', { baseURL: 'https://api.example.com/v1', apiKey: 'sk-...' })
-   * ```
-   */
-  readonly model: TextAdapter;
+  /** LLM model adapter */
+  model: TextAdapter;
 
   /** Static prompt or dynamic prompt function */
-  readonly prompt?: string | ((input: unknown, ctx: WorkflowContext) => string | Promise<string>);
+  prompt?: string | ((input: unknown, ctx: WorkflowContext) => string | Promise<string>);
 
   /** Messages builder */
-  readonly messages?: (
-    input: unknown,
-    ctx: WorkflowContext
-  ) => Array<{ role: string; content: string }>;
+  messages?: (input: unknown, ctx: WorkflowContext) => Array<{ role: string; content: string }>;
 
   /** System prompt */
-  readonly systemPrompt?: string;
+  systemPrompt?: string;
 
   /** Tools available to this node */
-  readonly tools?: readonly Tool<unknown, unknown>[];
+  tools?: Tool<unknown, unknown>[];
 
   /** Output schema for structured output */
-  readonly outputSchema?: ZodSchema;
+  outputSchema?: ZodSchema;
 
   /** Temperature */
-  readonly temperature?: number;
+  temperature?: number;
 
   /** Max tokens */
-  readonly maxTokens?: number;
+  maxTokens?: number;
 }
 
 /**
@@ -147,16 +135,16 @@ export interface LLMNodeConfig {
  */
 export interface ToolNodeConfig<TToolInput = unknown, TToolOutput = unknown> {
   /** Node name */
-  readonly name: string;
+  name: string;
 
   /** Tool to execute */
-  readonly tool: Tool<TToolInput, TToolOutput>;
+  tool: Tool<TToolInput, TToolOutput>;
 
   /** Input mapping function */
-  readonly input?: (nodeInput: unknown, ctx: WorkflowContext) => TToolInput;
+  input?: (nodeInput: unknown, ctx: WorkflowContext) => TToolInput;
 
   /** Output transform function */
-  readonly transform?: (result: TToolOutput) => unknown;
+  transform?: (result: TToolOutput) => unknown;
 }
 
 /**
@@ -164,16 +152,16 @@ export interface ToolNodeConfig<TToolInput = unknown, TToolOutput = unknown> {
  */
 export interface ConditionNodeConfig {
   /** Node name */
-  readonly name: string;
+  name: string;
 
   /** Condition to evaluate */
-  readonly condition: (ctx: WorkflowContext) => boolean | Promise<boolean>;
+  condition: (ctx: WorkflowContext) => boolean | Promise<boolean>;
 
   /** Target node if true */
-  readonly ifTrue: string;
+  ifTrue: string;
 
   /** Target node if false */
-  readonly ifFalse: string;
+  ifFalse: string;
 }
 
 /**
@@ -181,25 +169,25 @@ export interface ConditionNodeConfig {
  */
 export interface ParallelNodeConfig {
   /** Node name */
-  readonly name: string;
+  name: string;
 
   /** Branches to execute in parallel (static) */
-  readonly branches?: readonly WorkflowNode[];
+  branches?: WorkflowNode[];
 
   /** Dynamic parallel - items generator */
-  readonly forEach?: (input: unknown, ctx: WorkflowContext) => unknown[];
+  forEach?: (input: unknown, ctx: WorkflowContext) => unknown[];
 
   /** Node to execute for each item (when using forEach) */
-  readonly node?: WorkflowNode;
+  node?: WorkflowNode;
 
   /** Merge function for results */
-  readonly merge?: (results: unknown[]) => unknown;
+  merge?: (results: unknown[]) => unknown;
 
   /** Maximum concurrency */
-  readonly maxConcurrency?: number;
+  maxConcurrency?: number;
 
   /** Failure policy */
-  readonly failurePolicy?: 'all' | 'partial' | 'none';
+  failurePolicy?: 'all' | 'partial' | 'none';
 }
 
 /**
@@ -207,16 +195,16 @@ export interface ParallelNodeConfig {
  */
 export interface CustomNodeConfig<TInput = unknown, TOutput = unknown> {
   /** Node name */
-  readonly name: string;
+  name: string;
 
   /** Execution function */
-  readonly execute: (input: TInput, ctx: WorkflowContext) => Promise<TOutput>;
+  execute: (input: TInput, ctx: WorkflowContext) => Promise<TOutput>;
 
   /** Input schema */
-  readonly inputSchema?: ZodSchema;
+  inputSchema?: ZodSchema;
 
   /** Output schema */
-  readonly outputSchema?: ZodSchema;
+  outputSchema?: ZodSchema;
 }
 
 /**
@@ -224,29 +212,29 @@ export interface CustomNodeConfig<TInput = unknown, TOutput = unknown> {
  */
 export interface WorkflowContext {
   /** Node outputs collected during execution */
-  readonly nodeOutputs: Record<string, unknown>;
+  nodeOutputs: Record<string, unknown>;
 
   /** Custom metadata */
-  readonly metadata: Record<string, unknown>;
+  metadata: Record<string, unknown>;
 
   /** Current node being executed */
-  readonly currentNode?: string;
+  currentNode?: string;
 
   /** Execution path so far */
-  readonly executionPath?: readonly string[];
+  executionPath?: string[];
 
   /** Loop state (if in a loop) */
-  readonly loopState?: {
-    readonly index: number;
-    readonly iteration: number;
-    readonly isFirst: boolean;
-    readonly isLast: boolean;
-    readonly value?: unknown;
-    readonly accumulator?: unknown;
+  loopState?: {
+    index: number;
+    iteration: number;
+    isFirst: boolean;
+    isLast: boolean;
+    value?: unknown;
+    accumulator?: unknown;
   };
 
   /** Abort signal */
-  readonly signal?: AbortSignal;
+  signal?: AbortSignal;
 
   /** Get node output with type safety */
   getNodeOutput<T = unknown>(nodeName: string): T | undefined;
@@ -305,19 +293,19 @@ export interface MutableWorkflowContext {
  */
 export interface WorkflowExecutionResult<TOutput = unknown> {
   /** Final output */
-  readonly output: TOutput;
+  output: TOutput;
 
   /** Execution path taken */
-  readonly nodeExecutionOrder: readonly string[];
+  nodeExecutionOrder: string[];
 
   /** Node outputs */
-  readonly nodeOutputs: Record<string, unknown>;
+  nodeOutputs: Record<string, unknown>;
 
   /** Total duration in milliseconds */
-  readonly durationMs: number;
+  durationMs: number;
 
   /** Workflow context at completion */
-  readonly context?: WorkflowContext;
+  context?: WorkflowContext;
 
   /** Get node output with type safety */
   getNodeOutput<T = unknown>(nodeName: string): T | undefined;
@@ -328,19 +316,19 @@ export interface WorkflowExecutionResult<TOutput = unknown> {
  */
 export interface WorkflowExecutionOptions {
   /** Timeout in milliseconds */
-  readonly timeout?: number;
+  timeout?: number;
 
   /** Abort signal */
-  readonly signal?: AbortSignal;
+  signal?: AbortSignal;
 
   /** Maximum iterations (for loop protection) */
-  readonly maxIterations?: number;
+  maxIterations?: number;
 
   /** Initial metadata */
-  readonly metadata?: Record<string, unknown>;
+  metadata?: Record<string, unknown>;
 
   /** Event callback */
-  readonly onEvent?: (event: WorkflowEvent) => void;
+  onEvent?: (event: WorkflowEvent) => void;
 }
 
 /**
@@ -348,11 +336,11 @@ export interface WorkflowExecutionOptions {
  */
 export interface LLMTokenEventData {
   /** Node name that produced this token */
-  readonly nodeName: string;
+  nodeName: string;
   /** Token delta content */
-  readonly delta: string;
+  delta: string;
   /** Accumulated content so far */
-  readonly content: string;
+  content: string;
 }
 
 /**
@@ -360,54 +348,54 @@ export interface LLMTokenEventData {
  */
 export type WorkflowEvent =
   | {
-      readonly type: 'workflow_start';
-      readonly timestamp: number;
-      readonly data: {
-        readonly input: unknown;
+      type: 'workflow_start';
+      timestamp: number;
+      data: {
+        input: unknown;
       };
     }
   | {
-      readonly type: 'node_start';
-      readonly timestamp: number;
-      readonly data: {
-        readonly nodeName: string;
-        readonly input: unknown;
+      type: 'node_start';
+      timestamp: number;
+      data: {
+        nodeName: string;
+        input: unknown;
       };
     }
   | {
-      readonly type: 'node_complete';
-      readonly timestamp: number;
-      readonly data: {
-        readonly nodeName: string;
-        readonly output: unknown;
+      type: 'node_complete';
+      timestamp: number;
+      data: {
+        nodeName: string;
+        output: unknown;
       };
     }
   | {
-      readonly type: 'node_error';
-      readonly timestamp: number;
-      readonly data: {
-        readonly nodeName: string;
-        readonly error: unknown;
+      type: 'node_error';
+      timestamp: number;
+      data: {
+        nodeName: string;
+        error: unknown;
       };
     }
   | {
-      readonly type: 'workflow_complete';
-      readonly timestamp: number;
-      readonly data: {
-        readonly output: unknown;
+      type: 'workflow_complete';
+      timestamp: number;
+      data: {
+        output: unknown;
       };
     }
   | {
-      readonly type: 'workflow_error';
-      readonly timestamp: number;
-      readonly data: {
-        readonly error: unknown;
+      type: 'workflow_error';
+      timestamp: number;
+      data: {
+        error: unknown;
       };
     }
   | {
-      readonly type: 'llm_token';
-      readonly timestamp: number;
-      readonly data: LLMTokenEventData;
+      type: 'llm_token';
+      timestamp: number;
+      data: LLMTokenEventData;
     };
 
 /**
@@ -425,7 +413,7 @@ export type OnTokenCallback = (data: LLMTokenEventData) => void;
  */
 export interface StreamingWorkflowContext extends WorkflowContext {
   /** Callback for token-level streaming */
-  readonly onToken?: OnTokenCallback;
+  onToken?: OnTokenCallback;
 }
 
 /**
@@ -433,17 +421,11 @@ export interface StreamingWorkflowContext extends WorkflowContext {
  */
 export interface Workflow<TInput = unknown, TOutput = unknown> {
   /** Workflow configuration */
-  readonly config: WorkflowConfig;
+  config: WorkflowConfig;
 
-  /** Execute the workflow */
-  execute(
-    input: TInput,
-    options?: WorkflowExecutionOptions
-  ): Promise<WorkflowExecutionResult<TOutput>>;
+  /** Input type marker (never accessed at runtime) */
+  readonly __inputType?: TInput;
 
-  /** Execute with streaming events */
-  stream(
-    input: TInput,
-    options?: WorkflowExecutionOptions
-  ): AsyncGenerator<WorkflowEvent, WorkflowExecutionResult<TOutput>, undefined>;
+  /** Output type marker (never accessed at runtime) */
+  readonly __outputType?: TOutput;
 }

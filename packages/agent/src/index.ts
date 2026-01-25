@@ -40,8 +40,6 @@ export { collectStream, StreamChunks, streamToReadable, parseSSEStream } from '.
 // Workflow agent integration
 export {
   createWorkflowAgent,
-  createAgentNode,
-  composeAgents,
   type WorkflowAgentConfig,
   type WorkflowAgentInput,
   type WorkflowAgentOutput,

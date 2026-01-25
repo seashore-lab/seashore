@@ -4,14 +4,7 @@
  * Create workflow instances from configuration
  */
 
-import type {
-  WorkflowConfig,
-  Workflow,
-  WorkflowExecutionOptions,
-  WorkflowExecutionResult,
-  WorkflowEvent,
-} from './types';
-import { executeWorkflow, executeWorkflowStream } from './execution';
+import type { WorkflowConfig, Workflow } from './types';
 
 /**
  * Workflow configuration validation error
@@ -59,7 +52,8 @@ function validateWorkflowConfig(config: WorkflowConfig): void {
  *
  * @example
  * ```typescript
- * import { createWorkflow, createLLMNode, createConditionNode } from '@seashorelab/workflow';
+ * import { createWorkflow, createLLMNode, executeWorkflow } from '@seashorelab/workflow';
+ * import { createWorkflowAgent } from '@seashorelab/agent';
  * import { openaiText } from '@seashorelab/llm';
  *
  * const analyzeNode = createLLMNode({
@@ -85,7 +79,12 @@ function validateWorkflowConfig(config: WorkflowConfig): void {
  *   ],
  * });
  *
- * const result = await workflow.execute({ query: 'Help me!' });
+ * // Execute via agent
+ * const agent = createWorkflowAgent({ name: 'support-agent', workflow });
+ * const result = await agent.execute({ message: 'Help me!' });
+ *
+ * // Or execute directly
+ * const result = await executeWorkflow(workflow, { query: 'Help me!' });
  * ```
  */
 export function createWorkflow<TInput = unknown, TOutput = unknown>(
@@ -96,20 +95,6 @@ export function createWorkflow<TInput = unknown, TOutput = unknown>(
 
   const workflow: Workflow<TInput, TOutput> = {
     config,
-
-    async execute(
-      input: TInput,
-      options: WorkflowExecutionOptions = {}
-    ): Promise<WorkflowExecutionResult<TOutput>> {
-      return executeWorkflow(workflow, input, options);
-    },
-
-    async *stream(
-      input: TInput,
-      options: WorkflowExecutionOptions = {}
-    ): AsyncGenerator<WorkflowEvent, WorkflowExecutionResult<TOutput>, undefined> {
-      return yield* executeWorkflowStream(workflow, input, options);
-    },
   };
 
   return workflow;

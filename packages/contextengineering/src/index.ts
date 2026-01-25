@@ -35,23 +35,13 @@ export type {
 } from './types';
 
 // Core
-export { createContext, defineBlock } from './core/context-builder';
+export { createContext, defineBlock } from './context-builder';
 export {
   createTemplate,
   renderTemplate,
   hasTemplateVariables,
   extractTemplateVariables,
-} from './core/template';
+} from './template';
 
 // Providers
-export { createEnvironmentProvider, createEnv, env } from './providers/environment';
-
-// Presets
-export {
-  identity,
-  timeAwareness,
-  safetyGuidelines,
-  codeGeneration,
-  outputConstraints,
-  presets,
-} from './presets/index';
+export { createEnvironmentProvider, createEnv, env } from './environment';

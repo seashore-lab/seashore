@@ -4,7 +4,7 @@
  * Template system for variable interpolation in prompts
  */
 
-import type { Template, TemplateOptions } from '../types';
+import type { Template, TemplateOptions } from './types';
 
 /**
  * Default template options

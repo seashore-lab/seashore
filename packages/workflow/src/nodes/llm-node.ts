@@ -11,7 +11,7 @@ import type {
   StreamingWorkflowContext,
 } from '../types';
 import type { ChatMessage } from '@seashorelab/llm';
-import { chat } from '@seashorelab/llm';
+import { _chat } from '@seashorelab/llm';
 import { NodeExecutionError } from '../error-handler';
 
 /**
@@ -103,11 +103,11 @@ export function createLLMNode(config: LLMNodeConfig): WorkflowNode<unknown, LLMN
 
       try {
         // Call the LLM using @tanstack/ai chat function
-        const stream = chat({
+        const stream = _chat({
           adapter: model,
           messages: chatMessages,
           systemPrompts: systemPrompt ? [systemPrompt] : undefined,
-          tools: tools as Parameters<typeof chat>[0]['tools'],
+          tools: tools as Parameters<typeof _chat>[0]['tools'],
           temperature: temperature,
           // maxTokens is not directly supported by chat(), handled by adapter
         });

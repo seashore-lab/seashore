@@ -12,8 +12,8 @@ import type {
   EnvironmentOptions,
   Example,
   OutputFormatConfig,
-} from '../types';
-import { createEnvironmentProvider } from '../providers/environment';
+} from './types';
+import { createEnvironmentProvider } from './environment';
 import { renderTemplate } from './template';
 
 /**
@@ -27,7 +27,7 @@ const PRIORITY = {
   EXAMPLES: 50,
   CONTEXT: 60,
   CUSTOM: 100,
-};
+} as const;
 
 /**
  * Create an identity block
@@ -108,7 +108,7 @@ function createEnvironmentBlock(options: EnvironmentOptions | boolean): ContextB
 /**
  * Create an instructions block
  */
-function createInstructionsBlock(instructions: readonly string[]): ContextBlock {
+function createInstructionsBlock(instructions: string[]): ContextBlock {
   return {
     type: 'instructions',
     priority: PRIORITY.INSTRUCTIONS,
@@ -149,12 +149,6 @@ function createOutputFormatBlock(config: OutputFormatConfig): ContextBlock {
         lines.push(`- Format: ${config.type}`);
       }
 
-      if (config.constraints && config.constraints.length > 0) {
-        config.constraints.forEach((constraint) => {
-          lines.push(`- ${constraint}`);
-        });
-      }
-
       if (config.schema) {
         lines.push('');
         lines.push('**Schema:**');
@@ -171,7 +165,7 @@ function createOutputFormatBlock(config: OutputFormatConfig): ContextBlock {
 /**
  * Create an examples block
  */
-function createExamplesBlock(examples: readonly Example[]): ContextBlock {
+function createExamplesBlock(examples: Example[]): ContextBlock {
   return {
     type: 'examples',
     priority: PRIORITY.EXAMPLES,
@@ -297,49 +291,9 @@ export function createContext(config: ContextConfig = {}): IContextBuilder {
     blocks.push(createContextDataBlock(config.context));
   }
 
-  // Add custom blocks
-  if (config.blocks) {
-    blocks.push(...config.blocks);
-  }
-
   const builder: IContextBuilder = {
-    identity(identityConfig: IdentityConfig): IContextBuilder {
-      blocks.push(createIdentityBlock(identityConfig));
-      return builder;
-    },
-
-    environment(options: EnvironmentOptions | boolean = true): IContextBuilder {
-      blocks.push(createEnvironmentBlock(options));
-      return builder;
-    },
-
-    instructions(instructionList: readonly string[]): IContextBuilder {
-      blocks.push(createInstructionsBlock(instructionList));
-      return builder;
-    },
-
-    examples(exampleList: readonly Example[]): IContextBuilder {
-      blocks.push(createExamplesBlock(exampleList));
-      return builder;
-    },
-
-    outputFormat(formatConfig: OutputFormatConfig): IContextBuilder {
-      blocks.push(createOutputFormatBlock(formatConfig));
-      return builder;
-    },
-
-    block(customBlock: ContextBlock): IContextBuilder {
-      blocks.push(customBlock);
-      return builder;
-    },
-
-    context(data: Record<string, unknown>): IContextBuilder {
-      blocks.push(createContextDataBlock(data));
-      return builder;
-    },
-
     async build(variables?: Record<string, unknown>): Promise<string> {
-      // Sort blocks by priority
+      // Sort blocks by priority ascending
       const sortedBlocks = [...blocks].sort(
         (a, b) => (a.priority ?? PRIORITY.CUSTOM) - (b.priority ?? PRIORITY.CUSTOM)
       );

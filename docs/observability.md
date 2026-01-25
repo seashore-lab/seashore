@@ -51,7 +51,7 @@ Manage spans for nested operations:
 
 ```ts
 // Parent span
-const parentSpan = tracer.startSpan('workflow.execute');
+const parentSpan = tracer.startSpan('agent.execute');
 
 // Child span
 const childSpan = tracer.startSpan('llm.call', {

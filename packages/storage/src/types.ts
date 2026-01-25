@@ -8,31 +8,31 @@
  * Thread entity - represents a conversation session
  */
 export interface Thread {
-  readonly id: string;
-  readonly title: string | null;
-  readonly agentId: string;
-  readonly userId: string | null;
-  readonly metadata: Record<string, unknown> | null;
-  readonly createdAt: Date;
-  readonly updatedAt: Date;
+  id: string;
+  title: string | null;
+  agentId: string;
+  userId: string | null;
+  metadata: Record<string, unknown> | null;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 /**
  * New thread creation input
  */
 export interface NewThread {
-  readonly agentId: string;
-  readonly title?: string;
-  readonly userId?: string;
-  readonly metadata?: Record<string, unknown>;
+  agentId: string;
+  title?: string;
+  userId?: string;
+  metadata?: Record<string, unknown>;
 }
 
 /**
  * Thread update input
  */
 export interface UpdateThread {
-  readonly title?: string;
-  readonly metadata?: Record<string, unknown>;
+  title?: string;
+  metadata?: Record<string, unknown>;
 }
 
 /**
@@ -44,11 +44,11 @@ export type MessageRole = 'user' | 'assistant' | 'system' | 'tool';
  * Tool call within a message
  */
 export interface ToolCall {
-  readonly id: string;
-  readonly type: 'function';
-  readonly function: {
-    readonly name: string;
-    readonly arguments: string;
+  id: string;
+  type: 'function';
+  function: {
+    name: string;
+    arguments: string;
   };
 }
 
@@ -56,28 +56,28 @@ export interface ToolCall {
  * Message entity
  */
 export interface Message {
-  readonly id: string;
-  readonly threadId: string;
-  readonly role: MessageRole;
-  readonly content: string | null;
-  readonly toolCalls: readonly ToolCall[] | null;
-  readonly toolCallId: string | null;
-  readonly name: string | null;
-  readonly metadata: Record<string, unknown> | null;
-  readonly createdAt: Date;
+  id: string;
+  threadId: string;
+  role: MessageRole;
+  content: string | null;
+  toolCalls: ToolCall[] | null;
+  toolCallId: string | null;
+  name: string | null;
+  metadata: Record<string, unknown> | null;
+  createdAt: Date;
 }
 
 /**
  * New message creation input
  */
 export interface NewMessage {
-  readonly threadId: string;
-  readonly role: MessageRole;
-  readonly content?: string;
-  readonly toolCalls?: readonly ToolCall[];
-  readonly toolCallId?: string;
-  readonly name?: string;
-  readonly metadata?: Record<string, unknown>;
+  threadId: string;
+  role: MessageRole;
+  content?: string;
+  toolCalls?: ToolCall[];
+  toolCallId?: string;
+  name?: string;
+  metadata?: Record<string, unknown>;
 }
 
 /**
@@ -89,86 +89,86 @@ export type TraceType = 'agent' | 'tool' | 'llm' | 'retriever' | 'embedding' | '
  * Token usage statistics
  */
 export interface TokenUsage {
-  readonly promptTokens: number;
-  readonly completionTokens: number;
-  readonly totalTokens: number;
+  promptTokens: number;
+  completionTokens: number;
+  totalTokens: number;
 }
 
 /**
  * Trace entity - for observability
  */
 export interface Trace {
-  readonly id: string;
-  readonly threadId: string | null;
-  readonly parentId: string | null;
-  readonly name: string;
-  readonly type: TraceType;
-  readonly input: unknown;
-  readonly output: unknown;
-  readonly error: string | null;
-  readonly tokenUsage: TokenUsage | null;
-  readonly durationMs: number | null;
-  readonly startedAt: Date;
-  readonly endedAt: Date | null;
+  id: string;
+  threadId: string | null;
+  parentId: string | null;
+  name: string;
+  type: TraceType;
+  input: unknown;
+  output: unknown;
+  error: string | null;
+  tokenUsage: TokenUsage | null;
+  durationMs: number | null;
+  startedAt: Date;
+  endedAt: Date | null;
 }
 
 /**
  * New trace creation input
  */
 export interface NewTrace {
-  readonly threadId?: string;
-  readonly parentId?: string;
-  readonly name: string;
-  readonly type: TraceType;
-  readonly input?: unknown;
-  readonly startedAt?: Date;
+  threadId?: string;
+  parentId?: string;
+  name: string;
+  type: TraceType;
+  input?: unknown;
+  startedAt?: Date;
 }
 
 /**
  * Trace update input
  */
 export interface UpdateTrace {
-  readonly output?: unknown;
-  readonly error?: string;
-  readonly tokenUsage?: TokenUsage;
-  readonly durationMs?: number;
-  readonly endedAt?: Date;
+  output?: unknown;
+  error?: string;
+  tokenUsage?: TokenUsage;
+  durationMs?: number;
+  endedAt?: Date;
 }
 
 /**
  * Session entity
  */
 export interface Session {
-  readonly id: string;
-  readonly userId: string;
-  readonly metadata: Record<string, unknown> | null;
-  readonly expiresAt: Date | null;
-  readonly createdAt: Date;
+  id: string;
+  userId: string;
+  metadata: Record<string, unknown> | null;
+  expiresAt: Date | null;
+  createdAt: Date;
 }
 
 /**
  * New session creation input
  */
 export interface NewSession {
-  readonly userId: string;
-  readonly metadata?: Record<string, unknown>;
-  readonly expiresAt?: Date;
+  userId: string;
+  metadata?: Record<string, unknown>;
+  expiresAt?: Date;
 }
 
 /**
  * Pagination options
  */
 export interface PaginationOptions {
-  readonly limit?: number;
-  readonly offset?: number;
+  limit?: number;
+  offset?: number;
 }
 
 /**
  * List options with ordering
  */
 export interface ListOptions extends PaginationOptions {
-  readonly orderBy?: string;
-  readonly order?: 'asc' | 'desc';
+  orderBy?: string;
+  order?: 'asc' | 'desc';
 }
 
 /**
@@ -176,13 +176,13 @@ export interface ListOptions extends PaginationOptions {
  */
 export interface DatabaseConfig {
   /** PostgreSQL connection string */
-  readonly connectionString: string;
+  connectionString: string;
 
   /** Maximum number of connections in the pool */
-  readonly maxConnections?: number;
+  maxConnections?: number;
 
-  /** Enable SSL (recommended for production) */
-  readonly ssl?: boolean;
+  /** Enable SSL */
+  ssl?: boolean;
 }
 
 /**
@@ -190,7 +190,7 @@ export interface DatabaseConfig {
  */
 export interface Database {
   /** Get the underlying Drizzle database instance */
-  readonly db: unknown;
+  db: unknown;
 
   /** Check database connection health */
   healthCheck(): Promise<boolean>;

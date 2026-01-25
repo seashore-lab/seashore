@@ -14,69 +14,44 @@ export type DateTimeFormat = 'iso' | 'locale' | 'relative' | string;
  */
 export interface EnvironmentOptions {
   /**
-   * Include current time (e.g., "14:30:00")
-   */
-  readonly currentTime?: boolean;
-
-  /**
-   * Include current date (e.g., "2026-01-17")
-   */
-  readonly currentDate?: boolean;
-
-  /**
    * Include full ISO 8601 datetime (e.g., "2026-01-17T14:30:00+08:00")
    */
-  readonly currentDateTime?: boolean;
+  currentDateTime?: boolean;
 
   /**
    * Include timezone name (e.g., "Asia/Shanghai")
    */
-  readonly timezone?: boolean;
-
-  /**
-   * Include UTC offset (e.g., "+08:00")
-   */
-  readonly utcOffset?: boolean;
+  timezone?: boolean;
 
   /**
    * Include day of week (e.g., "Friday" or "星期五")
    */
-  readonly weekday?: boolean;
+  weekday?: boolean;
 
   /**
    * Locale for formatting (e.g., "en-US", "zh-CN")
    * Defaults to system locale
    */
-  readonly locale?: string;
-
-  /**
-   * Custom date format (e.g., "YYYY-MM-DD", "MMM DD, YYYY")
-   */
-  readonly dateFormat?: DateTimeFormat;
-
-  /**
-   * Custom time format (e.g., "HH:mm:ss", "hh:mm A")
-   */
-  readonly timeFormat?: DateTimeFormat;
+  locale?: string;
 
   /**
    * Custom environment variables to include
    */
-  readonly custom?: Record<string, string | (() => string) | (() => Promise<string>)>;
+  custom?: Record<string, string | (() => string) | (() => Promise<string>)>;
 }
 
 /**
  * Environment context - resolved environment information
  */
 export interface EnvironmentContext {
-  readonly currentTime?: string;
-  readonly currentDate?: string;
-  readonly currentDateTime?: string;
-  readonly timezone?: string;
-  readonly utcOffset?: string;
-  readonly weekday?: string;
-  readonly locale?: string;
-  readonly [key: string]: string | undefined;
+  currentTime?: string;
+  currentDate?: string;
+  currentDateTime?: string;
+  timezone?: string;
+  utcOffset?: string;
+  weekday?: string;
+  locale?: string;
+  [key: string]: string | undefined;
 }
 
 /**
@@ -101,22 +76,22 @@ export interface FormatOptions {
   /**
    * Output format style
    */
-  readonly style?: 'markdown' | 'yaml' | 'plain' | 'xml';
+  style?: 'markdown' | 'yaml' | 'plain' | 'xml';
 
   /**
    * Section title
    */
-  readonly title?: string;
+  title?: string;
 
   /**
    * Include only specific keys
    */
-  readonly include?: string[];
+  include?: string[];
 
   /**
    * Exclude specific keys
    */
-  readonly exclude?: string[];
+  exclude?: string[];
 }
 
 /**
@@ -126,32 +101,32 @@ export interface IdentityConfig {
   /**
    * Agent name
    */
-  readonly name: string;
+  name: string;
 
   /**
    * Agent role description
    */
-  readonly role?: string;
+  role?: string;
 
   /**
    * Agent description
    */
-  readonly description?: string;
+  description?: string;
 
   /**
    * Personality traits
    */
-  readonly personality?: readonly string[];
+  personality?: string[];
 
   /**
    * Capabilities the agent has
    */
-  readonly capabilities?: readonly string[];
+  capabilities?: string[];
 
   /**
    * Constraints or limitations
    */
-  readonly constraints?: readonly string[];
+  constraints?: string[];
 }
 
 /**
@@ -161,17 +136,17 @@ export interface Example {
   /**
    * User input
    */
-  readonly user: string;
+  user: string;
 
   /**
    * Expected assistant response
    */
-  readonly assistant: string;
+  assistant: string;
 
   /**
    * Optional explanation
    */
-  readonly explanation?: string;
+  explanation?: string;
 }
 
 /**
@@ -181,17 +156,17 @@ export interface ContextBlock {
   /**
    * Block type identifier
    */
-  readonly type: string;
+  type: string;
 
   /**
    * Block priority (lower = earlier in prompt)
    */
-  readonly priority?: number;
+  priority?: number;
 
   /**
    * Whether this block is static (cacheable)
    */
-  readonly isStatic?: boolean;
+  isStatic?: boolean;
 
   /**
    * Render the block to a string
@@ -206,37 +181,32 @@ export interface ContextConfig {
   /**
    * Agent identity
    */
-  readonly identity?: IdentityConfig;
+  identity?: IdentityConfig;
 
   /**
    * Environment options
    */
-  readonly environment?: EnvironmentOptions | boolean;
+  environment?: EnvironmentOptions | boolean;
 
   /**
    * Instructions for the agent
    */
-  readonly instructions?: readonly string[];
+  instructions?: string[];
 
   /**
    * Output format constraints
    */
-  readonly outputFormat?: OutputFormatConfig;
+  outputFormat?: OutputFormatConfig;
 
   /**
    * Few-shot examples
    */
-  readonly examples?: readonly Example[];
-
-  /**
-   * Custom context blocks
-   */
-  readonly blocks?: readonly ContextBlock[];
+  examples?: Example[];
 
   /**
    * Additional context data
    */
-  readonly context?: Record<string, unknown>;
+  context?: Record<string, unknown>;
 }
 
 /**
@@ -246,58 +216,18 @@ export interface OutputFormatConfig {
   /**
    * Output type
    */
-  readonly type?: 'text' | 'markdown' | 'json' | 'xml' | 'code';
-
-  /**
-   * Additional constraints
-   */
-  readonly constraints?: readonly string[];
+  type?: 'text' | 'markdown' | 'json' | 'xml' | 'code';
 
   /**
    * Schema for structured output
    */
-  readonly schema?: Record<string, unknown>;
+  schema?: Record<string, unknown>;
 }
 
 /**
  * Context builder interface
  */
 export interface ContextBuilder {
-  /**
-   * Add identity configuration
-   */
-  identity(config: IdentityConfig): ContextBuilder;
-
-  /**
-   * Add environment context
-   */
-  environment(options?: EnvironmentOptions | boolean): ContextBuilder;
-
-  /**
-   * Add instructions
-   */
-  instructions(instructions: readonly string[]): ContextBuilder;
-
-  /**
-   * Add examples for few-shot learning
-   */
-  examples(examples: readonly Example[]): ContextBuilder;
-
-  /**
-   * Add output format constraints
-   */
-  outputFormat(config: OutputFormatConfig): ContextBuilder;
-
-  /**
-   * Add a custom block
-   */
-  block(block: ContextBlock): ContextBuilder;
-
-  /**
-   * Add custom context data
-   */
-  context(data: Record<string, unknown>): ContextBuilder;
-
   /**
    * Build the final system prompt
    */
@@ -321,7 +251,7 @@ export interface Template {
   /**
    * The raw template string
    */
-  readonly raw: string;
+  raw: string;
 
   /**
    * Render the template with variables
@@ -341,22 +271,22 @@ export interface TemplateOptions {
   /**
    * Opening delimiter (default: "{{")
    */
-  readonly openDelimiter?: string;
+  openDelimiter?: string;
 
   /**
    * Closing delimiter (default: "}}")
    */
-  readonly closeDelimiter?: string;
+  closeDelimiter?: string;
 
   /**
    * Whether to throw on missing variables (default: false)
    */
-  readonly strict?: boolean;
+  strict?: boolean;
 
   /**
    * Default value for missing variables
    */
-  readonly defaultValue?: string;
+  defaultValue?: string;
 }
 
 /**
@@ -366,32 +296,32 @@ export interface PresetConfig {
   /**
    * Custom title for the preset section
    */
-  readonly title?: string;
+  title?: string;
 
   /**
    * Whether to include in static portion
    */
-  readonly isStatic?: boolean;
+  isStatic?: boolean;
 }
 
 /**
  * Identity preset options
  */
 export interface IdentityPresetOptions extends PresetConfig {
-  readonly name: string;
-  readonly role?: string;
-  readonly personality?: readonly string[];
+  name: string;
+  role?: string;
+  personality?: string[];
 }
 
 /**
  * Time awareness preset options
  */
 export interface TimeAwarenessPresetOptions extends PresetConfig {
-  readonly locale?: string;
-  readonly includeDate?: boolean;
-  readonly includeTime?: boolean;
-  readonly includeTimezone?: boolean;
-  readonly includeWeekday?: boolean;
+  locale?: string;
+  includeDate?: boolean;
+  includeTime?: boolean;
+  includeTimezone?: boolean;
+  includeWeekday?: boolean;
 }
 
 /**
@@ -401,12 +331,12 @@ export interface SafetyGuidelinesPresetOptions extends PresetConfig {
   /**
    * Safety level: 'minimal' | 'standard' | 'strict'
    */
-  readonly level?: 'minimal' | 'standard' | 'strict';
+  level?: 'minimal' | 'standard' | 'strict';
 
   /**
    * Custom guidelines to add
    */
-  readonly customGuidelines?: readonly string[];
+  customGuidelines?: string[];
 }
 
 /**
@@ -416,17 +346,17 @@ export interface CodeGenerationPresetOptions extends PresetConfig {
   /**
    * Target programming languages
    */
-  readonly languages?: readonly string[];
+  languages?: string[];
 
   /**
    * Code style preferences
    */
-  readonly style?: 'clean' | 'documented' | 'minimal';
+  style?: 'clean' | 'documented' | 'minimal';
 
   /**
    * Whether to include tests
    */
-  readonly includeTests?: boolean;
+  includeTests?: boolean;
 }
 
 /**
@@ -436,20 +366,20 @@ export interface OutputConstraintsPresetOptions extends PresetConfig {
   /**
    * Maximum response length
    */
-  readonly maxLength?: number;
+  maxLength?: number;
 
   /**
    * Output format
    */
-  readonly format?: 'markdown' | 'plain' | 'json' | 'xml';
+  format?: 'markdown' | 'plain' | 'json' | 'xml';
 
   /**
    * Language for response
    */
-  readonly language?: string;
+  language?: string;
 
   /**
    * Tone of response
    */
-  readonly tone?: 'professional' | 'casual' | 'friendly' | 'formal';
+  tone?: 'professional' | 'casual' | 'friendly' | 'formal';
 }

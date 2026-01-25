@@ -1,135 +1,72 @@
 # @seashorelab/contextengineering
 
-This package provides tools for building high-quality prompts and context for LLMs. It helps make agents aware of their environment, capabilities, and constraints.
+Many developers find it challenging to create structured, effective and efficient prompts that guide LLMs to produce desired outputs. This package provides tools for building high-quality prompts and context for LLMs, awaring environment, capabilities, and constraints.
 
 ## Context Builder
 
-Build structured prompts with context:
+A context is built of multiple blocks, each serving a specific purpose. Use the `createContext` function to define and compose these blocks into a coherent prompt.
+Here is a full example:
 
 ```ts
 import { createContext } from '@seashorelab/contextengineering';
 
-const context = createContext({
+const builder = createContext({
+  // Agent identity configuration
   identity: {
-    name: 'CodeAssistant',
-    role: 'expert programming assistant',
-    personality: ['technical', 'thorough', 'patient'],
-    capabilities: [
-      'Write clean, documented code',
-      'Debug and fix errors',
-      'Explain complex concepts',
-      'Suggest best practices',
-    ],
+    name: 'Code Assistant', // let it know who it is
+    role: 'You are a helpful coding assistant.', // define its role
+    personality: ['friendly', 'concise'], // set personality traits
+    capabilities: ['Write clean and documented code'], // list capabilities
+    constraints: ['Use Python by default to answer'], // set constraints (limitations)
   },
+  // Provide environment context (e.g., current date/time)
   environment: {
-    currentDateTime: true,
-    timezone: true,
-    weekday: true,
-    locale: 'en-US',
+    currentDateTime: true, // e.g., 2026-01-17T14:30:00+08:00
+    timezone: true, // e.g., Asia/Shanghai
+    weekday: true, // e.g., Friday or 星期五
+    locale: 'en-US', // e.g., en-US or zh-CN
+    // custom variables
+    custom: {
+      location: 'San Francisco, CA',
+    },
   },
-  instructions: [
-    'Always provide code examples with explanations',
-    'Include error handling in examples',
-    'Use TypeScript by default',
-  ],
+  // Provide instructions that are not exactly personality / capability / constraint
+  instructions: ['Let it crash your code if necessary to demonstrate the issue.'],
+  // Require the output to follow a specific format (not enforced strictly since this is prompt based)
+  outputFormat: {
+    type: 'json',
+    schema: {
+      type: 'object',
+      properties: {
+        explanation: { type: 'string' },
+        codeSnippet: { type: 'string' },
+      },
+      required: ['explanation', 'codeSnippet'],
+    },
+  },
+  // Few-shot examples to guide the agent behavior
   examples: [
     {
-      user: 'How do I fetch data in React?',
-      assistant: 'Here is how to fetch data in React using useEffect...',
+      user: 'Explain what a closure is in JavaScript and provide a code example.',
+      assistant:
+        '```json {\n  "explanation": "A closure is a feature in JavaScript where ...",\n  "codeSnippet": "function makeCounter() {\n  let count = 0;\n  return function() {\n    count++;\n    return count;\n  };\n}\n\nconst counter = makeCounter();\nconsole.log(counter()); // 1\nconsole.log(counter()); // 2"\n}```',
+      explanation:
+        'Output starts with ```json and ends with ``` to folow the output format specification.',
     },
   ],
-});
-
-const systemPrompt = await context.build();
-console.log(systemPrompt);
-```
-
-## Environment Awareness
-
-Make agents aware of current time and environment:
-
-```ts
-import { createEnvironmentProvider, env } from '@seashorelab/contextengineering';
-
-const envProvider = createEnvironmentProvider({
-  currentDateTime: true,
-  timezone: true,
-  weekday: true,
-  locale: 'en-US',
-  // Add custom environment data
-  custom: {
-    appVersion: '1.0.0',
-    environment: 'production',
+  // Provide extra background information if necessary
+  context: {
+    conversationHistorySummary:
+      'The user is a software developer seeking coding assistance and explanations.',
   },
 });
-
-// Get formatted environment string
-const envString = await envProvider.format();
-console.log(envString);
-/*
-Current date and time: Thursday, January 23, 2026 at 2:30 PM
-Timezone: America/New_York (EST)
-Locale: en-US
-*/
-
-// Get environment object
-const envData = await envProvider.getContext();
-console.log(envData);
-// { currentDateTime: '...', weekday: 'Thursday', ... }
-
-// Shorthand for environment string
-const quickEnv = await env({
-  currentDateTime: true,
-  timezone: true,
-  weekday: true,
-  locale: 'en-US',
-});
 ```
 
-## Presets
+This provides almost all the common context blocks needed to build a high-quality prompt for an LLM-based agent.
 
-Use preset context blocks for common patterns:
+To get the built prompt string, call `await builder.build()`. By default, blocks are sorted in the order of priority: identity > environment > instructions > output format > examples > context. The latter blocks will appear later in the prompt.
 
-```ts
-import { presets, createContext } from '@seashorelab/contextengineering';
-
-const context = createContext({
-  blocks: [
-    // Identity preset
-    presets.identity({
-      name: 'SupportBot',
-      role: 'customer support specialist',
-      personality: ['friendly', 'professional', 'helpful'],
-    }),
-
-    // Time awareness
-    presets.timeAwareness({
-      locale: 'en-US',
-      includeWeekday: true,
-      includeTimezone: true,
-    }),
-
-    // Safety guidelines
-    presets.safetyGuidelines({
-      level: 'standard', // 'basic' | 'standard' | 'strict'
-    }),
-
-    // Code generation
-    presets.codeGeneration({
-      languages: ['TypeScript', 'Python', 'Go'],
-      style: 'documented', // 'clean' | 'documented' | 'verbose'
-      includeTests: true,
-    }),
-
-    // Output constraints
-    presets.outputConstraints({
-      format: 'markdown',
-      tone: 'professional',
-      maxLength: 1000,
-    }),
-  ],
-});
-```
+If you want to maximize the prompt caching efficiency, you can separate static and dynamic portions of the context using `getStaticPortion` and `getDynamicPortion` methods. Basically, identity, instructions, output format, examples are static, and environment and extra context are dynamic. And you get the final prompt by combining both portions.
 
 ## Template System
 
@@ -178,97 +115,6 @@ const rendered = await template.render({
 });
 ```
 
-## Static/Dynamic Separation
-
-Separate static and dynamic content for prompt caching:
-
-```ts
-const context = createContext({
-  // Static content (cacheable)
-  identity: { name: 'Assistant' },
-  instructions: ['Be helpful', 'Be concise'],
-
-  // Dynamic content (per-request)
-  environment: true,
-});
-
-// Get static portion (cache this)
-const static = await context.getStaticPortion();
-console.log('Static (cacheable):', static);
-
-// Get dynamic portion (per-request)
-const dynamic = await context.getDynamicPortion({
-  currentDate: new Date().toISOString(),
-});
-console.log('Dynamic:', dynamic);
-
-// Combine for final prompt
-const fullPrompt = static + '\n\n' + dynamic;
-```
-
-## Agent Integration
-
-Use context with agents:
-
-```ts
-import { createAgent } from '@seashorelab/agent';
-import { openaiText } from '@seashorelab/llm';
-import { createContext, env } from '@seashorelab/contextengineering';
-
-// Build system prompt
-const systemPrompt =
-  `You are a helpful assistant.\n\n` +
-  await env({ currentDateTime: true, timezone: true }) +
-  `\n\nAlways reference the current time when answering time-related questions.`;
-
-const agent = createAgent({
-  name: 'time-aware-assistant',
-  model: openaiText('gpt-4o'),
-  systemPrompt,
-});
-
-// Agent now knows the current time
-const result = await agent.run('What time is it right now?');
-```
-
-## Custom Context Blocks
-
-Create your own context blocks:
-
-```ts
-import { createContext, createTemplate } from '@seashorelab/contextengineering';
-
-const customBlock = createTemplate(`
-## Company Information
-Company: {{company.name}}
-Industry: {{company.industry}}
-Founded: {{company.founded}}
-
-## Product Knowledge
-Our main product: {{product.name}}
-Version: {{product.version}}
-`);
-
-const context = createContext({
-  blocks: [
-    {
-      name: 'company-info',
-      build: async () => customBlock.render({
-        company: {
-          name: 'TechCorp',
-          industry: 'Software',
-          founded: 2020,
-        },
-        product: {
-          name: 'SuperApp',
-          version: '2.0',
-        },
-      }),
-    },
-  ],
-});
-```
-
 ## Context Composition
 
 Combine multiple contexts:
@@ -293,28 +139,6 @@ const combined = mergeContexts([baseContext, timeContext, safetyContext]);
 const prompt = await combined.build();
 ```
 
-## Conditional Context
-
-Include context conditionally:
-
-```ts
-const context = createContext({
-  identity: { name: 'Assistant' },
-  // Conditional environment
-  environment: process.env.INCLUDE_TIME ? {
-    currentDateTime: true,
-  } : undefined,
-  // Conditional instructions
-  instructions: process.env.NODE_ENV === 'production' ? [
-    'Be concise',
-    'Follow policies',
-  ] : [
-    'Be verbose',
-    'Show your work',
-  ],
-});
-```
-
 ## Context Variables
 
 Pass variables to context:
@@ -331,27 +155,4 @@ const prompt = await context.build({
   agentName: 'SupportBot',
   role: 'Customer Support',
 });
-```
-
-## Multi-Language Support
-
-Localize context for different languages:
-
-```ts
-const context = createContext({
-  identity: {
-    name: 'Asistente',
-    role: 'Asistente de ayuda',
-  },
-  environment: {
-    currentDateTime: true,
-    locale: 'es-ES',
-  },
-  instructions: [
-    'Habla en español',
-    'Sé amable y servicial',
-  ],
-});
-
-const prompt = await context.build();
 ```

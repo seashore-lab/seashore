@@ -9,7 +9,7 @@ import type {
   EnvironmentContext,
   EnvironmentProvider,
   FormatOptions,
-} from '../types';
+} from './types';
 
 /**
  * Default environment options
@@ -41,49 +41,6 @@ function getUtcOffset(date: Date = new Date()): string {
     .padStart(2, '0');
   const minutes = (Math.abs(offset) % 60).toString().padStart(2, '0');
   return `${sign}${hours}:${minutes}`;
-}
-
-/**
- * Format date according to locale and format options
- */
-function formatDate(date: Date, locale?: string, format?: string): string {
-  if (format === 'iso') {
-    return date.toISOString().split('T')[0]!;
-  }
-
-  if (format === 'relative') {
-    const rtf = new Intl.RelativeTimeFormat(locale || undefined, { numeric: 'auto' });
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const target = new Date(date);
-    target.setHours(0, 0, 0, 0);
-    const diffDays = Math.round((target.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
-    return rtf.format(diffDays, 'day');
-  }
-
-  // Use locale formatting
-  return date.toLocaleDateString(locale || undefined, {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-}
-
-/**
- * Format time according to locale and format options
- */
-function formatTime(date: Date, locale?: string, format?: string): string {
-  if (format === 'iso') {
-    return date.toISOString().split('T')[1]!.split('.')[0]!;
-  }
-
-  // Use locale formatting
-  return date.toLocaleTimeString(locale || undefined, {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: false,
-  });
 }
 
 /**
@@ -129,24 +86,12 @@ export function createEnvironmentProvider(
       const now = new Date();
       const context: Record<string, string | undefined> = {};
 
-      if (options.currentTime) {
-        context.currentTime = formatTime(now, options.locale, options.timeFormat);
-      }
-
-      if (options.currentDate) {
-        context.currentDate = formatDate(now, options.locale, options.dateFormat);
-      }
-
       if (options.currentDateTime) {
         context.currentDateTime = formatDateTime(now);
       }
 
       if (options.timezone) {
         context.timezone = getTimezone();
-      }
-
-      if (options.utcOffset) {
-        context.utcOffset = getUtcOffset(now);
       }
 
       if (options.weekday) {

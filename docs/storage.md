@@ -2,108 +2,108 @@
 
 This package provides PostgreSQL-based storage for Seashore agents. It handles conversation persistence, message storage, and traces using Drizzle ORM.
 
+Since PostgreSQL not only offers robust relational capabilities but also supports vector data types via pgvector, it is well-suited for managing the complex data structures involved in agent interactions and RAG.
+
 ## Database Setup
 
-Create a database connection with the storage package:
+To create a Seashore database instance, use the `createDatabase` function
+with a connection string:
 
 ```ts
 import { createDatabase } from '@seashorelab/storage';
+import { PostgreSqlContainer } from '@testcontainers/postgresql';
+
+const container = await new PostgreSqlContainer('postgres:16')
+  .withDatabase('seashore_storage_demo')
+  .withUsername('demo')
+  .withPassword('demo')
+  .withExposedPorts({ container: 5432, host: 5432 })
+  .start();
 
 const database = createDatabase({
-  connectionString: process.env.DATABASE_URL,
-  maxConnections: 10,
-  ssl: true,
+  connectionString: container.getConnectionUri(),
 });
 
-// Check connection health
-const isHealthy = await database.healthCheck();
-if (!isHealthy) {
-  throw new Error('Database connection failed');
-}
-
-// Access the underlying Drizzle instance
-const db = database.db;
-
-// Close connection when done
-await database.close();
+console.log('Database healthy:', await database.healthCheck());
 ```
 
-## Repositories
+## Data Structures
 
-The storage package provides repositories for managing different data types:
+The storage package manages the following core data structures:
 
-### Thread Repository
+- **Threads**: Containers for conversations, holding metadata like agent ID, user ID, and custom attributes.
+- **Messages**: Individual messages within threads, including role (user, assistant), content, tool calls, and metadata.
+- **Traces**: Execution traces for observability, capturing inputs, outputs, and metadata for agent runs and tool invocations.
 
-Threads represent conversation containers:
+A thread is like a post in a forum, while messages are the comments within that post. Traces provide a behind-the-scenes look at how the agent processed information.
+
+To know more about the schema of each data structure, please refer to the `packages/storage/src/schema` folder.
+
+
+## Thread Repository
+
+The following example demonstrates the CRUD operations of the Thread Repository to manage conversation threads:
 
 ```ts
 import { createThreadRepository } from '@seashorelab/storage';
 
+// Get a thread repository
 const threadRepo = createThreadRepository(database.db);
 
 // Create a new thread
 const thread = await threadRepo.create({
-  title: 'Customer Support Conversation',
-  agentId: 'support-agent',
-  userId: 'user-123',
+  agentId: 'my-agent', // The agent that responded in this thread
+  userId: 'david', // The user that started this thread
+  title: 'Hello World', // Optional title for the conversation
+  // Any additional metadata
   metadata: {
-    department: 'sales',
-    priority: 'high',
+    status: 'active',
   },
 });
 
-// Find threads by user
-const userThreads = await threadRepo.findByUserId('user-123', {
-  limit: 10,
-  offset: 0,
-});
+// Get threads belonging to a user
+// Default limit is 50 and by createdAt desc
+// Valid `order` columns: createdAt, updatedAt, title
+const userThreads = await threadRepo.findByUserId('david');
 
-// Update thread
+// Update a thread by its ID
 await threadRepo.update(thread.id, {
-  title: 'Updated Title',
-  metadata: { ...thread.metadata, status: 'resolved' },
+  metadata: {
+    status: 'archived',
+  },
 });
 
-// Delete thread
+// Delete a thread by its ID
 await threadRepo.delete(thread.id);
 ```
 
-### Message Repository
+## Message Repository
 
-Store and retrieve messages within threads:
+The following example demonstrates the CRUD operations of the Message Repository to manage messages within threads:
 
 ```ts
 import { createMessageRepository } from '@seashorelab/storage';
 
+// Get a message repository
 const messageRepo = createMessageRepository(database.db);
 
-// Create a message
+// Create a new message in the thread
 const message = await messageRepo.create({
-  threadId: thread.id,
-  role: 'user',
-  content: 'Hello, how can you help me?',
+  threadId: thread.id, // Each message must belong to a thread
+  role: 'user', // The role of the message
+  content: 'Hello, how are you?', // The content of the message
+  // Any additional metadata
   metadata: {
-    source: 'web',
+    platform: 'web',
   },
 });
 
 // Get all messages in a thread
-const messages = await messageRepo.findByThreadId(thread.id, {
-  limit: 100,
-});
-
-// Find messages by role
-const userMessages = await messageRepo.findByThreadId(thread.id, {
-  role: 'user',
-});
-
-// Update message content
-await messageRepo.update(message.id, {
-  content: 'Updated content',
-});
+// Default limit is 100 and by createdAt asc
+const messages = await messageRepo.findByThreadId(thread.id);
 ```
 
-### Trace Repository
+## Trace Repository
 
 Store execution traces for observability:
 

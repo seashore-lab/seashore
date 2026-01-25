@@ -16,22 +16,22 @@ export interface StorageRunOptions extends RunOptions {
    * Thread ID for conversation persistence
    * If not provided, a new thread will be created
    */
-  readonly threadId?: string;
+  threadId?: string;
 
   /**
    * Thread title for new threads
    */
-  readonly threadTitle?: string;
+  threadTitle?: string;
 
   /**
    * Whether to load previous messages from storage
    */
-  readonly loadHistory?: boolean;
+  loadHistory?: boolean;
 
   /**
    * Maximum messages to load from history
    */
-  readonly maxHistoryMessages?: number;
+  maxHistoryMessages?: number;
 }
 
 /**
@@ -41,39 +41,39 @@ export interface WithStorageConfig {
   /**
    * Thread repository
    */
-  readonly threads: ThreadRepository;
+  threads: ThreadRepository;
 
   /**
    * Message repository
    */
-  readonly messages: MessageRepository;
+  messages: MessageRepository;
 
   /**
    * Default agent ID
    */
-  readonly agentId: string;
+  agentId: string;
 
   /**
    * Auto-persist messages
    */
-  readonly autoPersist?: boolean;
+  autoPersist?: boolean;
 
   /**
    * Auto-load history when thread exists
    */
-  readonly autoLoadHistory?: boolean;
+  autoLoadHistory?: boolean;
 
   /**
    * Maximum history messages
    */
-  readonly maxHistoryMessages?: number;
+  maxHistoryMessages?: number;
 }
 
 /**
  * Agent with storage capabilities
  */
 export interface AgentWithStorage<
-  TTools extends readonly Tool<unknown, unknown>[] = readonly Tool<unknown, unknown>[],
+  TTools extends Tool<unknown, unknown>[] = Tool<unknown, unknown>[],
 > extends Agent<TTools> {
   /**
    * Run with storage integration
@@ -97,12 +97,12 @@ export interface AgentWithStorage<
   /**
    * Load thread history
    */
-  loadThreadHistory(threadId: string, limit?: number): Promise<readonly Message[]>;
+  loadThreadHistory(threadId: string, limit?: number): Promise<Message[]>;
 
   /**
    * Get storage configuration
    */
-  readonly storage: WithStorageConfig;
+  storage: WithStorageConfig;
 }
 
 /**
@@ -134,9 +134,10 @@ export interface AgentWithStorage<
  * });
  * ```
  */
-export function withStorage<
-  TTools extends readonly Tool<unknown, unknown>[] = readonly Tool<unknown, unknown>[],
->(agent: Agent<TTools>, config: WithStorageConfig): AgentWithStorage<TTools> {
+export function withStorage<TTools extends Tool<unknown, unknown>[] = Tool<unknown, unknown>[]>(
+  agent: Agent<TTools>,
+  config: WithStorageConfig
+): AgentWithStorage<TTools> {
   const {
     threads,
     messages,

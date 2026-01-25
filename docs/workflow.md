@@ -8,6 +8,7 @@ A workflow is defined by nodes and edges:
 
 ```ts
 import { createWorkflow, createLLMNode } from '@seashorelab/workflow';
+import { createWorkflowAgent } from '@seashorelab/agent';
 import { openaiText } from '@seashorelab/llm';
 
 const model = openaiText('gpt-4o', {
@@ -44,8 +45,13 @@ const workflow = createWorkflow({
   startNode: 'generate-outline',
 });
 
-// Execute workflow
-const result = await workflow.execute({ topic: 'AI Trends 2026' });
+// Create agent and execute
+const agent = createWorkflowAgent({
+  name: 'article-agent',
+  workflow,
+});
+
+const result = await agent.runWorkflow({ message: 'AI Trends 2026' });
 const outline = result.getNodeOutput('generate-outline')?.content;
 const content = result.getNodeOutput('generate-content')?.content;
 ```
@@ -268,27 +274,33 @@ const loopNode = createLoopNode({
 Stream workflow execution events:
 
 ```ts
-for await (const event of workflow.stream({ topic: 'AI' })) {
+import { createWorkflowAgent } from '@seashorelab/agent';
+
+const agent = createWorkflowAgent({
+  name: 'my-agent',
+  workflow,
+});
+
+for await (const event of agent.stream('AI')) {
   switch (event.type) {
-    case 'workflow_start':
-      console.log('Workflow started');
-      break;
-    case 'node_start':
-      console.log(`Node started: ${event.data.nodeName}`);
-      break;
-    case 'llm_token':
+    case 'thinking':
+    case 'content':
       // Token-level streaming
-      process.stdout.write(event.data.delta);
+      if (event.delta) {
+        process.stdout.write(event.delta);
+      }
       break;
-    case 'node_complete':
-      console.log(`Node completed: ${event.data.nodeName}`);
+    case 'tool-call-start':
+      console.log(`Tool call: ${event.toolCall?.name}`);
       break;
-    case 'workflow_complete':
-      console.log('Workflow complete');
+    case 'tool-result':
+      console.log(`Tool result:`, event.toolResult);
       break;
-    case 'node_error':
-    case 'workflow_error':
-      console.error(`Error: ${event.data.error}`);
+    case 'finish':
+      console.log('Workflow complete', event.result);
+      break;
+    case 'error':
+      console.error(`Error:`, event.error);
       break;
   }
 }

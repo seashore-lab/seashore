@@ -37,7 +37,8 @@
   "dependencies": {
     "@seashorelab/llm": "workspace:*",
     "@seashorelab/tool": "workspace:*",
-    "@seashorelab/workflow": "workspace:*"
+    "@seashorelab/workflow": "workspace:*",
+    "@seashorelab/storage": "workspace:*"
   },
   "peerDependencies": {
     "zod": "^4.0.5"
