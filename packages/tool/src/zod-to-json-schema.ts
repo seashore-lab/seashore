@@ -39,11 +39,9 @@ import type { JsonSchema } from './types';
  * ```
  */
 export function zodToJsonSchema(schema: ZodSchema): JsonSchema {
-  // Use Zod 4's built-in toJSONSchema function
   const jsonSchema = z.toJSONSchema(schema) as JsonSchema;
 
-  // For object types, add additionalProperties: false for stricter validation
-  // unless the schema is a passthrough object (allows extra properties)
+  // For object types, disallow additional properties for stricter validation
   if (jsonSchema.type === 'object' && jsonSchema.additionalProperties === undefined) {
     return {
       ...jsonSchema,

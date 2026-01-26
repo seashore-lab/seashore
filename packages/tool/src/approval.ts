@@ -11,28 +11,28 @@ import type { Tool, ToolContext, ToolResult } from './types';
  */
 export interface ApprovalRequest {
   /** Unique request ID */
-  readonly id: string;
+  id: string;
 
   /** Tool name */
-  readonly toolName: string;
+  toolName: string;
 
   /** Tool call ID */
-  readonly toolCallId: string;
+  toolCallId: string;
 
   /** Input arguments being sent to the tool */
-  readonly input: unknown;
+  input: unknown;
 
   /** Reason for requiring approval */
-  readonly reason: string;
+  reason: string;
 
-  /** Risk level */
-  readonly riskLevel: 'low' | 'medium' | 'high' | 'critical';
+  /** Additional metadata for the approval request */
+  metadata?: Record<string, any>;
 
   /** Timestamp when request was created */
-  readonly createdAt: Date;
+  createdAt: Date;
 
   /** Expiration time for the request */
-  readonly expiresAt: Date;
+  expiresAt: Date;
 }
 
 /**
@@ -40,19 +40,19 @@ export interface ApprovalRequest {
  */
 export interface ApprovalResponse {
   /** Request ID this is responding to */
-  readonly requestId: string;
+  requestId: string;
 
   /** Whether the action was approved */
-  readonly approved: boolean;
+  approved: boolean;
 
   /** User who approved/rejected */
-  readonly userId?: string;
+  userId?: string;
 
   /** Optional reason for rejection */
-  readonly reason?: string;
+  reason?: string;
 
   /** Timestamp of response */
-  readonly respondedAt: Date;
+  respondedAt: Date;
 }
 
 /**
@@ -76,16 +76,16 @@ export interface ApprovalHandler {
  */
 export interface ApprovalConfig {
   /** Custom reason message */
-  readonly reason?: string;
+  reason?: string;
 
-  /** Risk level override */
-  readonly riskLevel?: 'low' | 'medium' | 'high' | 'critical';
+  /** Additional metadata for the approval request */
+  metadata?: Record<string, any>;
 
   /** Timeout for approval request (default: 5 minutes) */
-  readonly timeout?: number;
+  timeout?: number;
 
   /** Handler for approval requests */
-  readonly handler: ApprovalHandler;
+  handler: ApprovalHandler;
 }
 
 /**
@@ -112,7 +112,7 @@ const DEFAULT_APPROVAL_TIMEOUT = 5 * 60 * 1000;
  *
  * const safeDeleteTool = withApproval(deleteTool, {
  *   reason: 'File deletion requires approval',
- *   riskLevel: 'high',
+ *   metadata: { riskLevel: 'high', category: 'filesystem' },
  *   handler: myApprovalHandler,
  * });
  * ```
@@ -123,7 +123,7 @@ export function withApproval<TInput, TOutput>(
 ): Tool<TInput, TOutput> {
   const {
     reason = `Tool "${tool.name}" requires approval before execution`,
-    riskLevel = 'medium',
+    metadata,
     timeout = DEFAULT_APPROVAL_TIMEOUT,
     handler,
   } = config;
@@ -147,7 +147,7 @@ export function withApproval<TInput, TOutput>(
         toolCallId,
         input,
         reason,
-        riskLevel,
+        metadata,
         createdAt: now,
         expiresAt,
       };
@@ -205,7 +205,7 @@ export function withApproval<TInput, TOutput>(
 }
 
 /**
- * Create an in-memory approval handler (for testing)
+ * Create an in-memory approval handler
  */
 export function createMemoryApprovalHandler(): ApprovalHandler & {
   pendingRequests: Map<string, ApprovalRequest>;
@@ -267,74 +267,4 @@ export function createMemoryApprovalHandler(): ApprovalHandler & {
       }
     },
   };
-}
-
-/**
- * Create an auto-approving handler (for development/testing)
- */
-export function createAutoApprovalHandler(options?: {
-  delay?: number;
-  userId?: string;
-}): ApprovalHandler {
-  const { delay = 0, userId = 'auto-approve' } = options ?? {};
-
-  return {
-    async requestApproval(request: ApprovalRequest): Promise<ApprovalResponse> {
-      if (delay > 0) {
-        await new Promise((resolve) => setTimeout(resolve, delay));
-      }
-
-      return {
-        requestId: request.id,
-        approved: true,
-        userId,
-        respondedAt: new Date(),
-      };
-    },
-
-    cancelRequest(): void {
-      // No-op for auto-approving handler
-    },
-  };
-}
-
-/**
- * Determine risk level based on tool name patterns
- */
-export function inferRiskLevel(toolName: string): 'low' | 'medium' | 'high' | 'critical' {
-  const name = toolName.toLowerCase();
-
-  // Critical operations
-  if (
-    name.includes('delete') ||
-    name.includes('remove') ||
-    name.includes('drop') ||
-    name.includes('destroy')
-  ) {
-    return 'critical';
-  }
-
-  // High risk operations
-  if (
-    name.includes('update') ||
-    name.includes('modify') ||
-    name.includes('write') ||
-    name.includes('execute') ||
-    name.includes('run')
-  ) {
-    return 'high';
-  }
-
-  // Medium risk operations
-  if (
-    name.includes('create') ||
-    name.includes('send') ||
-    name.includes('publish') ||
-    name.includes('post')
-  ) {
-    return 'medium';
-  }
-
-  // Default to low risk
-  return 'low';
 }

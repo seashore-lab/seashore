@@ -13,6 +13,7 @@ import {
   type WorkflowContext,
   type LLMNodeOutput,
 } from '@seashorelab/workflow';
+import { createWorkflowAgent } from '@seashorelab/agent';
 import { openaiText } from '@seashorelab/llm';
 
 async function main() {
@@ -61,7 +62,7 @@ async function main() {
   });
 
   // Create the workflow
-  const workflow = createWorkflow<{ topic: string }>({
+  const workflow = createWorkflow({
     name: 'article-generation',
     nodes: [outlineNode, contentNode],
     // Link nodes together
@@ -70,12 +71,18 @@ async function main() {
     startNode: 'generate-outline',
   });
 
+  // Create workflow agent
+  const agent = createWorkflowAgent({
+    name: 'article-agent',
+    workflow: workflow as any, // Type compatibility with WorkflowAgent
+  });
+
   const topic = 'AI Development Trends in 2026';
   console.log(`📝 Topic: ${topic}\n`);
 
-  // Execute the workflow. `execute` won't resolve until all nodes are completed.
+  // Execute the workflow. `runWorkflow` won't resolve until all nodes are completed.
   console.log('--- Starting workflow (`execute` mode) ---\n');
-  const result = await workflow.execute({ topic });
+  const result = await agent.runWorkflow({ message: topic });
   console.log('📄 Step 1 - Outline:');
   const outlineOutput = result.getNodeOutput<LLMNodeOutput>('generate-outline');
   console.log(outlineOutput?.content ?? '[No output]');
@@ -87,30 +94,20 @@ async function main() {
 
   // While `stream` streams token-level outputs as they are produced.
   console.log('\n--- Starting workflow (`stream` mode) ---\n');
-  let currentNodeName = '';
-  for await (const event of workflow.stream({ topic })) {
+  for await (const event of agent.stream(topic)) {
     switch (event.type) {
-      case 'workflow_start':
-        console.log('🚀 Workflow started\n');
-        break;
-      case 'node_start':
-        currentNodeName = event.data.nodeName;
-        console.log(`\n📍 Node started: ${currentNodeName}`);
-        break;
-      case 'llm_token':
+      case 'content':
+      case 'thinking':
         // Real-time token streaming. Each token is printed as it's generated.
-        const delta = event.data.delta;
-        process.stdout.write(delta);
+        if (event.delta) {
+          process.stdout.write(event.delta);
+        }
         break;
-      case 'node_complete':
-        console.log(`\n   ✅ Node completed: ${event.data.nodeName}`);
-        break;
-      case 'workflow_complete':
+      case 'finish':
         console.log('\n🎉 Workflow completed!\n');
         break;
-      case 'workflow_error':
-      case 'node_error':
-        console.error(`\n❌ Error: ${JSON.stringify(event.data)}`);
+      case 'error':
+        console.error(`\n❌ Error: ${JSON.stringify(event.error)}`);
         break;
     }
   }

@@ -352,7 +352,9 @@ console.log('Total duration:', result.durationMs)
 ### 流式执行
 
 ```typescript
-for await (const event of executeWorkflow.stream(workflow, { input })) {
+import { executeWorkflowStream } from '@seashorelab/workflow';
+
+for await (const event of executeWorkflowStream(workflow, { input })) {
   switch (event.type) {
     case 'node:start':
       console.log(`Starting: ${event.nodeName}`)

@@ -13,34 +13,34 @@ import type { Tool, ToolContext, ToolResult, JsonSchema } from './types';
  */
 export interface ClientToolConfig<TInput extends ZodSchema, _TOutput> {
   /** Tool name (unique identifier) */
-  readonly name: string;
+  name: string;
 
   /** Tool description (LLM uses this to decide when to call) */
-  readonly description: string;
+  description: string;
 
   /** Input parameter schema (Zod) */
-  readonly inputSchema: TInput;
+  inputSchema: TInput;
 
   /**
    * Handler type for client execution
    * This is sent to the client for local execution
    */
-  readonly handlerType: 'ui-action' | 'form-input' | 'confirmation' | 'file-upload' | 'custom';
+  handlerType: 'ui-action' | 'form-input' | 'confirmation' | 'file-upload' | 'custom';
 
   /**
    * UI component name to render (for genui integration)
    */
-  readonly component?: string;
+  component?: string;
 
   /**
    * Default values for the form
    */
-  readonly defaults?: Partial<z.infer<TInput>>;
+  defaults?: Partial<z.infer<TInput>>;
 
   /**
    * Timeout for client response (default: 5 minutes)
    */
-  readonly timeout?: number;
+  timeout?: number;
 }
 
 /**
@@ -48,36 +48,36 @@ export interface ClientToolConfig<TInput extends ZodSchema, _TOutput> {
  */
 export interface ClientTool<TInput, TOutput> extends Tool<TInput, TOutput> {
   /** Whether this tool runs on the client */
-  readonly isClientSide: true;
+  isClientSide: true;
 
   /** Handler type for client execution */
-  readonly handlerType: string;
+  handlerType: string;
 
   /** UI component name */
-  readonly component?: string;
+  component?: string;
 
   /** Default values */
-  readonly defaults?: Partial<TInput>;
+  defaults?: Partial<TInput>;
 
   /** Create a pending result to wait for client response */
-  readonly createPending: (toolCallId: string) => ClientToolPending<TOutput>;
+  createPending: (toolCallId: string) => ClientToolPending<TOutput>;
 }
 
 /**
  * Pending client tool result
  */
 export interface ClientToolPending<TOutput> {
-  readonly id: string;
-  readonly status: 'pending';
+  id: string;
+  status: 'pending';
 
   /** Resolve with client result */
-  readonly resolve: (result: TOutput) => void;
+  resolve: (result: TOutput) => void;
 
   /** Reject with error */
-  readonly reject: (error: Error) => void;
+  reject: (error: Error) => void;
 
   /** Promise that resolves when client responds */
-  readonly promise: Promise<ToolResult<TOutput>>;
+  promise: Promise<ToolResult<TOutput>>;
 }
 
 /**

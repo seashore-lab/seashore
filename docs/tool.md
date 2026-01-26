@@ -4,64 +4,53 @@ This package provides the ability to define type-safe tools for Seashore agents.
 
 ## Defining Tools
 
-Use `defineTool` to create a tool with a Zod schema for input validation. The tool configuration includes a name, description, input schema, and an execute function.
+Use `defineTool` to create a tool with a Zod schema for input validation. The tool configuration includes
+
+- `name` to uniquely identify the tool
+- `description` to tell agents what the tool does
+- `inputSchema` to tell agents what to pass as input
+- `execute` function that actually performs the tool's action. It receives validated input and returns the result.
 
 ```ts
 import { defineTool } from '@seashorelab/tool';
 import { z } from 'zod';
 
-const calculatorTool = defineTool({
-  name: 'calculator',
-  description: 'Perform mathematical calculations',
+const weatherTool = defineTool({
+  name: 'getWeather',
+  description: 'Get the current weather for a given city.',
   inputSchema: z.object({
-    expression: z.string().describe('Math expression to evaluate'),
+    city: z.string().describe('The city to get the weather for.'),
   }),
-  execute: async ({ expression }) => {
-    const result = eval(expression);
-    return { result: Number(result) };
+  execute: async ({ city }) => {
+    // Simulated data
+    return {
+      city,
+      temperature: '22°C',
+      condition: 'Cloudy',
+    };
   },
 });
 ```
 
-The `execute` function receives validated input and returns the result. The tool automatically handles timeout (default 30 seconds) and can be configured with retry logic.
-
-## Tool Configuration Options
-
-### Timeout
-
-Set a custom timeout for tool execution:
+The tool automatically handles timeout (default 30 seconds) and can be configured with retry logic.
 
 ```ts
-const slowTool = defineTool({
-  name: 'slow_tool',
-  description: 'A tool that takes time to complete',
-  inputSchema: z.object({ query: z.string() }),
-  timeout: 60000, // 60 seconds
-  execute: async ({ query }) => {
-    // Long-running operation
-    return { result: 'done' };
-  },
-});
-```
-
-### Retry
-
-Configure retry logic for transient failures:
-
-```ts
-const flakyTool = defineTool({
-  name: 'flaky_api',
-  description: 'Call a flaky external API',
-  inputSchema: z.object({ endpoint: z.string() }),
+defineTool({
+  ...,
+  timeout: 30000, // default timeout is 30 seconds
   retry: {
-    maxAttempts: 3,
-    delay: 1000, // 1 second
-    backoffMultiplier: 2, // Exponential backoff
+    maxAttempts: 2,
+    delay: 2000, // 2 seconds
+    backoffMultiplier: 2, // exponential backoff
   },
-  execute: async ({ endpoint }) => {
-    const response = await fetch(endpoint);
-    return await response.json();
-  },
+})
+```
+
+The defined tool can be passed to an agent for use. Internally, the `execute` function will be called when the agent decides to use the tool.
+
+```ts
+weatherTool.execute({ city: 'San Francisco' }).then((result) => {
+  console.log('Weather Tool Result:', result);
 });
 ```
 
@@ -73,18 +62,38 @@ For sensitive operations, you can require approval before tool execution using `
 import { withApproval, createMemoryApprovalHandler } from '@seashorelab/tool';
 
 const approvalHandler = createMemoryApprovalHandler();
-
-const sensitiveTool = withApproval(baseTool, {
-  reason: 'This operation requires approval',
-  riskLevel: 'medium',
+const weatherToolWithApproval = withApproval(weatherTool, {
+  reason: 'Fetching weather data requires approval.',
   handler: approvalHandler,
-  timeout: 30000,
 });
-
-// Later, approve or reject requests
-approvalHandler.approve(requestId, 'user-123');
-approvalHandler.reject(requestId, 'Operation not allowed');
 ```
+
+Here `createMemoryApprovalHandler` saves all pending approvals in memory. It's simple but not very production-ready.
+
+When a tool with approval is executed, it will pend its request into the approval handler. Only after approval / rejection will the tool proceed.
+
+```ts
+const weatherToolExecution = weatherToolWithApproval.execute({ city: 'San Francisco' });
+
+// Simulates an asynchronous approval process that approves or rejects after some time
+setInterval(() => {
+  const { pendingRequests } = approvalHandler;
+  const [requestId] = pendingRequests.keys();
+
+  if (requestId) {
+    console.log('Approving Request ID:', requestId);
+    approvalHandler.approve(requestId); // approve
+    // approvalHandler.reject(requestId, 'No reason.'); // or reject
+  }
+}, 1000);
+
+// Won't resolve until approved or rejected
+await weatherToolExecution.then((result) => {
+  console.log('Tool Execution Result:', result);
+});
+```
+
+`result.metadata.approvalStatus` can be `'approved'` or `'rejected'` based on the outcome.
 
 ## Validation Middleware
 

@@ -11,19 +11,19 @@ import type { z, ZodSchema } from 'zod';
  */
 export interface ToolContext {
   /** Unique execution ID */
-  readonly executionId: string;
+  executionId: string;
 
   /** Thread ID if within an agent conversation */
-  readonly threadId?: string;
+  threadId?: string;
 
   /** User ID if available */
-  readonly userId?: string;
+  userId?: string;
 
   /** Abort signal for cancellation */
-  readonly signal?: AbortSignal;
+  signal?: AbortSignal;
 
   /** Custom metadata */
-  readonly metadata?: Record<string, unknown>;
+  metadata?: Record<string, unknown>;
 }
 
 /**
@@ -31,19 +31,19 @@ export interface ToolContext {
  */
 export interface ToolResult<T> {
   /** Whether execution succeeded */
-  readonly success: boolean;
+  success: boolean;
 
   /** Result data (if successful) */
-  readonly data?: T;
+  data?: T;
 
   /** Error message (if failed) */
-  readonly error?: string;
+  error?: string;
 
   /** Execution duration in milliseconds */
-  readonly durationMs: number;
+  durationMs: number;
 
   /** Additional metadata */
-  readonly metadata?: Record<string, unknown>;
+  metadata?: Record<string, unknown>;
 }
 
 /**
@@ -51,25 +51,25 @@ export interface ToolResult<T> {
  */
 export interface ToolConfig<TInput extends ZodSchema, TOutput> {
   /** Tool name (unique identifier) */
-  readonly name: string;
+  name: string;
 
   /** Tool description (LLM uses this to decide when to call) */
-  readonly description: string;
+  description: string;
 
   /** Input parameter schema (Zod) */
-  readonly inputSchema: TInput;
+  inputSchema: TInput;
 
   /** Execution function */
-  readonly execute: (input: z.infer<TInput>, context: ToolContext) => Promise<TOutput>;
+  execute: (input: z.infer<TInput>, context: ToolContext) => Promise<TOutput>;
 
   /** Whether user approval is required */
-  readonly needsApproval?: boolean;
+  needsApproval?: boolean;
 
   /** Execution timeout in milliseconds */
-  readonly timeout?: number;
+  timeout?: number;
 
   /** Retry configuration */
-  readonly retry?: RetryConfig;
+  retry?: RetryConfig;
 }
 
 /**
@@ -77,13 +77,13 @@ export interface ToolConfig<TInput extends ZodSchema, TOutput> {
  */
 export interface RetryConfig {
   /** Maximum retry attempts */
-  readonly maxAttempts: number;
+  maxAttempts: number;
 
   /** Delay between retries in milliseconds */
-  readonly delay: number;
+  delay: number;
 
   /** Backoff multiplier (default: 2) */
-  readonly backoffMultiplier?: number;
+  backoffMultiplier?: number;
 }
 
 /**
@@ -91,16 +91,16 @@ export interface RetryConfig {
  */
 export interface Tool<TInput, TOutput> {
   /** Tool name */
-  readonly name: string;
+  name: string;
 
   /** Tool description */
-  readonly description: string;
+  description: string;
 
   /** JSON Schema for LLM function calling */
-  readonly jsonSchema: JsonSchema;
+  jsonSchema: JsonSchema;
 
   /** Whether user approval is required */
-  readonly needsApproval: boolean;
+  needsApproval: boolean;
 
   /** Execute the tool */
   execute(input: TInput, context?: Partial<ToolContext>): Promise<ToolResult<TOutput>>;
@@ -131,55 +131,55 @@ export type JsonSchemaType =
  */
 export interface JsonSchema {
   /** JSON Schema version identifier */
-  readonly $schema?: string;
+  $schema?: string;
 
   /** Type (supports multiple JSON Schema types) */
-  readonly type?: JsonSchemaType;
+  type?: JsonSchemaType;
 
   /** Object property definitions */
-  readonly properties?: Record<string, JsonSchemaProperty>;
+  properties?: Record<string, JsonSchemaProperty>;
 
   /** Required field list */
-  readonly required?: readonly string[];
+  required?: string[];
 
   /** Whether additional properties are allowed */
-  readonly additionalProperties?: boolean;
+  additionalProperties?: boolean;
 
   /** Array item type */
-  readonly items?: JsonSchemaProperty;
+  items?: JsonSchemaProperty;
 
   /** Enum values list */
-  readonly enum?: readonly unknown[];
+  enum?: unknown[];
 
   /** Constant value (literal types) */
-  readonly const?: unknown;
+  const?: unknown;
 
   /** Union type (oneOf) */
-  readonly oneOf?: readonly JsonSchemaProperty[];
+  oneOf?: JsonSchemaProperty[];
 
   /** Union type (anyOf) */
-  readonly anyOf?: readonly JsonSchemaProperty[];
+  anyOf?: JsonSchemaProperty[];
 
   /** Numeric constraints */
-  readonly minimum?: number;
-  readonly maximum?: number;
+  minimum?: number;
+  maximum?: number;
 
   /** String constraints */
-  readonly minLength?: number;
-  readonly maxLength?: number;
+  minLength?: number;
+  maxLength?: number;
 
   /** Array constraints */
-  readonly minItems?: number;
-  readonly maxItems?: number;
+  minItems?: number;
+  maxItems?: number;
 
   /** String format (uuid, email, uri, etc.) */
-  readonly format?: string;
+  format?: string;
 
   /** Default value */
-  readonly default?: unknown;
+  default?: unknown;
 
   /** Description */
-  readonly description?: string;
+  description?: string;
 }
 
 /**
@@ -189,68 +189,68 @@ export interface JsonSchema {
  */
 export interface JsonSchemaProperty {
   /** Type */
-  readonly type?: string;
+  type?: string;
 
   /** Description */
-  readonly description?: string;
+  description?: string;
 
   /** Enum values list */
-  readonly enum?: readonly unknown[];
+  enum?: unknown[];
 
   /** Constant value (literal types) */
-  readonly const?: unknown;
+  const?: unknown;
 
   /** Array item type */
-  readonly items?: JsonSchemaProperty;
+  items?: JsonSchemaProperty;
 
   /** Nested object properties */
-  readonly properties?: Record<string, JsonSchemaProperty>;
+  properties?: Record<string, JsonSchemaProperty>;
 
   /** Nested object required fields */
-  readonly required?: readonly string[];
+  required?: string[];
 
   /** Union type (oneOf) */
-  readonly oneOf?: readonly JsonSchemaProperty[];
+  oneOf?: JsonSchemaProperty[];
 
   /** Union type (anyOf) */
-  readonly anyOf?: readonly JsonSchemaProperty[];
+  anyOf?: JsonSchemaProperty[];
 
   /** Numeric constraints */
-  readonly minimum?: number;
-  readonly maximum?: number;
+  minimum?: number;
+  maximum?: number;
 
   /** String constraints */
-  readonly minLength?: number;
-  readonly maxLength?: number;
+  minLength?: number;
+  maxLength?: number;
 
   /** Array constraints */
-  readonly minItems?: number;
-  readonly maxItems?: number;
+  minItems?: number;
+  maxItems?: number;
 
   /** String format (uuid, email, uri, etc.) */
-  readonly format?: string;
+  format?: string;
 
   /** Default value */
-  readonly default?: unknown;
+  default?: unknown;
 
   /** Whether additional properties are allowed (nested objects) */
-  readonly additionalProperties?: boolean;
+  additionalProperties?: boolean;
 }
 
 /**
  * Tool call from LLM
  */
 export interface ToolCallRequest {
-  readonly id: string;
-  readonly name: string;
-  readonly arguments: string; // JSON string
+  id: string;
+  name: string;
+  arguments: string; // JSON string
 }
 
 /**
  * Tool call response
  */
 export interface ToolCallResponse {
-  readonly id: string;
-  readonly name: string;
-  readonly result: ToolResult<unknown>;
+  id: string;
+  name: string;
+  result: ToolResult<unknown>;
 }

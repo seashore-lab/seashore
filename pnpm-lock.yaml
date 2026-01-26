@@ -68,46 +68,46 @@ importers:
       '@hono/node-server':
         specifier: ^1.14.1
         version: 1.19.7(hono@4.11.3)
-      '@seashore/agent':
+      '@seashorelab/agent':
         specifier: workspace:*
         version: link:../packages/agent
-      '@seashore/contextengineering':
+      '@seashorelab/contextengineering':
         specifier: workspace:*
         version: link:../packages/contextengineering
-      '@seashore/deploy':
+      '@seashorelab/deploy':
         specifier: workspace:*
         version: link:../packages/deploy
-      '@seashore/evaluation':
+      '@seashorelab/evaluation':
         specifier: workspace:*
         version: link:../packages/evaluation
-      '@seashore/llm':
+      '@seashorelab/llm':
         specifier: workspace:*
         version: link:../packages/llm
-      '@seashore/mcp':
+      '@seashorelab/mcp':
         specifier: workspace:*
         version: link:../packages/mcp
-      '@seashore/memory':
+      '@seashorelab/memory':
         specifier: workspace:*
         version: link:../packages/memory
-      '@seashore/observability':
+      '@seashorelab/observability':
         specifier: workspace:*
         version: link:../packages/observability
-      '@seashore/rag':
+      '@seashorelab/rag':
         specifier: workspace:*
         version: link:../packages/rag
-      '@seashore/security':
+      '@seashorelab/security':
         specifier: workspace:*
         version: link:../packages/security
-      '@seashore/storage':
+      '@seashorelab/storage':
         specifier: workspace:*
         version: link:../packages/storage
-      '@seashore/tool':
+      '@seashorelab/tool':
         specifier: workspace:*
         version: link:../packages/tool
-      '@seashore/vectordb':
+      '@seashorelab/vectordb':
         specifier: workspace:*
         version: link:../packages/vectordb
-      '@seashore/workflow':
+      '@seashorelab/workflow':
         specifier: workspace:*
         version: link:../packages/workflow
       '@testcontainers/postgresql':
@@ -138,13 +138,16 @@ importers:
 
   packages/agent:
     dependencies:
-      '@seashore/llm':
+      '@seashorelab/llm':
         specifier: workspace:*
         version: link:../llm
-      '@seashore/tool':
+      '@seashorelab/storage':
+        specifier: workspace:*
+        version: link:../storage
+      '@seashorelab/tool':
         specifier: workspace:*
         version: link:../tool
-      '@seashore/workflow':
+      '@seashorelab/workflow':
         specifier: workspace:*
         version: link:../workflow
     devDependencies:
@@ -156,7 +159,7 @@ importers:
 
   packages/deploy:
     dependencies:
-      '@seashore/agent':
+      '@seashorelab/agent':
         specifier: workspace:*
         version: link:../agent
       hono:
@@ -178,7 +181,7 @@ importers:
 
   packages/evaluation:
     dependencies:
-      '@seashore/llm':
+      '@seashorelab/llm':
         specifier: workspace:*
         version: link:../llm
     devDependencies:
@@ -197,10 +200,10 @@ importers:
 
   packages/genui:
     dependencies:
-      '@seashore/agent':
+      '@seashorelab/agent':
         specifier: workspace:*
         version: link:../agent
-      '@seashore/tool':
+      '@seashorelab/tool':
         specifier: workspace:*
         version: link:../tool
       react:
@@ -250,7 +253,7 @@ importers:
       '@modelcontextprotocol/sdk':
         specifier: ^1.0.0
         version: 1.25.1(hono@4.11.3)(zod@4.2.1)
-      '@seashore/tool':
+      '@seashorelab/tool':
         specifier: workspace:*
         version: link:../tool
       zod:
@@ -266,13 +269,13 @@ importers:
 
   packages/memory:
     dependencies:
-      '@seashore/llm':
+      '@seashorelab/llm':
         specifier: workspace:*
         version: link:../llm
-      '@seashore/storage':
+      '@seashorelab/storage':
         specifier: workspace:*
         version: link:../storage
-      '@seashore/vectordb':
+      '@seashorelab/vectordb':
         specifier: workspace:*
         version: link:../vectordb
       drizzle-orm:
@@ -297,7 +300,7 @@ importers:
 
   packages/observability:
     dependencies:
-      '@seashore/storage':
+      '@seashorelab/storage':
         specifier: workspace:*
         version: link:../storage
     devDependencies:
@@ -310,10 +313,10 @@ importers:
 
   packages/rag:
     dependencies:
-      '@seashore/llm':
+      '@seashorelab/llm':
         specifier: workspace:*
         version: link:../llm
-      '@seashore/vectordb':
+      '@seashorelab/vectordb':
         specifier: workspace:*
         version: link:../vectordb
       node-html-parser:
@@ -341,7 +344,7 @@ importers:
 
   packages/security:
     dependencies:
-      '@seashore/llm':
+      '@seashorelab/llm':
         specifier: workspace:*
         version: link:../llm
     devDependencies:
@@ -379,7 +382,7 @@ importers:
 
   packages/vectordb:
     dependencies:
-      '@seashore/storage':
+      '@seashorelab/storage':
         specifier: workspace:*
         version: link:../storage
       drizzle-orm:
@@ -398,10 +401,10 @@ importers:
 
   packages/workflow:
     dependencies:
-      '@seashore/llm':
+      '@seashorelab/llm':
         specifier: workspace:*
         version: link:../llm
-      '@seashore/tool':
+      '@seashorelab/tool':
         specifier: workspace:*
         version: link:../tool
       zod:

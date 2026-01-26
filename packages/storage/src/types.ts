@@ -20,12 +20,8 @@ export interface Thread {
 /**
  * New thread creation input
  */
-export interface NewThread {
-  agentId: string;
-  title?: string;
-  userId?: string;
-  metadata?: Record<string, unknown>;
-}
+export type NewThread = Required<Pick<Thread, 'agentId'>> &
+  Partial<Pick<Thread, 'title' | 'userId' | 'metadata'>>;
 
 /**
  * Thread update input
@@ -70,15 +66,8 @@ export interface Message {
 /**
  * New message creation input
  */
-export interface NewMessage {
-  threadId: string;
-  role: MessageRole;
-  content?: string;
-  toolCalls?: ToolCall[];
-  toolCallId?: string;
-  name?: string;
-  metadata?: Record<string, unknown>;
-}
+export type NewMessage = Required<Pick<Message, 'threadId' | 'role'>> &
+  Partial<Pick<Message, 'content' | 'toolCalls' | 'toolCallId' | 'name' | 'metadata'>>;
 
 /**
  * Trace type
@@ -115,14 +104,8 @@ export interface Trace {
 /**
  * New trace creation input
  */
-export interface NewTrace {
-  threadId?: string;
-  parentId?: string;
-  name: string;
-  type: TraceType;
-  input?: unknown;
-  startedAt?: Date;
-}
+export type NewTrace = Required<Pick<Trace, 'name' | 'type'>> &
+  Partial<Pick<Trace, 'threadId' | 'parentId' | 'input' | 'startedAt'>>;
 
 /**
  * Trace update input
